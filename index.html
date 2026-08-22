@@ -202,7 +202,32 @@
   }
   .side-post p{font-size:13px; color:var(--slate);}
 
-  /* ===== PULL QUOTE STRIP ===== */
+  /* ===== PILLARS ===== */
+  .pillars{
+    padding:80px 0 88px;
+    border-bottom:1px solid var(--line);
+  }
+  .pillars .eyebrow{margin-bottom:14px;}
+  .pillars h2{font-size:30px; max-width:26ch; margin-bottom:44px; line-height:1.25;}
+  .pillars-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .pillar{
+    background:var(--paper);
+    padding:28px 26px;
+  }
+  .pillar-num{
+    font-family:'Space Mono', monospace; font-size:12px;
+    color:var(--olive-soft);
+  }
+  .pillar h3{font-size:18px; margin:14px 0 10px;}
+  .pillar p{font-size:14px; color:var(--ink-soft); line-height:1.55;}
+
+  /* ===== QUOTE STRIP ===== */
   .quote-strip{
     background:var(--olive-deep);
     color:var(--paper);
@@ -239,6 +264,20 @@
   .quote-stats div b{
     display:block; font-family:'Fraunces', serif; font-weight:500;
     font-size:30px; color:var(--paper); font-style:normal;
+  }
+
+  .empty-copy{
+    font-size:16px; color:var(--ink-soft); max-width:60ch;
+    margin:-16px 0 44px;
+  }
+  .card-ghost{border-top:2px dashed var(--line);}
+  .thumb-ghost{
+    background:transparent;
+    border:1px dashed var(--line);
+  }
+  .thumb-ghost span{color:var(--slate);}
+  .ghost-title{
+    font-style:italic; color:var(--slate); font-weight:400; font-size:16px;
   }
 
   /* ===== GRID / ARTICLES ===== */
@@ -351,7 +390,7 @@
     nav{display:none;}
     .hero{grid-template-columns:1fr; gap:36px;}
     .hero-side{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:24px;}
-    .featured-grid{grid-template-columns:1fr;}
+    .pillars-grid{grid-template-columns:1fr 1fr;}
     .grid3{grid-template-columns:1fr 1fr;}
     .about .wrap{grid-template-columns:1fr;}
     .about-photo{max-width:260px;}
@@ -360,6 +399,7 @@
     .footer-cols{gap:36px;}
   }
   @media (max-width:600px){
+    .pillars-grid{grid-template-columns:1fr;}
     .grid3{grid-template-columns:1fr;}
     .wrap{padding:0 20px;}
     .credentials{flex-wrap:wrap; gap:24px;}
@@ -376,7 +416,7 @@
   <div class="wrap masthead-inner">
     <a href="#" class="brandmark"><span class="dot"></span>Fernando</a>
     <nav>
-      <a href="#articulos">Artículos</a>
+      <a href="#articulos">Blog</a>
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#newsletter">Newsletter</a>
       <a href="#" class="nav-cta">Agendar diagnóstico →</a>
@@ -391,72 +431,59 @@
       <h1 style="margin-top:18px;">Marcas que se vuelven <span class="cycle-word"><em id="cycleWord">inevitables</em></span>.</h1>
       <p class="lede">Escribo sobre cómo las empresas dejan de competir por precio y empiezan a competir por significado. Casos reales, marcos de trabajo aplicables y lo que aprendo trabajando con marcas en crecimiento.</p>
       <div class="hero-actions">
-        <a href="#articulos" class="btn-primary">Leer los artículos</a>
+        <a href="#newsletter" class="btn-primary">Avísame cuando publiques</a>
         <a href="#sobre-mi" class="btn-ghost">Sobre Fernando →</a>
       </div>
     </div>
     <div class="hero-side">
-      <span class="stamp">Nº 042 · en publicación</span>
-      <p>Este blog documenta el trabajo de posicionar marcas para clientes reales: qué funcionó, qué falló y por qué la mayoría de los rebrandings no cambian nada en los resultados.</p>
-      <p>Nueva entrada cada dos semanas. Sin relleno, sin plantillas genéricas de "10 tips".</p>
+      <span class="stamp">En preparación</span>
+      <p>Este blog documentará el trabajo real de posicionar marcas: qué funciona, qué falla y por qué la mayoría de los rebrandings no cambian nada en los resultados.</p>
+      <p>Las primeras entradas llegan pronto. Sin relleno, sin plantillas genéricas de "10 tips".</p>
     </div>
   </div>
 </section>
 
-<section class="featured">
+<section class="about" id="sobre-mi">
   <div class="wrap">
-    <div class="section-head">
-      <div>
-        <p class="eyebrow">Destacado</p>
-        <h2>Lo más reciente</h2>
+    <div class="about-photo"></div>
+    <div>
+      <p class="eyebrow">Sobre mí</p>
+      <h2>¡Hola! Soy Fernando.</h2>
+      <p>Ayudo a fundadores y equipos de marketing a construir marcas que la gente recuerda — no solo marcas que se ven bien. Trabajo con negocios que ya tienen tracción pero no tienen una posición clara: el tipo de marca que "está bien" para todos y memorable para nadie.</p>
+      <p>Este blog será el registro público de ese trabajo: los marcos que uso, los errores que corrijo, y las decisiones incómodas que casi siempre valen la pena.</p>
+      <div class="credentials">
+        <div><b>60+</b>marcas posicionadas</div>
+        <div><b>8 años</b>en consultoría de marca</div>
+        <div><b>3</b>industrias de foco: retail, servicios, SaaS</div>
       </div>
-      <a href="#articulos">Ver todo el archivo →</a>
     </div>
+  </div>
+</section>
 
-    <div class="featured-grid">
-      <article class="feat-main">
-        <div class="feat-media"></div>
-        <div class="feat-body">
-          <span class="tag">Posicionamiento</span>
-          <h3>Por qué tu marca no tiene un problema de diseño, tiene un problema de decisión</h3>
-          <p>La mayoría de las marcas que me buscan creen que necesitan un logo nuevo. Casi ninguna lo necesita. Necesitan decidir, con precisión incómoda, a quién le hablan y a quién están dispuestas a no gustarle.</p>
-          <div class="meta">
-            <span>12 ago 2026</span>
-            <span>·</span>
-            <span>9 min de lectura</span>
-          </div>
-        </div>
-      </article>
-
-      <div class="side-posts">
-        <div class="side-post">
-          <span class="num">02</span>
-          <div>
-            <h4>El arquetipo no es una plantilla, es un punto de partida</h4>
-            <p>Cómo usar los 12 arquetipos sin terminar sonando igual que la competencia.</p>
-          </div>
-        </div>
-        <div class="side-post">
-          <span class="num">03</span>
-          <div>
-            <h4>La identidad verbal que nadie audita hasta que ya es tarde</h4>
-            <p>Un checklist de 14 puntos para revisar el tono de tu marca antes de escalar contenido.</p>
-          </div>
-        </div>
-        <div class="side-post">
-          <span class="num">04</span>
-          <div>
-            <h4>Growth sin marca es solo gasto acelerado</h4>
-            <p>Por qué los loops de adquisición fallan cuando no hay una promesa clara detrás.</p>
-          </div>
-        </div>
-        <div class="side-post">
-          <span class="num">05</span>
-          <div>
-            <h4>Diagnosticar antes de rediseñar</h4>
-            <p>El scorecard de tres preguntas que uso en la primera reunión con cada cliente.</p>
-          </div>
-        </div>
+<section class="pillars">
+  <div class="wrap">
+    <p class="eyebrow">En qué escribo</p>
+    <h2>Cuatro temas, un solo objetivo: que tu marca sea difícil de ignorar.</h2>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <span class="pillar-num">01</span>
+        <h3>Posicionamiento</h3>
+        <p>Cómo decidir con precisión a quién le hablas — y a quién estás dispuesto a no gustarle.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">02</span>
+        <h3>Identidad verbal</h3>
+        <p>El tono que hace que te reconozcan aunque tapen el logo.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">03</span>
+        <h3>Arquetipos</h3>
+        <p>Marcos de personalidad de marca aplicados a negocios reales, no plantillas genéricas.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">04</span>
+        <h3>Growth con marca</h3>
+        <p>Por qué la adquisición sin una promesa clara detrás es solo gasto acelerado.</p>
       </div>
     </div>
   </div>
@@ -480,83 +507,23 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Archivo</p>
-        <h2>Todos los artículos</h2>
+        <p class="eyebrow">Blog</p>
+        <h2>Los artículos están en camino.</h2>
       </div>
     </div>
-    <div class="filters">
-      <span class="filter active">Todos</span>
-      <span class="filter">Posicionamiento</span>
-      <span class="filter">Identidad verbal</span>
-      <span class="filter">Arquetipos</span>
-      <span class="filter">Growth</span>
-      <span class="filter">Casos de estudio</span>
-    </div>
-
+    <p class="empty-copy">Estoy escribiendo las primeras entradas — casos reales de marcas que he ayudado a posicionar, sin relleno ni plantillas de "10 tips". Si quieres que te avise apenas publique la primera, déjame tu correo abajo.</p>
     <div class="grid3">
-      <div class="card">
-        <div class="thumb"><span>Caso de estudio</span></div>
-        <span class="tag">Casos de estudio</span>
-        <h3>Cómo una panadería local subió sus precios 22% sin perder clientes</h3>
-        <p>Reposicionar no siempre significa gastar más en marketing. A veces significa dejar de competir donde no puedes ganar.</p>
-        <div class="meta"><span>29 jul 2026</span><span>·</span><span>7 min</span></div>
+      <div class="card card-ghost">
+        <div class="thumb thumb-ghost"><span>Posicionamiento</span></div>
+        <h3 class="ghost-title">Próximamente</h3>
       </div>
-
-      <div class="card">
-        <div class="thumb"><span>Identidad verbal</span></div>
-        <span class="tag">Identidad verbal</span>
-        <h3>El tono de voz no es "ser cercano", es ser reconocible en silencio</h3>
-        <p>Si tapas el logo y el post sigue sonando a cualquiera, no tienes tono de voz, tienes plantilla.</p>
-        <div class="meta"><span>15 jul 2026</span><span>·</span><span>6 min</span></div>
+      <div class="card card-ghost">
+        <div class="thumb thumb-ghost"><span>Identidad verbal</span></div>
+        <h3 class="ghost-title">Próximamente</h3>
       </div>
-
-      <div class="card">
-        <div class="thumb"><span>Arquetipos</span></div>
-        <span class="tag">Arquetipos</span>
-        <h3>El arquetipo del Sabio está sobreexplotado en B2B. Aquí tres alternativas</h3>
-        <p>Todas las fintechs no pueden ser el Sabio. Un mapa de arquetipos menos saturados para 2026.</p>
-        <div class="meta"><span>02 jul 2026</span><span>·</span><span>8 min</span></div>
-      </div>
-
-      <div class="card">
-        <div class="thumb"><span>Growth</span></div>
-        <span class="tag">Growth</span>
-        <h3>LTV/CAC no mejora con más anuncios, mejora con mejor promesa</h3>
-        <p>Un experimento con dos versiones del mismo funnel: una con más presupuesto, otra con más claridad de marca.</p>
-        <div class="meta"><span>18 jun 2026</span><span>·</span><span>10 min</span></div>
-      </div>
-
-      <div class="card">
-        <div class="thumb"><span>Posicionamiento</span></div>
-        <span class="tag">Posicionamiento</span>
-        <h3>La pregunta que casi ningún fundador puede responder en 10 segundos</h3>
-        <p>"¿Por qué tú y no el otro?" — y por qué la respuesta correcta casi nunca es la que dicen primero.</p>
-        <div class="meta"><span>04 jun 2026</span><span>·</span><span>5 min</span></div>
-      </div>
-
-      <div class="card">
-        <div class="thumb"><span>Casos de estudio</span></div>
-        <span class="tag">Casos de estudio</span>
-        <h3>Rebranding de una clínica dental: de "confiable" a "sin ansiedad"</h3>
-        <p>Cambiar un solo adjetivo en el posicionamiento movió la conversión de la landing un 31%.</p>
-        <div class="meta"><span>21 may 2026</span><span>·</span><span>9 min</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="about" id="sobre-mi">
-  <div class="wrap">
-    <div class="about-photo"></div>
-    <div>
-      <p class="eyebrow">Sobre mí</p>
-      <h2>Estrategia de marca para negocios que ya venden, pero no se recuerdan.</h2>
-      <p>Soy Fernando, estratega de marca. Trabajo con fundadores y equipos de marketing que tienen tracción pero no tienen una posición clara — el tipo de negocio que "está bien" para todos y memorable para nadie.</p>
-      <p>Este blog es el registro público de ese trabajo: los marcos que uso, los errores que corrijo y las decisiones incómodas que casi siempre valen la pena.</p>
-      <div class="credentials">
-        <div><b>60+</b>marcas posicionadas</div>
-        <div><b>8 años</b>en consultoría de marca</div>
-        <div><b>3</b>industrias de foco: retail, servicios, SaaS</div>
+      <div class="card card-ghost">
+        <div class="thumb thumb-ghost"><span>Casos de estudio</span></div>
+        <h3 class="ghost-title">Próximamente</h3>
       </div>
     </div>
   </div>
@@ -565,10 +532,10 @@
 <section class="newsletter" id="newsletter">
   <div class="wrap">
     <div class="news-inner">
-      <h3>Una idea de marca cada dos semanas. Sin spam, sin plantillas.</h3>
+      <h3>Sé el primero en leer cuando publique el primer artículo.</h3>
       <form class="news-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Listo →';">
         <input type="email" placeholder="tu@correo.com" required>
-        <button type="submit">Suscribirme</button>
+        <button type="submit">Avísame</button>
       </form>
     </div>
   </div>
@@ -583,16 +550,16 @@
     <div class="footer-cols">
       <div class="fcol">
         <h5>Explorar</h5>
-        <a href="#articulos">Artículos</a>
+        <a href="#articulos">Blog</a>
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#newsletter">Newsletter</a>
       </div>
       <div class="fcol">
-        <h5>Categorías</h5>
-        <a href="#">Posicionamiento</a>
-        <a href="#">Identidad verbal</a>
-        <a href="#">Arquetipos</a>
-        <a href="#">Growth</a>
+        <h5>Temas</h5>
+        <a href="#pillars">Posicionamiento</a>
+        <a href="#pillars">Identidad verbal</a>
+        <a href="#pillars">Arquetipos</a>
+        <a href="#pillars">Growth</a>
       </div>
       <div class="fcol">
         <h5>Contacto</h5>
@@ -623,13 +590,6 @@
     }, 2600);
     el.style.transition = 'opacity .25s ease';
   }
-
-  document.querySelectorAll('.filter').forEach(f => {
-    f.addEventListener('click', () => {
-      document.querySelectorAll('.filter').forEach(x => x.classList.remove('active'));
-      f.classList.add('active');
-    });
-  });
 </script>
 
 </body>
