@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fernando — Estrategia de marca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF8F3;
+    --paper-dim:#F1EDE3;
+    --ink:#16213A;
+    --ink-soft:#4B5468;
+    --gold:#C98A2C;
+    --gold-soft:#E7C486;
+    --slate:#5E7080;
+    --line:#DFD9C9;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:500; letter-spacing:-.01em;}
+
+  /* ===== MASTHEAD ===== */
+  .masthead{
+    border-bottom:1px solid var(--line);
+    background:var(--paper);
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(6px);
+  }
+  .masthead-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .brandmark{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fraunces', serif; font-weight:600; font-size:20px;
+  }
+  .brandmark .dot{
+    width:9px; height:9px; border-radius:50%; background:var(--gold);
+    display:inline-block;
+  }
+  nav{display:flex; gap:32px; align-items:center;}
+  nav a{font-size:14px; font-weight:500; color:var(--ink-soft);}
+  nav a:hover{color:var(--ink);}
+  .nav-cta{
+    font-family:'Space Mono', monospace;
+    font-size:12px; letter-spacing:.06em;
+    border:1px solid var(--ink); padding:9px 16px;
+    color:var(--ink) !important;
+  }
+  .nav-cta:hover{background:var(--ink); color:var(--paper) !important;}
+  .mobile-toggle{display:none;}
+
+  /* ===== HERO ===== */
+  .hero{
+    padding:88px 0 96px;
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:64px;
+    align-items:end;
+    border-bottom:1px solid var(--line);
+  }
+  .hero h1{
+    font-size:clamp(40px, 5.4vw, 74px);
+    line-height:1.03;
+    color:var(--ink);
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold);
+    font-weight:500;
+  }
+  .cycle-word{
+    display:inline-block;
+    position:relative;
+    min-width:1ch;
+  }
+  .hero p.lede{
+    margin-top:26px;
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:46ch;
+  }
+  .hero-actions{display:flex; gap:14px; margin-top:34px;}
+  .btn-primary{
+    background:var(--ink); color:var(--paper);
+    padding:14px 24px; font-size:14px; font-weight:600;
+    border-radius:2px;
+  }
+  .btn-primary:hover{background:var(--gold);}
+  .btn-ghost{
+    padding:14px 20px; font-size:14px; font-weight:500;
+    border-bottom:1px solid var(--ink);
+  }
+  .hero-side{
+    font-family:'Space Mono', monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+    border-left:1px solid var(--line);
+    padding-left:28px;
+  }
+  .hero-side .stamp{
+    display:inline-block;
+    border:1px solid var(--gold);
+    color:var(--gold);
+    padding:3px 9px;
+    font-size:11px;
+    letter-spacing:.08em;
+    margin-bottom:16px;
+  }
+  .hero-side p{margin-bottom:14px; line-height:1.7;}
+
+  /* ===== FEATURED ===== */
+  .featured{
+    padding:80px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .section-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-bottom:40px;
+  }
+  .section-head h2{font-size:28px;}
+  .section-head a{
+    font-family:'Space Mono', monospace; font-size:12px;
+    letter-spacing:.06em; color:var(--slate);
+    border-bottom:1px solid var(--slate);
+  }
+  .featured-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:48px;
+  }
+  .feat-main{
+    background:var(--white);
+    border:1px solid var(--line);
+    display:flex; flex-direction:column;
+  }
+  .feat-media{
+    height:280px;
+    background:linear-gradient(135deg, #16213A 0%, #2C3A5C 55%, #C98A2C 130%);
+    position:relative;
+    overflow:hidden;
+  }
+  .feat-media::after{
+    content:"01";
+    position:absolute; right:20px; bottom:16px;
+    font-family:'Space Mono', monospace;
+    color:rgba(255,255,255,.55);
+    font-size:64px; font-weight:700;
+  }
+  .feat-body{padding:32px;}
+  .tag{
+    font-family:'Space Mono', monospace;
+    font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--gold);
+  }
+  .feat-body h3{font-size:26px; margin:12px 0 14px; line-height:1.2;}
+  .feat-body p{color:var(--ink-soft); font-size:15px; margin-bottom:18px;}
+  .meta{
+    font-family:'Space Mono', monospace;
+    font-size:12px; color:var(--slate);
+    display:flex; gap:14px; align-items:center;
+  }
+  .side-posts{display:flex; flex-direction:column; gap:0;}
+  .side-post{
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+    display:grid; grid-template-columns:34px 1fr; gap:16px;
+  }
+  .side-post:first-child{padding-top:0;}
+  .side-post .num{
+    font-family:'Space Mono', monospace; color:var(--gold-soft);
+    font-size:13px; padding-top:3px;
+  }
+  .side-post h4{
+    font-family:'Fraunces', serif; font-weight:500; font-size:17px;
+    line-height:1.3; margin-bottom:6px;
+  }
+  .side-post p{font-size:13px; color:var(--slate);}
+
+  /* ===== GRID / ARTICLES ===== */
+  .articles{padding:80px 0; border-bottom:1px solid var(--line);}
+  .filters{display:flex; gap:10px; margin-bottom:44px; flex-wrap:wrap;}
+  .filter{
+    font-family:'Space Mono', monospace; font-size:12px;
+    padding:8px 14px; border:1px solid var(--line);
+    color:var(--ink-soft); cursor:pointer;
+    transition:.15s;
+  }
+  .filter.active, .filter:hover{border-color:var(--ink); color:var(--ink);}
+  .grid3{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:36px;
+  }
+  .card{
+    display:flex; flex-direction:column;
+    border-top:2px solid var(--ink);
+    padding-top:20px;
+  }
+  .card .thumb{
+    height:150px; margin-bottom:18px;
+    background:var(--paper-dim);
+    border:1px solid var(--line);
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .card .thumb span{
+    font-family:'Fraunces', serif; font-style:italic; font-size:15px;
+    color:var(--gold);
+  }
+  .card h3{font-size:19px; line-height:1.32; margin-bottom:10px;}
+  .card p{font-size:14px; color:var(--ink-soft); margin-bottom:16px; flex:1;}
+
+  /* ===== ABOUT / SIGNATURE STRIP ===== */
+  .about{
+    padding:88px 0;
+    background:var(--ink);
+    color:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .about .wrap{display:grid; grid-template-columns:.9fr 1.1fr; gap:64px; align-items:center;}
+  .about-photo{
+    aspect-ratio:4/5;
+    background:linear-gradient(160deg,#2C3A5C, #16213A 60%);
+    border:1px solid rgba(255,255,255,.15);
+    position:relative;
+  }
+  .about-photo::before{
+    content:"F";
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif; font-size:160px; font-weight:300;
+    color:rgba(255,255,255,.08);
+  }
+  .about .eyebrow{color:var(--gold-soft);}
+  .about h2{font-size:34px; margin:14px 0 20px; color:var(--paper); line-height:1.2;}
+  .about p{color:#C7CCDA; margin-bottom:16px; font-size:16px; max-width:52ch;}
+  .credentials{
+    display:flex; gap:32px; margin-top:28px;
+    font-family:'Space Mono', monospace; font-size:12px; color:#9AA5BC;
+  }
+  .credentials div b{display:block; color:var(--paper); font-size:22px; font-family:'Fraunces',serif; font-weight:500;}
+
+  /* ===== NEWSLETTER ===== */
+  .newsletter{
+    padding:64px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .news-inner{
+    display:flex; justify-content:space-between; align-items:center;
+    gap:40px; flex-wrap:wrap;
+    border:1px solid var(--line);
+    padding:44px 48px;
+    background:var(--paper-dim);
+  }
+  .news-inner h3{font-size:24px; max-width:16ch;}
+  .news-form{display:flex; gap:0; max-width:380px; width:100%;}
+  .news-form input{
+    flex:1; padding:14px 16px; border:1px solid var(--ink); border-right:none;
+    background:var(--white); font-family:'Inter'; font-size:14px;
+  }
+  .news-form button{
+    padding:14px 20px; background:var(--ink); color:var(--paper);
+    border:1px solid var(--ink); font-size:13px; font-weight:600;
+  }
+  .news-form button:hover{background:var(--gold); border-color:var(--gold);}
+
+  /* ===== FOOTER ===== */
+  footer{padding:56px 0 40px;}
+  .footer-inner{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:30px;
+  }
+  .footer-cols{display:flex; gap:64px;}
+  .fcol h5{
+    font-family:'Space Mono', monospace; font-size:11px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--slate); margin-bottom:14px;
+  }
+  .fcol a{display:block; font-size:14px; color:var(--ink-soft); margin-bottom:9px;}
+  .fcol a:hover{color:var(--ink);}
+  .foot-bottom{
+    margin-top:48px; padding-top:24px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; font-size:12px; color:var(--slate);
+    font-family:'Space Mono', monospace;
+  }
+
+  @media (max-width:900px){
+    nav{display:none;}
+    .hero{grid-template-columns:1fr; gap:36px;}
+    .hero-side{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:24px;}
+    .featured-grid{grid-template-columns:1fr;}
+    .grid3{grid-template-columns:1fr 1fr;}
+    .about .wrap{grid-template-columns:1fr;}
+    .about-photo{max-width:260px;}
+    .news-inner{flex-direction:column; align-items:flex-start;}
+    .news-form{max-width:100%;}
+    .footer-cols{gap:36px;}
+  }
+  @media (max-width:600px){
+    .grid3{grid-template-columns:1fr;}
+    .wrap{padding:0 20px;}
+    .credentials{flex-wrap:wrap; gap:24px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cycle-word span{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a href="#" class="brandmark"><span class="dot"></span>Fernando</a>
+    <nav>
+      <a href="#articulos">Artículos</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="#" class="nav-cta">Agendar diagnóstico →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap" style="display:grid; grid-template-columns:1.15fr .85fr; gap:64px; align-items:end;">
+    <div>
+      <p class="eyebrow">Estrategia de marca &nbsp;·&nbsp; Posicionamiento &nbsp;·&nbsp; Identidad verbal</p>
+      <h1 style="margin-top:18px;">Marcas que se vuelven <span class="cycle-word"><em id="cycleWord">inevitables</em></span>.</h1>
+      <p class="lede">Escribo sobre cómo las empresas dejan de competir por precio y empiezan a competir por significado. Casos reales, marcos de trabajo aplicables y lo que aprendo trabajando con marcas en crecimiento.</p>
+      <div class="hero-actions">
+        <a href="#articulos" class="btn-primary">Leer los artículos</a>
+        <a href="#sobre-mi" class="btn-ghost">Sobre Fernando →</a>
+      </div>
+    </div>
+    <div class="hero-side">
+      <span class="stamp">Nº 042 · en publicación</span>
+      <p>Este blog documenta el trabajo de posicionar marcas para clientes reales: qué funcionó, qué falló y por qué la mayoría de los rebrandings no cambian nada en los resultados.</p>
+      <p>Nueva entrada cada dos semanas. Sin relleno, sin plantillas genéricas de "10 tips".</p>
+    </div>
+  </div>
+</section>
+
+<section class="featured">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Destacado</p>
+        <h2>Lo más reciente</h2>
+      </div>
+      <a href="#articulos">Ver todo el archivo →</a>
+    </div>
+
+    <div class="featured-grid">
+      <article class="feat-main">
+        <div class="feat-media"></div>
+        <div class="feat-body">
+          <span class="tag">Posicionamiento</span>
+          <h3>Por qué tu marca no tiene un problema de diseño, tiene un problema de decisión</h3>
+          <p>La mayoría de las marcas que me buscan creen que necesitan un logo nuevo. Casi ninguna lo necesita. Necesitan decidir, con precisión incómoda, a quién le hablan y a quién están dispuestas a no gustarle.</p>
+          <div class="meta">
+            <span>12 ago 2026</span>
+            <span>·</span>
+            <span>9 min de lectura</span>
+          </div>
+        </div>
+      </article>
+
+      <div class="side-posts">
+        <div class="side-post">
+          <span class="num">02</span>
+          <div>
+            <h4>El arquetipo no es una plantilla, es un punto de partida</h4>
+            <p>Cómo usar los 12 arquetipos sin terminar sonando igual que la competencia.</p>
+          </div>
+        </div>
+        <div class="side-post">
+          <span class="num">03</span>
+          <div>
+            <h4>La identidad verbal que nadie audita hasta que ya es tarde</h4>
+            <p>Un checklist de 14 puntos para revisar el tono de tu marca antes de escalar contenido.</p>
+          </div>
+        </div>
+        <div class="side-post">
+          <span class="num">04</span>
+          <div>
+            <h4>Growth sin marca es solo gasto acelerado</h4>
+            <p>Por qué los loops de adquisición fallan cuando no hay una promesa clara detrás.</p>
+          </div>
+        </div>
+        <div class="side-post">
+          <span class="num">05</span>
+          <div>
+            <h4>Diagnosticar antes de rediseñar</h4>
+            <p>El scorecard de tres preguntas que uso en la primera reunión con cada cliente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="articles" id="articulos">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Archivo</p>
+        <h2>Todos los artículos</h2>
+      </div>
+    </div>
+    <div class="filters">
+      <span class="filter active">Todos</span>
+      <span class="filter">Posicionamiento</span>
+      <span class="filter">Identidad verbal</span>
+      <span class="filter">Arquetipos</span>
+      <span class="filter">Growth</span>
+      <span class="filter">Casos de estudio</span>
+    </div>
+
+    <div class="grid3">
+      <div class="card">
+        <div class="thumb"><span>Caso de estudio</span></div>
+        <span class="tag">Casos de estudio</span>
+        <h3>Cómo una panadería local subió sus precios 22% sin perder clientes</h3>
+        <p>Reposicionar no siempre significa gastar más en marketing. A veces significa dejar de competir donde no puedes ganar.</p>
+        <div class="meta"><span>29 jul 2026</span><span>·</span><span>7 min</span></div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><span>Identidad verbal</span></div>
+        <span class="tag">Identidad verbal</span>
+        <h3>El tono de voz no es "ser cercano", es ser reconocible en silencio</h3>
+        <p>Si tapas el logo y el post sigue sonando a cualquiera, no tienes tono de voz, tienes plantilla.</p>
+        <div class="meta"><span>15 jul 2026</span><span>·</span><span>6 min</span></div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><span>Arquetipos</span></div>
+        <span class="tag">Arquetipos</span>
+        <h3>El arquetipo del Sabio está sobreexplotado en B2B. Aquí tres alternativas</h3>
+        <p>Todas las fintechs no pueden ser el Sabio. Un mapa de arquetipos menos saturados para 2026.</p>
+        <div class="meta"><span>02 jul 2026</span><span>·</span><span>8 min</span></div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><span>Growth</span></div>
+        <span class="tag">Growth</span>
+        <h3>LTV/CAC no mejora con más anuncios, mejora con mejor promesa</h3>
+        <p>Un experimento con dos versiones del mismo funnel: una con más presupuesto, otra con más claridad de marca.</p>
+        <div class="meta"><span>18 jun 2026</span><span>·</span><span>10 min</span></div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><span>Posicionamiento</span></div>
+        <span class="tag">Posicionamiento</span>
+        <h3>La pregunta que casi ningún fundador puede responder en 10 segundos</h3>
+        <p>"¿Por qué tú y no el otro?" — y por qué la respuesta correcta casi nunca es la que dicen primero.</p>
+        <div class="meta"><span>04 jun 2026</span><span>·</span><span>5 min</span></div>
+      </div>
+
+      <div class="card">
+        <div class="thumb"><span>Casos de estudio</span></div>
+        <span class="tag">Casos de estudio</span>
+        <h3>Rebranding de una clínica dental: de "confiable" a "sin ansiedad"</h3>
+        <p>Cambiar un solo adjetivo en el posicionamiento movió la conversión de la landing un 31%.</p>
+        <div class="meta"><span>21 may 2026</span><span>·</span><span>9 min</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="sobre-mi">
+  <div class="wrap">
+    <div class="about-photo"></div>
+    <div>
+      <p class="eyebrow">Sobre mí</p>
+      <h2>Estrategia de marca para negocios que ya venden, pero no se recuerdan.</h2>
+      <p>Soy Fernando, estratega de marca. Trabajo con fundadores y equipos de marketing que tienen tracción pero no tienen una posición clara — el tipo de negocio que "está bien" para todos y memorable para nadie.</p>
+      <p>Este blog es el registro público de ese trabajo: los marcos que uso, los errores que corrijo y las decisiones incómodas que casi siempre valen la pena.</p>
+      <div class="credentials">
+        <div><b>60+</b>marcas posicionadas</div>
+        <div><b>8 años</b>en consultoría de marca</div>
+        <div><b>3</b>industrias de foco: retail, servicios, SaaS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter" id="newsletter">
+  <div class="wrap">
+    <div class="news-inner">
+      <h3>Una idea de marca cada dos semanas. Sin spam, sin plantillas.</h3>
+      <form class="news-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Listo →';">
+        <input type="email" placeholder="tu@correo.com" required>
+        <button type="submit">Suscribirme</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>
+      <a href="#" class="brandmark"><span class="dot"></span>Fernando</a>
+      <p style="margin-top:14px; font-size:13px; color:var(--slate); max-width:28ch;">Estrategia de marca y posicionamiento para negocios en crecimiento.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="fcol">
+        <h5>Explorar</h5>
+        <a href="#articulos">Artículos</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#newsletter">Newsletter</a>
+      </div>
+      <div class="fcol">
+        <h5>Categorías</h5>
+        <a href="#">Posicionamiento</a>
+        <a href="#">Identidad verbal</a>
+        <a href="#">Arquetipos</a>
+        <a href="#">Growth</a>
+      </div>
+      <div class="fcol">
+        <h5>Contacto</h5>
+        <a href="#">Agendar diagnóstico</a>
+        <a href="#">hola@fernando.marca</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 Fernando — Estrategia de marca</span>
+    <span>Diseñado para pensar antes de decorar</span>
+  </div>
+</footer>
+
+<script>
+  const words = ["inevitables", "reconocibles", "irrepetibles", "memorables"];
+  let i = 0;
+  const el = document.getElementById('cycleWord');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!prefersReduced){
+    setInterval(() => {
+      i = (i + 1) % words.length;
+      el.style.opacity = 0;
+      setTimeout(() => {
+        el.textContent = words[i];
+        el.style.opacity = 1;
+      }, 250);
+    }, 2600);
+    el.style.transition = 'opacity .25s ease';
+  }
+
+  document.querySelectorAll('.filter').forEach(f => {
+    f.addEventListener('click', () => {
+      document.querySelectorAll('.filter').forEach(x => x.classList.remove('active'));
+      f.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
