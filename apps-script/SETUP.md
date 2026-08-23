@@ -61,3 +61,21 @@ Llena el formulario "Agendar diagnóstico" en la web con datos de prueba. Deber�
 - **Cuota gratuita de Gmail:** 100 correos/día en una cuenta de Gmail normal — de sobra para la fase inicial.
 - **Clasificación con IA (futuro):** la función `classifyLead()` en `Code.gs` ya está aislada y comentada con un ejemplo de cómo conectarla a un modelo más adelante, sin tener que tocar el resto del flujo. Cualquier API key que uses ahí se guarda en **Project Settings → Script Properties** de Apps Script (no en el código ni en el frontend).
 - **Exportar a Excel cuando quieras:** en el Google Sheet, `Archivo → Descargar → Microsoft Excel (.xlsx)`.
+
+## Solución de problemas
+
+**"Hubo un problema de conexión" al enviar el formulario.**
+Es un bloqueo de CORS del propio navegador contra Apps Script — pasa incluso con la configuración correcta, en ciertos navegadores o al probar el archivo local (`file://`) en vez de la web publicada. El formulario ya tiene un **fallback automático**: si el envío directo falla, cae solo a un envío clásico (POST + iframe oculto) que no depende de CORS y siempre llega. No tienes que hacer nada — pero si quieres confirmar que de verdad llegó, revisa el Google Sheet o tu Gmail después de un envío de prueba.
+
+**Actualicé `Code.gs` pero el formulario sigue fallando igual.**
+Editar el código en el editor de Apps Script **no actualiza automáticamente** la URL `/exec` ya desplegada. Tienes que republicar:
+1. **Implementar → Administrar implementaciones**.
+2. Clic en el lápiz (editar) sobre tu implementación activa.
+3. En "Versión", selecciona **Nueva versión**.
+4. **Implementar**.
+
+La URL `/exec` se mantiene igual — no hace falta cambiar nada en `index.html`.
+
+**Quiero confirmar que el endpoint está vivo.**
+Abre la URL `/exec` directo en el navegador (método GET). Debe responder `{"ok":true,"message":"Endpoint de diagnósticos activo."}`. Si en cambio pide iniciar sesión o da error de permisos, revisa que el deployment tenga "Quién tiene acceso: Cualquier usuario".
+

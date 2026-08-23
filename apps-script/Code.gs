@@ -29,10 +29,14 @@ const SEND_USER_CONFIRMATION = true;
 
 /**
  * Punto de entrada: recibe el POST del formulario de la web.
+ * Acepta dos formatos, para ser resistente a bloqueos de CORS:
+ *   1. JSON (cuando el navegador pudo usar fetch normalmente)
+ *   2. application/x-www-form-urlencoded (fallback vía formulario/iframe,
+ *      que nunca depende de CORS porque es una navegación real)
  */
 function doPost(e) {
   try {
-    const data = JSON.parse(e.postData.contents);
+    const data = parseRequest(e);
 
     const errors = validate(data);
     if (errors.length > 0) {
@@ -74,6 +78,24 @@ function doPost(e) {
  */
 function doGet(e) {
   return respond({ ok: true, message: 'Endpoint de diagnósticos activo.' });
+}
+
+/**
+ * Interpreta el payload venga como venga: JSON (fetch) o
+ * form-urlencoded (envío clásico de formulario / fallback iframe).
+ */
+function parseRequest(e) {
+  if (e.postData && e.postData.contents) {
+    try {
+      return JSON.parse(e.postData.contents);
+    } catch (err) {
+      // No era JSON — seguimos e intentamos con e.parameter abajo.
+    }
+  }
+  if (e.parameter && Object.keys(e.parameter).length > 0) {
+    return e.parameter;
+  }
+  return {};
 }
 
 /**
