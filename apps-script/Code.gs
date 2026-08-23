@@ -13,7 +13,7 @@
 
 // ─── CONFIGURACIÓN ───────────────────────────────────────────────
 const SHEET_ID = '1xiI72IZpZs4FZYhVOSt0_uo5QPdJbaZqMAVzrB7dgvw';
-const SHEET_NAME = 'leads - fernando';
+const SHEET_NAME = 'leads';
 const NOTIFY_EMAIL = 'juanfernandomendez@gmail.com';
 const SEND_USER_CONFIRMATION = true;
 // ──────────────────────────────────────────────────────────────────
