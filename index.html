@@ -31,6 +31,17 @@
     font-size:16px;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  ::selection{background:var(--olive); color:var(--paper);}
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    z-index:200;
+    pointer-events:none;
+    opacity:.045;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
   a{color:inherit; text-decoration:none;}
   img{max-width:100%; display:block;}
@@ -43,6 +54,44 @@
     color:var(--olive);
   }
   h1,h2,h3{font-family:'Fraunces', serif; font-weight:500; letter-spacing:-.01em;}
+
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);}
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+
+  /* ===== MARQUEE ===== */
+  .marquee-strip{
+    background:var(--ink);
+    overflow:hidden;
+    padding:16px 0;
+    white-space:nowrap;
+  }
+  .marquee-track{
+    display:inline-flex;
+    animation:marquee 26s linear infinite;
+  }
+  .marquee-track span{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:20px;
+    color:var(--paper);
+    padding:0 28px;
+    display:inline-flex;
+    align-items:center;
+    gap:28px;
+  }
+  .marquee-track span::after{
+    content:"—";
+    color:var(--olive-soft);
+    font-style:normal;
+  }
+  @keyframes marquee{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{animation:none;}
+  }
 
   /* ===== MASTHEAD ===== */
   .masthead{
@@ -77,13 +126,29 @@
 
   /* ===== HERO ===== */
   .hero{
-    padding:88px 0 96px;
+    padding:104px 0 120px;
+    position:relative;
+    overflow:hidden;
     display:grid;
     grid-template-columns:1.15fr .85fr;
     gap:64px;
     align-items:end;
-    border-bottom:1px solid var(--line);
+    clip-path:polygon(0 0, 100% 0, 100% 94%, 0 100%);
+    background:var(--paper);
   }
+  .hero-bignum{
+    position:absolute;
+    top:-6%; right:-2%;
+    font-family:'Fraunces', serif;
+    font-weight:300;
+    font-size:min(46vw, 620px);
+    line-height:1;
+    color:var(--olive-tint);
+    z-index:0;
+    pointer-events:none;
+    user-select:none;
+  }
+  .hero .wrap{position:relative; z-index:1;}
   .hero h1{
     font-size:clamp(40px, 5.4vw, 74px);
     line-height:1.03;
@@ -231,8 +296,20 @@
   .quote-strip{
     background:var(--olive-deep);
     color:var(--paper);
-    padding:56px 0;
-    border-bottom:1px solid var(--line);
+    padding:64px 0;
+    position:relative;
+    overflow:hidden;
+    clip-path:polygon(0 6%, 100% 0, 100% 100%, 0 100%);
+  }
+  .quote-strip::before{
+    content:"“";
+    position:absolute;
+    top:-4%; left:2%;
+    font-family:'Fraunces', serif;
+    font-size:320px;
+    line-height:1;
+    color:rgba(255,255,255,.06);
+    pointer-events:none;
   }
   .quote-strip .wrap{
     display:flex; align-items:center; gap:56px; flex-wrap:wrap;
@@ -323,8 +400,8 @@
   .about-photo{
     aspect-ratio:4/5;
     background:linear-gradient(160deg,#1F4C2C, #16213A 65%);
-    border:1px solid rgba(255,255,255,.15);
     position:relative;
+    clip-path:polygon(8% 0%, 100% 0%, 100% 92%, 92% 100%, 0% 100%, 0% 8%);
   }
   .about-photo::before{
     content:"F";
@@ -341,6 +418,60 @@
     font-family:'Space Mono', monospace; font-size:12px; color:#9AA5BC;
   }
   .credentials div b{display:block; color:var(--paper); font-size:22px; font-family:'Fraunces',serif; font-weight:500;}
+
+  /* ===== DIAGNOSTIC FORM ===== */
+  .diagnostic{
+    padding:88px 0;
+    background:var(--paper-dim);
+    border-bottom:1px solid var(--line);
+  }
+  .diagnostic-head{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px; margin-bottom:48px;
+    align-items:end;
+  }
+  .diagnostic-head h2{font-size:32px; line-height:1.2;}
+  .diagnostic-head p{color:var(--ink-soft); font-size:15px; max-width:48ch;}
+  .diag-form{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-left:4px solid var(--olive);
+    padding:40px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+  }
+  .diag-form .full{grid-column:1 / -1;}
+  .field label{
+    display:block; font-family:'Space Mono', monospace; font-size:11px;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--slate);
+    margin-bottom:8px;
+  }
+  .field input, .field select, .field textarea{
+    width:100%; border:1px solid var(--line); background:var(--paper);
+    padding:12px 14px; font-family:'Inter'; font-size:14px; color:var(--ink);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-color:var(--olive);
+  }
+  .field textarea{resize:vertical; min-height:90px;}
+  .diag-submit{
+    background:var(--ink); color:var(--paper);
+    border:none; padding:15px 28px; font-size:14px; font-weight:600;
+    cursor:pointer; justify-self:start;
+  }
+  .diag-submit:hover{background:var(--olive);}
+  .diag-submit:disabled{opacity:.6; cursor:default;}
+  .diag-status{
+    font-family:'Space Mono', monospace; font-size:13px;
+    padding-top:4px;
+  }
+  .diag-status.ok{color:var(--olive-deep);}
+  .diag-status.err{color:#A6432E;}
+
+  @media (max-width:900px){
+    .diagnostic-head{grid-template-columns:1fr; gap:20px;}
+    .diag-form{grid-template-columns:1fr; padding:28px;}
+  }
 
   /* ===== NEWSLETTER ===== */
   .newsletter{
@@ -419,12 +550,13 @@
       <a href="#articulos">Blog</a>
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#newsletter">Newsletter</a>
-      <a href="#" class="nav-cta">Agendar diagnóstico →</a>
+      <a href="#diagnostico" class="nav-cta">Agendar diagnóstico →</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
+  <span class="hero-bignum" aria-hidden="true">M</span>
   <div class="wrap" style="display:grid; grid-template-columns:1.15fr .85fr; gap:64px; align-items:end;">
     <div>
       <p class="eyebrow">Estrategia de marca &nbsp;·&nbsp; Posicionamiento &nbsp;·&nbsp; Identidad verbal</p>
@@ -443,9 +575,24 @@
   </div>
 </section>
 
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Territorio de marca</span>
+    <span>Propósito</span>
+    <span>Océano azul</span>
+    <span>Posicionamiento</span>
+    <span>Identidad verbal</span>
+    <span>Territorio de marca</span>
+    <span>Propósito</span>
+    <span>Océano azul</span>
+    <span>Posicionamiento</span>
+    <span>Identidad verbal</span>
+  </div>
+</div>
+
 <section class="about" id="sobre-mi">
   <div class="wrap">
-    <div class="about-photo"></div>
+    <div class="about-photo reveal"></div>
     <div>
       <p class="eyebrow">Sobre mí</p>
       <h2>¡Hola! Soy Fernando.</h2>
@@ -464,7 +611,7 @@
   <div class="wrap">
     <p class="eyebrow">En qué escribo</p>
     <h2>Cuatro temas, un solo objetivo: que tu marca sea difícil de ignorar.</h2>
-    <div class="pillars-grid">
+    <div class="pillars-grid reveal">
       <div class="pillar">
         <span class="pillar-num">01</span>
         <h3>Posicionamiento</h3>
@@ -491,7 +638,7 @@
 
 <section class="quote-strip">
   <div class="wrap">
-    <blockquote>
+    <blockquote class="reveal">
       "El rediseño no arregla nada si nadie decidió, primero, a quién le vas a hablar y a quién no."
       <cite>— Fernando</cite>
     </blockquote>
@@ -512,7 +659,7 @@
       </div>
     </div>
     <p class="empty-copy">Estoy escribiendo las primeras entradas — casos reales de marcas que he ayudado a posicionar, sin relleno ni plantillas de "10 tips". Si quieres que te avise apenas publique la primera, déjame tu correo abajo.</p>
-    <div class="grid3">
+    <div class="grid3 reveal">
       <div class="card card-ghost">
         <div class="thumb thumb-ghost"><span>Posicionamiento</span></div>
         <h3 class="ghost-title">Próximamente</h3>
@@ -529,9 +676,58 @@
   </div>
 </section>
 
+<section class="diagnostic" id="diagnostico">
+  <div class="wrap">
+    <div class="diagnostic-head reveal">
+      <div>
+        <p class="eyebrow">Primer paso</p>
+        <h2>Agenda tu diagnóstico de marca</h2>
+      </div>
+      <p>Cuéntame sobre tu negocio y te respondo personalmente en menos de 48 horas para agendar la sesión de diagnóstico.</p>
+    </div>
+
+    <form class="diag-form reveal" id="diagForm">
+      <div class="field">
+        <label for="f-nombre">Nombre *</label>
+        <input type="text" id="f-nombre" name="nombre" required>
+      </div>
+      <div class="field">
+        <label for="f-empresa">Empresa</label>
+        <input type="text" id="f-empresa" name="empresa">
+      </div>
+      <div class="field">
+        <label for="f-email">Email *</label>
+        <input type="email" id="f-email" name="email" required>
+      </div>
+      <div class="field">
+        <label for="f-necesidad">Necesidad</label>
+        <select id="f-necesidad" name="necesidad">
+          <option value="Diagnóstico general">Diagnóstico general</option>
+          <option value="Posicionamiento">Posicionamiento</option>
+          <option value="Identidad verbal">Identidad verbal</option>
+          <option value="Rebranding completo">Rebranding completo</option>
+          <option value="No estoy seguro">No estoy seguro</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label for="f-descripcion">¿A qué se dedica tu negocio?</label>
+        <input type="text" id="f-descripcion" name="descripcion" placeholder="En una frase.">
+      </div>
+      <div class="field full">
+        <label for="f-mensaje">Cuéntame más</label>
+        <textarea id="f-mensaje" name="mensaje" placeholder="¿Qué te trae hasta aquí?"></textarea>
+      </div>
+      <div class="full" style="display:flex; align-items:center; gap:18px; flex-wrap:wrap;">
+        <button type="submit" class="diag-submit" id="diagSubmit">Enviar solicitud</button>
+        <span class="diag-status" id="diagStatus" role="status" aria-live="polite"></span>
+      </div>
+    </form>
+  </div>
+</section>
+
 <section class="newsletter" id="newsletter">
   <div class="wrap">
-    <div class="news-inner">
+    <div class="news-inner reveal">
       <h3>Sé el primero en leer cuando publique el primer artículo.</h3>
       <form class="news-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Listo →';">
         <input type="email" placeholder="tu@correo.com" required>
@@ -563,7 +759,7 @@
       </div>
       <div class="fcol">
         <h5>Contacto</h5>
-        <a href="#">Agendar diagnóstico</a>
+        <a href="#diagnostico">Agendar diagnóstico</a>
         <a href="#">hola@fernando.marca</a>
       </div>
     </div>
@@ -589,6 +785,81 @@
       }, 250);
     }, 2600);
     el.style.transition = 'opacity .25s ease';
+  }
+
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && revealEls.length){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.15, rootMargin:'0px 0px -60px 0px'});
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
+
+  // ─── Formulario de diagnóstico → Google Apps Script ───
+  // Reemplaza esto por la URL de tu implementación (ver apps-script/SETUP.md).
+  // No es una API key: es el endpoint público de tu propio backend.
+  const DIAGNOSTIC_ENDPOINT = "PON_AQUI_TU_URL_DE_APPS_SCRIPT";
+
+  const diagForm = document.getElementById('diagForm');
+  const diagSubmit = document.getElementById('diagSubmit');
+  const diagStatus = document.getElementById('diagStatus');
+
+  if(diagForm){
+    diagForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if(DIAGNOSTIC_ENDPOINT.indexOf('PON_AQUI') !== -1){
+        diagStatus.textContent = 'Formulario en configuración — escríbeme directo mientras tanto a hola@fernando.marca';
+        diagStatus.className = 'diag-status err';
+        return;
+      }
+
+      const payload = {
+        nombre: document.getElementById('f-nombre').value.trim(),
+        empresa: document.getElementById('f-empresa').value.trim(),
+        email: document.getElementById('f-email').value.trim(),
+        necesidad: document.getElementById('f-necesidad').value,
+        descripcion: document.getElementById('f-descripcion').value.trim(),
+        mensaje: document.getElementById('f-mensaje').value.trim()
+      };
+
+      diagSubmit.disabled = true;
+      diagSubmit.textContent = 'Enviando…';
+      diagStatus.textContent = '';
+      diagStatus.className = 'diag-status';
+
+      try{
+        const res = await fetch(DIAGNOSTIC_ENDPOINT, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+
+        if(result.ok){
+          diagForm.reset();
+          diagStatus.textContent = '¡Listo! Te escribo en menos de 48 horas.';
+          diagStatus.className = 'diag-status ok';
+          diagSubmit.textContent = 'Enviar solicitud';
+        } else {
+          diagStatus.textContent = 'No pude enviarlo. Revisa tu correo e inténtalo de nuevo.';
+          diagStatus.className = 'diag-status err';
+          diagSubmit.textContent = 'Enviar solicitud';
+        }
+      } catch(err){
+        diagStatus.textContent = 'Hubo un problema de conexión. Inténtalo de nuevo en un momento.';
+        diagStatus.className = 'diag-status err';
+        diagSubmit.textContent = 'Enviar solicitud';
+      } finally {
+        diagSubmit.disabled = false;
+      }
+    });
   }
 </script>
 
