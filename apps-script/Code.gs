@@ -36,14 +36,24 @@ const SEND_USER_CONFIRMATION = true;
  */
 function doPost(e) {
   try {
+    console.log('doPost recibido. postData:', e.postData ? e.postData.contents : '(sin postData)');
+    console.log('e.parameter:', JSON.stringify(e.parameter));
+
     const data = parseRequest(e);
+    console.log('Datos interpretados:', JSON.stringify(data));
 
     const errors = validate(data);
     if (errors.length > 0) {
+      console.log('Validación falló:', JSON.stringify(errors));
       return respond({ ok: false, errors: errors });
     }
 
+    console.log('Abriendo sheet con SHEET_ID:', SHEET_ID);
     const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(SHEET_NAME);
+    if (!sheet) {
+      console.log('ERROR: no se encontró una pestaña llamada "' + SHEET_NAME + '"');
+      return respond({ ok: false, error: 'sheet_no_encontrada' });
+    }
     ensureHeaders(sheet);
 
     const estadoInicial = classifyLead(data);
@@ -58,16 +68,20 @@ function doPost(e) {
       data.mensaje || '',
       estadoInicial
     ]);
+    console.log('Fila agregada correctamente.');
 
     sendOwnerNotification(data);
+    console.log('Correo de notificación enviado a', NOTIFY_EMAIL);
 
     if (SEND_USER_CONFIRMATION && data.email) {
       sendConfirmationToUser(data);
+      console.log('Correo de confirmación enviado a', data.email);
     }
 
     return respond({ ok: true });
 
   } catch (err) {
+    console.log('ERROR atrapado en doPost:', String(err));
     return respond({ ok: false, error: String(err) });
   }
 }
