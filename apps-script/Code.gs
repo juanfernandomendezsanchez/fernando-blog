@@ -12,17 +12,9 @@
  */
 
 // ─── CONFIGURACIÓN ───────────────────────────────────────────────
-// 1. Pega aquí el ID de tu Google Sheet (está en la URL de la hoja,
-//    entre /d/ y /edit).
-const SHEET_ID = 'PON_AQUI_EL_ID_DE_TU_GOOGLE_SHEET';
-
-// 2. Nombre exacto de la pestaña dentro de esa hoja.
-const SHEET_NAME = 'Leads';
-
-// 3. El Gmail donde quieres recibir la notificación de cada lead.
-const NOTIFY_EMAIL = 'PON_AQUI_TU_CORREO@gmail.com';
-
-// 4. ¿Enviar también un correo de confirmación automático al usuario?
+const SHEET_ID = '1xiI72IZpZs4FZYhVOSt0_uo5QPdJbaZqMAVzrB7dgvw';
+const SHEET_NAME = 'leads - fernando';
+const NOTIFY_EMAIL = 'juanfernandomendez@gmail.com';
 const SEND_USER_CONFIRMATION = true;
 // ──────────────────────────────────────────────────────────────────
 
