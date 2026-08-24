@@ -55,6 +55,7 @@ function doPost(e) {
       data.nombre,
       data.empresa || '',
       data.email,
+      data.telefono || '',
       data.necesidad || '',
       data.descripcion || '',
       data.mensaje || '',
@@ -122,9 +123,26 @@ function validate(data) {
 /**
  * Crea la fila de encabezados si la hoja está vacía.
  */
+/**
+ * Crea la fila de encabezados si la hoja está vacía, o migra una hoja
+ * ya existente (creada antes de que agregáramos Teléfono) insertando
+ * esa columna en el lugar correcto — sin tocar los leads ya guardados.
+ */
 function ensureHeaders(sheet) {
+  const fullHeaders = ['Fecha', 'Nombre', 'Empresa', 'Email', 'Teléfono', 'Necesidad', 'Descripción', 'Mensaje', 'Estado'];
+
   if (sheet.getLastRow() === 0) {
-    sheet.appendRow(['Fecha', 'Nombre', 'Empresa', 'Email', 'Necesidad', 'Descripción', 'Mensaje', 'Estado']);
+    sheet.appendRow(fullHeaders);
+    return;
+  }
+
+  const currentHeaders = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  if (currentHeaders.indexOf('Teléfono') === -1) {
+    // La hoja es de antes de agregar este campo: insertamos la columna
+    // Teléfono justo después de Email (columna D = 4), sin mover ni
+    // borrar ninguna fila existente.
+    sheet.insertColumnAfter(4);
+    sheet.getRange(1, 5).setValue('Teléfono');
   }
 }
 
@@ -166,6 +184,7 @@ function sendOwnerNotification(data) {
     `Nombre: ${data.nombre}\n` +
     `Empresa: ${data.empresa || '—'}\n` +
     `Email: ${data.email}\n` +
+    `Teléfono: ${data.telefono || '—'}\n` +
     `Necesidad: ${data.necesidad || '—'}\n` +
     `Descripción: ${data.descripcion || '—'}\n` +
     `Mensaje: ${data.mensaje || '—'}\n\n` +
