@@ -341,63 +341,6 @@
   .pillar h3{font-size:18px; margin:14px 0 10px;}
   .pillar p{font-size:14px; color:var(--ink-soft); line-height:1.55;}
 
-  /* ===== RESOURCES / LIBRARY ===== */
-  .resources{
-    padding:80px 0 88px;
-    background:var(--paper-dim);
-    border-bottom:1px solid var(--line);
-  }
-  .resources h2{font-size:30px; max-width:26ch; margin-bottom:12px; line-height:1.25;}
-  .resources-lede{color:var(--ink-soft); font-size:15px; max-width:56ch; margin-bottom:44px;}
-  .lib-sections{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:36px;
-  }
-  .lib-section-head{
-    display:flex; align-items:center; gap:10px;
-    margin-bottom:20px;
-    padding-bottom:14px;
-    border-bottom:2px solid var(--olive-deep);
-  }
-  .lib-section-head h3{font-size:19px;}
-  .lib-section-head .icon{width:20px; height:20px; color:var(--olive-deep);}
-  .lib-book{
-    display:flex; gap:16px;
-    padding:18px 0;
-    border-bottom:1px solid var(--line);
-  }
-  .lib-book:last-child{border-bottom:none;}
-  .lib-book-icon{
-    flex-shrink:0;
-    width:40px; height:52px;
-    background:var(--white);
-    border:1px solid var(--line);
-    border-left:3px solid var(--olive);
-    display:flex; align-items:center; justify-content:center;
-  }
-  .lib-book-icon svg{width:18px; height:18px; stroke:var(--olive-deep); fill:none; stroke-width:1.6;}
-  .lib-book-info h4{font-family:'Baloo 2', sans-serif; font-weight:600; font-size:15px; line-height:1.35; margin-bottom:4px;}
-  .lib-book-info p{font-size:13px; color:var(--slate); margin-bottom:8px;}
-  .lib-book-link{
-    font-family:'Poppins', sans-serif; font-size:12px; font-weight:600;
-    color:var(--olive-deep);
-    display:inline-flex; align-items:center; gap:5px;
-    border-bottom:1px solid var(--olive-deep);
-  }
-  .lib-book-link:hover{color:var(--olive); border-color:var(--olive);}
-  .lib-book-link svg{width:12px; height:12px; stroke:currentColor; fill:none; stroke-width:2;}
-  .resources-note{
-    margin-top:32px;
-    font-family:'Poppins', sans-serif;
-    font-size:12px; color:var(--slate);
-    display:flex; align-items:center; gap:8px;
-  }
-
-  @media (max-width:900px){
-    .lib-sections{grid-template-columns:1fr;}
-  }
-
   /* ===== QUOTE STRIP ===== */
   .quote-strip{
     background:var(--olive-deep);
@@ -654,7 +597,7 @@
     <a href="#" class="brandmark"><span class="dot"></span>Fernando</a>
     <nav>
       <a href="#articulos">Blog</a>
-      <a href="#recursos">Recursos</a>
+      <a href="recursos.html">Recursos</a>
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#newsletter">Newsletter</a>
       <a href="#diagnostico" class="nav-cta">Agendar diagnóstico →</a>
@@ -747,68 +690,6 @@
   </div>
 </section>
 
-<section class="resources" id="recursos">
-  <div class="wrap">
-    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>Recursos</p>
-    <h2 class="reveal">Mi biblioteca de referencia</h2>
-    <p class="resources-lede reveal">Los libros que le dieron forma a la manera en que pienso la estrategia de marca. Los comparto acá por si te sirven a ti también.</p>
-
-    <div class="lib-sections reveal">
-      <div class="lib-section">
-        <div class="lib-section-head">
-          <svg class="icon" viewBox="0 0 24 24"><polyline points="3,17 9,11 13,15 21,7"/><polyline points="15,7 21,7 21,13"/></svg>
-          <h3>Ventas</h3>
-        </div>
-        <div class="lib-book">
-          <div class="lib-book-icon">
-            <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
-          </div>
-          <div class="lib-book-info">
-            <h4>Véndele a la mente, no a la gente</h4>
-            <p>Jürgen Klaric</p>
-            <a class="lib-book-link" href="https://drive.google.com/file/d/1FUWFkT_lRTpUFjaGzyejtj3dtMbGNJAY/view" target="_blank" rel="noopener">
-              Leer en Drive
-              <svg viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="lib-section">
-        <div class="lib-section-head">
-          <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
-          <h3>Branding</h3>
-        </div>
-        <div class="lib-book">
-          <div class="lib-book-icon">
-            <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
-          </div>
-          <div class="lib-book-info">
-            <h4>La vaca púrpura</h4>
-            <p>Seth Godin</p>
-            <a class="lib-book-link" href="https://drive.google.com/file/d/1ZdLfgedo0eoovjQ85qUY7w7owXsGSJiG/view" target="_blank" rel="noopener">
-              Leer en Drive
-              <svg viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="lib-book">
-          <div class="lib-book-icon">
-            <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
-          </div>
-          <div class="lib-book-info">
-            <h4>La estrategia del océano azul</h4>
-            <p>W. Chan Kim y Renée Mauborgne</p>
-            <a class="lib-book-link" href="https://drive.google.com/file/d/1NSWrP6D4Y8Ljdi5rMhBHD-rYgd07G6qa/view" target="_blank" rel="noopener">
-              Leer en Drive
-              <svg viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="quote-strip">
   <div class="wrap">
@@ -937,7 +818,7 @@
       <div class="fcol">
         <h5><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="15,9 13,13 9,15 11,11"/></svg>Explorar</h5>
         <a href="#articulos">Blog</a>
-        <a href="#recursos">Recursos</a>
+        <a href="recursos.html">Recursos</a>
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#newsletter">Newsletter</a>
       </div>
