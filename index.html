@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fernando — Estrategia de marca</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#FAF8F3;
@@ -27,7 +28,7 @@
   body{
     background:var(--paper);
     color:var(--ink);
-    font-family:'Inter', sans-serif;
+    font-family:'Poppins', sans-serif;
     font-size:16px;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
@@ -46,14 +47,21 @@
   a{color:inherit; text-decoration:none;}
   img{max-width:100%; display:block;}
   .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .icon{
+    width:16px; height:16px;
+    stroke:currentColor; fill:none;
+    stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;
+    flex-shrink:0;
+  }
   .eyebrow{
-    font-family:'Space Mono', monospace;
+    display:inline-flex; align-items:center; gap:7px;
+    font-family:'Poppins', sans-serif;
     font-size:12px;
     letter-spacing:.14em;
     text-transform:uppercase;
     color:var(--olive);
   }
-  h1,h2,h3{font-family:'Fraunces', serif; font-weight:500; letter-spacing:-.01em;}
+  h1,h2,h3{font-family:'Baloo 2', sans-serif; font-weight:500; letter-spacing:-.01em;}
 
   .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);}
   .reveal.in-view{opacity:1; transform:translateY(0);}
@@ -70,9 +78,8 @@
     animation:marquee 26s linear infinite;
   }
   .marquee-track span{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-weight:500;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:600;
     font-size:20px;
     color:var(--paper);
     padding:0 28px;
@@ -106,7 +113,7 @@
   }
   .brandmark{
     display:flex; align-items:center; gap:10px;
-    font-family:'Fraunces', serif; font-weight:600; font-size:20px;
+    font-family:'Baloo 2', sans-serif; font-weight:600; font-size:20px;
   }
   .brandmark .dot{
     width:9px; height:9px; border-radius:50%; background:var(--olive);
@@ -116,7 +123,7 @@
   nav a{font-size:14px; font-weight:500; color:var(--ink-soft);}
   nav a:hover{color:var(--ink);}
   .nav-cta{
-    font-family:'Space Mono', monospace;
+    font-family:'Poppins', sans-serif;
     font-size:12px; letter-spacing:.06em;
     border:1px solid var(--ink); padding:9px 16px;
     color:var(--ink) !important;
@@ -139,8 +146,8 @@
   .hero-bignum{
     position:absolute;
     top:-6%; right:-2%;
-    font-family:'Fraunces', serif;
-    font-weight:300;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:400;
     font-size:min(46vw, 620px);
     line-height:1;
     color:var(--olive-tint);
@@ -153,16 +160,50 @@
     font-size:clamp(40px, 5.4vw, 74px);
     line-height:1.03;
     color:var(--ink);
+    font-weight:700;
   }
   .hero h1 em{
-    font-style:italic;
+    font-family:'Baloo 2', sans-serif;
     color:var(--olive);
-    font-weight:500;
+    font-weight:700;
+    font-style:normal;
   }
   .cycle-word{
     display:inline-block;
     position:relative;
     min-width:1ch;
+  }
+  .cycle-word::before{
+    content:"";
+    position:absolute;
+    left:-10%; right:-10%; top:10%; bottom:10%;
+    background:radial-gradient(ellipse at center, var(--olive-tint) 0%, transparent 70%);
+    z-index:-1;
+    opacity:.9;
+    pointer-events:none;
+  }
+  #cycleWord{
+    display:inline-block;
+    will-change:transform, filter, opacity;
+    transform-origin:50% 65%;
+  }
+  #cycleWord.word-out{
+    animation:wordOut .32s cubic-bezier(.55,0,1,.45) forwards;
+  }
+  #cycleWord.word-in{
+    animation:wordIn .48s cubic-bezier(.16,1,.3,1) forwards;
+  }
+  @keyframes wordOut{
+    0%{ transform:translateY(0) scale(1) rotate(0deg); filter:blur(0); opacity:1; }
+    100%{ transform:translateY(-14px) scale(.85) rotate(-4deg); filter:blur(10px); opacity:0; }
+  }
+  @keyframes wordIn{
+    0%{ transform:translateY(16px) scale(1.15) rotate(3deg); filter:blur(10px); opacity:0; }
+    60%{ filter:blur(0); }
+    100%{ transform:translateY(0) scale(1) rotate(0deg); filter:blur(0); opacity:1; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    #cycleWord.word-out, #cycleWord.word-in{animation:none !important;}
   }
   .hero p.lede{
     margin-top:26px;
@@ -182,7 +223,7 @@
     border-bottom:1px solid var(--ink);
   }
   .hero-side{
-    font-family:'Space Mono', monospace;
+    font-family:'Poppins', sans-serif;
     font-size:13px;
     color:var(--ink-soft);
     border-left:1px solid var(--line);
@@ -210,7 +251,7 @@
   }
   .section-head h2{font-size:28px;}
   .section-head a{
-    font-family:'Space Mono', monospace; font-size:12px;
+    font-family:'Poppins', sans-serif; font-size:12px;
     letter-spacing:.06em; color:var(--slate);
     border-bottom:1px solid var(--slate);
   }
@@ -233,20 +274,20 @@
   .feat-media::after{
     content:"01";
     position:absolute; right:20px; bottom:16px;
-    font-family:'Space Mono', monospace;
+    font-family:'Poppins', sans-serif;
     color:rgba(255,255,255,.55);
     font-size:64px; font-weight:700;
   }
   .feat-body{padding:32px;}
   .tag{
-    font-family:'Space Mono', monospace;
+    font-family:'Poppins', sans-serif;
     font-size:11px; letter-spacing:.08em; text-transform:uppercase;
     color:var(--olive);
   }
   .feat-body h3{font-size:26px; margin:12px 0 14px; line-height:1.2;}
   .feat-body p{color:var(--ink-soft); font-size:15px; margin-bottom:18px;}
   .meta{
-    font-family:'Space Mono', monospace;
+    font-family:'Poppins', sans-serif;
     font-size:12px; color:var(--slate);
     display:flex; gap:14px; align-items:center;
   }
@@ -258,11 +299,11 @@
   }
   .side-post:first-child{padding-top:0;}
   .side-post .num{
-    font-family:'Space Mono', monospace; color:var(--olive-soft);
+    font-family:'Poppins', sans-serif; color:var(--olive-soft);
     font-size:13px; padding-top:3px;
   }
   .side-post h4{
-    font-family:'Fraunces', serif; font-weight:500; font-size:17px;
+    font-family:'Baloo 2', sans-serif; font-weight:500; font-size:17px;
     line-height:1.3; margin-bottom:6px;
   }
   .side-post p{font-size:13px; color:var(--slate);}
@@ -284,9 +325,17 @@
   .pillar{
     background:var(--paper);
     padding:28px 26px;
+    display:flex;
+    flex-direction:column;
+  }
+  .pillar-icon{
+    width:26px; height:26px;
+    stroke:var(--olive); fill:none;
+    stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;
+    margin-bottom:16px;
   }
   .pillar-num{
-    font-family:'Space Mono', monospace; font-size:12px;
+    font-family:'Poppins', sans-serif; font-size:12px;
     color:var(--olive-soft);
   }
   .pillar h3{font-size:18px; margin:14px 0 10px;}
@@ -305,7 +354,7 @@
     content:"“";
     position:absolute;
     top:-4%; left:2%;
-    font-family:'Fraunces', serif;
+    font-family:'Baloo 2', sans-serif;
     font-size:320px;
     line-height:1;
     color:rgba(255,255,255,.06);
@@ -315,9 +364,8 @@
     display:flex; align-items:center; gap:56px; flex-wrap:wrap;
   }
   .quote-strip blockquote{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-weight:500;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:600;
     font-size:clamp(22px, 2.6vw, 32px);
     line-height:1.35;
     max-width:56ch;
@@ -326,7 +374,7 @@
   .quote-strip cite{
     display:block;
     margin-top:16px;
-    font-family:'Space Mono', monospace;
+    font-family:'Poppins', sans-serif;
     font-style:normal;
     font-size:12px;
     letter-spacing:.06em;
@@ -337,9 +385,9 @@
     margin-left:auto;
     flex-shrink:0;
   }
-  .quote-stats div{font-family:'Space Mono', monospace; font-size:12px; color:var(--olive-soft);}
+  .quote-stats div{font-family:'Poppins', sans-serif; font-size:12px; color:var(--olive-soft);}
   .quote-stats div b{
-    display:block; font-family:'Fraunces', serif; font-weight:500;
+    display:block; font-family:'Baloo 2', sans-serif; font-weight:500;
     font-size:30px; color:var(--paper); font-style:normal;
   }
 
@@ -354,14 +402,14 @@
   }
   .thumb-ghost span{color:var(--slate);}
   .ghost-title{
-    font-style:italic; color:var(--slate); font-weight:400; font-size:16px;
+    font-family:'Baloo 2', sans-serif; color:var(--slate); font-weight:500; font-size:16px;
   }
 
   /* ===== GRID / ARTICLES ===== */
   .articles{padding:80px 0; border-bottom:1px solid var(--line);}
   .filters{display:flex; gap:10px; margin-bottom:44px; flex-wrap:wrap;}
   .filter{
-    font-family:'Space Mono', monospace; font-size:12px;
+    font-family:'Poppins', sans-serif; font-size:12px;
     padding:8px 14px; border:1px solid var(--line);
     color:var(--ink-soft); cursor:pointer;
     transition:.15s;
@@ -383,7 +431,7 @@
     display:flex; align-items:center; justify-content:center;
   }
   .card .thumb span{
-    font-family:'Fraunces', serif; font-style:italic; font-size:15px;
+    font-family:'Baloo 2', sans-serif; font-weight:600; font-size:15px;
     color:var(--olive-deep);
   }
   .card h3{font-size:19px; line-height:1.32; margin-bottom:10px;}
@@ -407,7 +455,7 @@
     content:"F";
     position:absolute; inset:0;
     display:flex; align-items:center; justify-content:center;
-    font-family:'Fraunces', serif; font-size:160px; font-weight:300;
+    font-family:'Baloo 2', sans-serif; font-size:160px; font-weight:400;
     color:rgba(255,255,255,.08);
   }
   .about .eyebrow{color:var(--olive-soft);}
@@ -415,9 +463,9 @@
   .about p{color:#C7CCDA; margin-bottom:16px; font-size:16px; max-width:52ch;}
   .credentials{
     display:flex; gap:32px; margin-top:28px;
-    font-family:'Space Mono', monospace; font-size:12px; color:#9AA5BC;
+    font-family:'Poppins', sans-serif; font-size:12px; color:#9AA5BC;
   }
-  .credentials div b{display:block; color:var(--paper); font-size:22px; font-family:'Fraunces',serif; font-weight:500;}
+  .credentials div b{display:block; color:var(--paper); font-size:22px; font-family:'Baloo 2', sans-serif; font-weight:500;}
 
   /* ===== DIAGNOSTIC FORM ===== */
   .diagnostic{
@@ -442,13 +490,13 @@
   }
   .diag-form .full{grid-column:1 / -1;}
   .field label{
-    display:block; font-family:'Space Mono', monospace; font-size:11px;
+    display:block; font-family:'Poppins', sans-serif; font-size:11px;
     letter-spacing:.06em; text-transform:uppercase; color:var(--slate);
     margin-bottom:8px;
   }
   .field input, .field select, .field textarea{
     width:100%; border:1px solid var(--line); background:var(--paper);
-    padding:12px 14px; font-family:'Inter'; font-size:14px; color:var(--ink);
+    padding:12px 14px; font-family:'Poppins'; font-size:14px; color:var(--ink);
   }
   .field input:focus, .field select:focus, .field textarea:focus{
     outline:none; border-color:var(--olive);
@@ -462,7 +510,7 @@
   .diag-submit:hover{background:var(--olive);}
   .diag-submit:disabled{opacity:.6; cursor:default;}
   .diag-status{
-    font-family:'Space Mono', monospace; font-size:13px;
+    font-family:'Poppins', sans-serif; font-size:13px;
     padding-top:4px;
   }
   .diag-status.ok{color:var(--olive-deep);}
@@ -490,7 +538,7 @@
   .news-form{display:flex; gap:0; max-width:380px; width:100%;}
   .news-form input{
     flex:1; padding:14px 16px; border:1px solid var(--ink); border-right:none;
-    background:var(--white); font-family:'Inter'; font-size:14px;
+    background:var(--white); font-family:'Poppins'; font-size:14px;
   }
   .news-form button{
     padding:14px 20px; background:var(--ink); color:var(--paper);
@@ -506,7 +554,8 @@
   }
   .footer-cols{display:flex; gap:64px;}
   .fcol h5{
-    font-family:'Space Mono', monospace; font-size:11px; letter-spacing:.1em;
+    display:flex; align-items:center; gap:6px;
+    font-family:'Poppins', sans-serif; font-size:11px; letter-spacing:.1em;
     text-transform:uppercase; color:var(--slate); margin-bottom:14px;
   }
   .fcol a{display:block; font-size:14px; color:var(--ink-soft); margin-bottom:9px;}
@@ -514,7 +563,7 @@
   .foot-bottom{
     margin-top:48px; padding-top:24px; border-top:1px solid var(--line);
     display:flex; justify-content:space-between; font-size:12px; color:var(--slate);
-    font-family:'Space Mono', monospace;
+    font-family:'Poppins', sans-serif;
   }
 
   @media (max-width:900px){
@@ -594,7 +643,7 @@
   <div class="wrap">
     <div class="about-photo reveal"></div>
     <div>
-      <p class="eyebrow">Sobre mí</p>
+      <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>Sobre mí</p>
       <h2>¡Hola! Soy Fernando.</h2>
       <p>Ayudo a fundadores y equipos de marketing a construir marcas que la gente recuerda — no solo marcas que se ven bien. Trabajo con negocios que ya tienen tracción pero no tienen una posición clara: el tipo de marca que "está bien" para todos y memorable para nadie.</p>
       <p>Este blog será el registro público de ese trabajo: los marcos que uso, los errores que corrijo, y las decisiones incómodas que casi siempre valen la pena.</p>
@@ -609,25 +658,29 @@
 
 <section class="pillars">
   <div class="wrap">
-    <p class="eyebrow">En qué escribo</p>
+    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="15,9 13,13 9,15 11,11"/></svg>En qué escribo</p>
     <h2>Cuatro temas, un solo objetivo: que tu marca sea difícil de ignorar.</h2>
     <div class="pillars-grid reveal">
       <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
         <span class="pillar-num">01</span>
         <h3>Posicionamiento</h3>
         <p>Cómo decidir con precisión a quién le hablas — y a quién estás dispuesto a no gustarle.</p>
       </div>
       <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 24 24"><path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4V5Z"/></svg>
         <span class="pillar-num">02</span>
         <h3>Identidad verbal</h3>
         <p>El tono que hace que te reconozcan aunque tapen el logo.</p>
       </div>
       <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="15,9 13,13 9,15 11,11"/></svg>
         <span class="pillar-num">03</span>
         <h3>Arquetipos</h3>
         <p>Marcos de personalidad de marca aplicados a negocios reales, no plantillas genéricas.</p>
       </div>
       <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 24 24"><polyline points="3,17 9,11 13,15 21,7"/><polyline points="15,7 21,7 21,13"/></svg>
         <span class="pillar-num">04</span>
         <h3>Growth con marca</h3>
         <p>Por qué la adquisición sin una promesa clara detrás es solo gasto acelerado.</p>
@@ -654,7 +707,7 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Blog</p>
+        <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Blog</p>
         <h2>Los artículos están en camino.</h2>
       </div>
     </div>
@@ -680,7 +733,7 @@
   <div class="wrap">
     <div class="diagnostic-head reveal">
       <div>
-        <p class="eyebrow">Primer paso</p>
+        <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>Primer paso</p>
         <h2>Agenda tu diagnóstico de marca</h2>
       </div>
       <p>Cuéntame sobre tu negocio y te respondo personalmente en menos de 48 horas para agendar la sesión de diagnóstico.</p>
@@ -712,14 +765,29 @@
       </div>
       <div class="field full">
         <label for="f-descripcion">¿A qué se dedica tu negocio?</label>
-        <input type="text" id="f-descripcion" name="descripcion" placeholder="En una frase.">
+        <select id="f-descripcion" name="descripcion">
+          <option value="Retail / tienda física">Retail / tienda física</option>
+          <option value="Restaurante / gastronomía">Restaurante / gastronomía</option>
+          <option value="Servicios profesionales">Servicios profesionales</option>
+          <option value="Salud y bienestar">Salud y bienestar</option>
+          <option value="Tecnología / SaaS">Tecnología / SaaS</option>
+          <option value="Educación">Educación</option>
+          <option value="Otro">Otro</option>
+        </select>
       </div>
       <div class="field full">
-        <label for="f-mensaje">Cuéntame más</label>
-        <textarea id="f-mensaje" name="mensaje" placeholder="¿Qué te trae hasta aquí?"></textarea>
+        <label for="f-mensaje">¿Qué te trae por aquí?</label>
+        <select id="f-mensaje" name="mensaje">
+          <option value="Quiero reposicionar mi marca">Quiero reposicionar mi marca</option>
+          <option value="Estoy lanzando un negocio nuevo">Estoy lanzando un negocio nuevo</option>
+          <option value="No estoy conforme con mi identidad visual actual">No estoy conforme con mi identidad visual actual</option>
+          <option value="Quiero subir mis precios sin perder clientes">Quiero subir mis precios sin perder clientes</option>
+          <option value="Solo quiero explorar opciones">Solo quiero explorar opciones</option>
+          <option value="Otro">Otro</option>
+        </select>
       </div>
       <div class="full" style="display:flex; align-items:center; gap:18px; flex-wrap:wrap;">
-        <button type="submit" class="diag-submit" id="diagSubmit">Enviar solicitud</button>
+        <button type="submit" class="diag-submit" id="diagSubmit"><svg class="icon" style="color:var(--paper); margin-right:6px; vertical-align:-2px;" viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>Enviar solicitud</button>
         <span class="diag-status" id="diagStatus" role="status" aria-live="polite"></span>
       </div>
     </form>
@@ -729,7 +797,7 @@
 <section class="newsletter" id="newsletter">
   <div class="wrap">
     <div class="news-inner reveal">
-      <h3>Sé el primero en leer cuando publique el primer artículo.</h3>
+      <h3><svg class="icon" style="width:20px;height:20px;color:var(--olive-deep); margin-right:8px; vertical-align:-3px;" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Sé el primero en leer cuando publique el primer artículo.</h3>
       <form class="news-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Listo →';">
         <input type="email" placeholder="tu@correo.com" required>
         <button type="submit">Avísame</button>
@@ -746,20 +814,20 @@
     </div>
     <div class="footer-cols">
       <div class="fcol">
-        <h5>Explorar</h5>
+        <h5><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="15,9 13,13 9,15 11,11"/></svg>Explorar</h5>
         <a href="#articulos">Blog</a>
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#newsletter">Newsletter</a>
       </div>
       <div class="fcol">
-        <h5>Temas</h5>
+        <h5><svg class="icon" viewBox="0 0 24 24"><path d="M20 10 12 2H4v8l8 8 8-8Z"/><circle cx="7" cy="7" r="1"/></svg>Temas</h5>
         <a href="#pillars">Posicionamiento</a>
         <a href="#pillars">Identidad verbal</a>
         <a href="#pillars">Arquetipos</a>
         <a href="#pillars">Growth</a>
       </div>
       <div class="fcol">
-        <h5>Contacto</h5>
+        <h5><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Contacto</h5>
         <a href="#diagnostico">Agendar diagnóstico</a>
         <a href="#">hola@fernando.marca</a>
       </div>
@@ -776,16 +844,17 @@
   let i = 0;
   const el = document.getElementById('cycleWord');
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(!prefersReduced){
+  if(!prefersReduced && el){
     setInterval(() => {
       i = (i + 1) % words.length;
-      el.style.opacity = 0;
+      el.classList.remove('word-in');
+      el.classList.add('word-out');
       setTimeout(() => {
         el.textContent = words[i];
-        el.style.opacity = 1;
-      }, 250);
+        el.classList.remove('word-out');
+        el.classList.add('word-in');
+      }, 300);
     }, 2600);
-    el.style.transition = 'opacity .25s ease';
   }
 
   const revealEls = document.querySelectorAll('.reveal');
@@ -833,7 +902,7 @@
       };
 
       diagSubmit.disabled = true;
-      diagSubmit.textContent = 'Enviando…';
+      diagSubmit.innerHTML = 'Enviando…';
       diagStatus.textContent = '';
       diagStatus.className = 'diag-status';
 
@@ -854,7 +923,7 @@
           diagStatus.className = 'diag-status err';
         }
         diagSubmit.disabled = false;
-        diagSubmit.textContent = 'Enviar solicitud';
+        diagSubmit.innerHTML = '<svg class="icon" style="color:var(--paper); margin-right:6px; vertical-align:-2px;" viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>Enviar solicitud';
 
       } catch(err){
         // Intento 2 (fallback): algunos navegadores bloquean el fetch a
@@ -894,7 +963,7 @@
       diagStatus.textContent = '¡Listo! Te escribo en menos de 48 horas.';
       diagStatus.className = 'diag-status ok';
       diagSubmit.disabled = false;
-      diagSubmit.textContent = 'Enviar solicitud';
+      diagSubmit.innerHTML = '<svg class="icon" style="color:var(--paper); margin-right:6px; vertical-align:-2px;" viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>Enviar solicitud';
     }, 1200);
   }
 </script>
