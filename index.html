@@ -4,7 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fernando — Estrategia de marca</title>
-<link rel="icon" type="image/svg+xml" href="assets/logo-blanco.svg">
+<meta name="description" content="Fernando ayuda a negocios venezolanos a dejar de competir por precio y construir una marca memorable: posicionamiento, identidad verbal y arquetipo antes que el diseño.">
+<meta property="og:title" content="Fernando — Estrategia de marca">
+<meta property="og:description" content="Estrategia de marca para negocios que ya venden, pero no se recuerdan. Posicionamiento, identidad verbal y diagnóstico de marca.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#2E6F40">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -25,7 +30,7 @@
     --white:#FFFFFF;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden; max-width:100%;}
   body{
     background:var(--paper);
     color:var(--ink);
@@ -298,6 +303,18 @@
     margin-bottom:16px;
   }
   .hero-side p{margin-bottom:14px; line-height:1.7;}
+  .hero-contact{
+    margin-top:20px; padding-top:20px;
+    border-top:1px solid var(--line);
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .hero-contact a{
+    display:flex; align-items:center; gap:8px;
+    font-size:13px; color:var(--ink);
+    font-weight:500;
+  }
+  .hero-contact a:hover{color:var(--olive);}
+  .hero-contact .icon{width:15px; height:15px; color:var(--olive); flex-shrink:0;}
 
   /* ===== FEATURED ===== */
   .featured{
@@ -650,6 +667,25 @@
   @media (prefers-reduced-motion: reduce){
     .cycle-word span{transition:none !important;}
   }
+
+  /* ===== WHATSAPP FLOATING BUTTON ===== */
+  .wa-float{
+    position:fixed;
+    bottom:24px; right:24px;
+    width:56px; height:56px;
+    border-radius:50%;
+    background:#25D366;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 16px rgba(0,0,0,.25);
+    z-index:80;
+    transition:transform .2s ease;
+  }
+  .wa-float:hover{transform:scale(1.08);}
+  .wa-float svg{width:28px; height:28px; fill:#fff;}
+  @media (max-width:600px){
+    .wa-float{bottom:18px; right:18px; width:52px; height:52px;}
+  }
+
 </style>
 </head>
 <body>
@@ -664,7 +700,7 @@
       <a href="#newsletter">Newsletter</a>
       <a href="#diagnostico" class="nav-cta">Agendar diagnóstico →</a>
     </nav>
-    <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileDrawer">
+    <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileDrawer">
       <svg class="icon-menu" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       <svg class="icon-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
@@ -696,6 +732,16 @@
       <span class="stamp">En preparación</span>
       <p>Este blog documentará el trabajo real de posicionar marcas: qué funciona, qué falla y por qué la mayoría de los rebrandings no cambian nada en los resultados.</p>
       <p>Las primeras entradas llegan pronto. Sin relleno, sin plantillas genéricas de "10 tips".</p>
+      <div class="hero-contact">
+        <a href="mailto:juanfernandomendezsanchez@gmail.com">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          juanfernandomendezsanchez@gmail.com
+        </a>
+        <a href="tel:+584125272140">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 3a2 2 0 0 1-.4 2.1L8 10.3a16 16 0 0 0 6 6l1.5-1.5a2 2 0 0 1 2.1-.4c1 .3 2 .5 3 .7a2 2 0 0 1 1.4 2Z"/></svg>
+          0412-527-2140
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -732,7 +778,7 @@
   </div>
 </section>
 
-<section class="pillars">
+<section class="pillars" id="pillars">
   <div class="wrap">
     <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="15,9 13,13 9,15 11,11"/></svg>En qué escribo</p>
     <h2>Cuatro temas, un solo objetivo: que tu marca sea difícil de ignorar.</h2>
@@ -818,6 +864,14 @@
 
     <form class="diag-form reveal" id="diagForm">
       <iframe name="hiddenFrame" id="hiddenFrame" style="display:none;" title="envío en segundo plano"></iframe>
+
+      <!-- Honeypot: invisible para personas, visible para bots que rellenan todo automáticamente. -->
+      <div style="position:absolute; left:-9999px; top:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+        <label for="f-sitio-web">No llenar este campo</label>
+        <input type="text" id="f-sitio-web" name="sitio_web" tabindex="-1" autocomplete="off">
+      </div>
+      <input type="hidden" id="f-form-ts" name="form_ts" value="">
+
       <div class="field">
         <label for="f-nombre">Nombre *</label>
         <input type="text" id="f-nombre" name="nombre" required>
@@ -911,7 +965,9 @@
       <div class="fcol">
         <h5><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Contacto</h5>
         <a href="#diagnostico">Agendar diagnóstico</a>
-        <a href="#">hola@fernando.marca</a>
+        <a href="mailto:juanfernandomendezsanchez@gmail.com">juanfernandomendezsanchez@gmail.com</a>
+        <a href="tel:+584125272140">0412-527-2140</a>
+        <a href="https://wa.me/584125272140" target="_blank" rel="noopener">WhatsApp</a>
       </div>
     </div>
   </div>
@@ -992,13 +1048,15 @@
   const diagSubmit = document.getElementById('diagSubmit');
   const diagStatus = document.getElementById('diagStatus');
   const hiddenFrame = document.getElementById('hiddenFrame');
+  const formTsInput = document.getElementById('f-form-ts');
+  if(formTsInput) formTsInput.value = Date.now().toString();
 
   if(diagForm){
     diagForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       if(DIAGNOSTIC_ENDPOINT.indexOf('PON_AQUI') !== -1){
-        diagStatus.textContent = 'Formulario en configuración — escríbeme directo mientras tanto a hola@fernando.marca';
+        diagStatus.textContent = 'Formulario en configuración — escríbeme directo mientras tanto a juanfernandomendezsanchez@gmail.com';
         diagStatus.className = 'diag-status err';
         return;
       }
@@ -1010,7 +1068,9 @@
         telefono: document.getElementById('f-telefono').value.trim(),
         necesidad: document.getElementById('f-necesidad').value,
         descripcion: document.getElementById('f-descripcion').value.trim(),
-        mensaje: document.getElementById('f-mensaje').value.trim()
+        mensaje: document.getElementById('f-mensaje').value.trim(),
+        sitio_web: document.getElementById('f-sitio-web').value.trim(),
+        form_ts: document.getElementById('f-form-ts').value
       };
 
       diagSubmit.disabled = true;
@@ -1080,5 +1140,9 @@
   }
 </script>
 
+
+<a class="wa-float" href="https://wa.me/584125272140?text=Hola%20Fernando%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20de%20marca" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16.001 3C9.107 3 3.5 8.607 3.5 15.5c0 2.42.686 4.68 1.874 6.598L3 29l7.086-2.34a12.44 12.44 0 0 0 5.915 1.505h.005c6.893 0 12.5-5.607 12.5-12.5S22.894 3 16.001 3zm7.34 17.86c-.309.869-1.53 1.64-2.514 1.855-.67.145-1.545.26-4.49-.964-3.77-1.562-6.194-5.37-6.383-5.618-.182-.248-1.53-2.033-1.53-3.878 0-1.845.968-2.752 1.31-3.13.34-.379.744-.474 1.001-.474.257 0 .513.003.737.014.236.012.554-.09.867.66.322.775 1.098 2.68 1.194 2.875.096.195.16.424.032.679-.128.256-.192.416-.383.638-.192.223-.404.498-.577.669-.192.19-.392.397-.169.78.223.383.99 1.632 2.126 2.643 1.462 1.304 2.694 1.708 3.077 1.9.383.192.607.16.831-.096.223-.256.958-1.117 1.213-1.5.256-.383.512-.319.863-.192.352.128 2.233 1.053 2.617 1.245.383.192.639.287.735.447.096.16.096.923-.213 1.792z"/></svg>
+</a>
 </body>
 </html>

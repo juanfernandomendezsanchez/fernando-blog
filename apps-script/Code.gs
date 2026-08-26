@@ -9,12 +9,33 @@
  * No requiere API keys de terceros. Todo corre dentro de la cuenta
  * de Google de Fernando, dentro de las cuotas gratuitas estándar
  * (Gmail: 100 correos/día en cuentas normales de Gmail).
+ *
+ * ─── NOTAS DE SEGURIDAD ───────────────────────────────────────────
+ * - No hay ninguna API key en este proyecto (no se usa ningún
+ *   servicio de terceros de pago), por lo tanto no hay ninguna que
+ *   ocultar.
+ * - No se usan cookies en ningún punto del sitio ni de este script.
+ * - "Seguridad a nivel de fila" y "consultas parametrizadas" son
+ *   conceptos de bases de datos SQL; Google Sheets no es una base
+ *   SQL, así que no aplican tal cual. El riesgo real y equivalente
+ *   en Sheets es la inyección de fórmulas (alguien escribe "=ALGO()"
+ *   como su nombre) — por eso sanitize() neutraliza esos casos antes
+ *   de guardar cualquier campo.
+ * - El acceso de lectura a la hoja sigue siendo privado (solo tu
+ *   cuenta de Google): este script únicamente permite ESCRIBIR una
+ *   fila nueva vía POST, nunca leer datos existentes.
+ * - Cifrado: Google ya cifra los datos en reposo y en tránsito
+ *   (HTTPS) a nivel de infraestructura. Cifrar además campos
+ *   individuales aquí te impediría leer tus propios leads sin
+ *   construir una pantalla de descifrado — no vale la pena para
+ *   este caso de uso.
+ * ────────────────────────────────────────────────────────────────
  */
 
 // ─── CONFIGURACIÓN ───────────────────────────────────────────────
 const SHEET_ID = '1xiI72IZpZs4FZYhVOSt0_uo5QPdJbaZqMAVzrB7dgvw';
 const SHEET_NAME = 'leads';
-const NOTIFY_EMAIL = 'juanfernandomendez@gmail.com';
+const NOTIFY_EMAIL = 'juanfernandomendezsanchez@gmail.com';
 const SEND_USER_CONFIRMATION = true;
 // ──────────────────────────────────────────────────────────────────
 
@@ -34,11 +55,39 @@ function doPost(e) {
     const data = parseRequest(e);
     console.log('Datos interpretados:', JSON.stringify(data));
 
+    // ─── Protección anti-bot (gratis, sin servicios de terceros) ───
+    // 1. Honeypot: un campo oculto que los humanos nunca llenan, pero
+    //    los bots que rellenan formularios automáticamente sí.
+    if (data.sitio_web) {
+      console.log('Honeypot activado — descartado silenciosamente (probable bot).');
+      return respond({ ok: true }); // Respondemos éxito falso para no delatar el filtro al bot.
+    }
+    // 2. Tiempo mínimo: un humano tarda al menos unos segundos en
+    //    llenar el formulario; un bot lo hace casi instantáneamente.
+    const cargaTs = parseInt(data.form_ts, 10);
+    if (cargaTs && (Date.now() - cargaTs) < 2000) {
+      console.log('Envío demasiado rápido — descartado silenciosamente (probable bot).');
+      return respond({ ok: true });
+    }
+
     const errors = validate(data);
     if (errors.length > 0) {
       console.log('Validación falló:', JSON.stringify(errors));
       return respond({ ok: false, errors: errors });
     }
+
+    // Sanear cada campo: recorta longitud y neutraliza inyección de
+    // fórmulas en Sheets (si alguien escribe "=ALGO(...)" como nombre,
+    // por ejemplo, Sheets lo ejecutaría como fórmula si no se escapa).
+    const clean = {
+      nombre: sanitize(data.nombre, 120),
+      empresa: sanitize(data.empresa, 120),
+      email: sanitize(data.email, 160),
+      telefono: sanitize(data.telefono, 40),
+      necesidad: sanitize(data.necesidad, 120),
+      descripcion: sanitize(data.descripcion, 200),
+      mensaje: sanitize(data.mensaje, 200)
+    };
 
     console.log('Abriendo sheet con SHEET_ID:', SHEET_ID);
     const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(SHEET_NAME);
@@ -48,27 +97,27 @@ function doPost(e) {
     }
     ensureHeaders(sheet);
 
-    const estadoInicial = classifyLead(data);
+    const estadoInicial = classifyLead(clean);
 
     sheet.appendRow([
       new Date(),
-      data.nombre,
-      data.empresa || '',
-      data.email,
-      data.telefono || '',
-      data.necesidad || '',
-      data.descripcion || '',
-      data.mensaje || '',
+      clean.nombre,
+      clean.empresa || '',
+      clean.email,
+      clean.telefono || '',
+      clean.necesidad || '',
+      clean.descripcion || '',
+      clean.mensaje || '',
       estadoInicial
     ]);
     console.log('Fila agregada correctamente.');
 
-    sendOwnerNotification(data);
+    sendOwnerNotification(clean);
     console.log('Correo de notificación enviado a', NOTIFY_EMAIL);
 
-    if (SEND_USER_CONFIRMATION && data.email) {
-      sendConfirmationToUser(data);
-      console.log('Correo de confirmación enviado a', data.email);
+    if (SEND_USER_CONFIRMATION && clean.email) {
+      sendConfirmationToUser(clean);
+      console.log('Correo de confirmación enviado a', clean.email);
     }
 
     return respond({ ok: true });
@@ -115,9 +164,33 @@ function validate(data) {
     errors.push('payload_invalido');
     return errors;
   }
-  if (!data.nombre || data.nombre.trim().length < 2) errors.push('nombre');
+  if (!data.nombre || data.nombre.toString().trim().length < 2) errors.push('nombre');
   if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.push('email');
+  // Límite generoso de longitud contra abuso (nadie legítimo escribe
+  // un nombre de 5000 caracteres).
+  if (data.nombre && data.nombre.toString().length > 300) errors.push('nombre_muy_largo');
+  if (data.mensaje && data.mensaje.toString().length > 3000) errors.push('mensaje_muy_largo');
   return errors;
+}
+
+/**
+ * Recorta a un largo máximo y neutraliza inyección de fórmulas en
+ * Google Sheets: si un campo empieza con =, +, -, @ (los caracteres
+ * que Sheets interpreta como inicio de fórmula), le antepone un
+ * apóstrofe para forzar que se guarde como texto plano, nunca como
+ * fórmula ejecutable. Es el equivalente, en este stack, a "escapar"
+ * o "parametrizar" una consulta en una base de datos SQL.
+ */
+function sanitize(value, maxLength) {
+  if (value === undefined || value === null) return '';
+  let text = value.toString().trim();
+  if (/^[=+\-@]/.test(text)) {
+    text = "'" + text;
+  }
+  if (maxLength && text.length > maxLength) {
+    text = text.substring(0, maxLength);
+  }
+  return text;
 }
 
 /**
