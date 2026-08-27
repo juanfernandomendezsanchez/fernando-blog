@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Territorio de Marca: Qué Es Realmente (El Caso Cashea) | Fernando</title>
+<meta name="description" content="Una batidora, un señor de 75 años y una app venezolana me explicaron el territorio de marca mejor que cualquier libro de branding. Con datos reales de Cashea.">
+<meta name="keywords" content="territorio de marca, qué es el territorio de marca, territorio de marca ejemplos, territorio de marca vs posicionamiento, identidad de marca, Cashea Venezuela">
+<link rel="canonical" href="https://fernandoblog.netlify.app/territorio-de-marca-cashea.html">
+<meta name="author" content="Fernando">
+<meta property="og:title" content="Territorio de Marca: Qué Es Realmente (El Caso Cashea)">
+<meta property="og:description" content="Una batidora, un señor de 75 años y una app venezolana me explicaron el territorio de marca mejor que cualquier libro de branding.">
+<meta property="og:url" content="https://fernandoblog.netlify.app/territorio-de-marca-cashea.html">
+<meta property="article:author" content="Fernando">
+<meta property="article:section" content="Casos de estudio">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#2E6F40">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF8F3;
+    --paper-dim:#F1EDE3;
+    --ink:#16213A;
+    --ink-soft:#4B5468;
+    --gold:#C98A2C;
+    --gold-soft:#E7C486;
+    --olive:#2E6F40;
+    --olive-deep:#1F4C2C;
+    --olive-soft:#6FA57D;
+    --olive-tint:#E7F0E8;
+    --slate:#5E7080;
+    --line:#DFD9C9;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; overflow-x:hidden; max-width:100%;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Poppins', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--olive); color:var(--paper);}
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    z-index:200;
+    pointer-events:none;
+    opacity:.045;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .icon{
+    width:16px; height:16px;
+    stroke:currentColor; fill:none;
+    stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;
+    flex-shrink:0;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:7px;
+    font-family:'Poppins', sans-serif;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--olive);
+  }
+  h1,h2,h3{font-family:'Baloo 2', sans-serif; font-weight:500; letter-spacing:-.01em;}
+
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);}
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+
+  /* ===== MASTHEAD ===== */
+  .masthead{
+    border-bottom:1px solid var(--line);
+    background:var(--paper);
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(6px);
+  }
+  .masthead-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .brandmark{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Baloo 2', sans-serif; font-weight:600; font-size:20px;
+  }
+  .brand-logo{
+    width:28px; height:28px;
+    fill:var(--olive);
+    flex-shrink:0;
+  }
+  nav{display:flex; gap:32px; align-items:center;}
+  nav a{font-size:14px; font-weight:500; color:var(--ink-soft);}
+  nav a:hover{color:var(--ink);}
+  nav a.current{color:var(--olive); font-weight:600;}
+  .nav-cta{
+    font-family:'Poppins', sans-serif;
+    font-size:12px; letter-spacing:.06em;
+    border:1px solid var(--ink); padding:9px 16px;
+    color:var(--ink) !important;
+  }
+  .nav-cta:hover{background:var(--olive); border-color:var(--olive); color:var(--paper) !important;}
+
+  /* ===== MOBILE MENU ===== */
+  .mobile-toggle{
+    display:none;
+    width:44px; height:44px;
+    align-items:center; justify-content:center;
+    background:none; border:1px solid var(--line);
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .mobile-toggle svg{width:20px; height:20px; stroke:var(--ink); fill:none; stroke-width:1.8; stroke-linecap:round;}
+  .mobile-toggle .icon-close{display:none;}
+  .mobile-toggle[aria-expanded="true"] .icon-menu{display:none;}
+  .mobile-toggle[aria-expanded="true"] .icon-close{display:block;}
+
+  .mobile-drawer{
+    position:fixed;
+    top:0; right:0;
+    width:min(84vw, 340px);
+    height:100vh;
+    height:100dvh;
+    background:var(--paper);
+    border-left:1px solid var(--line);
+    z-index:100;
+    transform:translateX(100%);
+    transition:transform .35s cubic-bezier(.16,1,.3,1);
+    display:flex; flex-direction:column;
+    padding:90px 28px 32px;
+    overflow-y:auto;
+  }
+  .mobile-drawer.open{transform:translateX(0);}
+  .mobile-drawer a{
+    font-family:'Baloo 2', sans-serif;
+    font-size:22px; font-weight:600;
+    color:var(--ink);
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .mobile-drawer a.mobile-cta{
+    margin-top:24px;
+    background:var(--olive);
+    color:var(--paper) !important;
+    text-align:center;
+    border:none;
+    padding:16px;
+    font-size:16px;
+  }
+  .drawer-backdrop{
+    position:fixed; inset:0;
+    background:rgba(22,33,58,.35);
+    z-index:90;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .35s ease;
+  }
+  .drawer-backdrop.open{opacity:1; pointer-events:auto;}
+  body.drawer-locked{overflow:hidden;}
+
+  @media (max-width:900px){
+    .masthead-inner > nav{display:none;}
+    .mobile-toggle{display:flex;}
+  }
+
+  /* ===== PAGE HEADER ===== */
+  .page-header{
+    padding:72px 0 56px;
+    border-bottom:1px solid var(--line);
+  }
+  .page-header h1{
+    font-size:clamp(34px, 4.6vw, 56px);
+    line-height:1.05;
+    margin-top:14px;
+  }
+  .page-header p.lede{
+    margin-top:20px;
+    font-size:17px;
+    color:var(--ink-soft);
+    max-width:56ch;
+  }
+  .back-link{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:13px; color:var(--slate);
+    margin-bottom:22px;
+  }
+  .back-link:hover{color:var(--ink);}
+  .back-link svg{width:14px; height:14px;}
+
+  /* ===== ACCORDION ===== */
+  .library{
+    padding:64px 0 96px;
+  }
+  .accordion{
+    max-width:760px;
+  }
+  .acc-toggle{
+    width:100%;
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--white);
+    border:1px solid var(--line);
+    padding:20px 24px;
+    cursor:pointer;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:600;
+    font-size:18px;
+    color:var(--ink);
+    text-align:left;
+    transition:border-color .2s ease;
+  }
+  .acc-toggle:hover{border-color:var(--olive);}
+  .acc-toggle-left{display:flex; align-items:center; gap:12px;}
+  .acc-toggle-left .icon{width:20px; height:20px; color:var(--olive-deep);}
+  .acc-chevron{
+    width:18px; height:18px;
+    stroke:var(--olive-deep); fill:none; stroke-width:2.2;
+    stroke-linecap:round; stroke-linejoin:round;
+    transition:transform .3s cubic-bezier(.16,1,.3,1);
+    flex-shrink:0;
+  }
+  .acc-toggle[aria-expanded="true"] .acc-chevron{transform:rotate(180deg);}
+
+  .acc-panel{
+    display:grid;
+    grid-template-rows:0fr;
+    transition:grid-template-rows .4s cubic-bezier(.16,1,.3,1);
+    background:var(--paper-dim);
+    border:1px solid var(--line);
+    border-top:none;
+  }
+  .acc-panel.open{grid-template-rows:1fr;}
+  .acc-panel-inner{overflow:hidden;}
+
+  .acc-nested{padding:16px;}
+  .acc-toggle.level2{
+    background:var(--white);
+    font-size:15px;
+    padding:15px 20px;
+    border-left:3px solid var(--olive);
+    margin-bottom:10px;
+  }
+  .acc-toggle.level2 .acc-toggle-left .icon{width:17px; height:17px;}
+  .acc-panel.level2{
+    background:var(--paper);
+    border-left:3px solid var(--line);
+    margin:0 0 14px 3px;
+  }
+  .acc-panel.level2:last-child{margin-bottom:0;}
+
+  .lib-book{
+    display:flex; gap:14px;
+    padding:16px 20px;
+    border-bottom:1px solid var(--line);
+  }
+  .lib-book:last-child{border-bottom:none;}
+  .lib-book-icon{
+    flex-shrink:0;
+    width:36px; height:46px;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-left:3px solid var(--olive);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .lib-book-icon svg{width:16px; height:16px; stroke:var(--olive-deep); fill:none; stroke-width:1.6;}
+  .lib-book-info h4{font-family:'Baloo 2', sans-serif; font-weight:600; font-size:15px; line-height:1.35; margin-bottom:4px;}
+  .lib-book-info p{font-size:13px; color:var(--slate); margin-bottom:8px;}
+  .lib-book-link{
+    font-family:'Poppins', sans-serif; font-size:12px; font-weight:600;
+    color:var(--olive-deep);
+    display:inline-flex; align-items:center; gap:5px;
+    border-bottom:1px solid var(--olive-deep);
+  }
+  .lib-book-link:hover{color:var(--olive); border-color:var(--olive);}
+  .lib-book-link svg{width:12px; height:12px; stroke:currentColor; fill:none; stroke-width:2;}
+
+  .library-note{
+    max-width:760px;
+    margin-top:28px;
+    font-size:12px; color:var(--slate);
+    display:flex; align-items:center; gap:8px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer{padding:56px 0 40px; border-top:1px solid var(--line);}
+  .footer-inner{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:30px;
+  }
+  .footer-cols{display:flex; gap:64px;}
+  .fcol h5{
+    display:flex; align-items:center; gap:6px;
+    font-family:'Poppins', sans-serif; font-size:11px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--slate); margin-bottom:14px;
+  }
+  .fcol a{display:block; font-size:14px; color:var(--ink-soft); margin-bottom:9px;}
+  .fcol a:hover{color:var(--ink);}
+  .foot-bottom{
+    margin-top:48px; padding-top:24px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; font-size:12px; color:var(--slate);
+    font-family:'Poppins', sans-serif;
+  }
+
+  @media (max-width:600px){
+    .wrap{padding:0 20px;}
+    .footer-cols{flex-wrap:wrap; gap:32px;}
+  }
+
+  /* ===== WHATSAPP FLOATING BUTTON ===== */
+  .wa-float{
+    position:fixed;
+    bottom:24px; right:24px;
+    width:56px; height:56px;
+    border-radius:50%;
+    background:#25D366;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 16px rgba(0,0,0,.25);
+    z-index:80;
+    transition:transform .2s ease;
+  }
+  .wa-float:hover{transform:scale(1.08);}
+  .wa-float svg{width:28px; height:28px; fill:#fff;}
+  @media (max-width:600px){
+    .wa-float{bottom:18px; right:18px; width:52px; height:52px;}
+  }
+
+  /* ===== ARTICLE ===== */
+  .article-header{padding:64px 0 40px; border-bottom:1px solid var(--line);}
+  .article-header h1{font-size:clamp(30px, 4vw, 46px); line-height:1.15; margin-top:14px;}
+  .article-meta{
+    margin-top:18px;
+    display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    font-family:'Poppins', sans-serif; font-size:13px; color:var(--slate);
+  }
+  .back-link{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:13px; color:var(--slate);
+    margin-bottom:22px;
+  }
+  .back-link:hover{color:var(--ink);}
+  .back-link svg{width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2;}
+
+  .article-body{padding:48px 0 24px;}
+  .article-body .wrap{max-width:720px;}
+  article p{font-size:17px; line-height:1.85; color:var(--ink); margin-bottom:22px;}
+  article h2{font-size:26px; margin:48px 0 18px; line-height:1.3; color:var(--ink);}
+  article strong{font-weight:600; color:var(--ink);}
+  article blockquote{
+    margin:32px 0; padding:20px 24px;
+    background:var(--olive-tint);
+    border-left:3px solid var(--olive);
+    font-size:16px; color:var(--olive-deep);
+  }
+  article blockquote p{margin-bottom:0; color:inherit; font-size:inherit;}
+  article a{color:var(--olive-deep); border-bottom:1px solid var(--olive-deep);}
+  article a:hover{color:var(--olive);}
+  .article-sources{
+    margin-top:40px; padding-top:20px; border-top:1px solid var(--line);
+    font-size:13px; color:var(--slate); line-height:1.7;
+  }
+  .article-cta{
+    margin:44px 0; padding:36px;
+    background:var(--ink); color:var(--paper);
+    text-align:center;
+  }
+  .article-cta h3{color:var(--paper); font-size:22px; margin-bottom:10px;}
+  .article-cta p{color:#C7CCDA; margin-bottom:22px;}
+  .article-cta .btn-primary{
+    display:inline-block;
+    background:var(--olive); color:var(--paper);
+    padding:14px 28px; font-size:14px; font-weight:600;
+    border-bottom:none;
+  }
+  .article-cta .btn-primary:hover{background:var(--olive-soft);}
+
+  /* ===== STAR RATING ===== */
+  .article-rating{padding:24px 0 80px;}
+  .article-rating .wrap{max-width:720px;}
+  .rating-box{
+    background:var(--paper-dim);
+    border:1px solid var(--line);
+    padding:36px;
+    text-align:center;
+  }
+  .rating-box h3{font-size:20px; margin-bottom:8px;}
+  .rating-box p{font-size:14px; color:var(--ink-soft); margin-bottom:20px;}
+  .stars{display:flex; gap:8px; justify-content:center;}
+  .star{
+    background:none; border:none; cursor:pointer;
+    width:40px; height:40px;
+    padding:4px;
+  }
+  .star svg{
+    width:100%; height:100%;
+    fill:none; stroke:var(--slate); stroke-width:1.5;
+    transition:fill .15s ease, stroke .15s ease, transform .15s ease;
+  }
+  .star:hover svg, .star.hovered svg{stroke:var(--gold); transform:scale(1.1);}
+  .star.selected svg{fill:var(--gold); stroke:var(--gold);}
+  .rating-status{
+    margin-top:16px;
+    font-family:'Poppins', sans-serif; font-size:13px; color:var(--olive-deep);
+    min-height:18px;
+  }
+
+  @media (max-width:600px){
+    .article-body article p{font-size:16px;}
+    .article-cta{padding:28px 22px;}
+    .rating-box{padding:28px 22px;}
+    .star{width:38px; height:38px;}
+
+    /* Simplificación móvil: menos padding, título compacto, cita
+       sin sangría de "diario" que en pantallas chicas se ve apretada. */
+    .article-header{padding:40px 0 28px;}
+    .article-header h1{font-size:26px;}
+    .article-body{padding:32px 0 16px;}
+    article h2{font-size:22px; margin:36px 0 14px;}
+    article blockquote{padding:16px 18px; margin:24px 0;}
+    .article-rating{padding:16px 0 56px;}
+  }
+
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Territorio de Marca: Qué Es Realmente (El Caso Cashea)",
+  "description": "Una batidora, un señor de 75 años y una app venezolana me explicaron el territorio de marca mejor que cualquier libro de branding. Con datos reales de Cashea.",
+  "image": "https://fernandoblog.netlify.app/assets/favicon.svg",
+  "author": { "@type": "Person", "name": "Fernando" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Fernando — Estrategia de marca",
+    "logo": { "@type": "ImageObject", "url": "https://fernandoblog.netlify.app/assets/favicon.svg" }
+  },
+  "datePublished": "2026-08-26",
+  "dateModified": "2026-08-26",
+  "mainEntityOfPage": "https://fernandoblog.netlify.app/territorio-de-marca-cashea.html",
+  "keywords": "territorio de marca, identidad de marca, Cashea Venezuela"
+}
+</script>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a href="index.html" class="brandmark"><svg class="brand-logo" viewBox="0 0 1080 1080"><path d="M311.8,556.3c-6.1,4.5-13,5.6-19.9,6.3c-18.3,1.9-36.2,0-53.1-7.7c-6-2.7-11.9-6.2-16.9-10.5 c-14.2-12.3-19.6-27.9-14.8-46.9c2.9-11.5,7.7-22.1,14-31.9c13.7-21.5,31.1-39.4,50.5-55.1c38.7-31.3,81.4-53.9,129.4-65 c30-6.9,60.2-9,90.5-2.1c22.5,5.1,43.3,14.5,61.8,28.9c15.7,12.2,26.6,28,30.4,48.3c2.8,14.9,1.8,29.7-2.6,44 c-4.1,13.2-9.4,26.1-14.3,39.1c-0.9,2.4-2.1,4.8-3.4,7.8c1.6,0.3,2.8,0.8,3.9,0.8c21.7,0.8,43.4,1.6,65.1,2.3 c7.7,0.3,8,0.2,10.8-7.3c5.6-15.1,12.5-29.6,19.6-44c7.3-14.8,13.6-30.2,16.4-46.7c1-6,1.4-12.4,0.8-18.5 c-1.3-12.5-7.8-21.4-19.5-25.4c-4.4-1.5-9.1-2.4-13.7-2.8c-7.4-0.5-12.3-4.1-15.5-10.9c-4.2-8.8-4.8-17.8-1.7-27.1 c2.6-7.7,7.7-11.9,15.7-12.4c11.9-0.8,23.8-1.8,35.6-2.8c23.1-2,46.2-4.1,69.3-6.1c32.9-2.8,65.8-4.7,98.8-3.1 c14.7,0.7,29.2,2.7,43.3,7.5c18.3,6.3,27.6,19.5,28.2,39.7c0.3,10.4-1.4,20.4-5.8,29.7c-1.7,3.7-4.4,7.1-7.3,9.9 c-2.8,2.8-5.8,2.1-7.2-1.6c-4.4-11.5-13.6-16.5-23.7-20.5c-15.5-6.1-31.6-8.8-48-10.2c-9.5-0.8-19.1-0.8-28.7-1.1 c-2.5-0.1-5,0.5-8.8,0.8c2.7,1.7,4.3,2.7,5.8,3.7c6,4,11,9,14.1,15.9c2.3,5.1,1.9,9.3-1.9,13.9c-19.1,23.3-37.8,46.8-56.7,70.3 c-9.3,11.6-18.6,23.1-27.9,34.7c-1.2,1.5-2.2,3-3.6,4.9c8,0.6,15.4,0.8,22.7,1.6c10.6,1.2,21.2,3.4,30.2,9.7 c11.4,8,18.5,19.4,21.1,33.5c1.2,6.6-1.3,10.9-6.3,12c-1.4,0.3-3.9,0-4.5-1c-7-9.9-17.5-11.3-27.8-12.8c-22.5-3.3-45-2.3-67.5-0.8 c-4,0.3-6.6,1.8-9.1,5c-30.3,38.1-60.7,76-91.1,114c-0.7,0.9-1.4,1.7-2,2.6c-7,8.6-11.8,10.1-21.9,6.4c-9.3-3.5-16.8-9.5-21.6-18.6 c-4.3-8.3-3.7-13.5,2.4-20.5c22.9-26.3,45.8-52.6,68.7-78.8c3.4-3.9,6.8-7.9,10.4-12c-0.9-0.6-1.3-1.1-1.8-1.1 c-24.9,0.6-49.8,1.4-74.6,1.9c-4.9,0.1-7.5,2.5-10.1,6.5c-44.7,67.9-99.6,125.1-165.7,170.4c-29.2,20-60.3,35.6-94.5,43.8 c-23.2,5.5-46.6,8-70.2,3.4c-9.3-1.8-18.2-4.7-26.3-9.7c-18-11.1-25.3-29.5-19.9-50.6c3.3-12.8,9.3-24.3,17-34.7 c16.2-21.7,36.1-39.4,56.9-56c47.8-38.1,101.6-63.5,158.7-81.8c29.7-9.5,59.9-17,90.7-21.5c4.3-0.6,7.2-2.4,9.6-6.4 c12.3-21.3,23.9-43,32.3-66.3c4.5-12.5,7.8-25.4,7.2-38.9c-0.1-3.3-0.6-6.6-1.2-9.9c-2.7-14.1-11.2-22.5-24.3-26.2 c-10.2-2.9-20.6-3.1-31-1.9c-26.3,2.9-51.1,11.3-75.2,22.2c-33.8,15.3-65.3,34.3-93.1,59.7c-11.9,10.8-22.6,22.8-31.5,36.5 c-7.4,11.4-12.3,23.7-12.4,37.8c-0.1,10,3.7,17.6,11.2,23.4c8.4,6.6,18.1,9.7,28.5,10.1C306.9,556.3,309.3,556.3,311.8,556.3z M460.1,557.4c-0.2-0.5-0.5-1-0.7-1.6c-9.7,3-19.5,5.8-29.2,9.1c-51.3,17.8-99.2,43.1-144.8,73.4c-19.2,12.8-37.9,26.3-55,42.1 c-9.4,8.7-18.3,18-24.9,29.2c-2.5,4.3-4.6,9-5.9,13.9c-1.5,5.5,1.3,9.8,6.6,11c3.3,0.7,6.8,0.9,10.1,0.6 c13.7-1.4,26.7-5.7,39.2-11.4c39.2-18.2,76.3-40.2,110.3-67.6c30.1-24.3,56.4-52.6,81.1-82.7C451.2,568.1,455.7,562.7,460.1,557.4z M768.9,364.7c-0.3-0.6-0.5-1.3-0.8-1.9c-26.2,1.6-52.5,3.2-78.7,4.8c-1.5,0.1-2.9,0.4-4.4,0.6c-0.2,0-0.3,0.3-0.4,0.5 c-0.1,0.2-0.1,0.4-0.2,1c8.4,9.3,17.5,18.3,21.9,31c4.4,12.8,3,26,1.8,39.2c0.5,0.2,0.9,0.3,1.4,0.5 C729.4,415.1,749.2,389.9,768.9,364.7z"/></svg>Fernando</a>
+    <nav>
+      <a href="index.html#articulos" class="current">Blog</a>
+      <a href="recursos.html">Recursos</a>
+      <a href="index.html#sobre-mi">Sobre mí</a>
+      <a href="index.html#newsletter">Newsletter</a>
+      <a href="index.html#diagnostico" class="nav-cta">Agendar diagnóstico →</a>
+    </nav>
+    <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileDrawer">
+      <svg class="icon-menu" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<nav class="mobile-drawer" id="mobileDrawer" aria-label="Menú móvil">
+  <a href="index.html#articulos">Blog</a>
+  <a href="recursos.html">Recursos</a>
+  <a href="index.html#sobre-mi">Sobre mí</a>
+  <a href="index.html#newsletter">Newsletter</a>
+  <a href="index.html#diagnostico" class="mobile-cta">Agendar diagnóstico →</a>
+</nav>
+
+
+<section class="article-header">
+  <div class="wrap">
+    <a href="index.html#articulos" class="back-link reveal">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Volver al blog
+    </a>
+    <p class="eyebrow reveal">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+      Casos de estudio
+    </p>
+    <h1 class="reveal">Territorio de marca: qué es realmente (el caso Cashea)</h1>
+    <div class="article-meta reveal">
+      <span>Fernando</span>
+      <span>·</span>
+      <span>26 ago 2026</span>
+      <span>·</span>
+      <span>14 min de lectura</span>
+    </div>
+  </div>
+</section>
+
+<section class="article-body">
+  <div class="wrap">
+    <article class="reveal">
+<p>Estaba en una tienda, sin ningún interés especial ese día, cuando se me acerca un señor. Mayor, de esos con la voz gastada de tanto hablar con clientes. Me pregunta si yo sé cuánto cuesta una batidora. Le digo que ni idea, pero que lo ayudo a buscar el precio. Y ahí nos quedamos un rato, los dos viendo estantes como si fuéramos socios en la misión.</p>
+<p>En algún momento del camino me pregunta si esa tienda acepta Cashea. Que si podía llevársela con la inicial nomás. Le digo que sí, y por pura curiosidad (esa que a veces me mete en conversaciones que no tenían por qué durar diez minutos), le pregunto en qué nivel está dentro de la app.</p>
+<p>"Nivel 4", me dice, y lo dice con un orgullo que no esperaba de alguien hablando de un electrodoméstico de cien dólares.</p>
+<p>Sigue: que ya ha comprado de todo con Cashea. Lavadora, televisor, horno, cama. "Ya no me hace falta nada", me suelta, como quien termina una lista de compras de toda una vida.</p>
+<p>Me cuenta que es vendedor desde los 12 años. Hoy tiene 75. Vive solo. Y me dice, casi al pasar, que lograr algo así a su edad, en Venezuela, es impensable. Ahí es cuando me tira la frase que me dejó pensando el resto de la semana: que Cashea le escribió por su cumpleaños. Una carta gigante. Y que al principio se asustó, porque él paga puntual (adelanta cuotas, de a dos y tres) y pensó que algo andaba mal con su cuenta.</p>
+<p>No era eso. Era una carta felicitándolo por su cumpleaños y por lo responsable que había sido pagando. Que contaban con él para lo que fuera.</p>
+<p>A sus 75 años, me dijo, recibir algo así es un logro.</p>
+<p>Yo no fui a esa tienda a buscar un caso de estudio, obviamente. Pero unos días después me cayó la ficha: ese señor me había regalado, sin saberlo, el mejor ejemplo de territorio de marca que iba a encontrar en semanas de investigación.</p>
+<p>Y antes de que sigas leyendo pensando que esto es solo una anécdota bonita, te adelanto el punto completo, para que no se te pierda en el camino: <strong>ese señor no estaba comprando una batidora. Estaba parado dentro del territorio de una marca sin saberlo.</strong> El resto del artículo es, literalmente, explicarte esa frase.</p>
+<h2>El mapa no es el territorio (y ahí está la clave de todo)</h2>
+<p>Hay una imagen que uso desde que entendí esto de verdad, y te la voy a dar de una vez porque la vas a necesitar para el resto del artículo.</p>
+<p>En geografía, primero existe el territorio. La tierra, el río, la montaña. Ya está ahí, exista o no un mapa de ella. Después llega alguien y dibuja el mapa: una versión simplificada, útil, que representa ese terreno para que otros lo puedan entender sin tener que caminarlo entero.</p>
+<p>En branding, es exactamente al revés. Primero dibujas el mapa, eso es tu posicionamiento, la frase que quieres que la gente tenga en la cabeza, y después, con suerte, con años de trabajo, construyes el territorio real que hace que ese mapa sea cierto. Muchas marcas se quedan solo con el mapa. Dicen "somos la marca más confiable" o "la más innovadora" en su publicidad, pero nunca construyen el terreno que sostenga esa frase. El mapa dice una cosa, el territorio, si es que existe, dice otra.</p>
+<p>Quédate con esa imagen. Vamos a usarla todo el artículo: <strong>posicionamiento es el mapa. Territorio es la tierra que efectivamente puedes pisar.</strong></p>
+<p>Con eso en la cabeza, ahora sí, separemos las tres palabras que la gente confunde todo el tiempo.</p>
+<p>La <strong>identidad</strong> es quién es la marca cuando nadie la está viendo. Sus valores, su carácter, de dónde salió.</p>
+<p>El <strong>posicionamiento</strong> es el mapa. El punto concreto, la etiqueta que quieres pegarle a la marca dentro de la cabeza de alguien.</p>
+<p>El <strong>territorio</strong> es el terreno real. Todo lo que la marca puede decir o hacer sin dejar de sonar como ella misma, sostenido en el tiempo, no solo dibujado en un slide.</p>
+<p>Ahora sí. Volvamos a la tienda, y veamos cómo se ve esto cuando no es teoría sino un señor de 75 años frente a un estante de electrodomésticos.</p>
+<h2>Quién es Cashea, de verdad (no lo que dice su bio)</h2>
+<p>Cashea nació en 2022, la fundaron venezolanos, en un país donde el crédito bancario tradicional prácticamente se había esfumado. No hablo de una crisis leve de esas que se resuelven con un par de reformas. Hablo de años enteros donde, si no tenías conexiones bancarias fuertes, la palabra "crédito" ni siquiera era una opción sobre la mesa.</p>
+<p>El mecanismo es simple: pagas una inicial, el resto en cuotas sin interés, sin tarjeta de crédito ni historial bancario. Vas pagando bien, subes de nivel dentro de lo que ellos llaman el Cashea Score, y con cada nivel te dan más línea de compra.</p>
+<p>Hasta ahí, suena a fintech más. Y la verdad, si se hubieran quedado solo con eso, ya les habría alcanzado para tener un negocio sano.</p>
+<p>Pero el CEO, Pedro Vallenilla, dijo algo en una entrevista que le da otra dimensión a todo esto: contó que a ellos les advirtieron, una y otra vez, que el venezolano común no iba a poder pagar ese tipo de financiamiento. Y la apuesta de Cashea fue exactamente la contraria: creer que sí, que el venezolano de a pie es un sujeto de crédito responsable, solo que nadie se lo había dicho antes. Ni mucho menos se lo había demostrado con un gesto real.</p>
+<p>Esa apuesta, resumida así, es la identidad completa de Cashea.</p>
+<blockquote>
+<p><strong>Esto todavía no es territorio.</strong> Es la base sobre la que se va a construir. Sigue leyendo.</p>
+</blockquote>
+<h2>El posicionamiento: el mapa que dibujaron primero</h2>
+<p>"Compra en cuotas sin tarjeta de crédito ni historial bancario." Ese es el mapa completo de Cashea. No tiene nada de poético, y así está bien. Un buen mapa no necesita sonar bonito, necesita ser específico y resolver algo real.</p>
+<p>Y lo resolvió a una escala que sorprende hasta a alguien medio anestesiado de tantas cifras de startups exageradas. Según lo que reportan medios como Bloomberg Línea y Banca y Negocios, Cashea ya pasa los 10 millones de cuentas de consumidores. Más de la mitad de la población adulta de Venezuela. Trabajan con más de 40 mil comercios. Han procesado más de 100 millones de transacciones. Y en 2026 levantaron 100 millones de dólares en dos rondas, todo destinado al país.</p>
+<p>El dato que de verdad me detuvo mientras investigaba fue este: de cada 100 dólares que financian, solo pierden 1.20. O sea, la gente sí paga. El mapa que dibujaron, "aquí puedes confiar en la gente", resultó ser cierto.</p>
+<p>Pero un mapa correcto no es lo mismo que un territorio construido. Ahí es donde entra la carta de cumpleaños.</p>
+<blockquote>
+<p><strong>Recapitulando antes de seguir:</strong> identidad es quién son. Posicionamiento es lo que prometen (el mapa). Todavía nos falta la pieza que responde tu pregunta original: ¿y el territorio, dónde está?</p>
+</blockquote>
+<h2>Aquí está: el territorio real de Cashea</h2>
+<p>Podrían haberse quedado tranquilamente en el mapa de "te ayudo a comprar en cuotas". Con esos números les alcanzaba de sobra, no necesitaban mandarle una carta de cumpleaños a nadie para seguir creciendo.</p>
+<p>Pero no se quedaron ahí, y esto no es casualidad ni ocurrencia de alguien en redes sociales con un día inspirado. Está metido en la estructura del producto: tienen un programa que se llama Club Cashea Más, con seis niveles, que premia explícitamente el "consumo responsable" y el pago puntual. No te da un descuento por gastar más: te reconoce, con toda intención, por ser cumplido.</p>
+<p>A eso súmale una campaña que sacaron llamada "Venezuela Cree en Ti", que baja las iniciales y alarga los plazos para, según ellos mismos lo explican, ayudar a la gente a reconstruir lo que perdió. Fíjate en el nombre. No dice "tasas más bajas". Dice que creen en ti.</p>
+<p>Ahí está el territorio real de Cashea, y creo que ni ellos lo tenían tan claro al principio: <strong>no es "facilitar compras", es dignidad financiera.</strong> Reconocimiento. El terreno que pisas cuando usas Cashea no es solo transaccional, es emocional, y por eso un señor de 75 años se acuerda de una carta antes que de la lavadora que compró.</p>
+<p>Y sí, también voy a decir la parte incómoda, porque no quiero sonar como si estuviera vendiendo acciones de Cashea: esto también es una jugada de negocio brillante. Cada vez que subes de nivel, te prestan más, tú les compras más, ellos ganan más. El gesto humano y el interés comercial no se contradicen aquí, van agarrados de la mano. Eso no le quita mérito al territorio, pero tampoco hay que ponerse cursi y pensar que es puro corazón.</p>
+<p><strong>Este es el momento exacto en el que un mapa se convierte en territorio: cuando la promesa deja de vivir solo en la publicidad y empieza a vivir en la estructura del producto, repetida tantas veces que la gente ya no la cuestiona, solo la habita.</strong></p>
+<h2>La prueba de que el territorio existe: los 25 dólares</h2>
+<p>Si el párrafo anterior te sonó bonito pero un poco abstracto, quédate, porque acá viene la parte con datos que no dejan lugar a dudas.</p>
+<p>Si vives en Venezuela y usas Cashea, seguro ya viste esto: la mayoría de los comercios pide un monto mínimo para poder pagar con la app, casi siempre 25 dólares (el rango oficial va de 8 a 25 según el comercio). Y es bien común ver a alguien que solo necesitaba algo de 15 dólares, buscando qué más agarrar para llegar al mínimo y poder pagar con Cashea.</p>
+<p>A primera vista parece un detalle técnico sin chiste. No lo es, para nada.</p>
+<p>Esa persona no está tratando de gastar menos. Está haciendo justo lo contrario: gastando más, con tal de poder usar Cashea. Eso solo pasa cuando el medio de pago dejó de ser un medio y se volvió algo que la persona quiere activamente alimentar. Nadie infla su carrito por un mapa. Solo lo haces por un territorio en el que ya decidiste vivir.</p>
+<p>Y tiene toda la lógica si lo conectas con el Cashea Score: cada compra pagada a tiempo te sube de nivel, y cada nivel te da más línea. En un país donde construir un historial de crédito por la vía tradicional es casi ciencia ficción, usar Cashea, aunque sea completando el carrito con algo que no necesitabas, se volvió la forma más a la mano que tiene alguien común de decir "miren, yo sí soy confiable". No está comprando una batidora nada más. Está fabricando su propia reputación financiera, compra por compra.</p>
+<p>Y esto no es exclusivo de Cashea, lo cual le da más peso al argumento, no menos. En toda Latinoamérica existe lo que en la industria fintech llaman "crédito invisible": millones de personas sin ningún historial financiero, no porque sean malas pagadoras, sino porque nunca nadie les dio la oportunidad de demostrarlo. Nu en Brasil, México y Colombia, Vexi y Stori en México, básicamente construyeron sus negocios completos alrededor de la misma idea. Dale a alguien "sin historial" la chance de probar que es responsable, y esa persona no solo va a usar tu producto: lo va a defender, lo va a priorizar por encima de otras opciones, y en más de un caso lo va a agradecer como si le hubieras hecho un favor personal. Como el señor de la batidora.</p>
+<p>Ese es el indicio real detrás de los 25 dólares. Cuando alguien ajusta su compra con tal de usar tu marca, ya no estás resolviendo una necesidad puntual. Estás parado sobre un territorio que la gente eligió habitar por su cuenta, sin que se lo pidieras.</p>
+<h2>La parte académica (que casi nadie trae al español)</h2>
+<p>Todo esto tiene una base seria detrás, aunque nadie la mencione en los blogs de agencia. El término "territorio de marca" viene originalmente del francés, <em>territoire de marque</em>, y su desarrollo más riguroso se lo debemos a una investigadora llamada Sophie Changeur, que en 1998 lo definió como un espacio perceptual construido por las asociaciones fuertes, coherentes y dominantes de una marca. No cualquier asociación cuenta. Tienen que repetirse, tienen que sostenerse en el tiempo, tienen que estar conectadas entre sí.</p>
+<p>Jean-Noël Kapferer, que enseña en HEC París y es de las voces más citadas del mundo en gestión de marca, le agrega la pieza de la legitimidad: entender el programa real de una marca (lo que genuinamente es, no lo que le gustaría aparentar) te dice hasta dónde puede estirarse sin sonar falsa. La carta de cumpleaños de Cashea no suena falsa porque encaja con todo lo demás que ya venían haciendo. Si la mandara un banco tradicional cualquiera, sonaría a truco barato. En Cashea, es coherente con el resto de la película.</p>
+<p>Ahí está, para mí, la prueba de fuego de un territorio bien construido: que cualquier gesto nuevo se sienta parte del mismo personaje, en vez de sentirse pegado con cinta adhesiva a último momento.</p>
+<h2>Cómo hacerlo tú, sin necesitar 100 millones de dólares</h2>
+<p>No hace falta el presupuesto de una fintech para aplicar la misma lógica. Lo que sí hace falta es hacerse las preguntas incómodas, en este orden:</p>
+<p>Primero, a quién le sirves de verdad, no qué temas se te ocurren para publicar. Cashea no arrancó preguntando "¿qué app de pagos hacemos?". Arrancó viendo que millones de personas responsables no tenían acceso a nada, y ahí armaron el resto.</p>
+<p>Segundo, qué comportamiento genuino ya existe en tu audiencia, para construir sobre eso en vez de inventarlo desde cero en una sesión de brainstorming. El territorio de Cashea no lo diseñó un departamento de marketing con pizarrón blanco. Lo encontraron viendo que la gente sí pagaba, sí era cumplida, y que nadie se lo estaba reconociendo.</p>
+<p>Tercero, dónde vas a meter el reconocimiento dentro de tu producto o servicio, no solo en un post de redes. El Club Cashea Más vive dentro de la estructura de la app, no en una campaña de redes. Esa es la diferencia entre un territorio de verdad y un eslogan que se ve bonito en Canva.</p>
+<p>Cuarto, si estás dispuesto a sostenerlo aunque te aburra repetirlo. El territorio se construye a punta de constancia, no de un golpe de suerte publicitario que se viraliza una vez.</p>
+<p>Y quinto, si estás listo para que la gente haga con tu marca cosas que ni tú planeaste. Nadie en Cashea diseñó que la gente completara compras de 25 dólares solo por usar la app. Eso lo generó el territorio solo, sin que nadie lo pidiera. Esa es la señal de que ya no estás dibujando el mapa. Ya construiste el terreno.</p>
+<h2>Y si estás armando tu marca personal, como yo</h2>
+<p>Casi todo lo que se escribe de territorio de marca está pensado para empresas grandes. El principio funciona igual para una marca personal, con un matiz que vale la pena decir claro: cuando la marca eres tú, el territorio no protege una categoría de producto. Protege tu credibilidad como referente en algo.</p>
+<p>Si tu blog es la puerta principal para que alguien confíe en ti antes de contratarte, tu territorio es, en la práctica, tu línea editorial. Y la pregunta real antes de publicar algo no es "¿esto me interesa a mí?", es "¿esto suma al terreno que estoy construyendo, o es solo una idea que me distrajo esta semana y ya?"</p>
+<p>Si quieres profundizar en cómo se construye esa capa de identidad antes de tocar el diseño, es justo el tema del que hablo en <a href="index.html#pillars">identidad verbal</a>, uno de los cuatro ejes sobre los que escribo en este blog.</p>
+<h2>Para cerrar: volvamos a la batidora</h2>
+<p>Nada de esto es un truco de agencia ni una palabra elegante para sonar más profesional en una junta. Tiene detrás gente estudiándolo en serio desde hace más de veinticinco años, y tiene una prueba bastante más contundente que cualquier estudio de caso.</p>
+<p>Ese señor de 75 años no fue a la tienda a construir una relación con una marca. Fue a comprar una batidora. Pero terminó viviendo, sin saberlo, dentro de un territorio que Cashea construyó a punta de años, de niveles, de cartas, de creer en la gente que nadie más creía. El mapa de Cashea dice "compra en cuotas". El territorio dice "aquí te reconocemos". Y el señor, la carta que se guardó, no fue por el mapa.</p>
+<p>Definir tu territorio no se resuelve en una tarde ni con una lluvia de ideas de una hora. Pero es la diferencia entre tener un blog que solo dibuja mapas bonitos, y tener uno que la gente empieza a habitar y a defender como si fuera propio.</p>
+<div class="article-cta">
+  <h3>¿Tu marca tiene mapa, o territorio?</h3>
+  <p>Si todavía no estás seguro, ese es exactamente el punto de partida de un diagnóstico de marca.</p>
+  <a href="index.html#diagnostico" class="btn-primary">Agendar diagnóstico →</a>
+</div>
+<hr />
+<p class="article-sources"><strong>Fuentes:</strong> Sophie Changeur (1998, 1999, Universidad de Aix-Marseille), Jean-Noël Kapferer (HEC París), datos operativos de Cashea reportados por Bloomberg Línea, Banca y Negocios, El Diario y El Ecosistema Startup, más la anécdota personal del autor.</p>
+    </article>
+  </div>
+</section>
+
+<section class="article-rating">
+  <div class="wrap">
+    <div class="rating-box reveal">
+      <h3>¿Qué tan útil te resultó este artículo?</h3>
+      <p>Tu valoración me ayuda a saber qué seguir escribiendo.</p>
+      <div class="stars" id="starRating" role="radiogroup" aria-label="Calificación de 1 a 5 estrellas">
+        <iframe name="hiddenFrame" id="hiddenFrame" style="display:none;" title="envío en segundo plano"></iframe>
+        <button type="button" class="star" data-value="1" aria-label="1 estrella" role="radio" aria-checked="false">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 17,14.5 18.5,22 12,18 5.5,22 7,14.5 2,9.5 9,9"/></svg>
+        </button>
+        <button type="button" class="star" data-value="2" aria-label="2 estrellas" role="radio" aria-checked="false">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 17,14.5 18.5,22 12,18 5.5,22 7,14.5 2,9.5 9,9"/></svg>
+        </button>
+        <button type="button" class="star" data-value="3" aria-label="3 estrellas" role="radio" aria-checked="false">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 17,14.5 18.5,22 12,18 5.5,22 7,14.5 2,9.5 9,9"/></svg>
+        </button>
+        <button type="button" class="star" data-value="4" aria-label="4 estrellas" role="radio" aria-checked="false">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 17,14.5 18.5,22 12,18 5.5,22 7,14.5 2,9.5 9,9"/></svg>
+        </button>
+        <button type="button" class="star" data-value="5" aria-label="5 estrellas" role="radio" aria-checked="false">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 17,14.5 18.5,22 12,18 5.5,22 7,14.5 2,9.5 9,9"/></svg>
+        </button>
+      </div>
+      <p class="rating-status" id="ratingStatus" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>
+      <a href="index.html" class="brandmark"><svg class="brand-logo" viewBox="0 0 1080 1080"><path d="M311.8,556.3c-6.1,4.5-13,5.6-19.9,6.3c-18.3,1.9-36.2,0-53.1-7.7c-6-2.7-11.9-6.2-16.9-10.5 c-14.2-12.3-19.6-27.9-14.8-46.9c2.9-11.5,7.7-22.1,14-31.9c13.7-21.5,31.1-39.4,50.5-55.1c38.7-31.3,81.4-53.9,129.4-65 c30-6.9,60.2-9,90.5-2.1c22.5,5.1,43.3,14.5,61.8,28.9c15.7,12.2,26.6,28,30.4,48.3c2.8,14.9,1.8,29.7-2.6,44 c-4.1,13.2-9.4,26.1-14.3,39.1c-0.9,2.4-2.1,4.8-3.4,7.8c1.6,0.3,2.8,0.8,3.9,0.8c21.7,0.8,43.4,1.6,65.1,2.3 c7.7,0.3,8,0.2,10.8-7.3c5.6-15.1,12.5-29.6,19.6-44c7.3-14.8,13.6-30.2,16.4-46.7c1-6,1.4-12.4,0.8-18.5 c-1.3-12.5-7.8-21.4-19.5-25.4c-4.4-1.5-9.1-2.4-13.7-2.8c-7.4-0.5-12.3-4.1-15.5-10.9c-4.2-8.8-4.8-17.8-1.7-27.1 c2.6-7.7,7.7-11.9,15.7-12.4c11.9-0.8,23.8-1.8,35.6-2.8c23.1-2,46.2-4.1,69.3-6.1c32.9-2.8,65.8-4.7,98.8-3.1 c14.7,0.7,29.2,2.7,43.3,7.5c18.3,6.3,27.6,19.5,28.2,39.7c0.3,10.4-1.4,20.4-5.8,29.7c-1.7,3.7-4.4,7.1-7.3,9.9 c-2.8,2.8-5.8,2.1-7.2-1.6c-4.4-11.5-13.6-16.5-23.7-20.5c-15.5-6.1-31.6-8.8-48-10.2c-9.5-0.8-19.1-0.8-28.7-1.1 c-2.5-0.1-5,0.5-8.8,0.8c2.7,1.7,4.3,2.7,5.8,3.7c6,4,11,9,14.1,15.9c2.3,5.1,1.9,9.3-1.9,13.9c-19.1,23.3-37.8,46.8-56.7,70.3 c-9.3,11.6-18.6,23.1-27.9,34.7c-1.2,1.5-2.2,3-3.6,4.9c8,0.6,15.4,0.8,22.7,1.6c10.6,1.2,21.2,3.4,30.2,9.7 c11.4,8,18.5,19.4,21.1,33.5c1.2,6.6-1.3,10.9-6.3,12c-1.4,0.3-3.9,0-4.5-1c-7-9.9-17.5-11.3-27.8-12.8c-22.5-3.3-45-2.3-67.5-0.8 c-4,0.3-6.6,1.8-9.1,5c-30.3,38.1-60.7,76-91.1,114c-0.7,0.9-1.4,1.7-2,2.6c-7,8.6-11.8,10.1-21.9,6.4c-9.3-3.5-16.8-9.5-21.6-18.6 c-4.3-8.3-3.7-13.5,2.4-20.5c22.9-26.3,45.8-52.6,68.7-78.8c3.4-3.9,6.8-7.9,10.4-12c-0.9-0.6-1.3-1.1-1.8-1.1 c-24.9,0.6-49.8,1.4-74.6,1.9c-4.9,0.1-7.5,2.5-10.1,6.5c-44.7,67.9-99.6,125.1-165.7,170.4c-29.2,20-60.3,35.6-94.5,43.8 c-23.2,5.5-46.6,8-70.2,3.4c-9.3-1.8-18.2-4.7-26.3-9.7c-18-11.1-25.3-29.5-19.9-50.6c3.3-12.8,9.3-24.3,17-34.7 c16.2-21.7,36.1-39.4,56.9-56c47.8-38.1,101.6-63.5,158.7-81.8c29.7-9.5,59.9-17,90.7-21.5c4.3-0.6,7.2-2.4,9.6-6.4 c12.3-21.3,23.9-43,32.3-66.3c4.5-12.5,7.8-25.4,7.2-38.9c-0.1-3.3-0.6-6.6-1.2-9.9c-2.7-14.1-11.2-22.5-24.3-26.2 c-10.2-2.9-20.6-3.1-31-1.9c-26.3,2.9-51.1,11.3-75.2,22.2c-33.8,15.3-65.3,34.3-93.1,59.7c-11.9,10.8-22.6,22.8-31.5,36.5 c-7.4,11.4-12.3,23.7-12.4,37.8c-0.1,10,3.7,17.6,11.2,23.4c8.4,6.6,18.1,9.7,28.5,10.1C306.9,556.3,309.3,556.3,311.8,556.3z M460.1,557.4c-0.2-0.5-0.5-1-0.7-1.6c-9.7,3-19.5,5.8-29.2,9.1c-51.3,17.8-99.2,43.1-144.8,73.4c-19.2,12.8-37.9,26.3-55,42.1 c-9.4,8.7-18.3,18-24.9,29.2c-2.5,4.3-4.6,9-5.9,13.9c-1.5,5.5,1.3,9.8,6.6,11c3.3,0.7,6.8,0.9,10.1,0.6 c13.7-1.4,26.7-5.7,39.2-11.4c39.2-18.2,76.3-40.2,110.3-67.6c30.1-24.3,56.4-52.6,81.1-82.7C451.2,568.1,455.7,562.7,460.1,557.4z M768.9,364.7c-0.3-0.6-0.5-1.3-0.8-1.9c-26.2,1.6-52.5,3.2-78.7,4.8c-1.5,0.1-2.9,0.4-4.4,0.6c-0.2,0-0.3,0.3-0.4,0.5 c-0.1,0.2-0.1,0.4-0.2,1c8.4,9.3,17.5,18.3,21.9,31c4.4,12.8,3,26,1.8,39.2c0.5,0.2,0.9,0.3,1.4,0.5 C729.4,415.1,749.2,389.9,768.9,364.7z"/></svg>Fernando</a>
+      <p style="margin-top:14px; font-size:13px; color:var(--slate); max-width:28ch;">Estrategia de marca y posicionamiento para negocios en crecimiento.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="fcol">
+        <h5><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="15,9 13,13 9,15 11,11"/></svg>Explorar</h5>
+        <a href="index.html#articulos">Blog</a>
+        <a href="recursos.html">Recursos</a>
+        <a href="index.html#sobre-mi">Sobre mí</a>
+        <a href="index.html#newsletter">Newsletter</a>
+      </div>
+      <div class="fcol">
+        <h5><svg class="icon" viewBox="0 0 24 24"><path d="M20 10 12 2H4v8l8 8 8-8Z"/><circle cx="7" cy="7" r="1"/></svg>Temas</h5>
+        <a href="index.html#pillars">Posicionamiento</a>
+        <a href="index.html#pillars">Identidad verbal</a>
+        <a href="index.html#pillars">Arquetipos</a>
+        <a href="index.html#pillars">Growth</a>
+      </div>
+      <div class="fcol">
+        <h5><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Contacto</h5>
+        <a href="index.html#diagnostico">Agendar diagnóstico</a>
+        <a href="mailto:juanfernandomendezsanchez@gmail.com">juanfernandomendezsanchez@gmail.com</a>
+        <a href="tel:+584125272140">0412-527-2140</a>
+        <a href="https://wa.me/584125272140" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 Fernando — Estrategia de marca</span>
+    <span>Diseñado para pensar antes de decorar</span>
+  </div>
+</footer>
+
+<script>
+  // ─── Menú móvil ───
+  const mobileToggle = document.getElementById('mobileToggle');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const drawerBackdrop = document.getElementById('drawerBackdrop');
+
+  function closeMobileMenu(){
+    mobileToggle.setAttribute('aria-expanded', 'false');
+    mobileDrawer.classList.remove('open');
+    drawerBackdrop.classList.remove('open');
+    document.body.classList.remove('drawer-locked');
+  }
+  function openMobileMenu(){
+    mobileToggle.setAttribute('aria-expanded', 'true');
+    mobileDrawer.classList.add('open');
+    drawerBackdrop.classList.add('open');
+    document.body.classList.add('drawer-locked');
+  }
+  if(mobileToggle && mobileDrawer && drawerBackdrop){
+    mobileToggle.addEventListener('click', () => {
+      const isOpen = mobileToggle.getAttribute('aria-expanded') === 'true';
+      isOpen ? closeMobileMenu() : openMobileMenu();
+    });
+    drawerBackdrop.addEventListener('click', closeMobileMenu);
+    mobileDrawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+    window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeMobileMenu(); });
+    window.addEventListener('resize', () => { if(window.innerWidth > 900) closeMobileMenu(); });
+  }
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && revealEls.length){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
+
+  // Accordion (soporta anidamiento: los paneles se ajustan solos con CSS grid,
+  // así que abrir/cerrar un nivel interno no rompe la altura del nivel externo)
+  document.querySelectorAll('.acc-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const panel = document.getElementById(targetId);
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+  // ─── Valoración por estrellas → Google Apps Script ───
+  const RATING_ENDPOINT = "https://script.google.com/macros/s/AKfycbx5i8XMYxFKpF6WBA0KzsKM-nyVudr5Qgn9AxVWcgi_GqYcEQ2XSsv7sSO71ugtxLIL3A/exec";
+  const ARTICLE_SLUG = "territorio-de-marca-cashea";
+
+  const starButtons = document.querySelectorAll('.star');
+  const ratingStatus = document.getElementById('ratingStatus');
+  let ratingSent = false;
+
+  function paintStars(value){
+    starButtons.forEach(btn => {
+      const v = parseInt(btn.getAttribute('data-value'), 10);
+      btn.classList.toggle('selected', v <= value);
+      btn.setAttribute('aria-checked', v === value ? 'true' : 'false');
+    });
+  }
+
+  starButtons.forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      const v = parseInt(btn.getAttribute('data-value'), 10);
+      starButtons.forEach(b => b.classList.toggle('hovered', parseInt(b.getAttribute('data-value'), 10) <= v));
+    });
+    btn.addEventListener('mouseleave', () => {
+      starButtons.forEach(b => b.classList.remove('hovered'));
+    });
+    btn.addEventListener('click', () => {
+      if(ratingSent) return; // evita doble envío
+      const value = parseInt(btn.getAttribute('data-value'), 10);
+      paintStars(value);
+      ratingSent = true;
+      ratingStatus.textContent = 'Enviando…';
+
+      const payload = { tipo: 'valoracion', articulo: ARTICLE_SLUG, puntuacion: value };
+
+      fetch(RATING_ENDPOINT, { method: 'POST', body: JSON.stringify(payload) })
+        .then(res => res.json())
+        .then(result => {
+          ratingStatus.textContent = result.ok ? '¡Gracias por tu valoración!' : 'Gracias — hubo un detalle pero quedó registrado.';
+        })
+        .catch(() => {
+          // Fallback: envío clásico por iframe oculto (no depende de CORS).
+          const tempForm = document.createElement('form');
+          tempForm.method = 'POST';
+          tempForm.action = RATING_ENDPOINT;
+          tempForm.target = 'hiddenFrame';
+          tempForm.style.display = 'none';
+          Object.keys(payload).forEach(key => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = payload[key];
+            tempForm.appendChild(input);
+          });
+          document.body.appendChild(tempForm);
+          tempForm.submit();
+          setTimeout(() => document.body.removeChild(tempForm), 1000);
+          ratingStatus.textContent = '¡Gracias por tu valoración!';
+        });
+    });
+  });
+</script>
+
+
+<a class="wa-float" href="https://wa.me/584125272140?text=Hola%20Fernando%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20de%20marca" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16.001 3C9.107 3 3.5 8.607 3.5 15.5c0 2.42.686 4.68 1.874 6.598L3 29l7.086-2.34a12.44 12.44 0 0 0 5.915 1.505h.005c6.893 0 12.5-5.607 12.5-12.5S22.894 3 16.001 3zm7.34 17.86c-.309.869-1.53 1.64-2.514 1.855-.67.145-1.545.26-4.49-.964-3.77-1.562-6.194-5.37-6.383-5.618-.182-.248-1.53-2.033-1.53-3.878 0-1.845.968-2.752 1.31-3.13.34-.379.744-.474 1.001-.474.257 0 .513.003.737.014.236.012.554-.09.867.66.322.775 1.098 2.68 1.194 2.875.096.195.16.424.032.679-.128.256-.192.416-.383.638-.192.223-.404.498-.577.669-.192.19-.392.397-.169.78.223.383.99 1.632 2.126 2.643 1.462 1.304 2.694 1.708 3.077 1.9.383.192.607.16.831-.096.223-.256.958-1.117 1.213-1.5.256-.383.512-.319.863-.192.352.128 2.233 1.053 2.617 1.245.383.192.639.287.735.447.096.16.096.923-.213 1.792z"/></svg>
+</a>
+</body>
+</html>

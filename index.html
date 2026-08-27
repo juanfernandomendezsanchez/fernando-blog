@@ -9,6 +9,8 @@
 <meta property="og:description" content="Estrategia de marca para negocios que ya venden, pero no se recuerdan. Posicionamiento, identidad verbal y diagnóstico de marca.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#2E6F40">
+<link rel="canonical" href="https://fernandoblog.netlify.app/">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -498,7 +500,10 @@
     display:flex; flex-direction:column;
     border-top:2px solid var(--olive-deep);
     padding-top:20px;
+    text-decoration:none;
+    transition:transform .2s ease;
   }
+  a.card:hover{transform:translateY(-3px);}
   .card .thumb{
     height:150px; margin-bottom:18px;
     background:var(--olive-tint);
@@ -662,6 +667,55 @@
     .grid3{grid-template-columns:1fr;}
     .wrap{padding:0 20px;}
     .credentials{flex-wrap:wrap; gap:24px;}
+
+    /* ─── Simplificación real para móvil ───
+       En pantallas chicas priorizamos lectura rápida sobre efectos
+       editoriales: menos decoración, menos scroll, más densidad útil.
+       Nada de esto se aplica en escritorio. */
+
+    /* Quitar el numeral gigante de fondo del hero: es puramente
+       decorativo y en pantallas chicas solo agrega ruido visual. */
+    .hero-bignum{display:none;}
+
+    /* Cortes diagonales → bordes rectos. En móvil, el clip-path
+       diagonal recorta contenido de forma impredecible según el
+       alto real del texto, y no aporta nada funcional aquí. */
+    .hero{clip-path:none; padding:56px 0 48px;}
+    .quote-strip{clip-path:none; padding:40px 0;}
+    .quote-strip::before{display:none;}
+
+    /* Marquee: es un adorno tipográfico en movimiento; en un celular,
+       moviéndose todo el tiempo, distrae más de lo que suma. */
+    .marquee-strip{display:none;}
+
+    /* Espaciados más compactos entre secciones (antes 80-104px). */
+    .about{padding:48px 0;}
+    .pillars{padding:48px 0 56px;}
+    .articles{padding:48px 0;}
+    .diagnostic{padding:48px 0;}
+    .newsletter{padding:40px 0;}
+
+    /* Pilares: la grilla con separadores en cada celda se ve pesada
+       apilada en una columna. La simplificamos a una lista limpia. */
+    .pillars-grid{background:none; border:none; gap:0;}
+    .pillar{
+      padding:18px 0;
+      border-bottom:1px solid var(--line);
+    }
+    .pillar:first-child{padding-top:0;}
+    .pillar-icon{width:22px; height:22px; margin-bottom:10px;}
+
+    /* Hero: copy más corto visualmente, menos padding lateral extra. */
+    .hero h1{font-size:34px;}
+    .hero p.lede{font-size:16px; margin-top:18px;}
+    .hero-side{padding-top:20px;}
+
+    /* Tarjetas de artículos: menos alto de thumbnail decorativo. */
+    .card .thumb{height:110px;}
+
+    /* Botones a ancho completo: más fácil de tocar con el pulgar. */
+    .hero-actions{flex-direction:column; align-items:stretch;}
+    .hero-actions .btn-primary, .hero-actions .btn-ghost{text-align:center;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -687,6 +741,27 @@
   }
 
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Fernando",
+  "jobTitle": "Estratega de marca",
+  "url": "https://fernandoblog.netlify.app/",
+  "sameAs": [],
+  "email": "juanfernandomendezsanchez@gmail.com",
+  "telephone": "+584125272140",
+  "knowsAbout": ["Posicionamiento de marca", "Identidad verbal", "Arquetipos de marca", "Branding", "Growth marketing"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Fernando — Estrategia de marca",
+  "url": "https://fernandoblog.netlify.app/"
+}
+</script>
 </head>
 <body>
 
@@ -831,21 +906,22 @@
     <div class="section-head">
       <div>
         <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Blog</p>
-        <h2>Los artículos están en camino.</h2>
+        <h2>Lo más reciente</h2>
       </div>
     </div>
-    <p class="empty-copy">Estoy escribiendo las primeras entradas — casos reales de marcas que he ayudado a posicionar, sin relleno ni plantillas de "10 tips". Si quieres que te avise apenas publique la primera, déjame tu correo abajo.</p>
     <div class="grid3 reveal">
+      <a href="territorio-de-marca-cashea.html" class="card">
+        <div class="thumb"><span>Casos de estudio</span></div>
+        <h3>Territorio de marca: qué es realmente (el caso Cashea)</h3>
+        <p>Una batidora, un señor de 75 años y una app venezolana me explicaron el territorio de marca mejor que cualquier libro de branding.</p>
+        <div class="meta"><span>26 ago 2026</span><span>·</span><span>14 min</span></div>
+      </a>
       <div class="card card-ghost">
         <div class="thumb thumb-ghost"><span>Posicionamiento</span></div>
         <h3 class="ghost-title">Próximamente</h3>
       </div>
       <div class="card card-ghost">
         <div class="thumb thumb-ghost"><span>Identidad verbal</span></div>
-        <h3 class="ghost-title">Próximamente</h3>
-      </div>
-      <div class="card card-ghost">
-        <div class="thumb thumb-ghost"><span>Casos de estudio</span></div>
         <h3 class="ghost-title">Próximamente</h3>
       </div>
     </div>

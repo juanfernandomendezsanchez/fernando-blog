@@ -35,6 +35,7 @@
 // ─── CONFIGURACIÓN ───────────────────────────────────────────────
 const SHEET_ID = '1xiI72IZpZs4FZYhVOSt0_uo5QPdJbaZqMAVzrB7dgvw';
 const SHEET_NAME = 'leads';
+const RATING_SHEET_NAME = 'valoraciones';
 const NOTIFY_EMAIL = 'juanfernandomendezsanchez@gmail.com';
 const SEND_USER_CONFIRMATION = true;
 // ──────────────────────────────────────────────────────────────────
@@ -68,6 +69,11 @@ function doPost(e) {
     if (cargaTs && (Date.now() - cargaTs) < 2000) {
       console.log('Envío demasiado rápido — descartado silenciosamente (probable bot).');
       return respond({ ok: true });
+    }
+
+    // ─── Valoraciones de artículos (1-5 estrellas) van por su propio flujo ───
+    if (data.tipo === 'valoracion') {
+      return handleRating(data);
     }
 
     const errors = validate(data);
@@ -152,6 +158,39 @@ function parseRequest(e) {
     return e.parameter;
   }
   return {};
+}
+
+/**
+ * Guarda una valoración de artículo (1-5 estrellas) en su propia
+ * pestaña "valoraciones" — se crea sola la primera vez que llega
+ * una valoración, sin que tengas que hacer nada manualmente.
+ */
+function handleRating(data) {
+  try {
+    const puntuacion = parseInt(data.puntuacion, 10);
+    const articulo = sanitize(data.articulo, 200);
+
+    if (!articulo || !puntuacion || puntuacion < 1 || puntuacion > 5) {
+      console.log('Valoración inválida:', JSON.stringify(data));
+      return respond({ ok: false, error: 'valoracion_invalida' });
+    }
+
+    const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
+    let ratingSheet = spreadsheet.getSheetByName(RATING_SHEET_NAME);
+    if (!ratingSheet) {
+      ratingSheet = spreadsheet.insertSheet(RATING_SHEET_NAME);
+      ratingSheet.appendRow(['Fecha', 'Artículo', 'Puntuación']);
+      ratingSheet.setFrozenRows(1);
+    }
+
+    ratingSheet.appendRow([new Date(), articulo, puntuacion]);
+    console.log('Valoración guardada:', articulo, puntuacion);
+
+    return respond({ ok: true });
+  } catch (err) {
+    console.log('ERROR en handleRating:', String(err));
+    return respond({ ok: false, error: String(err) });
+  }
 }
 
 /**
