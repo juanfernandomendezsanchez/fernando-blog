@@ -510,7 +510,10 @@
     border:1px solid var(--line);
     position:relative;
     display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
   }
+  .thumb-illustrated{background:#F1EDE3;}
+  .thumb-illustrated img{height:100%; width:auto; object-fit:cover;}
   .card .thumb span{
     font-family:'Baloo 2', sans-serif; font-weight:600; font-size:15px;
     color:var(--olive-deep);
@@ -652,7 +655,7 @@
   @media (max-width:900px){
     .masthead-inner > nav{display:none;}
     .mobile-toggle{display:flex;}
-    .hero{grid-template-columns:1fr; gap:36px;}
+    .hero{grid-template-columns:1fr; gap:36px; clip-path:none; padding:64px 0 48px;}
     .hero-side{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:24px;}
     .pillars-grid{grid-template-columns:1fr 1fr;}
     .grid3{grid-template-columns:1fr 1fr;}
@@ -661,6 +664,14 @@
     .news-inner{flex-direction:column; align-items:flex-start;}
     .news-form{max-width:100%;}
     .footer-cols{gap:36px;}
+
+    /* El corte diagonal está pensado para una caja ancha y baja
+       (escritorio). En una sola columna la caja se vuelve alta y el
+       mismo % de recorte cae directo sobre el texto. Se desactiva
+       aquí, no solo en pantallas muy chicas, porque el layout ya
+       cambia a una columna desde este ancho. */
+    .quote-strip{clip-path:none; padding:48px 0;}
+    .quote-strip::before{opacity:.4;}
   }
   @media (max-width:600px){
     .pillars-grid{grid-template-columns:1fr;}
@@ -716,6 +727,10 @@
     /* Botones a ancho completo: más fácil de tocar con el pulgar. */
     .hero-actions{flex-direction:column; align-items:stretch;}
     .hero-actions .btn-primary, .hero-actions .btn-ghost{text-align:center;}
+
+    /* Estos dos párrafos son útiles en escritorio pero en el celular
+       son texto de relleno antes del contacto real: se quitan solo aquí. */
+    .hide-mobile{display:none;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -795,8 +810,7 @@
   <span class="hero-bignum" aria-hidden="true">M</span>
   <div class="wrap" style="display:grid; grid-template-columns:1.15fr .85fr; gap:64px; align-items:end;">
     <div>
-      <p class="eyebrow">Estrategia de marca &nbsp;·&nbsp; Posicionamiento &nbsp;·&nbsp; Identidad verbal</p>
-      <h1 style="margin-top:18px;">Marcas que se vuelven <span class="cycle-word"><em id="cycleWord">inevitables</em></span>.</h1>
+      <h1>Marcas que se vuelven <span class="cycle-word"><em id="cycleWord">inevitables</em></span>.</h1>
       <p class="lede">Escribo sobre cómo las empresas dejan de competir por precio y empiezan a competir por significado. Casos reales, marcos de trabajo aplicables y lo que aprendo trabajando con marcas en crecimiento.</p>
       <div class="hero-actions">
         <a href="#newsletter" class="btn-primary">Avísame cuando publiques</a>
@@ -805,8 +819,8 @@
     </div>
     <div class="hero-side">
       <span class="stamp">En preparación</span>
-      <p>Este blog documentará el trabajo real de posicionar marcas: qué funciona, qué falla y por qué la mayoría de los rebrandings no cambian nada en los resultados.</p>
-      <p>Las primeras entradas llegan pronto. Sin relleno, sin plantillas genéricas de "10 tips".</p>
+      <p class="hide-mobile">Este blog documentará el trabajo real de posicionar marcas: qué funciona, qué falla y por qué la mayoría de los rebrandings no cambian nada en los resultados.</p>
+      <p class="hide-mobile">Las primeras entradas llegan pronto. Sin relleno, sin plantillas genéricas de "10 tips".</p>
       <div class="hero-contact">
         <a href="mailto:juanfernandomendezsanchez@gmail.com">
           <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
@@ -840,7 +854,6 @@
   <div class="wrap">
     <div class="about-photo reveal"><svg class="about-watermark" viewBox="0 0 1080 1080"><path d="M311.8,556.3c-6.1,4.5-13,5.6-19.9,6.3c-18.3,1.9-36.2,0-53.1-7.7c-6-2.7-11.9-6.2-16.9-10.5 c-14.2-12.3-19.6-27.9-14.8-46.9c2.9-11.5,7.7-22.1,14-31.9c13.7-21.5,31.1-39.4,50.5-55.1c38.7-31.3,81.4-53.9,129.4-65 c30-6.9,60.2-9,90.5-2.1c22.5,5.1,43.3,14.5,61.8,28.9c15.7,12.2,26.6,28,30.4,48.3c2.8,14.9,1.8,29.7-2.6,44 c-4.1,13.2-9.4,26.1-14.3,39.1c-0.9,2.4-2.1,4.8-3.4,7.8c1.6,0.3,2.8,0.8,3.9,0.8c21.7,0.8,43.4,1.6,65.1,2.3 c7.7,0.3,8,0.2,10.8-7.3c5.6-15.1,12.5-29.6,19.6-44c7.3-14.8,13.6-30.2,16.4-46.7c1-6,1.4-12.4,0.8-18.5 c-1.3-12.5-7.8-21.4-19.5-25.4c-4.4-1.5-9.1-2.4-13.7-2.8c-7.4-0.5-12.3-4.1-15.5-10.9c-4.2-8.8-4.8-17.8-1.7-27.1 c2.6-7.7,7.7-11.9,15.7-12.4c11.9-0.8,23.8-1.8,35.6-2.8c23.1-2,46.2-4.1,69.3-6.1c32.9-2.8,65.8-4.7,98.8-3.1 c14.7,0.7,29.2,2.7,43.3,7.5c18.3,6.3,27.6,19.5,28.2,39.7c0.3,10.4-1.4,20.4-5.8,29.7c-1.7,3.7-4.4,7.1-7.3,9.9 c-2.8,2.8-5.8,2.1-7.2-1.6c-4.4-11.5-13.6-16.5-23.7-20.5c-15.5-6.1-31.6-8.8-48-10.2c-9.5-0.8-19.1-0.8-28.7-1.1 c-2.5-0.1-5,0.5-8.8,0.8c2.7,1.7,4.3,2.7,5.8,3.7c6,4,11,9,14.1,15.9c2.3,5.1,1.9,9.3-1.9,13.9c-19.1,23.3-37.8,46.8-56.7,70.3 c-9.3,11.6-18.6,23.1-27.9,34.7c-1.2,1.5-2.2,3-3.6,4.9c8,0.6,15.4,0.8,22.7,1.6c10.6,1.2,21.2,3.4,30.2,9.7 c11.4,8,18.5,19.4,21.1,33.5c1.2,6.6-1.3,10.9-6.3,12c-1.4,0.3-3.9,0-4.5-1c-7-9.9-17.5-11.3-27.8-12.8c-22.5-3.3-45-2.3-67.5-0.8 c-4,0.3-6.6,1.8-9.1,5c-30.3,38.1-60.7,76-91.1,114c-0.7,0.9-1.4,1.7-2,2.6c-7,8.6-11.8,10.1-21.9,6.4c-9.3-3.5-16.8-9.5-21.6-18.6 c-4.3-8.3-3.7-13.5,2.4-20.5c22.9-26.3,45.8-52.6,68.7-78.8c3.4-3.9,6.8-7.9,10.4-12c-0.9-0.6-1.3-1.1-1.8-1.1 c-24.9,0.6-49.8,1.4-74.6,1.9c-4.9,0.1-7.5,2.5-10.1,6.5c-44.7,67.9-99.6,125.1-165.7,170.4c-29.2,20-60.3,35.6-94.5,43.8 c-23.2,5.5-46.6,8-70.2,3.4c-9.3-1.8-18.2-4.7-26.3-9.7c-18-11.1-25.3-29.5-19.9-50.6c3.3-12.8,9.3-24.3,17-34.7 c16.2-21.7,36.1-39.4,56.9-56c47.8-38.1,101.6-63.5,158.7-81.8c29.7-9.5,59.9-17,90.7-21.5c4.3-0.6,7.2-2.4,9.6-6.4 c12.3-21.3,23.9-43,32.3-66.3c4.5-12.5,7.8-25.4,7.2-38.9c-0.1-3.3-0.6-6.6-1.2-9.9c-2.7-14.1-11.2-22.5-24.3-26.2 c-10.2-2.9-20.6-3.1-31-1.9c-26.3,2.9-51.1,11.3-75.2,22.2c-33.8,15.3-65.3,34.3-93.1,59.7c-11.9,10.8-22.6,22.8-31.5,36.5 c-7.4,11.4-12.3,23.7-12.4,37.8c-0.1,10,3.7,17.6,11.2,23.4c8.4,6.6,18.1,9.7,28.5,10.1C306.9,556.3,309.3,556.3,311.8,556.3z M460.1,557.4c-0.2-0.5-0.5-1-0.7-1.6c-9.7,3-19.5,5.8-29.2,9.1c-51.3,17.8-99.2,43.1-144.8,73.4c-19.2,12.8-37.9,26.3-55,42.1 c-9.4,8.7-18.3,18-24.9,29.2c-2.5,4.3-4.6,9-5.9,13.9c-1.5,5.5,1.3,9.8,6.6,11c3.3,0.7,6.8,0.9,10.1,0.6 c13.7-1.4,26.7-5.7,39.2-11.4c39.2-18.2,76.3-40.2,110.3-67.6c30.1-24.3,56.4-52.6,81.1-82.7C451.2,568.1,455.7,562.7,460.1,557.4z M768.9,364.7c-0.3-0.6-0.5-1.3-0.8-1.9c-26.2,1.6-52.5,3.2-78.7,4.8c-1.5,0.1-2.9,0.4-4.4,0.6c-0.2,0-0.3,0.3-0.4,0.5 c-0.1,0.2-0.1,0.4-0.2,1c8.4,9.3,17.5,18.3,21.9,31c4.4,12.8,3,26,1.8,39.2c0.5,0.2,0.9,0.3,1.4,0.5 C729.4,415.1,749.2,389.9,768.9,364.7z"/></svg></div>
     <div>
-      <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>Sobre mí</p>
       <h2>¡Hola! Soy Fernando.</h2>
       <p>Ayudo a fundadores y equipos de marketing a construir marcas que la gente recuerda — no solo marcas que se ven bien. Trabajo con negocios que ya tienen tracción pero no tienen una posición clara: el tipo de marca que "está bien" para todos y memorable para nadie.</p>
       <p>Este blog será el registro público de ese trabajo: los marcos que uso, los errores que corrijo, y las decisiones incómodas que casi siempre valen la pena.</p>
@@ -855,7 +868,6 @@
 
 <section class="pillars" id="pillars">
   <div class="wrap">
-    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="15,9 13,13 9,15 11,11"/></svg>En qué escribo</p>
     <h2>Cuatro temas, un solo objetivo: que tu marca sea difícil de ignorar.</h2>
     <div class="pillars-grid reveal">
       <div class="pillar">
@@ -905,13 +917,12 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Blog</p>
         <h2>Lo más reciente</h2>
       </div>
     </div>
     <div class="grid3 reveal">
       <a href="territorio-de-marca-cashea.html" class="card">
-        <div class="thumb"><span>Casos de estudio</span></div>
+        <div class="thumb thumb-illustrated"><img src="assets/articulo-cover-cashea.svg" alt="" width="400" height="460" loading="lazy"></div>
         <h3>Territorio de marca: qué es realmente (el caso Cashea)</h3>
         <p>Una batidora, un señor de 75 años y una app venezolana me explicaron el territorio de marca mejor que cualquier libro de branding.</p>
         <div class="meta"><span>26 ago 2026</span><span>·</span><span>14 min</span></div>
@@ -932,7 +943,6 @@
   <div class="wrap">
     <div class="diagnostic-head reveal">
       <div>
-        <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>Primer paso</p>
         <h2>Agenda tu diagnóstico de marca</h2>
       </div>
       <p>Cuéntame sobre tu negocio y te respondo personalmente en menos de 48 horas para agendar la sesión de diagnóstico.</p>
