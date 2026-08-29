@@ -708,14 +708,6 @@
     revealEls.forEach(el => el.classList.add('in-view'));
   }
 
-  // Accordion (soporta anidamiento: los paneles se ajustan solos con CSS grid,
-  // así que abrir/cerrar un nivel interno no rompe la altura del nivel externo)
-  document.querySelectorAll('.acc-toggle').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-target');
-      const panel = document.getElementById(targetId);
-      const isOpen = btn.getAttribute('aria-expanded') === 'true';
-
   // ─── Valoración por estrellas → Google Apps Script ───
   const RATING_ENDPOINT = "https://script.google.com/macros/s/AKfycbx5i8XMYxFKpF6WBA0KzsKM-nyVudr5Qgn9AxVWcgi_GqYcEQ2XSsv7sSO71ugtxLIL3A/exec";
   const ARTICLE_SLUG = "territorio-de-marca-cashea";
