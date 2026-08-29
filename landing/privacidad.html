@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<title>Página no encontrada — Fernando</title>
-<meta name="description" content="Esta página no existe o se movió. Vuelve al inicio del blog de Fernando, estrategia de marca.">
-<meta property="og:title" content="Página no encontrada — Fernando">
-<meta property="og:description" content="Esta página no existe o se movió.">
+<title>Política de privacidad — Fernando</title>
+<meta name="description" content="Qué datos recojo en este sitio, para qué los uso y cómo los protejo. Sin cookies, sin rastreo de terceros.">
+<meta property="og:title" content="Política de privacidad — Fernando">
+<meta property="og:description" content="Qué datos recojo en este sitio, para qué los uso y cómo los protejo.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#2E6F40">
-<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://fernandoblog.netlify.app/privacidad.html">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -336,6 +336,20 @@
     border-radius:2px;
   }
   .btn-primary:hover{background:var(--olive);}
+  /* ===== PRIVACY BODY ===== */
+  .privacy-body{padding:16px 0 88px;}
+  .privacy-body .wrap{max-width:720px;}
+  .privacy-body article p{font-size:16px; line-height:1.8; color:var(--ink); margin-bottom:20px;}
+  .privacy-body article h2{font-size:22px; margin:40px 0 14px; line-height:1.3; color:var(--ink);}
+  .privacy-body article h3{font-size:17px; margin:28px 0 10px; color:var(--olive-deep);}
+  .privacy-body article a{color:var(--olive-deep); border-bottom:1px solid var(--olive-deep);}
+  .privacy-body article a:hover{color:var(--olive);}
+  .privacy-body article em{font-style:italic;}
+
+  @media (max-width:600px){
+    .privacy-body article p{font-size:15px;}
+    .privacy-body article h2{font-size:20px; margin:32px 0 12px;}
+  }
 
 </style>
 </head>
@@ -347,7 +361,7 @@
     <nav>
       <a href="index.html#articulos">Blog</a>
       <a href="recursos.html" class="current">Recursos</a>
-      <a href="index.html#sobre-mi">Sobre mí</a>
+
       <a href="index.html#newsletter">Newsletter</a>
       <a href="index.html#diagnostico" class="nav-cta">Agendar diagnóstico →</a>
     </nav>
@@ -356,36 +370,59 @@
       <svg class="icon-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
-</header>
-
-<div class="drawer-backdrop" id="drawerBackdrop"></div>
-<nav class="mobile-drawer" id="mobileDrawer" aria-label="Menú móvil">
-  <a href="index.html#articulos">Blog</a>
-  <a href="recursos.html">Recursos</a>
-  <a href="index.html#sobre-mi">Sobre mí</a>
-  <a href="index.html#newsletter">Newsletter</a>
-  <a href="index.html#diagnostico" class="mobile-cta">Agendar diagnóstico →</a>
-</nav>
 
 
-<section class="page-header" style="text-align:center; padding-bottom:0;">
+<section class="page-header">
   <div class="wrap">
-    <h1 class="reveal" style="font-size:clamp(60px, 12vw, 140px); line-height:1; color:var(--olive-tint); -webkit-text-stroke:2px var(--ink); text-stroke:2px var(--ink);">404</h1>
-    <p class="lede reveal" style="margin:20px auto 0; text-align:center;">Esta página no existe, se movió, o el enlace tiene un error. Como en una buena estrategia de marca: mejor volver a la posición clara.</p>
+    <a href="/index.html" class="back-link reveal">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Volver al inicio
+    </a>
+    <h1 class="reveal">Política de privacidad</h1>
+    <p class="lede reveal">Última actualización: 29 de agosto de 2026.</p>
   </div>
 </section>
 
-<section class="library" style="padding-top:40px;">
-  <div class="wrap" style="text-align:center;">
-    <a href="index.html" class="btn-primary reveal" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none;">
-      <svg class="icon" style="color:var(--paper);" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
-      Volver al inicio
-    </a>
-    <div style="margin-top:40px; display:flex; gap:28px; justify-content:center; flex-wrap:wrap;">
-      <a href="index.html#articulos" style="font-size:14px; color:var(--ink-soft); border-bottom:1px solid var(--line);">Blog</a>
-      <a href="recursos.html" style="font-size:14px; color:var(--ink-soft); border-bottom:1px solid var(--line);">Recursos</a>
-      <a href="index.html#diagnostico" style="font-size:14px; color:var(--ink-soft); border-bottom:1px solid var(--line);">Agendar diagnóstico</a>
-    </div>
+<section class="privacy-body">
+  <div class="wrap">
+    <article class="reveal">
+
+<p>Esta página explica, en español simple, qué información recojo en fernandoblog.netlify.app, para qué la uso y qué NO hago con ella. Si algo no queda claro, escríbeme directo a <a href="mailto:juanfernandomendezsanchez@gmail.com">juanfernandomendezsanchez@gmail.com</a>.</p>
+
+<h2>Este sitio no usa cookies</h2>
+<p>No hay ningún banner de cookies en este sitio por una razón simple: no hay ninguna cookie que aceptar. No uso cookies propias ni de terceros, no hay píxeles de seguimiento de redes sociales, y no hay ningún servicio de analítica instalado todavía. Si en el futuro agrego analítica (por ejemplo, para saber qué artículos se leen más), esta página se actualizará primero para contarlo.</p>
+
+<h2>Qué datos recojo, y dónde</h2>
+<p>Los únicos datos personales que este sitio recoge son los que tú decides escribir voluntariamente en dos lugares:</p>
+
+<h3>1. El formulario "Agendar diagnóstico"</h3>
+<p>Nombre, empresa, email, teléfono (opcional), y las respuestas que elijas sobre tu negocio y tu necesidad. Esta información se guarda directamente en una hoja de Google Sheets de mi cuenta, y me llega una notificación por Gmail. No pasa por ningún servidor ni servicio de terceros — solo Google (donde ya vive el resto de mi trabajo) y yo.</p>
+
+<h3>2. La valoración de artículos (1-5 estrellas)</h3>
+<p>Cuando calificas un artículo, solo se guarda la puntuación y qué artículo calificaste, con fecha. No se asocia a tu nombre ni a tu email — es completamente anónimo.</p>
+
+<h3>3. El formulario de newsletter</h3>
+<p>Si dejas tu correo para que te avise de nuevos artículos, ese correo se guarda únicamente para ese propósito.</p>
+
+<h2>Qué hago con estos datos</h2>
+<p>Uso tu información de contacto exclusivamente para responder tu solicitud de diagnóstico, coordinar una posible sesión de trabajo, o avisarte de contenido nuevo si lo pediste. No vendo, alquilo, ni comparto tus datos con terceros bajo ninguna circunstancia. No uso tu información para ningún fin distinto al que la diste.</p>
+
+<h2>Dónde se almacena</h2>
+<p>Toda la información vive dentro de mi cuenta de Google (Google Sheets y Gmail), protegida por la seguridad estándar de Google. El acceso de lectura a esa hoja es privado — solo yo puedo verla. El formulario de la web solo tiene permiso para <em>agregar</em> una fila nueva, nunca para leer las que ya existen.</p>
+
+<h2>Cuánto tiempo se conservan</h2>
+<p>Conservo la información de contacto mientras sea relevante para nuestra relación de trabajo, o hasta que me pidas que la elimine. Si quieres que borre tus datos en cualquier momento, escríbeme y lo hago de inmediato.</p>
+
+<h2>Tus derechos</h2>
+<p>Puedes pedirme en cualquier momento, sin costo, que te confirme qué información tengo sobre ti, que la corrija si está mal, o que la elimine por completo. Basta un correo a <a href="mailto:juanfernandomendezsanchez@gmail.com">juanfernandomendezsanchez@gmail.com</a>.</p>
+
+<h2>Enlaces externos</h2>
+<p>Este sitio enlaza a WhatsApp, Google Drive (para la biblioteca de recursos) y otros sitios externos. Una vez que sales de fernandoblog.netlify.app, aplica la política de privacidad de ese otro sitio, no la mía.</p>
+
+<h2>Cambios a esta política</h2>
+<p>Si esta política cambia de forma importante, actualizaré la fecha al inicio de esta página. Te recomiendo revisarla de vez en cuando si te preocupa el tema.</p>
+
+    </article>
   </div>
 </section>
 
