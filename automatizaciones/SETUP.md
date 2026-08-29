@@ -17,7 +17,7 @@ No hace falta que escribas los encabezados a mano — el script los crea solo la
 ## 2. Crea el proyecto de Apps Script
 
 1. En la misma hoja: **Extensiones → Apps Script**.
-2. Borra el contenido de `Código.gs` y pega todo el contenido de `apps-script/Code.gs` de este repo.
+2. Borra el contenido de `Código.gs` y pega todo el contenido de `automatizaciones/Code.gs` de este repo.
 3. Arriba del archivo, edita estas tres líneas con tus datos:
    ```js
    const SHEET_ID = 'ESTE_ES_EL_ID';           // el que copiaste en el paso 1
@@ -41,7 +41,7 @@ Esa URL **no es secreta** — es el endpoint público de tu formulario, diseñad
 
 ## 4. Conecta la web
 
-Abre `index.html`, busca esta línea cerca del final del `<script>`:
+Abre `landing/index.html`, busca esta línea cerca del final del `<script>`:
 
 ```js
 const DIAGNOSTIC_ENDPOINT = "PON_AQUI_TU_URL_DE_APPS_SCRIPT";
@@ -74,7 +74,7 @@ Editar el código en el editor de Apps Script **no actualiza automáticamente** 
 3. En "Versión", selecciona **Nueva versión**.
 4. **Implementar**.
 
-La URL `/exec` se mantiene igual — no hace falta cambiar nada en `index.html`.
+La URL `/exec` se mantiene igual — no hace falta cambiar nada en `landing/index.html`.
 
 **Quiero confirmar que el endpoint está vivo.**
 Abre la URL `/exec` directo en el navegador (método GET). Debe responder `{"ok":true,"message":"Endpoint de diagnósticos activo."}`. Si en cambio pide iniciar sesión o da error de permisos, revisa que el deployment tenga "Quién tiene acceso: Cualquier usuario".
