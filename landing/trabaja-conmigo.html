@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<title>Política de privacidad — Fernando</title>
-<meta name="description" content="Qué datos recojo en este sitio, para qué los uso y cómo los protejo. Sin cookies, sin rastreo de terceros.">
-<meta property="og:title" content="Política de privacidad — Fernando">
-<meta property="og:description" content="Qué datos recojo en este sitio, para qué los uso y cómo los protejo.">
+<title>Trabaja conmigo — Fernando, estrategia de marca</title>
+<meta name="description" content="Diagnóstico, estrategia, identidad y acompañamiento de marca — o mentoría y consultoría puntual. Así es como trabajo con cada tipo de cliente.">
+<meta property="og:title" content="Trabaja conmigo — Fernando">
+<meta property="og:description" content="Diagnóstico, estrategia, identidad, acompañamiento, mentoría y consultoría. Elige cómo trabajamos juntos.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#2E6F40">
-<link rel="canonical" href="https://fernandoblog.netlify.app/privacidad.html">
+<link rel="canonical" href="https://fernandoblog.netlify.app/trabaja-conmigo.html">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -336,19 +336,60 @@
     border-radius:2px;
   }
   .btn-primary:hover{background:var(--olive);}
-  /* ===== PRIVACY BODY ===== */
-  .privacy-body{padding:16px 0 88px;}
-  .privacy-body .wrap{max-width:720px;}
-  .privacy-body article p{font-size:16px; line-height:1.8; color:var(--ink); margin-bottom:20px;}
-  .privacy-body article h2{font-size:22px; margin:40px 0 14px; line-height:1.3; color:var(--ink);}
-  .privacy-body article h3{font-size:17px; margin:28px 0 10px; color:var(--olive-deep);}
-  .privacy-body article a{color:var(--olive-deep); border-bottom:1px solid var(--olive-deep);}
-  .privacy-body article a:hover{color:var(--olive);}
-  .privacy-body article em{font-style:italic;}
+  /* ===== PROCESO (escalera) ===== */
+  .process{padding:24px 0 72px;}
+  .process h2{font-size:28px; max-width:24ch; margin:14px 0 12px; line-height:1.3;}
+  .process-lede{font-size:15px; color:var(--ink-soft); max-width:60ch; margin-bottom:48px;}
+  .process-steps{max-width:680px;}
+  .step{
+    display:flex; gap:24px;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-left:4px solid var(--olive);
+    padding:28px 30px;
+  }
+  .step-num{
+    font-family:'Poppins', sans-serif; font-weight:700; font-size:14px;
+    color:var(--olive-soft);
+    flex-shrink:0;
+  }
+  .step-body h3{font-size:20px; margin-bottom:8px;}
+  .step-optional{font-family:'Poppins', sans-serif; font-weight:400; font-size:13px; color:var(--slate);}
+  .step-body p{font-size:15px; line-height:1.7; color:var(--ink-soft);}
+  .step-arrow{display:flex; justify-content:center; padding:10px 0;}
+  .step-arrow svg{width:22px; height:22px; stroke:var(--olive); fill:none; stroke-width:2; stroke-linecap:round;}
+  .process-cta{margin-top:40px;}
+  .process-cta .btn-primary{display:inline-block; text-decoration:none;}
 
-  @media (max-width:600px){
-    .privacy-body article p{font-size:15px;}
-    .privacy-body article h2{font-size:20px; margin:32px 0 12px;}
+  /* ===== OTROS FORMATOS ===== */
+  .other-formats{padding:24px 0 88px; background:var(--paper-dim); border-top:1px solid var(--line);}
+  .other-formats h2{font-size:26px; margin:14px 0 12px;}
+  .formats-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:28px;
+    margin-top:40px;
+  }
+  .format-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    padding:32px;
+  }
+  .format-icon{width:32px; height:32px; stroke:var(--olive-deep); fill:none; stroke-width:1.6; margin-bottom:16px;}
+  .format-card h3{font-size:21px; margin-bottom:4px;}
+  .format-tag{
+    font-family:'Poppins', sans-serif; font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--olive); margin-bottom:16px;
+  }
+  .format-card > p{font-size:14.5px; line-height:1.75; color:var(--ink-soft); margin-bottom:16px;}
+  .format-for{font-size:13.5px; color:var(--ink); background:var(--olive-tint); padding:12px 14px; margin-bottom:20px;}
+  .format-link{
+    font-family:'Poppins', sans-serif; font-size:13px; font-weight:600;
+    color:var(--olive-deep); border-bottom:1px solid var(--olive-deep);
+  }
+  .format-link:hover{color:var(--olive);}
+
+  @media (max-width:700px){
+    .formats-grid{grid-template-columns:1fr;}
+    .step{padding:22px 20px; flex-direction:column; gap:8px;}
   }
 
 </style>
@@ -360,8 +401,7 @@
     <a href="index.html" class="brandmark"><svg class="brand-logo" viewBox="0 0 1080 1080"><path d="M311.8,556.3c-6.1,4.5-13,5.6-19.9,6.3c-18.3,1.9-36.2,0-53.1-7.7c-6-2.7-11.9-6.2-16.9-10.5 c-14.2-12.3-19.6-27.9-14.8-46.9c2.9-11.5,7.7-22.1,14-31.9c13.7-21.5,31.1-39.4,50.5-55.1c38.7-31.3,81.4-53.9,129.4-65 c30-6.9,60.2-9,90.5-2.1c22.5,5.1,43.3,14.5,61.8,28.9c15.7,12.2,26.6,28,30.4,48.3c2.8,14.9,1.8,29.7-2.6,44 c-4.1,13.2-9.4,26.1-14.3,39.1c-0.9,2.4-2.1,4.8-3.4,7.8c1.6,0.3,2.8,0.8,3.9,0.8c21.7,0.8,43.4,1.6,65.1,2.3 c7.7,0.3,8,0.2,10.8-7.3c5.6-15.1,12.5-29.6,19.6-44c7.3-14.8,13.6-30.2,16.4-46.7c1-6,1.4-12.4,0.8-18.5 c-1.3-12.5-7.8-21.4-19.5-25.4c-4.4-1.5-9.1-2.4-13.7-2.8c-7.4-0.5-12.3-4.1-15.5-10.9c-4.2-8.8-4.8-17.8-1.7-27.1 c2.6-7.7,7.7-11.9,15.7-12.4c11.9-0.8,23.8-1.8,35.6-2.8c23.1-2,46.2-4.1,69.3-6.1c32.9-2.8,65.8-4.7,98.8-3.1 c14.7,0.7,29.2,2.7,43.3,7.5c18.3,6.3,27.6,19.5,28.2,39.7c0.3,10.4-1.4,20.4-5.8,29.7c-1.7,3.7-4.4,7.1-7.3,9.9 c-2.8,2.8-5.8,2.1-7.2-1.6c-4.4-11.5-13.6-16.5-23.7-20.5c-15.5-6.1-31.6-8.8-48-10.2c-9.5-0.8-19.1-0.8-28.7-1.1 c-2.5-0.1-5,0.5-8.8,0.8c2.7,1.7,4.3,2.7,5.8,3.7c6,4,11,9,14.1,15.9c2.3,5.1,1.9,9.3-1.9,13.9c-19.1,23.3-37.8,46.8-56.7,70.3 c-9.3,11.6-18.6,23.1-27.9,34.7c-1.2,1.5-2.2,3-3.6,4.9c8,0.6,15.4,0.8,22.7,1.6c10.6,1.2,21.2,3.4,30.2,9.7 c11.4,8,18.5,19.4,21.1,33.5c1.2,6.6-1.3,10.9-6.3,12c-1.4,0.3-3.9,0-4.5-1c-7-9.9-17.5-11.3-27.8-12.8c-22.5-3.3-45-2.3-67.5-0.8 c-4,0.3-6.6,1.8-9.1,5c-30.3,38.1-60.7,76-91.1,114c-0.7,0.9-1.4,1.7-2,2.6c-7,8.6-11.8,10.1-21.9,6.4c-9.3-3.5-16.8-9.5-21.6-18.6 c-4.3-8.3-3.7-13.5,2.4-20.5c22.9-26.3,45.8-52.6,68.7-78.8c3.4-3.9,6.8-7.9,10.4-12c-0.9-0.6-1.3-1.1-1.8-1.1 c-24.9,0.6-49.8,1.4-74.6,1.9c-4.9,0.1-7.5,2.5-10.1,6.5c-44.7,67.9-99.6,125.1-165.7,170.4c-29.2,20-60.3,35.6-94.5,43.8 c-23.2,5.5-46.6,8-70.2,3.4c-9.3-1.8-18.2-4.7-26.3-9.7c-18-11.1-25.3-29.5-19.9-50.6c3.3-12.8,9.3-24.3,17-34.7 c16.2-21.7,36.1-39.4,56.9-56c47.8-38.1,101.6-63.5,158.7-81.8c29.7-9.5,59.9-17,90.7-21.5c4.3-0.6,7.2-2.4,9.6-6.4 c12.3-21.3,23.9-43,32.3-66.3c4.5-12.5,7.8-25.4,7.2-38.9c-0.1-3.3-0.6-6.6-1.2-9.9c-2.7-14.1-11.2-22.5-24.3-26.2 c-10.2-2.9-20.6-3.1-31-1.9c-26.3,2.9-51.1,11.3-75.2,22.2c-33.8,15.3-65.3,34.3-93.1,59.7c-11.9,10.8-22.6,22.8-31.5,36.5 c-7.4,11.4-12.3,23.7-12.4,37.8c-0.1,10,3.7,17.6,11.2,23.4c8.4,6.6,18.1,9.7,28.5,10.1C306.9,556.3,309.3,556.3,311.8,556.3z M460.1,557.4c-0.2-0.5-0.5-1-0.7-1.6c-9.7,3-19.5,5.8-29.2,9.1c-51.3,17.8-99.2,43.1-144.8,73.4c-19.2,12.8-37.9,26.3-55,42.1 c-9.4,8.7-18.3,18-24.9,29.2c-2.5,4.3-4.6,9-5.9,13.9c-1.5,5.5,1.3,9.8,6.6,11c3.3,0.7,6.8,0.9,10.1,0.6 c13.7-1.4,26.7-5.7,39.2-11.4c39.2-18.2,76.3-40.2,110.3-67.6c30.1-24.3,56.4-52.6,81.1-82.7C451.2,568.1,455.7,562.7,460.1,557.4z M768.9,364.7c-0.3-0.6-0.5-1.3-0.8-1.9c-26.2,1.6-52.5,3.2-78.7,4.8c-1.5,0.1-2.9,0.4-4.4,0.6c-0.2,0-0.3,0.3-0.4,0.5 c-0.1,0.2-0.1,0.4-0.2,1c8.4,9.3,17.5,18.3,21.9,31c4.4,12.8,3,26,1.8,39.2c0.5,0.2,0.9,0.3,1.4,0.5 C729.4,415.1,749.2,389.9,768.9,364.7z"/></svg>Fernando</a>
     <nav>
       <a href="index.html#articulos">Blog</a>
-      <a href="trabaja-conmigo.html">Trabaja conmigo</a>
-      <a href="recursos.html">Recursos</a>
+      <a href="recursos.html" class="current">Recursos</a>
       <a href="index.html#sobre-mi">Sobre mí</a>
       <a href="index.html#newsletter">Newsletter</a>
       <a href="index.html#diagnostico" class="nav-cta">Agendar diagnóstico →</a>
@@ -372,7 +412,6 @@
     </button>
   </div>
 </header>
-
 <div class="drawer-backdrop" id="drawerBackdrop"></div>
 <nav class="mobile-drawer" id="mobileDrawer" aria-label="Menú móvil">
   <a href="index.html#articulos">Blog</a>
@@ -383,57 +422,93 @@
   <a href="index.html#diagnostico" class="mobile-cta">Agendar diagnóstico →</a>
 </nav>
 
-<section class="page-header">
+<section class="page-header" style="padding-bottom:24px;">
   <div class="wrap">
-    <a href="/index.html" class="back-link reveal">
+    <a href="index.html" class="back-link reveal">
       <svg viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
       Volver al inicio
     </a>
-    <h1 class="reveal">Política de privacidad</h1>
-    <p class="lede reveal">Última actualización: 29 de agosto de 2026.</p>
+    <h1 class="reveal">Trabaja conmigo</h1>
+    <p class="lede reveal">Hay dos formas de trabajar juntos: un proceso completo si tu marca necesita construirse desde el territorio hacia arriba, o una sesión puntual si solo necesitas una mirada externa sobre algo específico. Todo empieza con la misma llamada.</p>
   </div>
 </section>
 
-<section class="privacy-body">
+<section class="process">
   <div class="wrap">
-    <article class="reveal">
+    <p class="eyebrow reveal">El proceso</p>
+    <h2 class="reveal">De cero a marca completa, en cuatro pasos</h2>
+    <p class="process-lede reveal">Cada paso parte del anterior. El diagnóstico es el único punto de entrada obligatorio — de ahí en adelante, avanzamos solo hasta donde tu marca realmente lo necesite.</p>
 
-<p>Esta página explica, en español simple, qué información recojo en fernandoblog.netlify.app, para qué la uso y qué NO hago con ella. Si algo no queda claro, escríbeme directo a <a href="mailto:juanfernandomendezsanchez@gmail.com">juanfernandomendezsanchez@gmail.com</a>.</p>
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <h3>Diagnóstico</h3>
+          <p>Antes de cambiar nada, hay que ver qué hay de verdad. Reviso cómo se posiciona tu marca hoy, dónde compite solo por precio, y qué tan lejos está tu "mapa" (lo que dices ser) de tu "territorio" (lo que la gente realmente experimenta). Es el punto de partida obligatorio de todo el proceso.</p>
+        </div>
+      </div>
+      <div class="step-arrow reveal" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <h3>Estrategia</h3>
+          <p>Con el diagnóstico en mano, definimos el territorio real: posicionamiento, arquetipo de marca, tono, y los mensajes clave que van a sostener todo lo que venga después. Esto queda documentado en un brand book — la base de la que parte todo lo visual.</p>
+        </div>
+      </div>
+      <div class="step-arrow reveal" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <h3>Identidad</h3>
+          <p>Ahora sí, lo visual: logo, paleta de color, tipografía, papelería. Pero no antes de tener el territorio claro — un logo bonito sin estrategia detrás es solo decoración. Aquí la identidad se construye para sostener la posición que ya definimos.</p>
+        </div>
+      </div>
+      <div class="step-arrow reveal" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <h3>Acompañamiento <span class="step-optional">(opcional)</span></h3>
+          <p>Una marca no se termina el día que se entrega el logo. Para quienes quieren seguir construyendo con alguien que ya conoce el territorio, ofrezco acompañamiento continuo — revisiones periódicas, ajustes de rumbo, y una mirada externa constante.</p>
+        </div>
+      </div>
+    </div>
 
-<h2>Este sitio no usa cookies</h2>
-<p>No hay ningún banner de cookies en este sitio por una razón simple: no hay ninguna cookie que aceptar. No uso cookies propias ni de terceros, no hay píxeles de seguimiento de redes sociales, y no hay ningún servicio de analítica instalado todavía. Si en el futuro agrego analítica (por ejemplo, para saber qué artículos se leen más), esta página se actualizará primero para contarlo.</p>
+    <div class="process-cta reveal">
+      <a href="index.html?necesidad=Diagnóstico general#diagnostico" class="btn-primary">Agenda tu diagnóstico →</a>
+    </div>
+  </div>
+</section>
 
-<h2>Qué datos recojo, y dónde</h2>
-<p>Los únicos datos personales que este sitio recoge son los que tú decides escribir voluntariamente en dos lugares:</p>
+<section class="other-formats">
+  <div class="wrap">
+    <p class="eyebrow reveal">Otras formas de trabajar juntos</p>
+    <h2 class="reveal">¿No necesitas el proceso completo?</h2>
+    <p class="process-lede reveal">Si ya tienes marca y solo necesitas una mirada externa, hay dos formatos más ligeros.</p>
 
-<h3>1. El formulario "Agendar diagnóstico"</h3>
-<p>Nombre, empresa, email, teléfono (opcional), y las respuestas que elijas sobre tu negocio y tu necesidad. Esta información se guarda directamente en una hoja de Google Sheets de mi cuenta, y me llega una notificación por Gmail. No pasa por ningún servidor ni servicio de terceros — solo Google (donde ya vive el resto de mi trabajo) y yo.</p>
-
-<h3>2. La valoración de artículos (1-5 estrellas)</h3>
-<p>Cuando calificas un artículo, solo se guarda la puntuación y qué artículo calificaste, con fecha. No se asocia a tu nombre ni a tu email — es completamente anónimo.</p>
-
-<h3>3. El formulario de newsletter</h3>
-<p>Si dejas tu correo para que te avise de nuevos artículos, ese correo se guarda únicamente para ese propósito.</p>
-
-<h2>Qué hago con estos datos</h2>
-<p>Uso tu información de contacto exclusivamente para responder tu solicitud de diagnóstico, coordinar una posible sesión de trabajo, o avisarte de contenido nuevo si lo pediste. No vendo, alquilo, ni comparto tus datos con terceros bajo ninguna circunstancia. No uso tu información para ningún fin distinto al que la diste.</p>
-
-<h2>Dónde se almacena</h2>
-<p>Toda la información vive dentro de mi cuenta de Google (Google Sheets y Gmail), protegida por la seguridad estándar de Google. El acceso de lectura a esa hoja es privado — solo yo puedo verla. El formulario de la web solo tiene permiso para <em>agregar</em> una fila nueva, nunca para leer las que ya existen.</p>
-
-<h2>Cuánto tiempo se conservan</h2>
-<p>Conservo la información de contacto mientras sea relevante para nuestra relación de trabajo, o hasta que me pidas que la elimine. Si quieres que borre tus datos en cualquier momento, escríbeme y lo hago de inmediato.</p>
-
-<h2>Tus derechos</h2>
-<p>Puedes pedirme en cualquier momento, sin costo, que te confirme qué información tengo sobre ti, que la corrija si está mal, o que la elimine por completo. Basta un correo a <a href="mailto:juanfernandomendezsanchez@gmail.com">juanfernandomendezsanchez@gmail.com</a>.</p>
-
-<h2>Enlaces externos</h2>
-<p>Este sitio enlaza a WhatsApp, Google Drive (para la biblioteca de recursos) y otros sitios externos. Una vez que sales de fernandoblog.netlify.app, aplica la política de privacidad de ese otro sitio, no la mía.</p>
-
-<h2>Cambios a esta política</h2>
-<p>Si esta política cambia de forma importante, actualizaré la fecha al inicio de esta página. Te recomiendo revisarla de vez en cuando si te preocupa el tema.</p>
-
-    </article>
+    <div class="formats-grid">
+      <div class="format-card reveal">
+        <svg class="format-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/><path d="M17 4a4 4 0 0 1 0 8"/></svg>
+        <h3>Mentoría</h3>
+        <p class="format-tag">Sesiones periódicas</p>
+        <p>Para quienes están construyendo su propio criterio de marca y quieren a alguien que revise el camino con ellos de forma continua — no una respuesta puntual, sino acompañamiento en el proceso de pensar.</p>
+        <p class="format-for"><strong>Es para ti si:</strong> quieres desarrollar tu propio criterio estratégico, no solo recibir un entregable.</p>
+        <a href="index.html?necesidad=Mentoría#diagnostico" class="format-link">Agenda una llamada →</a>
+      </div>
+      <div class="format-card reveal">
+        <svg class="format-icon" viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
+        <h3>Consultoría</h3>
+        <p class="format-tag">Sesión única</p>
+        <p>Para una decisión puntual: un nombre que estás dudando, un rediseño que no sabes si vale la pena, una dirección que necesitas validar antes de invertir en ella. Una conversación enfocada, sin compromiso de proceso largo.</p>
+        <p class="format-for"><strong>Es para ti si:</strong> tienes una pregunta específica y necesitas una opinión experta rápida.</p>
+        <a href="index.html?necesidad=Consultoría#diagnostico" class="format-link">Agenda una llamada →</a>
+      </div>
+    </div>
   </div>
 </section>
 
