@@ -33,6 +33,14 @@ Sitio tipo blog para Fernando, estratega de marca. Landing editorial con hero, p
 3. Agrega la tarjeta del artículo en `landing/index.html`, dentro de `<section class="articles" id="articulos">`.
 4. Agrega la URL nueva a `landing/sitemap.xml`.
 
+## Hosting
+
+El sitio se publica en **GitHub Pages** vía GitHub Actions (`.github/workflows/deploy-pages.yml`), que toma solo la carpeta `landing/` y la publica en cada push a `main`. Se usa Actions en vez de la configuración clásica de Pages porque esta última solo admite publicar desde la raíz del repo o desde `/docs`, y aquí el sitio vive en `/landing`.
+
+URL: `https://juanfernandomendezsanchez.github.io/fernando-blog/`
+
+Para activarlo (una sola vez): **Settings → Pages → Source: GitHub Actions** (no "Deploy from a branch").
+
 ## Uso local
 
 Abrir `landing/index.html` directamente en el navegador, o servir la carpeta `landing/` con cualquier servidor estático.

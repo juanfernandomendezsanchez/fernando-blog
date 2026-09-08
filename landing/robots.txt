@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fernandoblog.netlify.app/sitemap.xml
+Sitemap: https://juanfernandomendezsanchez.github.io/fernando-blog/sitemap.xml
