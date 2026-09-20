@@ -1,0 +1,43 @@
+# Servicios de ejemplo. Reemplaza esta lista por la tuya: se cargan a la base de datos
+# la primera vez que corres "python sembrar_datos.py" (no duplica si ya existen, busca por nombre).
+
+servicios:
+  - nombre: Sesion de asesoria puntual
+    linea: asesoria
+    precio_base: 80
+    moneda: USD
+    duracion: "1 hora"
+    entregables: Grabacion de la sesion y resumen escrito con proximos pasos.
+    plantilla_propuesta: ""
+
+  - nombre: Asesoria recurrente mensual
+    linea: asesoria
+    precio_base: 250
+    moneda: USD
+    duracion: "4 sesiones de 1 hora al mes"
+    entregables: Cuatro sesiones mensuales y seguimiento por correo entre sesiones.
+    plantilla_propuesta: ""
+
+  - nombre: Consultoria de estrategia de marca
+    linea: consultoria
+    precio_base: 1500
+    moneda: USD
+    duracion: "6 a 8 semanas"
+    entregables: Diagnostico, posicionamiento, identidad verbal y brand book.
+    plantilla_propuesta: plantillas_propuestas/consultoria_marca.md
+
+  - nombre: Plantilla de brand book
+    linea: venta
+    precio_base: 35
+    moneda: USD
+    duracion: entrega inmediata
+    entregables: Archivo editable de plantilla de brand book.
+    plantilla_propuesta: ""
+
+  - nombre: Guia de posicionamiento personal
+    linea: venta
+    precio_base: 20
+    moneda: USD
+    duracion: entrega inmediata
+    entregables: Guia en PDF con ejercicios de posicionamiento.
+    plantilla_propuesta: ""

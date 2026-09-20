@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block titulo %}Contactos - CRM{% endblock %}
+{% block contenido %}
+<h1>Contactos</h1>
+
+<section id="nuevo" class="formulario-nuevo-contacto">
+  <h2>Nuevo contacto</h2>
+  <form method="post" action="/contactos/nuevo-rapido">
+    <input type="text" name="nombre" placeholder="Nombre" required />
+    <select name="canal_preferido">
+      <option value="">Canal preferido</option>
+      <option value="correo">Correo</option>
+      <option value="whatsapp">WhatsApp</option>
+      <option value="instagram">Instagram</option>
+    </select>
+    <select name="servicio_id" required>
+      {% for servicio in servicios %}
+      <option value="{{ servicio.id }}">{{ servicio.nombre }} ({{ servicio.linea }})</option>
+      {% endfor %}
+    </select>
+    <select name="origen">
+      <option value="referido">Referido</option>
+      <option value="instagram">Instagram</option>
+      <option value="whatsapp">WhatsApp</option>
+      <option value="correo">Correo</option>
+      <option value="web">Web</option>
+      <option value="evento">Evento</option>
+      <option value="otro" selected>Otro</option>
+    </select>
+    <button type="submit">Crear</button>
+  </form>
+</section>
+
+<section>
+  {% if busqueda is defined %}
+  <p>Resultados para "{{ busqueda }}"</p>
+  {% endif %}
+  <table class="tabla-contactos">
+    <thead>
+      <tr>
+        <th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Origen</th><th>Puntuación</th><th>Etiquetas</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for contacto in contactos %}
+      <tr>
+        <td>{{ contacto.nombre }}</td>
+        <td>{{ contacto.correo or "-" }}</td>
+        <td>{{ contacto.telefono or "-" }}</td>
+        <td>{{ contacto.origen }}</td>
+        <td>{{ contacto.puntuacion }}</td>
+        <td>{{ contacto.etiquetas or "-" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if not contactos %}<p class="vacio">No hay contactos que mostrar.</p>{% endif %}
+</section>
+
+<p class="nota-fase">Importar y exportar (por ejemplo desde Google Sheets) llega en la Fase 2.</p>
+{% endblock %}

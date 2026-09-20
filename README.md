@@ -17,6 +17,7 @@ Blog y sitio personal de Fernando, estratega de marca. Estructura del sitio orga
 │   ├── sitemap.xml · feed.xml · robots.txt   ← GENERADOS por tools/build.py (no editar a mano)
 ├── automatizaciones/        ← Google Apps Script (Code.gs) + SETUP.md
 ├── tools/                   ← scripts de mantenimiento (ver abajo)
+├── crm/                     ← CRM propio de la marca personal (app Python aparte, ver crm/README.md)
 └── .github/workflows/deploy-pages.yml
 ```
 
@@ -47,3 +48,9 @@ URL actual: `https://juanfernandomendezsanchez.github.io/fernando-blog/`
 Diagnóstico en Público, newsletter y valoraciones de artículos van al mismo Google Apps Script
 (`automatizaciones/Code.gs`). Tras cambiar `Code.gs` hay que **republicar una nueva versión** (ver `SETUP.md`).
 Pestañas del Sheet: `leads`, `valoraciones` y `newsletter` (se crea sola con la primera suscripción).
+
+## CRM (`crm/`)
+
+Aplicación Python aparte (FastAPI + SQLModel) para gestionar leads, oportunidades, propuestas
+y cobros de la marca personal. No se publica junto al sitio: corre local o en su propio servidor.
+Ver `crm/README.md` para instalarlo, correrlo y saber qué está construido y qué falta.

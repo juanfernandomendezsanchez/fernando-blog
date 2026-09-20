@@ -1,3 +1,11 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# CRM (crm/)
+crm/.env
+crm/venv/
+crm/.venv/
+crm/datos/*.db
+crm/datos/*.db-journal
+.pytest_cache/

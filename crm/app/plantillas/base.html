@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block titulo %}CRM de Fernando{% endblock %}</title>
+  <link rel="stylesheet" href="/estaticos/estilos.css" />
+  <script src="https://unpkg.com/htmx.org@1.9.12" defer></script>
+</head>
+<body>
+  <header class="barra-superior">
+    <a href="/hoy" class="marca">CRM</a>
+    <form action="/buscar" method="get" class="busqueda">
+      <input type="search" name="q" placeholder="Buscar contacto..." aria-label="Buscar contacto" />
+    </form>
+    <a href="/contactos#nuevo" class="boton-nuevo">+ Nuevo</a>
+  </header>
+
+  <nav class="navegacion">
+    <a href="/hoy" class="{{ 'activo' if request.url.path == '/hoy' else '' }}">Hoy</a>
+    <a href="/embudo" class="{{ 'activo' if request.url.path == '/embudo' else '' }}">Embudo</a>
+    <a href="/contactos" class="{{ 'activo' if request.url.path == '/contactos' else '' }}">Contactos</a>
+    <span class="pendiente" title="Todavia no esta construido (Fase 2)">Bandeja</span>
+    <span class="pendiente" title="Todavia no esta construido (Fase 2)">Cobros</span>
+    <span class="pendiente" title="Todavia no esta construido (Fase 2)">Cifras</span>
+    <a href="/logout" class="salir">Salir</a>
+  </nav>
+
+  <main class="contenido">
+    {% block contenido %}{% endblock %}
+  </main>
+</body>
+</html>
