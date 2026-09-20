@@ -1,0 +1,53 @@
+{
+  "base": "https://juanfernandomendezsanchez.github.io/fernando-blog/",
+  "site_name": "Fernando · Estrategia de marca",
+  "circles": {
+    "marca": "Marca",
+    "funcion": "Función",
+    "contenido": "Contenido"
+  },
+  "static": [
+    {
+      "path": "",
+      "lastmod": "2026-09-20"
+    },
+    {
+      "path": "blog.html",
+      "lastmod": "2026-09-20"
+    },
+    {
+      "path": "trabaja-conmigo.html",
+      "lastmod": "2026-09-20"
+    },
+    {
+      "path": "recursos.html",
+      "lastmod": "2026-09-20"
+    },
+    {
+      "path": "privacidad.html",
+      "lastmod": "2026-09-20"
+    }
+  ],
+  "articles": [
+    {
+      "slug": "cuando-tu-funnel-traiciona-tu-marca",
+      "title": "Cuando tu funnel traiciona tu marca",
+      "description": "Un funnel obsesionado con cerrar la venta y ciego a lo que pasa después del pago es un problema de marca. Con datos de Amazon, Ticketmaster y Edelman.",
+      "date": "2026-09-10",
+      "modified": "2026-09-20",
+      "read_min": 9,
+      "circle": "funcion",
+      "cover": "assets/articulo-cover-funnel.svg"
+    },
+    {
+      "slug": "territorio-de-marca-cashea",
+      "title": "Territorio de marca: qué es realmente (el caso Cashea)",
+      "description": "Una batidora, un señor de 75 años y una app venezolana me explicaron el territorio de marca mejor que cualquier libro de branding.",
+      "date": "2026-08-26",
+      "modified": "2026-09-20",
+      "read_min": 14,
+      "circle": "marca",
+      "cover": "assets/articulo-cover-cashea.svg"
+    }
+  ]
+}

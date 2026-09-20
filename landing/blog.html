@@ -4,25 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<title>Recursos: libros de ventas y branding | Fernando</title>
-<meta name="description" content="Los libros de ventas y branding detrás de mi forma de pensar la estrategia de marca: Klaric, Godin, Kim y Mauborgne.">
+<title>Blog de estrategia de marca | Fernando</title>
+<meta name="description" content="Casos reales de marcas venezolanas, marcos aplicables y datos con fuente. Artículos organizados por marca, función y contenido.">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<link rel="canonical" href="https://juanfernandomendezsanchez.github.io/fernando-blog/recursos.html">
+<link rel="canonical" href="https://juanfernandomendezsanchez.github.io/fernando-blog/blog.html">
 <meta name="author" content="Fernando">
 <meta property="og:locale" content="es_VE">
 <meta property="og:site_name" content="Fernando · Estrategia de marca">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Recursos: libros de ventas y branding">
-<meta property="og:description" content="Los libros de ventas y branding detrás de mi forma de pensar la estrategia de marca: Klaric, Godin, Kim y Mauborgne.">
-<meta property="og:url" content="https://juanfernandomendezsanchez.github.io/fernando-blog/recursos.html">
-<meta property="og:image" content="https://juanfernandomendezsanchez.github.io/fernando-blog/assets/og/recursos.png">
+<meta property="og:title" content="Blog de estrategia de marca">
+<meta property="og:description" content="Casos reales de marcas venezolanas, marcos aplicables y datos con fuente. Artículos organizados por marca, función y contenido.">
+<meta property="og:url" content="https://juanfernandomendezsanchez.github.io/fernando-blog/blog.html">
+<meta property="og:image" content="https://juanfernandomendezsanchez.github.io/fernando-blog/assets/og/blog.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Recursos: libros de ventas y branding. Fernando, estrategia de marca.">
+<meta property="og:image:alt" content="Blog de estrategia de marca. Fernando, estrategia de marca.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Recursos: libros de ventas y branding">
-<meta name="twitter:description" content="Los libros de ventas y branding detrás de mi forma de pensar la estrategia de marca: Klaric, Godin, Kim y Mauborgne.">
-<meta name="twitter:image" content="https://juanfernandomendezsanchez.github.io/fernando-blog/assets/og/recursos.png">
+<meta name="twitter:title" content="Blog de estrategia de marca">
+<meta name="twitter:description" content="Casos reales de marcas venezolanas, marcos aplicables y datos con fuente. Artículos organizados por marca, función y contenido.">
+<meta name="twitter:image" content="https://juanfernandomendezsanchez.github.io/fernando-blog/assets/og/blog.png">
 <meta name="theme-color" content="#2E6F40">
 <link rel="alternate" type="application/rss+xml" title="Fernando · Estrategia de marca" href="feed.xml">
 <link rel="preload" href="assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -324,15 +324,7 @@
   @media (max-width:600px){
     .wrap{padding:0 20px;}
     .footer-cols{flex-wrap:wrap; gap:32px;}
-
-    /* Simplificación móvil: menos padding, acordeón más compacto. */
     .page-header{padding:48px 0 32px;}
-    .library{padding:40px 0 64px;}
-    .page-header h1{font-size:30px;}
-    .acc-toggle{padding:16px 18px; font-size:16px;}
-    .acc-toggle.level2{padding:13px 16px; font-size:14px;}
-    .lib-book{padding:14px 0; gap:12px;}
-    .lib-book-icon{width:30px; height:40px;}
   }
 
   /* ===== WHATSAPP FLOATING BUTTON ===== */
@@ -352,6 +344,68 @@
   @media (max-width:600px){
     .wa-float{bottom:18px; right:18px; width:52px; height:52px;}
   }
+  .btn-primary{
+    background:var(--ink); color:var(--paper);
+    padding:14px 24px; font-size:14px; font-weight:600;
+    border-radius:2px;
+  }
+  .btn-primary:hover{background:var(--olive);}
+  /* ===== PROCESO (escalera) ===== */
+  .process{padding:24px 0 72px;}
+  .process h2{font-size:28px; max-width:24ch; margin:14px 0 12px; line-height:1.3;}
+  .process-lede{font-size:15px; color:var(--ink-soft); max-width:60ch; margin-bottom:48px;}
+  .process-steps{max-width:680px;}
+  .step{
+    display:flex; gap:24px;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-left:4px solid var(--olive);
+    padding:28px 30px;
+  }
+  .step-num{
+    font-family:'Poppins', sans-serif; font-weight:700; font-size:14px;
+    color:var(--olive-soft);
+    flex-shrink:0;
+  }
+  .step-body h3{font-size:20px; margin-bottom:8px;}
+  .step-optional{font-family:'Poppins', sans-serif; font-weight:400; font-size:13px; color:var(--slate);}
+  .step-body p{font-size:15px; line-height:1.7; color:var(--ink-soft);}
+  .step-arrow{display:flex; justify-content:center; padding:10px 0;}
+  .step-arrow svg{width:22px; height:22px; stroke:var(--olive); fill:none; stroke-width:2; stroke-linecap:round;}
+  .process-cta{margin-top:40px;}
+  .process-cta .btn-primary{display:inline-block; text-decoration:none;}
+
+  /* ===== OTROS FORMATOS ===== */
+  .other-formats{padding:24px 0 88px; background:var(--paper-dim); border-top:1px solid var(--line);}
+  .other-formats h2{font-size:26px; margin:14px 0 12px;}
+  .formats-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:28px;
+    margin-top:40px;
+  }
+  .format-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    padding:32px;
+  }
+  .format-icon{width:32px; height:32px; stroke:var(--olive-deep); fill:none; stroke-width:1.6; margin-bottom:16px;}
+  .format-card h3{font-size:21px; margin-bottom:4px;}
+  .format-tag{
+    font-family:'Poppins', sans-serif; font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--olive); margin-bottom:16px;
+  }
+  .format-card > p{font-size:14.5px; line-height:1.75; color:var(--ink-soft); margin-bottom:16px;}
+  .format-for{font-size:13.5px; color:var(--ink); background:var(--olive-tint); padding:12px 14px; margin-bottom:12px; border-left:3px solid var(--olive);}
+  .format-not{font-size:13.5px; color:var(--ink); background:#FBEDE8; padding:12px 14px; margin-bottom:20px; border-left:3px solid #B5533B;}
+  .format-link{
+    font-family:'Poppins', sans-serif; font-size:13px; font-weight:600;
+    color:var(--olive-deep); border-bottom:1px solid var(--olive-deep);
+  }
+  .format-link:hover{color:var(--olive);}
+
+  @media (max-width:700px){
+    .formats-grid{grid-template-columns:1fr;}
+    .step{padding:22px 20px; flex-direction:column; gap:8px;}
+  }
 
 </style>
 <script type="application/ld+json">
@@ -359,11 +413,11 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebPage",
-      "@id": "https://juanfernandomendezsanchez.github.io/fernando-blog/recursos.html#page",
-      "url": "https://juanfernandomendezsanchez.github.io/fernando-blog/recursos.html",
-      "name": "Recursos: libros de ventas y branding",
-      "description": "Los libros de ventas y branding detrás de mi forma de pensar la estrategia de marca: Klaric, Godin, Kim y Mauborgne.",
+      "@type": "CollectionPage",
+      "@id": "https://juanfernandomendezsanchez.github.io/fernando-blog/blog.html#page",
+      "url": "https://juanfernandomendezsanchez.github.io/fernando-blog/blog.html",
+      "name": "Blog de estrategia de marca",
+      "description": "Casos reales de marcas venezolanas, marcos aplicables y datos con fuente. Artículos organizados por marca, función y contenido.",
       "inLanguage": "es",
       "isPartOf": {
         "@id": "https://juanfernandomendezsanchez.github.io/fernando-blog/#website"
@@ -381,8 +435,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Recursos",
-          "item": "https://juanfernandomendezsanchez.github.io/fernando-blog/recursos.html"
+          "name": "Blog",
+          "item": "https://juanfernandomendezsanchez.github.io/fernando-blog/blog.html"
         }
       ]
     }
@@ -396,9 +450,9 @@
   <div class="wrap masthead-inner">
     <a href="index.html" class="brandmark"><svg class="brand-logo" viewBox="0 0 1080 1080"><path d="M311.8,556.3c-6.1,4.5-13,5.6-19.9,6.3c-18.3,1.9-36.2,0-53.1-7.7c-6-2.7-11.9-6.2-16.9-10.5 c-14.2-12.3-19.6-27.9-14.8-46.9c2.9-11.5,7.7-22.1,14-31.9c13.7-21.5,31.1-39.4,50.5-55.1c38.7-31.3,81.4-53.9,129.4-65 c30-6.9,60.2-9,90.5-2.1c22.5,5.1,43.3,14.5,61.8,28.9c15.7,12.2,26.6,28,30.4,48.3c2.8,14.9,1.8,29.7-2.6,44 c-4.1,13.2-9.4,26.1-14.3,39.1c-0.9,2.4-2.1,4.8-3.4,7.8c1.6,0.3,2.8,0.8,3.9,0.8c21.7,0.8,43.4,1.6,65.1,2.3 c7.7,0.3,8,0.2,10.8-7.3c5.6-15.1,12.5-29.6,19.6-44c7.3-14.8,13.6-30.2,16.4-46.7c1-6,1.4-12.4,0.8-18.5 c-1.3-12.5-7.8-21.4-19.5-25.4c-4.4-1.5-9.1-2.4-13.7-2.8c-7.4-0.5-12.3-4.1-15.5-10.9c-4.2-8.8-4.8-17.8-1.7-27.1 c2.6-7.7,7.7-11.9,15.7-12.4c11.9-0.8,23.8-1.8,35.6-2.8c23.1-2,46.2-4.1,69.3-6.1c32.9-2.8,65.8-4.7,98.8-3.1 c14.7,0.7,29.2,2.7,43.3,7.5c18.3,6.3,27.6,19.5,28.2,39.7c0.3,10.4-1.4,20.4-5.8,29.7c-1.7,3.7-4.4,7.1-7.3,9.9 c-2.8,2.8-5.8,2.1-7.2-1.6c-4.4-11.5-13.6-16.5-23.7-20.5c-15.5-6.1-31.6-8.8-48-10.2c-9.5-0.8-19.1-0.8-28.7-1.1 c-2.5-0.1-5,0.5-8.8,0.8c2.7,1.7,4.3,2.7,5.8,3.7c6,4,11,9,14.1,15.9c2.3,5.1,1.9,9.3-1.9,13.9c-19.1,23.3-37.8,46.8-56.7,70.3 c-9.3,11.6-18.6,23.1-27.9,34.7c-1.2,1.5-2.2,3-3.6,4.9c8,0.6,15.4,0.8,22.7,1.6c10.6,1.2,21.2,3.4,30.2,9.7 c11.4,8,18.5,19.4,21.1,33.5c1.2,6.6-1.3,10.9-6.3,12c-1.4,0.3-3.9,0-4.5-1c-7-9.9-17.5-11.3-27.8-12.8c-22.5-3.3-45-2.3-67.5-0.8 c-4,0.3-6.6,1.8-9.1,5c-30.3,38.1-60.7,76-91.1,114c-0.7,0.9-1.4,1.7-2,2.6c-7,8.6-11.8,10.1-21.9,6.4c-9.3-3.5-16.8-9.5-21.6-18.6 c-4.3-8.3-3.7-13.5,2.4-20.5c22.9-26.3,45.8-52.6,68.7-78.8c3.4-3.9,6.8-7.9,10.4-12c-0.9-0.6-1.3-1.1-1.8-1.1 c-24.9,0.6-49.8,1.4-74.6,1.9c-4.9,0.1-7.5,2.5-10.1,6.5c-44.7,67.9-99.6,125.1-165.7,170.4c-29.2,20-60.3,35.6-94.5,43.8 c-23.2,5.5-46.6,8-70.2,3.4c-9.3-1.8-18.2-4.7-26.3-9.7c-18-11.1-25.3-29.5-19.9-50.6c3.3-12.8,9.3-24.3,17-34.7 c16.2-21.7,36.1-39.4,56.9-56c47.8-38.1,101.6-63.5,158.7-81.8c29.7-9.5,59.9-17,90.7-21.5c4.3-0.6,7.2-2.4,9.6-6.4 c12.3-21.3,23.9-43,32.3-66.3c4.5-12.5,7.8-25.4,7.2-38.9c-0.1-3.3-0.6-6.6-1.2-9.9c-2.7-14.1-11.2-22.5-24.3-26.2 c-10.2-2.9-20.6-3.1-31-1.9c-26.3,2.9-51.1,11.3-75.2,22.2c-33.8,15.3-65.3,34.3-93.1,59.7c-11.9,10.8-22.6,22.8-31.5,36.5 c-7.4,11.4-12.3,23.7-12.4,37.8c-0.1,10,3.7,17.6,11.2,23.4c8.4,6.6,18.1,9.7,28.5,10.1C306.9,556.3,309.3,556.3,311.8,556.3z M460.1,557.4c-0.2-0.5-0.5-1-0.7-1.6c-9.7,3-19.5,5.8-29.2,9.1c-51.3,17.8-99.2,43.1-144.8,73.4c-19.2,12.8-37.9,26.3-55,42.1 c-9.4,8.7-18.3,18-24.9,29.2c-2.5,4.3-4.6,9-5.9,13.9c-1.5,5.5,1.3,9.8,6.6,11c3.3,0.7,6.8,0.9,10.1,0.6 c13.7-1.4,26.7-5.7,39.2-11.4c39.2-18.2,76.3-40.2,110.3-67.6c30.1-24.3,56.4-52.6,81.1-82.7C451.2,568.1,455.7,562.7,460.1,557.4z M768.9,364.7c-0.3-0.6-0.5-1.3-0.8-1.9c-26.2,1.6-52.5,3.2-78.7,4.8c-1.5,0.1-2.9,0.4-4.4,0.6c-0.2,0-0.3,0.3-0.4,0.5 c-0.1,0.2-0.1,0.4-0.2,1c8.4,9.3,17.5,18.3,21.9,31c4.4,12.8,3,26,1.8,39.2c0.5,0.2,0.9,0.3,1.4,0.5 C729.4,415.1,749.2,389.9,768.9,364.7z"/></svg>Fernando</a>
     <nav>
-      <a href="blog.html">Blog</a>
+      <a href="blog.html" class="current">Blog</a>
       <a href="trabaja-conmigo.html">Trabaja conmigo</a>
-      <a href="recursos.html" class="current">Recursos</a>
+      <a href="recursos.html">Recursos</a>
       <a href="index.html#sobre-mi">Sobre mí</a>
       <a href="index.html#newsletter">Newsletter</a>
       <a href="index.html#diagnostico" class="nav-cta">Postula tu marca →</a>
@@ -409,7 +463,6 @@
     </button>
   </div>
 </header>
-
 <div class="drawer-backdrop" id="drawerBackdrop"></div>
 <nav class="mobile-drawer" id="mobileDrawer" aria-label="Menú móvil">
   <a href="blog.html">Blog</a>
@@ -420,94 +473,61 @@
   <a href="index.html#diagnostico" class="mobile-cta">Postula tu marca →</a>
 </nav>
 
-<section class="page-header">
+<section class="page-header" style="padding-bottom:24px;">
   <div class="wrap">
     <a href="index.html" class="back-link reveal">
       <svg viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
       Volver al inicio
     </a>
-    <h1 class="reveal">Mi biblioteca de referencia</h1>
-    <p class="lede reveal">Los libros que le dieron forma a la manera en que pienso la estrategia de marca, organizados por tema.</p>
+    <h1 class="reveal">Blog de estrategia de marca</h1>
+    <p class="lede reveal">Casos reales de marcas venezolanas, marcos que puedes aplicar hoy y cada dato con su fuente. Los artículos están organizados por los tres círculos del método: marca, función y contenido.</p>
   </div>
 </section>
 
-<section class="library">
+<section style="padding:24px 0 72px;">
   <div class="wrap">
-    <div class="accordion reveal">
-
-      <button class="acc-toggle" type="button" aria-expanded="false" data-target="acc-libros">
-        <span class="acc-toggle-left">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
-          Libros
-        </span>
-        <svg class="acc-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-
-      <div class="acc-panel" id="acc-libros">
-        <div class="acc-panel-inner">
-          <div class="acc-nested">
-
-            <button class="acc-toggle level2" type="button" aria-expanded="false" data-target="acc-ventas">
-              <span class="acc-toggle-left">
-                <svg class="icon" viewBox="0 0 24 24"><polyline points="3,17 9,11 13,15 21,7"/><polyline points="15,7 21,7 21,13"/></svg>
-                Ventas
-              </span>
-              <svg class="acc-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="acc-panel level2" id="acc-ventas">
-              <div class="acc-panel-inner">
-                <div class="lib-book">
-                  <div class="lib-book-icon">
-                    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
-                  </div>
-                  <div class="lib-book-info">
-                    <h4>Véndele a la mente, no a la gente</h4>
-                    <p>Jürgen Klaric</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <button class="acc-toggle level2" type="button" aria-expanded="false" data-target="acc-branding">
-              <span class="acc-toggle-left">
-                <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
-                Branding
-              </span>
-              <svg class="acc-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="acc-panel level2" id="acc-branding">
-              <div class="acc-panel-inner">
-                <div class="lib-book">
-                  <div class="lib-book-icon">
-                    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
-                  </div>
-                  <div class="lib-book-info">
-                    <h4>La vaca púrpura</h4>
-                    <p>Seth Godin</p>
-                  </div>
-                </div>
-                <div class="lib-book">
-                  <div class="lib-book-icon">
-                    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
-                  </div>
-                  <div class="lib-book-info">
-                    <h4>La estrategia del océano azul</h4>
-                    <p>W. Chan Kim y Renée Mauborgne</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
+    <div class="filters reveal" data-filters role="group" aria-label="Filtrar artículos por círculo">
+      <button type="button" class="filter" data-filter="todos" aria-pressed="true">Todos</button>
+      <button type="button" class="filter" data-filter="marca" aria-pressed="false">Marca</button>
+      <button type="button" class="filter" data-filter="funcion" aria-pressed="false">Función</button>
+      <button type="button" class="filter" data-filter="contenido" aria-pressed="false">Contenido</button>
     </div>
+    <div class="grid3">
+      <!-- ARTICLES:START -->
+      <a href="articulos/cuando-tu-funnel-traiciona-tu-marca.html" class="card" data-circulo="funcion">
+        <div class="thumb thumb-illustrated"><img src="assets/articulo-cover-funnel.svg" alt="" width="400" height="460" loading="lazy"></div>
+        <span class="chip chip-funcion">Función</span>
+        <h3>Cuando tu funnel traiciona tu marca</h3>
+        <p>Un funnel obsesionado con cerrar la venta y ciego a lo que pasa después del pago es un problema de marca. Con datos de Amazon, Ticketmaster y Edelman.</p>
+        <div class="meta"><span>10 sep 2026</span><span>·</span><span>9 min</span></div>
+      </a>
+      <a href="articulos/territorio-de-marca-cashea.html" class="card" data-circulo="marca">
+        <div class="thumb thumb-illustrated"><img src="assets/articulo-cover-cashea.svg" alt="" width="400" height="460" loading="lazy"></div>
+        <span class="chip chip-marca">Marca</span>
+        <h3>Territorio de marca: qué es realmente (el caso Cashea)</h3>
+        <p>Una batidora, un señor de 75 años y una app venezolana me explicaron el territorio de marca mejor que cualquier libro de branding.</p>
+        <div class="meta"><span>26 ago 2026</span><span>·</span><span>14 min</span></div>
+      </a>
+      <!-- ARTICLES:END -->
+    </div>
+    <p style="margin-top:40px; color:var(--ink-soft); max-width:60ch;">Publico cuando el artículo está listo, no por calendario. Si quieres enterarte, deja tu correo abajo o suscríbete por <a href="feed.xml" style="color:var(--olive-deep); border-bottom:1px solid var(--olive-soft);">RSS</a>.</p>
+  </div>
+</section>
 
-    <p class="library-note reveal">
-      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      Los comparto como referencia de mi método. Consíguelos en tu librería o biblioteca de confianza.
-    </p>
+<section class="newsletter" id="newsletter">
+  <div class="wrap">
+    <div class="news-inner reveal">
+      <div>
+        <h3>Recibe el próximo artículo en tu correo.</h3>
+        <p class="news-note">Solo te escribo cuando publico. Sin relleno y sin spam.</p>
+      </div>
+      <form class="news-form" data-newsletter data-fuente="blog">
+        <div class="news-hp" aria-hidden="true"><input type="text" name="sitio_web" tabindex="-1" autocomplete="off"></div>
+        <input type="email" name="email" placeholder="tu@correo.com" required autocomplete="email" aria-label="Tu correo electrónico">
+        <button type="submit">Avísame</button>
+        <p class="news-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -620,5 +640,6 @@
   <svg viewBox="0 0 32 32"><path d="M16.001 3C9.107 3 3.5 8.607 3.5 15.5c0 2.42.686 4.68 1.874 6.598L3 29l7.086-2.34a12.44 12.44 0 0 0 5.915 1.505h.005c6.893 0 12.5-5.607 12.5-12.5S22.894 3 16.001 3zm7.34 17.86c-.309.869-1.53 1.64-2.514 1.855-.67.145-1.545.26-4.49-.964-3.77-1.562-6.194-5.37-6.383-5.618-.182-.248-1.53-2.033-1.53-3.878 0-1.845.968-2.752 1.31-3.13.34-.379.744-.474 1.001-.474.257 0 .513.003.737.014.236.012.554-.09.867.66.322.775 1.098 2.68 1.194 2.875.096.195.16.424.032.679-.128.256-.192.416-.383.638-.192.223-.404.498-.577.669-.192.19-.392.397-.169.78.223.383.99 1.632 2.126 2.643 1.462 1.304 2.694 1.708 3.077 1.9.383.192.607.16.831-.096.223-.256.958-1.117 1.213-1.5.256-.383.512-.319.863-.192.352.128 2.233 1.053 2.617 1.245.383.192.639.287.735.447.096.16.096.923-.213 1.792z"/></svg>
 </a>
 <noscript><style>.reveal{opacity:1 !important; transform:none !important;}</style></noscript>
+<script src="assets/site.js" defer></script>
 </body>
 </html>

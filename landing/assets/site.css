@@ -1,0 +1,131 @@
+/* ---------- Fuentes autoalojadas (Poppins + Space Grotesk, subconjunto latin, licencia OFL) ---------- */
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/poppins-latin-400-normal.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/poppins-latin-500-normal.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/poppins-latin-600-normal.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/poppins-latin-700-normal.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:italic;font-weight:400;font-display:swap;src:url(fonts/poppins-latin-400-italic.woff2) format('woff2');}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/space-grotesk-latin-500-normal.woff2) format('woff2');}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/space-grotesk-latin-600-normal.woff2) format('woff2');}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/space-grotesk-latin-700-normal.woff2) format('woff2');}
+
+/* ============================================================
+   Estilos compartidos por todas las páginas (componentes nuevos).
+   Usa las variables :root que cada página ya define (--olive, --ink...).
+   ============================================================ */
+
+/* ---------- Chips de círculo (Marca / Función / Contenido) ---------- */
+.chip{
+  display:inline-block; align-self:flex-start;
+  font-family:'Poppins',sans-serif; font-size:11px; font-weight:600;
+  letter-spacing:.12em; text-transform:uppercase;
+  padding:3px 9px; margin-bottom:12px;
+  border:1px solid currentColor;
+}
+.chip-marca{color:var(--olive-deep);}
+.chip-funcion{color:#8A5A12;}
+.chip-contenido{color:var(--ink);}
+
+/* ---------- Tarjetas de artículos y filtros (blog) ---------- */
+.filters{display:flex; gap:10px; margin-bottom:44px; flex-wrap:wrap;}
+.filter{
+  font-family:'Poppins',sans-serif; font-size:12px; background:none;
+  padding:8px 14px; border:1px solid var(--line);
+  color:var(--ink-soft); cursor:pointer; transition:.15s;
+}
+.filter[aria-pressed="true"], .filter:hover{border-color:var(--olive); color:var(--olive-deep); background:var(--olive-tint);}
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:36px;}
+.card{
+  display:flex; flex-direction:column;
+  border-top:2px solid var(--olive-deep); padding-top:20px;
+  text-decoration:none; transition:transform .2s ease;
+}
+a.card:hover{transform:translateY(-3px);}
+.card .thumb{margin-bottom:18px;}
+.card .thumb img{width:100%; height:auto; display:block; border-radius:14px; border:1px solid var(--line);}
+.card h3{font-size:19px; line-height:1.32; margin-bottom:10px;}
+.card p{font-size:14px; color:var(--ink-soft); margin-bottom:16px; flex:1;}
+.card .meta{font-family:'Poppins',sans-serif; font-size:12px; color:var(--slate); display:flex; gap:14px; align-items:center;}
+.card[hidden]{display:none;}
+@media (max-width:900px){ .grid3{grid-template-columns:1fr 1fr;} }
+@media (max-width:600px){ .grid3{grid-template-columns:1fr;} }
+
+/* ---------- Newsletter (formulario real, reutilizable) ---------- */
+.newsletter{padding:64px 0; border-bottom:1px solid var(--line);}
+.news-inner{
+  display:flex; justify-content:space-between; align-items:center;
+  gap:40px; flex-wrap:wrap;
+  border:1px solid var(--line); border-left:4px solid var(--olive);
+  padding:44px 48px; background:var(--olive-tint);
+}
+.news-inner h3{font-size:24px; max-width:18ch;}
+.news-inner .news-note{font-size:13px; color:var(--ink-soft); margin-top:10px; max-width:38ch;}
+.news-form{display:flex; gap:0; max-width:380px; width:100%; flex-wrap:wrap;}
+.news-form input[type="email"]{
+  flex:1; min-width:0; padding:14px 16px; border:1px solid var(--ink); border-right:none;
+  background:var(--white); font-family:'Poppins'; font-size:16px;
+}
+.news-form button{
+  padding:14px 20px; background:var(--ink); color:var(--paper);
+  border:1px solid var(--ink); font-size:13px; font-weight:600; cursor:pointer;
+}
+.news-form button:hover{background:var(--olive); border-color:var(--olive);}
+.news-form button:disabled{opacity:.6; cursor:wait;}
+.news-status{flex-basis:100%; font-size:13px; margin-top:10px; min-height:1.3em;}
+.news-status.ok{color:var(--olive-deep);}
+.news-status.err{color:#9B2C2C;}
+.news-hp{position:absolute; left:-9999px; top:-9999px; width:1px; height:1px; overflow:hidden;}
+@media (max-width:900px){
+  .news-inner{flex-direction:column; align-items:flex-start; padding:32px 24px;}
+  .news-form{max-width:100%;}
+}
+
+/* ---------- Método: tres círculos ---------- */
+.circles{padding:88px 0; background:var(--paper-dim); border-bottom:1px solid var(--line);}
+.circles h2{font-size:32px; max-width:24ch; line-height:1.2; margin:14px 0 14px;}
+.circles-lede{max-width:62ch; color:var(--ink-soft); margin-bottom:48px;}
+.circles-layout{display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center;}
+.venn{width:100%; max-width:430px; height:auto; margin:0 auto; display:block;}
+.venn text{font-family:'Space Grotesk',sans-serif; font-weight:600; fill:var(--ink);}
+.circle-list{display:grid; gap:26px;}
+.circle-item{border-left:3px solid var(--c); padding-left:20px;}
+.circle-item h3{font-size:22px; margin-bottom:4px;}
+.circle-item .sub{font-size:14px; color:var(--ink-soft); margin-bottom:8px;}
+.circle-item p{font-size:15px; color:var(--ink-soft);}
+.circle-item .q{margin-top:8px; font-size:14px; color:var(--ink); font-weight:500;}
+.overlaps{margin-top:52px; display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+.overlap{border-top:1px solid var(--line); padding-top:14px; font-size:14px; color:var(--ink-soft);}
+.overlap b{display:block; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; color:var(--ink); margin-bottom:4px;}
+@media (max-width:900px){
+  .circles{padding:56px 0;}
+  .circles-layout{grid-template-columns:1fr; gap:36px;}
+  .overlaps{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:600px){ .overlaps{grid-template-columns:1fr;} }
+
+/* ---------- FAQ (details/summary, sin JS) ---------- */
+.faq{padding:72px 0; border-top:1px solid var(--line);}
+.faq h2{font-size:28px; margin:12px 0 28px;}
+.faq details{border-bottom:1px solid var(--line); padding:18px 0;}
+.faq summary{
+  cursor:pointer; list-style:none; font-family:'Space Grotesk',sans-serif;
+  font-weight:500; font-size:18px; display:flex; justify-content:space-between; gap:20px;
+}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:"+"; color:var(--olive); font-size:22px; line-height:1;}
+.faq details[open] summary::after{content:"\2212";}
+.faq details p{margin-top:12px; color:var(--ink-soft); max-width:68ch;}
+
+/* ---------- Bloque "Etapa actual" ---------- */
+.stage-note{
+  border:1px solid var(--line); border-left:4px solid var(--gold);
+  background:var(--white); padding:22px 26px; margin-top:26px; max-width:760px;
+}
+.stage-note b{font-family:'Space Grotesk',sans-serif; font-weight:600;}
+.stage-note p{color:var(--ink-soft); font-size:15px; margin-top:6px;}
+
+/* ---------- Lista de fuentes con enlaces (artículos) ---------- */
+.article-sources a{color:var(--olive-deep); border-bottom:1px solid var(--olive-soft);}
+.article-sources a:hover{color:var(--ink);}
+.related{margin-top:40px; padding-top:24px; border-top:1px solid var(--line);}
+.related h3{font-size:18px; margin-bottom:12px;}
+.related a{display:block; padding:8px 0; color:var(--olive-deep); border-bottom:1px solid var(--line);}

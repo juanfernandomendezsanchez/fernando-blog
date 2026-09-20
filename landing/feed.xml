@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fernando · Estrategia de marca</title>
+    <link>https://juanfernandomendezsanchez.github.io/fernando-blog/</link>
+    <atom:link href="https://juanfernandomendezsanchez.github.io/fernando-blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Blog de estrategia de marca para negocios venezolanos: posicionamiento, identidad verbal y casos analizados en público.</description>
+    <language>es</language>
+    <lastBuildDate>Sun, 20 Sep 2026 09:00:00 -0400</lastBuildDate>
+    <item>
+      <title>Cuando tu funnel traiciona tu marca</title>
+      <link>https://juanfernandomendezsanchez.github.io/fernando-blog/articulos/cuando-tu-funnel-traiciona-tu-marca.html</link>
+      <guid isPermaLink="true">https://juanfernandomendezsanchez.github.io/fernando-blog/articulos/cuando-tu-funnel-traiciona-tu-marca.html</guid>
+      <pubDate>Thu, 10 Sep 2026 09:00:00 -0400</pubDate>
+      <description>Un funnel obsesionado con cerrar la venta y ciego a lo que pasa después del pago es un problema de marca. Con datos de Amazon, Ticketmaster y Edelman.</description>
+    </item>
+    <item>
+      <title>Territorio de marca: qué es realmente (el caso Cashea)</title>
+      <link>https://juanfernandomendezsanchez.github.io/fernando-blog/articulos/territorio-de-marca-cashea.html</link>
+      <guid isPermaLink="true">https://juanfernandomendezsanchez.github.io/fernando-blog/articulos/territorio-de-marca-cashea.html</guid>
+      <pubDate>Wed, 26 Aug 2026 09:00:00 -0400</pubDate>
+      <description>Una batidora, un señor de 75 años y una app venezolana me explicaron el territorio de marca mejor que cualquier libro de branding.</description>
+    </item>
+  </channel>
+</rss>

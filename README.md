@@ -1,50 +1,49 @@
 # Fernando — Estrategia de marca
 
-Sitio tipo blog para Fernando, estratega de marca. Landing editorial con hero, pilares de contenido, blog, biblioteca de recursos, formulario de diagnóstico y captura de newsletter.
+Blog y sitio personal de Fernando, estratega de marca. Estructura del sitio organizada por el método de tres círculos
+(Marca, Función, Contenido): home, blog, Diagnóstico en Público (`trabaja-conmigo.html`), recursos, artículos.
 
 ## Estructura del repositorio
 
 ```
 /
-├── landing/              ← el sitio web (esto es lo que Netlify publica)
-│   ├── index.html        ← página de inicio
-│   ├── recursos.html     ← biblioteca de recursos (acordeón)
-│   ├── 404.html          ← página de error personalizada
-│   ├── robots.txt
-│   ├── sitemap.xml
-│   ├── assets/           ← logos, favicon, ilustraciones
-│   └── articulos/        ← cada entrada del blog, un archivo .html
-│       └── territorio-de-marca-cashea.html
-│
-├── automatizaciones/     ← backend, nunca se publica como web
-│   ├── Code.gs           ← Google Apps Script (Sheets + Gmail)
-│   └── SETUP.md          ← guía paso a paso para desplegarlo
-│
-├── netlify.toml          ← le dice a Netlify que publique landing/
-└── README.md
+├── landing/                 ← el sitio web (lo único que se publica)
+│   ├── index.html · blog.html · trabaja-conmigo.html · recursos.html · privacidad.html · 404.html
+│   ├── articulos/           ← un .html por artículo
+│   ├── assets/
+│   │   ├── site.css · site.js   ← estilos y comportamiento compartidos (newsletter, filtros)
+│   │   ├── fonts/               ← Poppins + Space Grotesk autoalojadas (sin Google Fonts)
+│   │   └── og/                  ← imágenes 1200x630 PNG para compartir en WhatsApp/LinkedIn/X
+│   ├── sitemap.xml · feed.xml · robots.txt   ← GENERADOS por tools/build.py (no editar a mano)
+├── automatizaciones/        ← Google Apps Script (Code.gs) + SETUP.md
+├── tools/                   ← scripts de mantenimiento (ver abajo)
+└── .github/workflows/deploy-pages.yml
 ```
 
-**¿Por qué esta separación?** `landing/` contiene únicamente archivos que Netlify sirve como parte del sitio. `automatizaciones/` es código que corre en Google Apps Script, no en el navegador — nunca debe quedar accesible como página web, así que vive fuera de la carpeta publicada.
+## Publicar un artículo nuevo (5 pasos)
 
-## Publicar un artículo nuevo
+1. Copia un artículo existente de `landing/articulos/` y edítalo (título, texto, fuentes con enlace).
+2. Agrega su entrada en `tools/pages.json` (slug, título, descripción de 120 a 155 caracteres, fecha, minutos, círculo, portada).
+3. Agrega su imagen OG en `tools/make_og.py` (lista `PAGES`) y corre `python3 tools/make_og.py`.
+4. Corre `python3 tools/build.py` (regenera sitemap, feed y tarjetas de home y blog).
+5. Corre `python3 tools/check_site.py`: debe decir 0 errores. Luego haz push a `main`.
 
-1. Crea el archivo en `landing/articulos/tu-articulo.html` (puedes copiar la estructura de `territorio-de-marca-cashea.html` como plantilla: mismo head SEO, mismo header/footer, mismo sistema de valoración por estrellas).
-2. Todos los enlaces internos (`href="/index.html"`, `href="/recursos.html"`, `src="/assets/..."`) usan **ruta absoluta desde la raíz** (empiezan con `/`) — así no importa la profundidad de carpetas, siempre apuntan al mismo lugar.
-3. Agrega la tarjeta del artículo en `landing/index.html`, dentro de `<section class="articles" id="articulos">`.
-4. Agrega la URL nueva a `landing/sitemap.xml`.
+Regla editorial: ningún dato sin fuente enlazada.
+
+## Herramientas (`tools/`)
+
+- `build.py`: sitemap, feed RSS, robots y tarjetas de artículos a partir de `pages.json`.
+- `check_site.py`: revisa títulos, descripciones, canonical, OG, JSON-LD, enlaces rotos, anclas y cifras no verificables.
+- `make_og.py`: genera las imágenes OG (requiere playwright; ver comentarios del archivo).
+- `set_domain.py`: cambia el dominio base cuando compres uno propio.
 
 ## Hosting
 
-El sitio se publica en **GitHub Pages** vía GitHub Actions (`.github/workflows/deploy-pages.yml`), que toma solo la carpeta `landing/` y la publica en cada push a `main`. Se usa Actions en vez de la configuración clásica de Pages porque esta última solo admite publicar desde la raíz del repo o desde `/docs`, y aquí el sitio vive en `/landing`.
+GitHub Pages vía GitHub Actions: publica solo `landing/` en cada push a `main`.
+URL actual: `https://juanfernandomendezsanchez.github.io/fernando-blog/`
 
-URL: `https://juanfernandomendezsanchez.github.io/fernando-blog/`
+## Backend de formularios ($0)
 
-Para activarlo (una sola vez): **Settings → Pages → Source: GitHub Actions** (no "Deploy from a branch").
-
-## Uso local
-
-Abrir `landing/index.html` directamente en el navegador, o servir la carpeta `landing/` con cualquier servidor estático.
-
-## Backend del formulario ($0)
-
-Para que "Agendar diagnóstico" y las valoraciones de artículos funcionen de verdad, sigue `automatizaciones/SETUP.md` — toma unos 10 minutos y no requiere ningún servicio de pago (Google Apps Script + Google Sheets + Gmail, dentro de las cuotas gratuitas).
+Diagnóstico en Público, newsletter y valoraciones de artículos van al mismo Google Apps Script
+(`automatizaciones/Code.gs`). Tras cambiar `Code.gs` hay que **republicar una nueva versión** (ver `SETUP.md`).
+Pestañas del Sheet: `leads`, `valoraciones` y `newsletter` (se crea sola con la primera suscripción).

@@ -2,34 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://juanfernandomendezsanchez.github.io/fernando-blog/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-09-20</lastmod>
   </url>
   <url>
-    <loc>https://juanfernandomendezsanchez.github.io/fernando-blog/articulos/territorio-de-marca-cashea.html</loc>
-    <lastmod>2026-08-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://juanfernandomendezsanchez.github.io/fernando-blog/articulos/cuando-tu-funnel-traiciona-tu-marca.html</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://juanfernandomendezsanchez.github.io/fernando-blog/recursos.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://juanfernandomendezsanchez.github.io/fernando-blog/blog.html</loc>
+    <lastmod>2026-09-20</lastmod>
   </url>
   <url>
     <loc>https://juanfernandomendezsanchez.github.io/fernando-blog/trabaja-conmigo.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2026-09-20</lastmod>
+  </url>
+  <url>
+    <loc>https://juanfernandomendezsanchez.github.io/fernando-blog/recursos.html</loc>
+    <lastmod>2026-09-20</lastmod>
   </url>
   <url>
     <loc>https://juanfernandomendezsanchez.github.io/fernando-blog/privacidad.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <lastmod>2026-09-20</lastmod>
+  </url>
+  <url>
+    <loc>https://juanfernandomendezsanchez.github.io/fernando-blog/articulos/cuando-tu-funnel-traiciona-tu-marca.html</loc>
+    <lastmod>2026-09-20</lastmod>
+  </url>
+  <url>
+    <loc>https://juanfernandomendezsanchez.github.io/fernando-blog/articulos/territorio-de-marca-cashea.html</loc>
+    <lastmod>2026-09-20</lastmod>
   </url>
 </urlset>

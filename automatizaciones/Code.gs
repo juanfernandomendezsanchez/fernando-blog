@@ -36,6 +36,7 @@
 const SHEET_ID = '1xiI72IZpZs4FZYhVOSt0_uo5QPdJbaZqMAVzrB7dgvw';
 const SHEET_NAME = 'leads';
 const RATING_SHEET_NAME = 'valoraciones';
+const NEWSLETTER_SHEET_NAME = 'newsletter';
 const NOTIFY_EMAIL = 'juanfernandomendezsanchez@gmail.com';
 const SEND_USER_CONFIRMATION = true;
 // ──────────────────────────────────────────────────────────────────
@@ -74,6 +75,11 @@ function doPost(e) {
     // ─── Valoraciones de artículos (1-5 estrellas) van por su propio flujo ───
     if (data.tipo === 'valoracion') {
       return handleRating(data);
+    }
+
+    // ─── Suscripciones a la newsletter (solo email) ───
+    if (data.tipo === 'newsletter') {
+      return handleNewsletter(data);
     }
 
     const errors = validate(data);
@@ -194,6 +200,48 @@ function handleRating(data) {
 }
 
 /**
+ * Guarda una suscripción a la newsletter en su propia pestaña
+ * "newsletter" (se crea sola la primera vez). Evita duplicados:
+ * si el email ya existe, responde ok sin agregar otra fila.
+ * Columnas: Fecha | Email | Fuente (de qué página se suscribió).
+ */
+function handleNewsletter(data) {
+  try {
+    const email = sanitize(data.email, 160).toLowerCase();
+    const fuente = sanitize(data.fuente, 80);
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return respond({ ok: false, error: 'email_invalido' });
+    }
+
+    const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
+    let sheet = spreadsheet.getSheetByName(NEWSLETTER_SHEET_NAME);
+    if (!sheet) {
+      sheet = spreadsheet.insertSheet(NEWSLETTER_SHEET_NAME);
+      sheet.appendRow(['Fecha', 'Email', 'Fuente']);
+      sheet.setFrozenRows(1);
+    }
+
+    // Evitar duplicados (compara en minúsculas contra la columna B).
+    const lastRow = sheet.getLastRow();
+    if (lastRow > 1) {
+      const existentes = sheet.getRange(2, 2, lastRow - 1, 1).getValues()
+        .map(function (fila) { return fila[0].toString().toLowerCase(); });
+      if (existentes.indexOf(email) !== -1) {
+        return respond({ ok: true, duplicado: true });
+      }
+    }
+
+    sheet.appendRow([new Date(), email, fuente]);
+    console.log('Suscripción guardada:', email, fuente);
+    return respond({ ok: true });
+  } catch (err) {
+    console.log('ERROR en handleNewsletter:', String(err));
+    return respond({ ok: false, error: String(err) });
+  }
+}
+
+/**
  * Validación mínima de servidor. Nunca confíes solo en la
  * validación del navegador — el navegador se puede saltar.
  */
@@ -290,9 +338,9 @@ function classifyLead(data) {
 }
 
 function sendOwnerNotification(data) {
-  const subject = `Nuevo diagnóstico solicitado — ${data.nombre}`;
+  const subject = `Nueva postulación al Diagnóstico en Público: ${data.nombre}`;
   const body =
-    'Has recibido una nueva solicitud de diagnóstico de marca:\n\n' +
+    'Has recibido una nueva postulación al Diagnóstico en Público:\n\n' +
     `Nombre: ${data.nombre}\n` +
     `Empresa: ${data.empresa || '—'}\n` +
     `Email: ${data.email}\n` +
@@ -310,9 +358,10 @@ function sendConfirmationToUser(data) {
   const subject = `Recibí tu solicitud, ${primerNombre}`;
   const body =
     `¡Hola ${primerNombre}!\n\n` +
-    'Gracias por escribirme. Recibí tu solicitud de diagnóstico de marca ' +
-    'y te voy a responder personalmente en las próximas 48 horas.\n\n' +
-    '— Fernando';
+    'Gracias por escribirme. Recibí tu postulación al Diagnóstico en Público. ' +
+    'La reviso personalmente y te respondo en las próximas 48 horas para ' +
+    'contarte si tu marca encaja en esta etapa y cómo sería el proceso.\n\n' +
+    'Fernando';
 
   GmailApp.sendEmail(data.email, subject, body);
 }

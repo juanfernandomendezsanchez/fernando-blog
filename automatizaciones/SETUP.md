@@ -79,3 +79,13 @@ La URL `/exec` se mantiene igual — no hace falta cambiar nada en `landing/inde
 **Quiero confirmar que el endpoint está vivo.**
 Abre la URL `/exec` directo en el navegador (método GET). Debe responder `{"ok":true,"message":"Endpoint de diagnósticos activo."}`. Si en cambio pide iniciar sesión o da error de permisos, revisa que el deployment tenga "Quién tiene acceso: Cualquier usuario".
 
+
+
+---
+
+## Newsletter (novedad)
+
+`Code.gs` ahora acepta suscripciones de la web (`tipo: "newsletter"`) y las guarda en una pestaña `newsletter`
+(Fecha, Email, Fuente) que se crea sola, sin duplicados. **Para activarlo republica el script**:
+Implementar → Administrar implementaciones → lápiz → Versión: Nueva versión → Implementar.
+La URL `/exec` no cambia. Hasta que lo hagas, el formulario de newsletter mostrará el mensaje de error con tu correo como alternativa.
