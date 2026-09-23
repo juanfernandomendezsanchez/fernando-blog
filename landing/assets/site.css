@@ -181,3 +181,11 @@ a.card:hover{transform:translateY(-3px);}
 /* Seguridad general: ningún link de correo/teléfono debe poder forzar
    overflow horizontal, sin importar qué tan larga sea la dirección. */
 a[href^="mailto:"], a[href^="tel:"]{overflow-wrap:anywhere;}
+
+/* El diagrama de tres círculos usa mix-blend-mode para que los colores
+   se mezclen entre sí. "multiply" funciona sobre fondo claro, pero
+   sobre fondo oscuro aplasta todo a negro (multiplicar contra un
+   fondo casi negro da casi negro). En modo oscuro usamos "screen",
+   que hace el efecto equivalente pero aclarando en vez de oscurecer. */
+.venn-blend{mix-blend-mode:multiply;}
+:root[data-theme="dark"] .venn-blend{mix-blend-mode:screen;}
