@@ -129,3 +129,51 @@ a.card:hover{transform:translateY(-3px);}
 .related{margin-top:40px; padding-top:24px; border-top:1px solid var(--line);}
 .related h3{font-size:18px; margin-bottom:12px;}
 .related a{display:block; padding:8px 0; color:var(--olive-deep); border-bottom:1px solid var(--line);}
+
+/* ============================================================
+   MODO OSCURO — toggle real (independiente de color-scheme del
+   navegador). --navy-block y --on-navy son fijos en ambos modos:
+   son los bloques "siempre oscuros" del diseño (Sobre mí, CTA,
+   botones), no deben invertirse cuando cambia el tema de la página.
+   ============================================================ */
+:root{
+  --navy-block:#16213A;
+  --on-navy:#FAF8F3;
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#14181A;
+  --paper-dim:#1B211F;
+  --ink:#F2F0E8;
+  --ink-soft:#ACB2A8;
+  --slate:#96A099;
+  --line:#2B322E;
+  --white:#1E2523;
+  --olive:#59A873;
+  --olive-deep:#3C7A52;
+  --olive-soft:#7EBF92;
+  --olive-tint:#1E2B22;
+  --gold:#D9A24A;
+  --gold-soft:#E7C486;
+}
+:root[data-theme="dark"] .about-photo,
+:root[data-theme="dark"] .article-cover{
+  border-color:var(--line);
+}
+
+/* ---------- Botón de tema (sol / luna) ---------- */
+.theme-toggle{
+  width:40px; height:40px;
+  display:flex; align-items:center; justify-content:center;
+  background:none; border:1px solid var(--line);
+  cursor:pointer; flex-shrink:0; margin-left:8px;
+  color:var(--ink);
+}
+.theme-toggle svg{width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round;}
+.theme-toggle .icon-sun{display:none;}
+:root[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+:root[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
+
+@media (max-width:600px){
+  .theme-toggle{width:38px; height:38px;}
+}

@@ -79,3 +79,19 @@
   document.querySelectorAll("form[data-newsletter]").forEach(initNewsletter);
   var f = document.querySelector("[data-filters]"); if (f) initFilters(f);
 })();
+
+/* ---------- Modo oscuro: toggle + persistencia ---------- */
+(function () {
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    try { localStorage.setItem("theme", theme); } catch (e) {}
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".theme-toggle").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+        applyTheme(current === "dark" ? "light" : "dark");
+      });
+    });
+  });
+})();

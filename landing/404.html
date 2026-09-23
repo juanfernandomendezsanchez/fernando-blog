@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
 <title>Página no encontrada | Fernando</title>
@@ -42,7 +43,7 @@
     position:relative;
     overflow-x:hidden;
   }
-  ::selection{background:var(--olive); color:var(--paper);}
+  ::selection{background:var(--olive); color:var(--on-navy);}
   body::before{
     content:"";
     position:fixed; inset:0;
@@ -82,11 +83,11 @@
     backdrop-filter:blur(6px);
   }
   .masthead-inner{
-    display:flex; align-items:center; justify-content:space-between;
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
     padding:18px 0;
   }
   .brandmark{
-    display:flex; align-items:center; gap:10px;
+    display:flex; align-items:center; gap:10px; margin-right:auto;
     font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:20px;
   }
   .brand-logo{
@@ -104,7 +105,7 @@
     border:1px solid var(--ink); padding:9px 16px;
     color:var(--ink) !important;
   }
-  .nav-cta:hover{background:var(--olive); border-color:var(--olive); color:var(--paper) !important;}
+  .nav-cta:hover{background:var(--olive); border-color:var(--olive); color:var(--on-navy) !important;}
 
   /* ===== MOBILE MENU ===== */
   .mobile-toggle{
@@ -146,7 +147,7 @@
   .mobile-drawer a.mobile-cta{
     margin-top:24px;
     background:var(--olive);
-    color:var(--paper) !important;
+    color:var(--on-navy) !important;
     text-align:center;
     border:none;
     padding:16px;
@@ -329,7 +330,7 @@
     .wa-float{bottom:18px; right:18px; width:52px; height:52px;}
   }
   .btn-primary{
-    background:var(--ink); color:var(--paper);
+    background:var(--navy-block); color:var(--on-navy);
     padding:14px 24px; font-size:14px; font-weight:600;
     border-radius:2px;
   }
@@ -350,6 +351,10 @@
       <a href="index.html#newsletter">Newsletter</a>
       <a href="index.html#diagnostico" class="nav-cta">Postula tu marca →</a>
     </nav>
+        <button type="button" class="theme-toggle" aria-label="Cambiar tema claro/oscuro">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+    </button>
     <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileDrawer">
       <svg class="icon-menu" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       <svg class="icon-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -378,7 +383,7 @@
 <section class="library" style="padding-top:40px;">
   <div class="wrap" style="text-align:center;">
     <a href="index.html" class="btn-primary reveal" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none;">
-      <svg class="icon" style="color:var(--paper);" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      <svg class="icon" style="color:var(--on-navy);" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
       Volver al inicio
     </a>
     <div style="margin-top:40px; display:flex; gap:28px; justify-content:center; flex-wrap:wrap;">
