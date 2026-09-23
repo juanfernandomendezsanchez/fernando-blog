@@ -177,3 +177,7 @@ a.card:hover{transform:translateY(-3px);}
 @media (max-width:600px){
   .theme-toggle{width:38px; height:38px;}
 }
+
+/* Seguridad general: ningún link de correo/teléfono debe poder forzar
+   overflow horizontal, sin importar qué tan larga sea la dirección. */
+a[href^="mailto:"], a[href^="tel:"]{overflow-wrap:anywhere;}
