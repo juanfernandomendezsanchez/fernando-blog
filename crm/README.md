@@ -45,6 +45,25 @@ Este README documenta la **Fase 1**, que es lo que ya está construido.
 
 ## Cómo correrlo en tu laptop
 
+### Opción rápida: `iniciar.py`
+
+Si ya tienes Python y Git instalados, `crm/iniciar.py` hace todo esto por ti:
+clona o actualiza el repositorio, crea el entorno virtual, instala las
+dependencias, te pide una contraseña la primera vez, carga los servicios de
+ejemplo, levanta el servidor y abre el navegador cuando ya está listo (espera
+a que el servidor responda antes de abrirlo, para evitar el clásico "no se
+pudo establecer conexión").
+
+```bash
+python iniciar.py
+```
+
+Solo usa librerías estándar de Python (no depende de que ya exista el
+entorno virtual, porque corre antes de crearlo). Deja la ventana abierta
+mientras usas el CRM; para apagarlo, ciérrala o presiona Ctrl+C.
+
+### Paso a paso manual
+
 1. Crea el entorno virtual e instala las dependencias:
 
    ```bash
