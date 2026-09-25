@@ -192,6 +192,25 @@ a {
 }
 
 /* Contactos */
+.barra-sincronizacion {
+  margin-bottom: 16px;
+}
+
+.barra-sincronizacion button {
+  background: var(--color-tarjeta);
+  border: 1px solid var(--color-marca);
+  color: var(--color-marca);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.mensaje-sincronizacion {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
 .formulario-nuevo-contacto form {
   display: flex;
   flex-wrap: wrap;

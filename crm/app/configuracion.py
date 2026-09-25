@@ -24,6 +24,12 @@ BASE_DATOS_URL = obtener_variable(
 )
 META_MENSUAL_USD = float(obtener_variable("CRM_META_MENSUAL_USD", "0") or "0")
 
+# Sincronizacion con Google Sheets (Fase 2). Si CREDENCIALES_GOOGLE_SHEETS
+# queda vacio, la sincronizacion simplemente se salta (ver sincronizar_sheets.py).
+CREDENCIALES_GOOGLE_SHEETS = obtener_variable("GOOGLE_CREDENCIALES_JSON", "")
+ID_HOJA_GOOGLE_SHEETS = obtener_variable("GOOGLE_SHEETS_ID", "")
+PESTANA_LEADS_GOOGLE_SHEETS = obtener_variable("GOOGLE_SHEETS_PESTANA_LEADS", "leads")
+
 
 def convertir_a_hora_local(fecha_utc: datetime) -> datetime:
     """Convierte una fecha guardada en UTC a la zona horaria configurada, para mostrarla."""

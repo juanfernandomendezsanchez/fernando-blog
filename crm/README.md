@@ -23,11 +23,17 @@ Este README documenta la **Fase 1**, que es lo que ya está construido.
 - Interfaz web mínima, mobile-first, con HTMX y CSS propio: `/hoy`, `/embudo`
   (tablero con semáforo y botón para mover etapa) y `/contactos` (tabla,
   búsqueda global y alta rápida).
-- 16 pruebas con pytest, con ejemplos realistas, para las reglas de embudo y
-  de puntuación.
+- 23 pruebas con pytest, con ejemplos realistas, para las reglas de embudo,
+  de puntuación y la sincronización con Sheets.
 - El catálogo completo de automatizaciones ya está escrito en
   `reglas/automatizaciones.yaml` (todas en modo "sombra"), listo para cuando
   se construya el motor que las ejecuta.
+- Sincronización de contactos desde Google Sheets (`app/sincronizar_sheets.py`):
+  lee la pestaña de leads, crea o actualiza Contactos sin duplicar (busca por
+  correo o teléfono), y guarda en notas todo lo que no tiene un campo propio
+  (empresa, necesidad, descripción, mensaje, estado). Corre sola cada vez que
+  arrancas con `iniciar.py`, y también hay un botón "Sincronizar con Google
+  Sheets ahora" en `/contactos`. Ver la sección de abajo para configurarla.
 
 ## Qué falta (Fase 2, no está construido todavía)
 
@@ -36,12 +42,38 @@ Este README documenta la **Fase 1**, que es lo que ya está construido.
   se guardan en la tabla Evento pero nadie los procesa todavía.
 - El reloj con APScheduler (recordatorios, seguimientos, resúmenes, cierre
   de mes).
-- Sincronización con Gmail (correo.nuevo), Google Calendar (reuniones) y
-  Google Sheets (importar/exportar contactos).
+- Sincronización con Gmail (correo.nuevo) y Google Calendar (reuniones).
+- Que la sincronización de Sheets también cree Oportunidades automáticamente
+  (hoy a propósito solo sincroniza Contactos: adivinar el servicio a partir
+  del texto de "Necesidad" podría crear datos incorrectos sin que te des
+  cuenta).
 - Rutas `/aprobacion` (bandeja de borradores), `/cobros` y `/cifras`.
 - Página de detalle `/oportunidades/{id}` con línea de tiempo, generar
   propuesta y registrar pago.
 - Respaldo diario de la base de datos.
+
+## Configurar la sincronización con Google Sheets
+
+1. En Google Cloud (mismo proyecto que uses para el CRM), habilita la
+   **Google Sheets API** y crea una **cuenta de servicio** (sin ningún rol
+   de administrador ni de proyecto — el acceso se da compartiendo la hoja,
+   como con una persona más). Descarga su clave en formato JSON.
+2. Guarda ese archivo como `crm/credenciales_google.json` (ese nombre ya
+   está protegido en `.gitignore`, nunca se sube al repositorio).
+3. Comparte tu Google Sheet con el correo de la cuenta de servicio (se ve
+   como `algo@tu-proyecto.iam.gserviceaccount.com`), con rol de Lector.
+4. En tu `.env`, completa:
+   ```
+   GOOGLE_CREDENCIALES_JSON=credenciales_google.json
+   GOOGLE_SHEETS_ID=el-id-de-tu-hoja
+   GOOGLE_SHEETS_PESTANA_LEADS=leads
+   ```
+5. Pruébalo aislado antes de correr todo el CRM:
+   ```bash
+   python sincronizar_datos.py
+   ```
+   Si algo falla (credencial mal puesta, hoja no compartida, nombre de
+   pestaña distinto), el error aparece ahí, claro y aislado.
 
 ## Cómo correrlo en tu laptop
 

@@ -3,6 +3,15 @@
 {% block contenido %}
 <h1>Contactos</h1>
 
+<section class="barra-sincronizacion">
+  <form method="post" action="/contactos/sincronizar-sheets">
+    <button type="submit">Sincronizar con Google Sheets ahora</button>
+  </form>
+  {% if mensaje_sincronizacion %}
+  <p class="mensaje-sincronizacion">{{ mensaje_sincronizacion }}</p>
+  {% endif %}
+</section>
+
 <section id="nuevo" class="formulario-nuevo-contacto">
   <h2>Nuevo contacto</h2>
   <form method="post" action="/contactos/nuevo-rapido">
@@ -57,5 +66,5 @@
   {% if not contactos %}<p class="vacio">No hay contactos que mostrar.</p>{% endif %}
 </section>
 
-<p class="nota-fase">Importar y exportar (por ejemplo desde Google Sheets) llega en la Fase 2.</p>
+<p class="nota-fase">La sincronizacion tambien corre sola cada vez que arrancas el CRM con iniciar.py.</p>
 {% endblock %}

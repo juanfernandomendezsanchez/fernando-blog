@@ -109,6 +109,11 @@ def sembrar_datos(python_venv, carpeta_crm):
     ejecutar([str(python_venv), "sembrar_datos.py"], carpeta=carpeta_crm)
 
 
+def sincronizar_sheets(python_venv, carpeta_crm):
+    print("Sincronizando contactos desde Google Sheets (si ya esta configurado)...")
+    ejecutar([str(python_venv), "sincronizar_datos.py"], carpeta=carpeta_crm)
+
+
 def esperar_servidor_listo(segundos_maximo=20):
     inicio = time.time()
     while time.time() - inicio < segundos_maximo:
@@ -156,6 +161,7 @@ def main():
         instalar_dependencias(python_venv, carpeta_crm)
         generar_env_si_hace_falta(carpeta_crm)
         sembrar_datos(python_venv, carpeta_crm)
+        sincronizar_sheets(python_venv, carpeta_crm)
         iniciar_servidor_y_navegador(python_venv, carpeta_crm)
     except KeyboardInterrupt:
         print("\nCRM detenido.")
