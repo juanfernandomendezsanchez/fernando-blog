@@ -8,4 +8,5 @@ crm/venv/
 crm/.venv/
 crm/datos/*.db
 crm/datos/*.db-journal
+crm/credenciales_google.json
 .pytest_cache/
