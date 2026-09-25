@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block titulo %}Hoy - CRM{% endblock %}
+{% block contenido %}
+<h1>Hoy</h1>
+
+<section class="cifras">
+  <div class="tarjeta-cifra">
+    <span class="etiqueta">Cobrado este mes</span>
+    <span class="valor">${{ "%.2f"|format(cobrado_del_mes) }} / ${{ "%.2f"|format(meta_mensual) }}</span>
+  </div>
+  <div class="tarjeta-cifra">
+    <span class="etiqueta">Embudo ponderado</span>
+    <span class="valor">${{ "%.2f"|format(embudo_ponderado) }}</span>
+  </div>
+  <div class="tarjeta-cifra">
+    <span class="etiqueta">Monto vencido</span>
+    <span class="valor">${{ "%.2f"|format(monto_vencido) }}</span>
+  </div>
+</section>
+
+<section>
+  <h2>Para aprobar ({{ borradores_para_aprobar|length }})</h2>
+  {% if borradores_para_aprobar %}
+  <ul>
+    {% for borrador in borradores_para_aprobar %}
+    <li>{{ borrador.canal }} — {{ borrador.asunto or borrador.cuerpo[:60] }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="vacio">No hay nada pendiente de aprobar.</p>
+  {% endif %}
+</section>
+
+<section>
+  <h2>Tareas vencidas ({{ tareas_vencidas|length }})</h2>
+  {% if tareas_vencidas %}
+  <ul>
+    {% for tarea in tareas_vencidas %}
+    <li>{{ tarea.descripcion }} — vencía el {{ tarea.fecha_limite|hora_local }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="vacio">No tienes tareas vencidas.</p>
+  {% endif %}
+</section>
+
+<section>
+  <h2>Oportunidades en riesgo ({{ oportunidades_en_riesgo|length }})</h2>
+  {% if oportunidades_en_riesgo %}
+  <ul>
+    {% for oportunidad in oportunidades_en_riesgo %}
+    <li><a href="/embudo">Oportunidad #{{ oportunidad.id }} — {{ oportunidad.etapa }}</a></li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="vacio">Ninguna oportunidad está en riesgo ahora mismo.</p>
+  {% endif %}
+</section>
+
+<p class="nota-fase">
+  Reuniones de hoy todavía no aparece aquí: falta conectar Google Calendar (Fase 2).
+</p>
+{% endblock %}

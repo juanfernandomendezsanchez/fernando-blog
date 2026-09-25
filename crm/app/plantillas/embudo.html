@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block titulo %}Embudo - CRM{% endblock %}
+{% block contenido %}
+<h1>Embudo</h1>
+
+<form method="get" class="filtro-linea">
+  <label for="linea">Línea</label>
+  <select name="linea" id="linea" onchange="this.form.submit()">
+    <option value="">Todas</option>
+    {% for l in lineas %}
+    <option value="{{ l }}" {{ "selected" if l == linea_seleccionada else "" }}>{{ l }}</option>
+    {% endfor %}
+  </select>
+</form>
+
+<div class="tablero-embudo">
+  {% for etapa in etapas %}
+  <div class="columna-etapa">
+    <h2>{{ etapa }} ({{ columnas[etapa]|length }})</h2>
+    {% for tarjeta in columnas[etapa] %}
+    <div class="tarjeta-oportunidad semaforo-{{ tarjeta.semaforo or 'sin-limite' }}">
+      <strong>{{ tarjeta.contacto.nombre if tarjeta.contacto else "Sin contacto" }}</strong>
+      <span>
+        {% if tarjeta.oportunidad.valor_estimado %}
+          {{ "%.2f"|format(tarjeta.oportunidad.valor_estimado) }} {{ tarjeta.oportunidad.moneda }}
+        {% else %}
+          Sin valor estimado
+        {% endif %}
+      </span>
+      {% if tarjeta.siguientes_etapas %}
+      <form method="post" action="/oportunidades/{{ tarjeta.oportunidad.id }}/mover-etapa" class="formulario-mover-etapa">
+        <select name="etapa_nueva">
+          {% for etapa_destino in tarjeta.siguientes_etapas %}
+          <option value="{{ etapa_destino }}">{{ etapa_destino }}</option>
+          {% endfor %}
+        </select>
+        <input type="text" name="motivo_perdida" placeholder="motivo si es Perdido" />
+        <label class="opcion-pago"><input type="checkbox" name="pago_recibido" value="true" /> pago recibido</label>
+        <button type="submit">Mover</button>
+      </form>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

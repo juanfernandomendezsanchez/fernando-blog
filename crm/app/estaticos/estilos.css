@@ -1,0 +1,320 @@
+/* Estilos propios del CRM. Mobile-first: primero celular, luego laptop. */
+
+:root {
+  --color-fondo: #f7f7f5;
+  --color-texto: #1f2320;
+  --color-marca: #2f5d50;
+  --color-borde: #dcdcd6;
+  --color-verde: #2f855a;
+  --color-ambar: #b7791f;
+  --color-rojo: #c53030;
+  --color-tarjeta: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding-bottom: 64px; /* deja espacio para la barra inferior en celular */
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+a {
+  color: var(--color-marca);
+}
+
+.barra-superior {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--color-tarjeta);
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.barra-superior .marca {
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.barra-superior .busqueda {
+  flex: 1;
+}
+
+.barra-superior .busqueda input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--color-borde);
+  border-radius: 6px;
+}
+
+.boton-nuevo {
+  background: var(--color-marca);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Navegacion: barra inferior fija en celular */
+.navegacion {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background: var(--color-tarjeta);
+  border-top: 1px solid var(--color-borde);
+  padding: 8px 4px;
+  z-index: 10;
+}
+
+.navegacion a,
+.navegacion .pendiente {
+  text-decoration: none;
+  color: var(--color-texto);
+  font-size: 0.8rem;
+  padding: 4px 6px;
+}
+
+.navegacion .pendiente {
+  color: #999;
+}
+
+.navegacion a.activo {
+  color: var(--color-marca);
+  font-weight: 700;
+}
+
+.navegacion .salir {
+  color: var(--color-rojo);
+}
+
+.contenido {
+  padding: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.cifras {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.tarjeta-cifra {
+  background: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+.tarjeta-cifra .etiqueta {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.tarjeta-cifra .valor {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.vacio {
+  color: #777;
+  font-style: italic;
+}
+
+.nota-fase {
+  margin-top: 24px;
+  padding: 10px 12px;
+  background: #fff8e6;
+  border: 1px solid #f0d98c;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* Embudo: columnas con scroll horizontal en celular */
+.tablero-embudo {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.columna-etapa {
+  min-width: 240px;
+  flex: 0 0 auto;
+}
+
+.tarjeta-oportunidad {
+  background: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-left: 5px solid #999;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.tarjeta-oportunidad.semaforo-verde {
+  border-left-color: var(--color-verde);
+}
+
+.tarjeta-oportunidad.semaforo-ambar {
+  border-left-color: var(--color-ambar);
+}
+
+.tarjeta-oportunidad.semaforo-rojo {
+  border-left-color: var(--color-rojo);
+}
+
+.formulario-mover-etapa {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.formulario-mover-etapa select,
+.formulario-mover-etapa input[type="text"] {
+  padding: 6px;
+  border: 1px solid var(--color-borde);
+  border-radius: 4px;
+}
+
+/* Contactos */
+.barra-sincronizacion {
+  margin-bottom: 16px;
+}
+
+.barra-sincronizacion button {
+  background: var(--color-tarjeta);
+  border: 1px solid var(--color-marca);
+  color: var(--color-marca);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.mensaje-sincronizacion {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.formulario-nuevo-contacto form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.formulario-nuevo-contacto input,
+.formulario-nuevo-contacto select {
+  padding: 8px;
+  border: 1px solid var(--color-borde);
+  border-radius: 4px;
+}
+
+.tabla-contactos {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-tarjeta);
+}
+
+.tabla-contactos th,
+.tabla-contactos td {
+  border-bottom: 1px solid var(--color-borde);
+  padding: 8px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+/* Login */
+.pagina-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.formulario-login {
+  background: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  padding: 24px;
+  width: 90%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.formulario-login input {
+  padding: 10px;
+  border: 1px solid var(--color-borde);
+  border-radius: 6px;
+}
+
+.formulario-login button {
+  background: var(--color-marca);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.formulario-login .error {
+  color: var(--color-rojo);
+}
+
+/* Laptop: barra lateral en vez de barra inferior */
+@media (min-width: 900px) {
+  body {
+    padding-bottom: 0;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .barra-superior {
+    grid-column: 1 / span 2;
+  }
+
+  .navegacion {
+    position: static;
+    grid-column: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    border-top: none;
+    border-right: 1px solid var(--color-borde);
+    padding: 16px 0;
+  }
+
+  .navegacion a,
+  .navegacion .pendiente {
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .contenido {
+    grid-column: 2;
+  }
+
+  .cifras {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

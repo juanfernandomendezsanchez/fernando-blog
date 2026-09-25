@@ -1,0 +1,23 @@
+# Reglas de puntuacion de contactos.
+# Cada senal (si ocurre) suma o resta puntos. El total decide si el contacto pasa a Calificado.
+
+puntos:
+  llego_por_referido: 25
+  declara_presupuesto_o_pregunta_precios: 20
+  negocio_activo_con_clientes: 15
+  marca_debil_o_inconsistente: 15
+  respondio_en_menos_de_24_horas: 10
+  tiene_redes_activas: 10
+  fuera_de_perfil_ideal: -20
+  solo_pide_gratis_o_ideas: -15
+
+# Puntuacion minima y maxima permitidas.
+puntuacion_minima: 0
+puntuacion_maxima: 95
+
+# A partir de este puntaje el contacto pasa a Calificado.
+umbral_calificado: 50
+
+# Por debajo del umbral, el contacto se queda en Nuevo con esta etiqueta,
+# y se prepara un borrador de respuesta con un recurso gratuito.
+etiqueta_nutricion: nutricion
