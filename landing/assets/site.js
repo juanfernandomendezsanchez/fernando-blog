@@ -47,7 +47,15 @@
 
       var done = function (ok) {
         button.disabled = false; button.textContent = label;
-        if (ok) { form.reset(); setStatus(status, "Listo. Te escribo cuando publique el próximo artículo.", "ok"); }
+        if (ok) {
+          form.reset();
+          setStatus(status, "Listo. Te escribo cuando publique el próximo artículo. Mientras tanto, ", "ok");
+          // Siguiente paso del embudo: quien se suscribe ya confía un poco; se le muestra cómo trabajo.
+          var next = document.createElement("a");
+          next.href = (location.pathname.indexOf("/articulos/") > -1 ? "../" : "") + "trabaja-conmigo.html";
+          next.textContent = "mira cómo trabajo →";
+          if (status) status.appendChild(next);
+        }
         else { setStatus(status, "No pude guardarlo. Escríbeme a juanfernandomendezsanchez@gmail.com y te agrego a mano.", "err"); }
       };
 
@@ -65,7 +73,13 @@
       b.addEventListener("click", function () {
         var v = b.getAttribute("data-filter");
         buttons.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
-        cards.forEach(function (c) { c.hidden = !(v === "todos" || c.getAttribute("data-circulo") === v); });
+        var shown = 0;
+        cards.forEach(function (c) {
+          c.hidden = !(v === "todos" || c.getAttribute("data-circulo") === v);
+          if (!c.hidden) shown++;
+        });
+        var empty = document.querySelector("[data-filter-empty]");
+        if (empty) empty.hidden = shown > 0;
       });
     });
     // /blog.html?circulo=marca abre el filtro ya aplicado
