@@ -477,3 +477,6 @@ html, body{overflow-x:clip !important;}
   box-shadow:0 -18px 40px rgba(10,16,30,.28);}
 @media (max-width:900px){ #metodo{border-radius:20px 20px 0 0;} }
 @media (prefers-reduced-motion: reduce){ .about{transform:none; filter:none;} }
+
+/* El efecto vive solo dentro de este bloque: al terminar "El método", "Mi marca" ya no reaparece */
+.apilado{position:relative; isolation:isolate;}
