@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block titulo %}Contactos - CRM{% endblock %}
+{% block contenido %}
+<div class="encabezado-pagina">
+  <h1>Contactos</h1>
+  <div class="acciones">
+    <a href="/contactos/exportar.csv">Exportar CSV</a>
+    <form method="post" action="/contactos/sincronizar-sheets" class="en-linea">
+      <button type="submit" class="boton-secundario">Sincronizar con Google Sheets</button>
+    </form>
+  </div>
+</div>
+{% if mensaje_sincronizacion %}
+<p class="mensaje-sincronizacion">{{ mensaje_sincronizacion }}</p>
+{% endif %}
+
+<details id="nuevo" class="desplegable tarjeta formulario-nuevo-contacto" open>
+  <summary>+ Nuevo contacto</summary>
+  <form method="post" action="/contactos/nuevo-rapido">
+    <input type="text" name="nombre" placeholder="Nombre" required />
+    <input type="email" name="correo" placeholder="Correo (opcional)" />
+    <input type="tel" name="telefono" placeholder="Teléfono (opcional)" />
+    <select name="canal_preferido">
+      <option value="">Canal preferido</option>
+      <option value="correo">Correo</option>
+      <option value="whatsapp">WhatsApp</option>
+      <option value="instagram">Instagram</option>
+    </select>
+    <select name="servicio_id" required>
+      {% for servicio in servicios %}
+      <option value="{{ servicio.id }}">{{ servicio.nombre }} ({{ servicio.linea }})</option>
+      {% endfor %}
+    </select>
+    <select name="origen">
+      {% for o in origenes %}
+      <option value="{{ o }}" {{ "selected" if o == "otro" else "" }}>{{ o|capitalize }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="boton-principal">Crear</button>
+  </form>
+</details>
+
+<form method="get" action="/contactos" class="barra-filtros">
+  <select name="origen" onchange="this.form.submit()">
+    <option value="">Todos los orígenes</option>
+    {% for o in origenes %}
+    <option value="{{ o }}" {{ "selected" if o == origen_seleccionado else "" }}>{{ o }}</option>
+    {% endfor %}
+  </select>
+  {% if etiquetas_usadas %}
+  <select name="etiqueta" onchange="this.form.submit()">
+    <option value="">Todas las etiquetas</option>
+    {% for e in etiquetas_usadas %}
+    <option value="{{ e }}" {{ "selected" if e == etiqueta_seleccionada else "" }}>#{{ e }}</option>
+    {% endfor %}
+  </select>
+  {% endif %}
+  {% if origen_seleccionado or etiqueta_seleccionada %}<a href="/contactos">Limpiar filtros</a>{% endif %}
+</form>
+
+<section>
+  {% if busqueda is defined %}
+  <p>Resultados para "{{ busqueda }}" · <a href="/contactos">ver todos</a></p>
+  {% endif %}
+  <div class="tabla-desplazable">
+  <table class="tabla-contactos">
+    <thead>
+      <tr>
+        <th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Origen</th><th>Puntuación</th><th>Etiquetas</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for contacto in contactos %}
+      <tr>
+        <td>
+          <a href="/contactos/{{ contacto.id }}">{{ contacto.nombre }}</a>
+          {% if contacto.no_contactar %}<span class="insignia insignia-roja">no contactar</span>{% endif %}
+        </td>
+        <td>{{ contacto.correo or "-" }}</td>
+        <td>{{ contacto.telefono or "-" }}</td>
+        <td>{{ contacto.origen }}</td>
+        <td>{{ contacto.puntuacion }}</td>
+        <td>{{ contacto.etiquetas or "-" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% if not contactos %}<p class="vacio">No hay contactos que mostrar.</p>{% endif %}
+</section>
+
+<p class="nota-fase">La sincronización con Google Sheets también corre sola cada vez que arrancas el CRM con iniciar.py.</p>
+{% endblock %}

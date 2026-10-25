@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block titulo %}CRM de Fernando{% endblock %}</title>
+  <link rel="stylesheet" href="/estaticos/estilos.css" />
+  <script src="https://unpkg.com/htmx.org@1.9.12" defer></script>
+</head>
+<body>
+  {% set ruta = request.url.path %}
+  <header class="barra-superior">
+    <a href="/hoy" class="marca">CRM</a>
+    <form action="/buscar" method="get" class="busqueda">
+      <input type="search" name="q" placeholder="Buscar contacto..." aria-label="Buscar contacto" />
+    </form>
+    <a href="/contactos#nuevo" class="boton-nuevo">+ Nuevo</a>
+  </header>
+
+  <nav class="navegacion">
+    <a href="/hoy" class="{{ 'activo' if ruta == '/hoy' else '' }}">Hoy</a>
+    <a href="/embudo" class="{{ 'activo' if ruta.startswith('/embudo') or ruta.startswith('/oportunidades') else '' }}">Embudo</a>
+    <a href="/contactos" class="{{ 'activo' if ruta.startswith('/contactos') or ruta == '/buscar' else '' }}">Contactos</a>
+    <a href="/tareas" class="{{ 'activo' if ruta.startswith('/tareas') else '' }}">Tareas</a>
+    <a href="/biblioteca" class="{{ 'activo' if ruta.startswith('/biblioteca') else '' }}">Biblioteca</a>
+    <a href="/cifras" class="{{ 'activo' if ruta.startswith('/cifras') else '' }}">Cifras</a>
+    <a href="/logout" class="salir">Salir</a>
+  </nav>
+
+  <main class="contenido">
+    {% block contenido %}{% endblock %}
+  </main>
+</body>
+</html>

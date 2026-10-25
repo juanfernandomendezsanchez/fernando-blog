@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% from "_documentos.html" import lista_compacta, formulario_subida_rapida %}
+{% block titulo %}{{ contacto.nombre }} - CRM{% endblock %}
+{% block contenido %}
+{% set volver = "/contactos/" ~ contacto.id %}
+<p class="migas"><a href="/contactos">← Contactos</a></p>
+
+<div class="encabezado-pagina">
+  <div>
+    <h1>{{ contacto.nombre }}
+      {% if contacto.no_contactar %}<span class="insignia insignia-roja">no contactar</span>{% endif %}
+    </h1>
+    <p class="texto-suave">
+      {% if empresa %}{{ empresa.nombre }} · {% endif %}
+      Origen: {{ contacto.origen }}
+      {% if referido_por %} (por <a href="/contactos/{{ referido_por.id }}">{{ referido_por.nombre }}</a>){% endif %}
+      · Puntuación {{ contacto.puntuacion }}
+      · Desde {{ contacto.creado_en|hora_local("%d/%m/%Y") }}
+    </p>
+  </div>
+  <div class="acciones-contacto">
+    {% if contacto.telefono %}
+    <a class="boton-secundario" href="https://wa.me/{{ contacto.telefono|replace('+','')|replace(' ','')|replace('-','') }}" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="boton-secundario" href="tel:{{ contacto.telefono }}">Llamar</a>
+    {% endif %}
+    {% if contacto.correo %}<a class="boton-secundario" href="mailto:{{ contacto.correo }}">Correo</a>{% endif %}
+    {% if contacto.usuario_instagram %}<a class="boton-secundario" href="https://instagram.com/{{ contacto.usuario_instagram }}" target="_blank" rel="noopener">Instagram</a>{% endif %}
+  </div>
+</div>
+
+<div class="dos-columnas">
+  <div>
+    <section class="tarjeta">
+      <div class="encabezado-seccion">
+        <h2>Oportunidades ({{ oportunidades|length }})</h2>
+        {% if valor_ganado %}<span class="texto-suave">Ganado: ${{ valor_ganado|dinero }}</span>{% endif %}
+      </div>
+      {% for o in oportunidades %}
+      <a href="/oportunidades/{{ o.id }}" class="fila-oportunidad semaforo-{{ semaforos[o.id] or 'sin-limite' }}">
+        <strong>{{ servicios[o.servicio_id].nombre if servicios.get(o.servicio_id) else "Servicio" }}</strong>
+        <span class="insignia etapa-{{ o.etapa|lower }}">{{ o.etapa }}</span>
+        <span>{% if o.valor_estimado %}{{ o.valor_estimado|dinero }} {{ o.moneda }}{% else %}sin valor{% endif %}</span>
+        {% if o.siguiente_paso %}<span class="texto-suave">→ {{ o.siguiente_paso }}</span>{% endif %}
+      </a>
+      {% else %}
+      <p class="vacio">Todavía no tiene oportunidades.</p>
+      {% endfor %}
+      <details class="desplegable">
+        <summary>+ Nueva oportunidad</summary>
+        <form method="post" action="/contactos/{{ contacto.id }}/nueva-oportunidad" class="formulario-apilado">
+          <select name="servicio_id" required>
+            {% for s in servicios.values() %}
+            <option value="{{ s.id }}">{{ s.nombre }} ({{ s.linea }}) — {{ s.precio_base|dinero }} {{ s.moneda }}</option>
+            {% endfor %}
+          </select>
+          <input type="text" inputmode="decimal" name="valor_estimado" placeholder="Valor estimado (vacío = precio base)" />
+          <button type="submit">Crear oportunidad</button>
+        </form>
+      </details>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Conversaciones ({{ interacciones|length }})</h2>
+      {% if oportunidades %}
+      <details class="desplegable">
+        <summary>+ Registrar conversación</summary>
+        {% set abierta = oportunidades|selectattr("etapa", "in", ["Nuevo","Calificado","Diagnostico","Propuesta","Negociacion","Dormido"])|first %}
+        <form method="post" action="/oportunidades/{{ (abierta or oportunidades[0]).id }}/interacciones" class="formulario-apilado"
+              onsubmit="this.action='/oportunidades/'+this.oportunidad.value+'/interacciones'">
+          <input type="hidden" name="volver" value="{{ volver }}" />
+          <select name="oportunidad">
+            {% for o in oportunidades %}
+            <option value="{{ o.id }}" {{ "selected" if abierta and o.id == abierta.id else "" }}>{{ servicios[o.servicio_id].nombre if servicios.get(o.servicio_id) else "Oportunidad" }} ({{ o.etapa }})</option>
+            {% endfor %}
+          </select>
+          <div class="fila-campos">
+            <select name="canal">{% for c in ["whatsapp","correo","instagram","llamada","reunion"] %}<option>{{ c }}</option>{% endfor %}</select>
+            <select name="direccion"><option value="saliente">Yo escribí</option><option value="entrante">Me escribió</option></select>
+          </div>
+          <textarea name="resumen" rows="3" placeholder="¿De qué hablaron? ¿Qué quedó pendiente?"></textarea>
+          <label class="opcion-en-linea"><input type="checkbox" name="requiere_respuesta" value="true" /> Me toca responder</label>
+          <button type="submit">Guardar</button>
+        </form>
+      </details>
+      {% endif %}
+      <ol class="linea-tiempo">
+        {% for i in interacciones %}
+        <li class="{{ 'requiere-respuesta' if i.requiere_respuesta else '' }}">
+          <span class="texto-suave">{{ i.fecha|hora_local }} · {{ i.canal }} · {{ "me escribió" if i.direccion == "entrante" else "yo escribí" }}</span>
+          <p>{{ i.resumen or "(sin resumen)" }}</p>
+        </li>
+        {% else %}
+        <li class="vacio">Sin conversaciones registradas.</li>
+        {% endfor %}
+      </ol>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Tareas pendientes ({{ tareas_pendientes|length }})</h2>
+      {% include "_lista_tareas.html" %}
+      {% if oportunidades %}
+      <details class="desplegable">
+        <summary>+ Nueva tarea</summary>
+        <form method="post" action="/tareas/nueva" class="formulario-apilado">
+          <input type="hidden" name="volver" value="{{ volver }}" />
+          <input type="text" name="descripcion" placeholder="Qué hay que hacer" required />
+          <select name="oportunidad_id">
+            {% for o in oportunidades %}<option value="{{ o.id }}">{{ servicios[o.servicio_id].nombre if servicios.get(o.servicio_id) else "Oportunidad" }} ({{ o.etapa }})</option>{% endfor %}
+          </select>
+          <div class="fila-campos">
+            <input type="date" name="fecha_limite" />
+            <select name="prioridad"><option>alta</option><option selected>media</option><option>baja</option></select>
+          </div>
+          <button type="submit">Agregar</button>
+        </form>
+      </details>
+      {% endif %}
+    </section>
+  </div>
+
+  <div>
+    <section class="tarjeta">
+      <h2>Datos</h2>
+      <form method="post" action="/contactos/{{ contacto.id }}/editar" class="formulario-apilado">
+        <label>Nombre <input type="text" name="nombre" value="{{ contacto.nombre }}" required /></label>
+        <label>Correo <input type="email" name="correo" value="{{ contacto.correo or '' }}" /></label>
+        <label>Teléfono <input type="tel" name="telefono" value="{{ contacto.telefono or '' }}" placeholder="+58 412 …" /></label>
+        <label>Instagram <input type="text" name="usuario_instagram" value="{{ contacto.usuario_instagram or '' }}" placeholder="usuario" /></label>
+        <label>Empresa <input type="text" name="empresa" value="{{ empresa.nombre if empresa else '' }}" /></label>
+        <div class="fila-campos">
+          <label>Canal preferido
+            <select name="canal_preferido">
+              <option value="">—</option>
+              {% for c in canales %}<option value="{{ c }}" {{ "selected" if c == contacto.canal_preferido else "" }}>{{ c }}</option>{% endfor %}
+            </select>
+          </label>
+          <label>Origen
+            <select name="origen">
+              {% for o in origenes %}<option value="{{ o }}" {{ "selected" if o == contacto.origen else "" }}>{{ o }}</option>{% endfor %}
+            </select>
+          </label>
+        </div>
+        <label>Referido por
+          <select name="referido_por_id">
+            <option value="">—</option>
+            {% for c in otros_contactos %}<option value="{{ c.id }}" {{ "selected" if c.id == contacto.referido_por_id else "" }}>{{ c.nombre }}</option>{% endfor %}
+          </select>
+        </label>
+        <label>Etiquetas <input type="text" name="etiquetas" value="{{ contacto.etiquetas or '' }}" placeholder="marca, ecommerce" /></label>
+        <label>Notas <textarea name="notas" rows="5">{{ contacto.notas or "" }}</textarea></label>
+        <label class="opcion-en-linea"><input type="checkbox" name="no_contactar" value="true" {{ "checked" if contacto.no_contactar else "" }} /> No contactar</label>
+        <button type="submit" class="boton-principal">Guardar cambios</button>
+      </form>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Documentos ({{ documentos|length }})</h2>
+      {{ lista_compacta(documentos, volver) }}
+      {{ formulario_subida_rapida(volver, contacto_id=contacto.id) }}
+    </section>
+
+    <section class="tarjeta">
+      <details>
+        <summary><h2 class="en-linea">Historial de cambios</h2></summary>
+        <ul class="historial">
+          {% for h in historial %}
+          <li><span class="texto-suave">{{ h.fecha|hora_local }}</span> · {{ h.campo }}:
+            {% if h.valor_anterior %}<s>{{ h.valor_anterior|truncate(40) }}</s> → {% endif %}{{ (h.valor_nuevo or "—")|truncate(60) }}
+            <span class="texto-suave">({{ h.origen }})</span></li>
+          {% else %}
+          <li class="vacio">Sin cambios registrados.</li>
+          {% endfor %}
+        </ul>
+      </details>
+    </section>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block titulo %}Falta algo - CRM{% endblock %}
+{% block contenido %}
+<section class="tarjeta aviso-error">
+  <h1>No se pudo guardar</h1>
+  <p>{{ mensaje }}</p>
+  <p><a href="javascript:history.back()" class="boton-principal">← Volver y corregir</a></p>
+</section>
+{% endblock %}

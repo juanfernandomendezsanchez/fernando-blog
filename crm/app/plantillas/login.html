@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrar - CRM de Fernando</title>
+  <link rel="stylesheet" href="/estaticos/estilos.css" />
+</head>
+<body class="pagina-login">
+  <form method="post" action="/login" class="formulario-login">
+    <h1>CRM de Fernando</h1>
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    <label for="contrasena">Contraseña</label>
+    <input type="password" id="contrasena" name="contrasena" required autofocus />
+    <button type="submit">Entrar</button>
+  </form>
+</body>
+</html>

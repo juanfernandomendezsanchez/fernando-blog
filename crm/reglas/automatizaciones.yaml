@@ -1,0 +1,235 @@
+# Catalogo de reglas de automatizacion.
+#
+# IMPORTANTE: en esta Fase 1 este archivo es solo el catalogo (los datos). El motor que
+# lee cada Evento, busca aqui las reglas que aplican y ejecuta sus acciones todavia
+# no esta construido (queda para la Fase 2, ver README.md de crm/).
+#
+# Todas las reglas nacen en modo "sombra": cuando el motor exista, en ese modo solo
+# registra en la Bitacora lo que habria hecho, sin enviar nada ni mover nada. Fernando
+# decide cuando pasar una regla a "con_aprobacion" (crea un Borrador para aprobar) o a
+# "automatico" (se ejecuta sola).
+#
+# Formato de cada regla:
+#   nombre: texto libre
+#   cuando: nombre del evento (modulo.hecho) o de una condicion de tiempo del reloj
+#   si: condiciones que deben cumplirse ademas del evento
+#   entonces: lista de acciones a ejecutar, en orden
+#   modo: sombra | con_aprobacion | automatico
+
+reglas:
+  - nombre: Alta de lead con deduplicacion
+    cuando: correo.nuevo
+    si: {}
+    entonces:
+      - buscar_o_crear_contacto: por_correo_o_telefono
+      - crear_oportunidad_si_no_existe: {etapa: Nuevo}
+    modo: sombra
+
+  - nombre: Primera respuesta fuera de horario
+    cuando: correo.nuevo
+    si: {fuera_de_horario_caracas: true}
+    entonces:
+      - crear_borrador: mensaje_recibido_fuera_de_horario
+    modo: sombra
+
+  - nombre: Calificacion por puntuacion
+    cuando: contacto.creado
+    si: {puntuacion_mayor_o_igual: 50}
+    entonces:
+      - mover_etapa: {etapa_nueva: Calificado}
+      - crear_tarea: "Preparar diagnostico inicial"
+    modo: sombra
+
+  - nombre: Lead que no encaja
+    cuando: contacto.creado
+    si: {puntuacion_menor_que: 50}
+    entonces:
+      - etiquetar_contacto: nutricion
+      - crear_borrador: mensaje_recurso_gratuito
+    modo: sombra
+
+  - nombre: Referido
+    cuando: contacto.creado
+    si: {tiene_referido_por: true}
+    entonces:
+      - sumar_puntos: {motivo: llego_por_referido}
+      - crear_tarea: "Agradecer al referidor"
+    modo: sombra
+
+  - nombre: Ficha previa a la llamada
+    cuando: pasaron_horas_antes_de_reunion
+    si: {horas: 2}
+    entonces:
+      - crear_tarea: "Revisar ficha del contacto antes de la llamada"
+    modo: sombra
+
+  - nombre: Recordatorio de reunion a 24 horas
+    cuando: pasaron_horas_antes_de_reunion
+    si: {horas: 24}
+    entonces:
+      - crear_borrador: recordatorio_reunion
+    modo: sombra
+
+  - nombre: Recordatorio de reunion a 2 horas
+    cuando: pasaron_horas_antes_de_reunion
+    si: {horas: 2}
+    entonces:
+      - crear_borrador: recordatorio_reunion
+    modo: sombra
+
+  - nombre: Notas obligatorias tras la reunion
+    cuando: reunion.terminada
+    si: {}
+    entonces:
+      - crear_tarea: "Registrar notas de la reunion"
+    modo: sombra
+
+  - nombre: Borrador de propuesta al entrar a Propuesta
+    cuando: oportunidad.cambio_etapa
+    si: {etapa_nueva: Propuesta}
+    entonces:
+      - crear_borrador: primera_version_propuesta
+      - crear_tarea: "Redactar y revisar propuesta"
+    modo: sombra
+
+  - nombre: Seguimiento de propuesta a 3 dias
+    cuando: pasaron_dias_sin_respuesta
+    si: {etapa: Propuesta, dias: 3}
+    entonces:
+      - crear_borrador: mensaje_seguimiento_propuesta
+      - crear_tarea: "Revisar y enviar seguimiento"
+    modo: sombra
+
+  - nombre: Seguimiento de propuesta a 7 dias
+    cuando: pasaron_dias_sin_respuesta
+    si: {etapa: Propuesta, dias: 7}
+    entonces:
+      - crear_borrador: mensaje_seguimiento_propuesta
+      - crear_tarea: "Revisar y enviar seguimiento final"
+    modo: sombra
+
+  - nombre: Aviso de vigencia de propuesta
+    cuando: pasaron_dias_antes_de_vigencia
+    si: {dias: 2}
+    entonces:
+      - crear_borrador: aviso_vigencia_propuesta
+    modo: sombra
+
+  - nombre: Ganado crea Proyecto, Hitos y Pagos pendientes
+    cuando: oportunidad.cambio_etapa
+    si: {etapa_nueva: Ganado}
+    entonces:
+      - crear_proyecto: {}
+      - crear_hitos_desde_propuesta: {}
+      - crear_pagos_pendientes_desde_hitos: {}
+    modo: sombra
+
+  - nombre: Cobro escalonado dia 0
+    cuando: pago.vencido
+    si: {dias_desde_vencimiento: 0}
+    entonces:
+      - crear_borrador: recordatorio_cobro
+    modo: sombra
+
+  - nombre: Cobro escalonado dia 3
+    cuando: pago.vencido
+    si: {dias_desde_vencimiento: 3}
+    entonces:
+      - crear_borrador: recordatorio_cobro
+    modo: sombra
+
+  - nombre: Cobro escalonado dia 7
+    cuando: pago.vencido
+    si: {dias_desde_vencimiento: 7}
+    entonces:
+      - crear_borrador: recordatorio_cobro
+      - crear_tarea: "Llamar para gestionar el cobro"
+    modo: sombra
+
+  - nombre: Pago recibido libera el siguiente hito
+    cuando: pago.recibido
+    si: {}
+    entonces:
+      - activar_siguiente_hito: {}
+    modo: sombra
+
+  - nombre: Perdido exige motivo y programa reactivacion
+    cuando: oportunidad.cambio_etapa
+    si: {etapa_nueva: Perdido}
+    entonces:
+      - crear_tarea: {descripcion: "Reactivar contacto", fecha_limite_en_dias: 90}
+    modo: sombra
+
+  - nombre: Encuesta de satisfaccion a 7 dias del cierre
+    cuando: pasaron_dias_desde_cierre
+    si: {dias: 7}
+    entonces:
+      - crear_borrador: encuesta_satisfaccion
+    modo: sombra
+
+  - nombre: Peticion de testimonio a 14 dias del cierre
+    cuando: pasaron_dias_desde_cierre
+    si: {dias: 14, acepta_testimonio: true}
+    entonces:
+      - crear_borrador: peticion_testimonio
+    modo: sombra
+
+  - nombre: Peticion de referido a 30 dias del cierre
+    cuando: pasaron_dias_desde_cierre
+    si: {dias: 30}
+    entonces:
+      - crear_borrador: peticion_referido
+    modo: sombra
+
+  - nombre: Oferta de siguiente servicio a 45 dias del cierre
+    cuando: pasaron_dias_desde_cierre
+    si: {dias: 45}
+    entonces:
+      - crear_borrador: oferta_siguiente_servicio
+    modo: sombra
+
+  - nombre: Reactivacion de Dormidos
+    cuando: pasaron_dias_sin_movimiento
+    si: {etapa: Dormido, dias: 60}
+    entonces:
+      - crear_borrador: mensaje_reactivacion
+      - crear_tarea: "Evaluar si reactivar o descartar"
+    modo: sombra
+
+  - nombre: Oportunidad huerfana
+    cuando: reloj.cada_hora
+    si: {sin_siguiente_paso_con_fecha: true}
+    entonces:
+      - crear_tarea: "Definir siguiente paso de la oportunidad"
+    modo: sombra
+
+  - nombre: Resumen del dia
+    cuando: reloj.diario_manana
+    si: {}
+    entonces:
+      - generar_resumen_del_dia: {}
+    modo: sombra
+
+  - nombre: Reporte semanal
+    cuando: reloj.lunes
+    si: {}
+    entonces:
+      - generar_reporte_semanal: {}
+    modo: sombra
+
+  - nombre: Cierre de mes
+    cuando: reloj.fin_de_mes
+    si: {}
+    entonces:
+      - generar_cierre_de_mes: {}
+    modo: sombra
+
+# Controles generales del motor (aplican a todas las reglas de arriba).
+controles:
+  limite_de_encadenamiento: 5
+  maximo_mensajes_automaticos_por_contacto_cada_horas: 48
+  horario_permitido_para_enviar:
+    desde: "08:00"
+    hasta: "20:00"
+    zona_horaria: America/Caracas
+  respeta_no_contactar: true

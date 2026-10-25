@@ -1,0 +1,79 @@
+# Reglas del embudo de ventas.
+# Nada de esto va en el codigo: si cambias un plazo o agregas una etapa, edita este archivo.
+
+etapas:
+  - Nuevo
+  - Calificado
+  - Diagnostico
+  - Propuesta
+  - Negociacion
+  - Dormido
+  - Ganado
+  - Perdido
+  - Descartado
+
+# A que etapas se puede saltar desde cada etapa.
+saltos_permitidos:
+  Nuevo: [Calificado, Descartado]
+  Calificado: [Diagnostico, Dormido]
+  Diagnostico: [Propuesta, Dormido, Perdido]
+  Propuesta: [Negociacion, Ganado, Dormido, Perdido]
+  Negociacion: [Ganado, Perdido]
+  Dormido: [Diagnostico]
+  Ganado: []
+  Perdido: []
+  Descartado: []
+
+# Dias maximos sin movimiento antes de marcar la oportunidad en_riesgo.
+dias_maximos_sin_movimiento:
+  Nuevo: 2
+  Calificado: 4
+  Diagnostico: 5
+  Propuesta: 7
+  Negociacion: 7
+  Dormido: 60
+
+# Probabilidad de cierre que se asigna automaticamente al entrar a cada etapa.
+probabilidad_inicial:
+  Nuevo: 5
+  Calificado: 15
+  Diagnostico: 30
+  Propuesta: 50
+  Negociacion: 70
+  Ganado: 100
+  Perdido: 0
+  Dormido: 10
+  Descartado: 0
+
+# Campos obligatorios en la oportunidad para poder entrar a cada etapa.
+requisitos_para_entrar:
+  Propuesta:
+    - valor_estimado
+    - alcance
+    - fecha_cierre_esperada
+  Ganado:
+    # Se exige UNA de estas dos condiciones (ver reglas_embudo.py):
+    # un pago recibido, o una propuesta aceptada con documento adjunto.
+    una_de:
+      - pago_recibido
+      - propuesta_aceptada_con_documento
+
+# Motivos de perdida validos. Marcar Perdido exige elegir uno de esta lista.
+motivos_perdida_validos:
+  - precio
+  - momento
+  - competencia
+  - sin_presupuesto
+  - no_respondio
+  - no_era_el_perfil
+
+# Atajos por linea de servicio: rutas cortas que no pasan por todas las etapas.
+atajos_por_linea:
+  asesoria:
+    # La asesoria no pasa por Propuesta: de Diagnostico se gana tras el cobro previo.
+    saltos_extra:
+      Diagnostico: [Ganado]
+  venta:
+    # La venta de producto es de un solo paso.
+    saltos_extra:
+      Nuevo: [Ganado]

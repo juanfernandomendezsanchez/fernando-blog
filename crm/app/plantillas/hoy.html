@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block titulo %}Hoy - CRM{% endblock %}
+{% block contenido %}
+{% set volver = "/hoy" %}
+<h1>Hoy</h1>
+
+<section class="cifras">
+  <div class="tarjeta-cifra">
+    <span class="etiqueta">Cobrado este mes</span>
+    <span class="valor">${{ cobrado_del_mes|dinero }}{% if meta_mensual %} / ${{ meta_mensual|dinero }}{% endif %}</span>
+    {% if meta_mensual %}
+    <span class="barra-progreso"><span style="width: {{ [100, (100 * cobrado_del_mes / meta_mensual)|round|int]|min }}%"></span></span>
+    {% endif %}
+  </div>
+  <div class="tarjeta-cifra">
+    <span class="etiqueta">Embudo ponderado</span>
+    <span class="valor">${{ embudo_ponderado|dinero }}</span>
+  </div>
+  <div class="tarjeta-cifra">
+    <span class="etiqueta">Monto vencido</span>
+    <span class="valor">${{ monto_vencido|dinero }}</span>
+  </div>
+</section>
+
+<div class="dos-columnas">
+  <div>
+    <section class="tarjeta">
+      <h2>Tareas de hoy y vencidas ({{ tareas_vencidas|length + tareas_de_hoy|length }})</h2>
+      {% set tareas_pendientes = tareas_vencidas + tareas_de_hoy %}
+      {% set nombres = nombres_tareas %}
+      <ul class="lista-tareas">
+        {% for tarea in tareas_pendientes %}
+        <li class="prioridad-{{ tarea.prioridad }} {{ 'vencida' if tarea in tareas_vencidas else '' }}">
+          <form method="post" action="/tareas/{{ tarea.id }}/completar" class="en-linea">
+            <input type="hidden" name="volver" value="/hoy" />
+            <button type="submit" class="casilla" title="Marcar como hecha" aria-label="Marcar como hecha"></button>
+          </form>
+          <div>
+            <span>{{ tarea.descripcion }}</span>
+            <span class="texto-suave">
+              {% if tarea in tareas_vencidas %}venció el {{ tarea.fecha_limite|hora_local("%d/%m") }}{% else %}hoy{% endif %}
+              {% if tarea.oportunidad_id and nombres.get(tarea.oportunidad_id) %} · <a href="/oportunidades/{{ tarea.oportunidad_id }}">{{ nombres[tarea.oportunidad_id] }}</a>{% endif %}
+            </span>
+          </div>
+        </li>
+        {% else %}
+        <li class="vacio">Nada urgente. <a href="/tareas">Ver todas las tareas</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Te toca responder ({{ por_responder|length }})</h2>
+      {% if por_responder %}
+      <ul class="lista-simple">
+        {% for i in por_responder %}
+        {% set c = contacto_de_oportunidad.get(i.oportunidad_id) %}
+        <li>
+          <a href="/oportunidades/{{ i.oportunidad_id }}">{{ c.nombre if c else "Oportunidad #" ~ i.oportunidad_id }}</a>
+          <span class="texto-suave">· {{ i.canal }} · {{ i.fecha|hora_local("%d/%m") }}</span>
+          {% if i.resumen %}<br /><span class="texto-suave">{{ i.resumen|truncate(80) }}</span>{% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="vacio">No tienes conversaciones esperando respuesta.</p>
+      {% endif %}
+    </section>
+
+    <section class="tarjeta">
+      <h2>Siguientes pasos para hoy ({{ siguientes_pasos|length }})</h2>
+      {% if siguientes_pasos %}
+      <ul class="lista-simple">
+        {% for o in siguientes_pasos %}
+        <li>
+          <a href="/oportunidades/{{ o.id }}">{{ contactos[o.contacto_id].nombre if contactos.get(o.contacto_id) else "Oportunidad #" ~ o.id }}</a>
+          — {{ o.siguiente_paso or "(sin descripción)" }}
+          <span class="texto-suave">· {{ o.fecha_siguiente_paso|hora_local("%d/%m") }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="vacio">Ningún siguiente paso programado para hoy.</p>
+      {% endif %}
+    </section>
+  </div>
+
+  <div>
+    <section class="tarjeta">
+      <h2>Oportunidades en riesgo ({{ oportunidades_en_riesgo|length }})</h2>
+      {% if oportunidades_en_riesgo %}
+      <ul class="lista-simple">
+        {% for o in oportunidades_en_riesgo %}
+        <li>
+          <span class="punto semaforo-rojo"></span>
+          <a href="/oportunidades/{{ o.id }}">{{ contactos[o.contacto_id].nombre if contactos.get(o.contacto_id) else "Oportunidad #" ~ o.id }}</a>
+          <span class="texto-suave">· {{ o.etapa }} · {{ dias_sin_movimiento[o.id] }} días sin movimiento</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="vacio">Ninguna oportunidad está en riesgo ahora mismo.</p>
+      {% endif %}
+    </section>
+
+    <section class="tarjeta">
+      <h2>Para aprobar ({{ borradores_para_aprobar|length }})</h2>
+      {% if borradores_para_aprobar %}
+      <ul class="lista-simple">
+        {% for borrador in borradores_para_aprobar %}
+        <li>{{ borrador.canal }} — {{ borrador.asunto or borrador.cuerpo[:60] }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="vacio">No hay nada pendiente de aprobar.</p>
+      {% endif %}
+    </section>
+
+    <section class="tarjeta">
+      <h2>Documentos favoritos</h2>
+      {% if documentos_favoritos %}
+      <ul class="lista-simple">
+        {% for d in documentos_favoritos %}
+        <li>★ <a href="{{ '/biblioteca/' ~ d.id ~ '/archivo' if d.archivo_guardado else d.enlace_externo }}" target="_blank" rel="noopener">{{ d.titulo }}</a></li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="vacio">Marca documentos con ★ en la <a href="/biblioteca">biblioteca</a> para tenerlos a mano aquí.</p>
+      {% endif %}
+    </section>
+  </div>
+</div>
+
+<p class="nota-fase">
+  Reuniones de hoy todavía no aparece aquí: falta conectar Google Calendar (Fase 2).
+</p>
+{% endblock %}

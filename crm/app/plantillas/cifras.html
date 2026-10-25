@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block titulo %}Cifras - CRM{% endblock %}
+{% block contenido %}
+<h1>Cifras</h1>
+
+<section class="cifras cifras-cuatro">
+  <div class="tarjeta-cifra">
+    <span class="etiqueta">Embudo abierto</span>
+    <span class="valor">${{ valor_abierto|dinero }}</span>
+    <span class="detalle">{{ total_abiertas }} oportunidad{{ "" if total_abiertas == 1 else "es" }} · ponderado ${{ valor_ponderado|dinero }}</span>
+  </div>
+  <div class="tarjeta-cifra">
+    <span class="etiqueta">Tasa de cierre</span>
+    <span class="valor">{{ tasa_de_cierre ~ "%" if tasa_de_cierre is not none else "—" }}</span>
+    <span class="detalle">ganadas / (ganadas + perdidas)</span>
+  </div>
+  <div class="tarjeta-cifra">
+    <span class="etiqueta">Ticket promedio</span>
+    <span class="valor">{{ "$" ~ ticket_promedio|dinero if ticket_promedio is not none else "—" }}</span>
+    <span class="detalle">de lo ganado</span>
+  </div>
+  <div class="tarjeta-cifra">
+    <span class="etiqueta">Tiempo para cerrar</span>
+    <span class="valor">{{ dias_promedio_para_ganar ~ " días" if dias_promedio_para_ganar is not none else "—" }}</span>
+    <span class="detalle">promedio, de creada a ganada</span>
+  </div>
+</section>
+
+<div class="dos-columnas">
+  <section class="tarjeta">
+    <h2>Ganado por mes</h2>
+    <div class="grafico-barras" role="img" aria-label="Valor ganado en los últimos meses">
+      {% for m in serie_meses %}
+      <div class="columna-barra">
+        <span class="valor-barra">{{ m.valor|round|int if m.valor else "" }}</span>
+        <div class="barra" style="height: {{ (100 * m.valor / maximo_mes)|round|int if maximo_mes else 0 }}%"></div>
+        <span class="etiqueta-barra">{{ m.etiqueta }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% if not maximo_mes %}<p class="vacio">Todavía no hay oportunidades ganadas en estos meses.</p>{% endif %}
+  </section>
+
+  <section class="tarjeta">
+    <h2>Embudo por etapa</h2>
+    {% set mayor = por_etapa|map(attribute="cantidad")|max if por_etapa else 0 %}
+    <table class="tabla-simple">
+      <thead><tr><th>Etapa</th><th></th><th>#</th><th>Valor</th></tr></thead>
+      <tbody>
+        {% for fila in por_etapa %}
+        <tr>
+          <td><a href="/embudo">{{ fila.etapa }}</a></td>
+          <td class="celda-barra"><span class="barra-horizontal" style="width: {{ (100 * fila.cantidad / mayor)|round|int if mayor else 0 }}%"></span></td>
+          <td>{{ fila.cantidad }}</td>
+          <td>{{ fila.valor|dinero }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <section class="tarjeta">
+    <h2>Por origen</h2>
+    <table class="tabla-simple">
+      <thead><tr><th>Origen</th><th>Contactos</th><th>Ganadas</th><th>Valor ganado</th></tr></thead>
+      <tbody>
+        {% for origen, datos in por_origen.items() %}
+        <tr>
+          <td><a href="/contactos?origen={{ origen|urlencode }}">{{ origen }}</a></td>
+          <td>{{ datos.contactos }}</td>
+          <td>{{ datos.ganadas }}</td>
+          <td>{{ datos.valor_ganado|dinero }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4" class="vacio">Sin contactos todavía.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <section class="tarjeta">
+    <h2>Por línea de servicio</h2>
+    <table class="tabla-simple">
+      <thead><tr><th>Línea</th><th>Abiertas</th><th>Valor abierto</th><th>Ganadas</th><th>Valor ganado</th></tr></thead>
+      <tbody>
+        {% for linea, datos in por_linea.items() %}
+        <tr>
+          <td><a href="/embudo?linea={{ linea|urlencode }}">{{ linea }}</a></td>
+          <td>{{ datos.abiertas }}</td>
+          <td>{{ datos.valor_abierto|dinero }}</td>
+          <td>{{ datos.ganadas }}</td>
+          <td>{{ datos.valor_ganado|dinero }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="vacio">Sin oportunidades todavía.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  {% if motivos_perdida %}
+  <section class="tarjeta">
+    <h2>Por qué se pierden</h2>
+    <ul>
+      {% for motivo, cantidad in motivos_perdida %}
+      <li>{{ motivo|replace("_", " ") }}: <strong>{{ cantidad }}</strong></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+</div>
+
+<section class="tarjeta respaldo">
+  <h2>Respaldo</h2>
+  <p>Descarga en un .zip tu base de datos y todos los documentos de la biblioteca. Guárdalo en Drive o en un disco externo de vez en cuando.</p>
+  <a href="/respaldo.zip" class="boton-principal">Descargar respaldo</a>
+  <a href="/contactos/exportar.csv" class="boton-secundario">Exportar contactos (CSV)</a>
+</section>
+{% endblock %}

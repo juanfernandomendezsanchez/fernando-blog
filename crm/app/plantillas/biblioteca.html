@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% from "_documentos.html" import tipo_documento %}
+{% block titulo %}Biblioteca - CRM{% endblock %}
+{% block contenido %}
+{% set volver = request.url.path ~ ("?" ~ request.url.query if request.url.query else "") %}
+<div class="encabezado-pagina">
+  <div>
+    <h1>Biblioteca</h1>
+    <p class="texto-suave">
+      {{ total_documentos }} documento{{ "" if total_documentos == 1 else "s" }}
+      {% if espacio_usado %} · {{ espacio_usado|tamano }} usados{% endif %}
+    </p>
+  </div>
+</div>
+
+<details class="desplegable tarjeta" id="subir" {{ "open" if not total_documentos else "" }}>
+  <summary>+ Agregar documento</summary>
+  <form method="post" action="/biblioteca/subir" enctype="multipart/form-data" class="formulario-rejilla">
+    <input type="hidden" name="volver" value="{{ volver }}" />
+    <label class="campo-ancho">Archivo (máximo {{ tamano_maximo_mb }} MB)
+      <input type="file" name="archivo" />
+    </label>
+    <label class="campo-ancho">…o un enlace
+      <input type="url" name="enlace_externo" placeholder="https://drive.google.com/…" />
+    </label>
+    <label>Título
+      <input type="text" name="titulo" placeholder="Si lo dejas vacío uso el nombre del archivo" />
+    </label>
+    <label>Categoría
+      <input type="text" name="categoria" list="categorias" value="general" />
+    </label>
+    <label>Etiquetas
+      <input type="text" name="etiquetas" placeholder="marca, 2026, cliente-x" />
+    </label>
+    <label>Ligar a un contacto (opcional)
+      <select name="contacto_id">
+        <option value="">— Solo para mí —</option>
+        {% for contacto in contactos.values() %}
+        <option value="{{ contacto.id }}">{{ contacto.nombre }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label class="campo-ancho">Descripción
+      <textarea name="descripcion" rows="2" placeholder="¿Para qué sirve este documento?"></textarea>
+    </label>
+    <button type="submit" class="boton-principal">Guardar</button>
+  </form>
+</details>
+
+<datalist id="categorias">
+  {% for c in categorias_sugeridas %}<option value="{{ c }}">{% endfor %}
+</datalist>
+
+<form method="get" class="barra-filtros">
+  <input type="search" name="q" value="{{ q }}" placeholder="Buscar por título, descripción, archivo o etiqueta…" />
+  {% if categoria_seleccionada %}<input type="hidden" name="categoria" value="{{ categoria_seleccionada }}" />{% endif %}
+  <label class="opcion-en-linea"><input type="checkbox" name="favoritos" value="1" {{ "checked" if solo_favoritos else "" }} onchange="this.form.submit()" /> Solo favoritos</label>
+  <button type="submit">Buscar</button>
+  {% if q or categoria_seleccionada or etiqueta_seleccionada or solo_favoritos %}
+  <a href="/biblioteca">Limpiar filtros</a>
+  {% endif %}
+</form>
+
+{% if categorias_usadas %}
+<nav class="chips" aria-label="Categorías">
+  <a href="/biblioteca" class="chip {{ 'activo' if not categoria_seleccionada else '' }}">Todas</a>
+  {% for c in categorias_usadas %}
+  <a href="/biblioteca?categoria={{ c|urlencode }}" class="chip {{ 'activo' if c == categoria_seleccionada else '' }}">{{ c }} <span>{{ conteo_por_categoria[c] }}</span></a>
+  {% endfor %}
+</nav>
+{% endif %}
+
+{% if etiqueta_seleccionada %}
+<p>Etiqueta: <strong>#{{ etiqueta_seleccionada }}</strong> · <a href="/biblioteca">quitar</a></p>
+{% endif %}
+
+<section class="rejilla-documentos">
+  {% for documento in documentos %}
+  {% set tipo = tipo_documento(documento) %}
+  <article class="tarjeta-documento">
+    <header>
+      <span class="insignia-tipo tipo-{{ tipo|lower }}">{{ tipo }}</span>
+      <form method="post" action="/biblioteca/{{ documento.id }}/favorito" class="en-linea">
+        <input type="hidden" name="volver" value="{{ volver }}" />
+        <button type="submit" class="boton-estrella {{ 'marcado' if documento.favorito else '' }}"
+                title="{{ 'Quitar de favoritos' if documento.favorito else 'Marcar como favorito' }}">★</button>
+      </form>
+    </header>
+
+    <h3>
+      {% if documento.archivo_guardado %}
+      <a href="/biblioteca/{{ documento.id }}/archivo" target="_blank" rel="noopener">{{ documento.titulo }}</a>
+      {% else %}
+      <a href="{{ documento.enlace_externo }}" target="_blank" rel="noopener noreferrer">{{ documento.titulo }}</a>
+      {% endif %}
+    </h3>
+
+    {% if documento.descripcion %}<p class="descripcion">{{ documento.descripcion }}</p>{% endif %}
+
+    <p class="meta">
+      <a href="/biblioteca?categoria={{ documento.categoria|urlencode }}">{{ documento.categoria }}</a>
+      {% if documento.tamano_bytes %} · {{ documento.tamano_bytes|tamano }}{% endif %}
+      · {{ documento.creado_en|hora_local("%d/%m/%Y") }}
+    </p>
+    {% if documento.contacto_id and contactos.get(documento.contacto_id) %}
+    <p class="meta">Contacto: <a href="/contactos/{{ documento.contacto_id }}">{{ contactos[documento.contacto_id].nombre }}</a></p>
+    {% endif %}
+    {% if documento.etiquetas %}
+    <p class="etiquetas">
+      {% for e in documento.etiquetas.split(",") %}<a href="/biblioteca?etiqueta={{ e|urlencode }}">#{{ e }}</a> {% endfor %}
+    </p>
+    {% endif %}
+
+    <footer class="acciones">
+      {% if documento.archivo_guardado %}
+      <a href="/biblioteca/{{ documento.id }}/archivo?descargar=true">Descargar</a>
+      {% endif %}
+      {% if documento.archivo_guardado and documento.enlace_externo %}
+      <a href="{{ documento.enlace_externo }}" target="_blank" rel="noopener noreferrer">Enlace</a>
+      {% endif %}
+      <details class="desplegable-en-linea">
+        <summary>Editar</summary>
+        <form method="post" action="/biblioteca/{{ documento.id }}/editar" class="formulario-apilado">
+          <input type="hidden" name="volver" value="{{ volver }}" />
+          <input type="text" name="titulo" value="{{ documento.titulo }}" required />
+          <input type="text" name="categoria" value="{{ documento.categoria }}" list="categorias" />
+          <input type="text" name="etiquetas" value="{{ documento.etiquetas or '' }}" placeholder="Etiquetas" />
+          <input type="url" name="enlace_externo" value="{{ documento.enlace_externo or '' }}" placeholder="Enlace" />
+          <select name="contacto_id">
+            <option value="">— Solo para mí —</option>
+            {% for contacto in contactos.values() %}
+            <option value="{{ contacto.id }}" {{ "selected" if contacto.id == documento.contacto_id else "" }}>{{ contacto.nombre }}</option>
+            {% endfor %}
+          </select>
+          <textarea name="descripcion" rows="2" placeholder="Descripción">{{ documento.descripcion or "" }}</textarea>
+          <button type="submit">Guardar cambios</button>
+        </form>
+        <form method="post" action="/biblioteca/{{ documento.id }}/eliminar"
+              onsubmit='return confirm({{ ("¿Eliminar «" ~ documento.titulo ~ "»? El archivo se borra para siempre.")|tojson }});'>
+          <input type="hidden" name="volver" value="{{ volver }}" />
+          <button type="submit" class="boton-peligro">Eliminar documento</button>
+        </form>
+      </details>
+    </footer>
+  </article>
+  {% endfor %}
+</section>
+
+{% if not documentos %}
+<p class="vacio">
+  {% if total_documentos %}Ningún documento coincide con esos filtros.{% else %}Tu biblioteca está vacía. Sube tu primer documento arriba.{% endif %}
+</p>
+{% endif %}
+
+{% if etiquetas_usadas %}
+<section class="nube-etiquetas">
+  <h2>Etiquetas</h2>
+  {% for e in etiquetas_usadas %}<a href="/biblioteca?etiqueta={{ e|urlencode }}" class="chip {{ 'activo' if e == etiqueta_seleccionada else '' }}">#{{ e }}</a> {% endfor %}
+</section>
+{% endif %}
+{% endblock %}
