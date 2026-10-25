@@ -37,7 +37,7 @@ def card(a, prefix=""):
       </a>'''
 
 GHOST = '''      <div class="card card-ghost">
-        <div class="thumb thumb-ghost"><span>Diagnóstico en Público</span></div>
+        <div class="thumb thumb-ghost"><span>Identidad verbal</span></div>
         <h3 class="ghost-title">Próximamente</h3>
       </div>'''
 

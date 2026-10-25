@@ -17,9 +17,9 @@ logo = re.search(r'<path[^>]*d="([^"]+)"', (ROOT/"assets/logo-verde.svg").read_t
 
 # (archivo, kicker, título, subtítulo)
 PAGES = [
-  ("home", "Marca y negocio", "Te muestro dónde se rompe la <em>promesa</em> de tu negocio.", "Precio, WhatsApp y atención, con casos venezolanos reales."),
-  ("blog", "Blog", "Marca y negocio, sin relleno.", "Casos reales de negocios venezolanos, con cada dato citado."),
-  ("trabaja-conmigo", "Diagnóstico en Público", "Postula tu negocio. Lo reviso en público.", "Dónde se rompe la promesa, con el razonamiento a la vista."),
+  ("home", "Estrategia de marca", "Marcas que se vuelven <em>inevitables</em>.", "Posicionamiento, identidad verbal y casos reales de marcas venezolanas."),
+  ("blog", "Blog", "Estrategia de marca, sin relleno.", "Casos reales, marcos aplicables y datos con fuente."),
+  ("trabaja-conmigo", "Diagnóstico en Público", "Postula tu marca. La analizo en público.", "Estrategia de marca con el razonamiento a la vista."),
   ("territorio-de-marca-cashea", "Caso · Territorio de marca", "Territorio de marca: qué es realmente <em>(el caso Cashea)</em>", "Una batidora, un señor de 75 años y una app venezolana."),
   ("cuando-tu-funnel-traiciona-tu-marca", "Ensayo · Funnel y marca", "Cuando tu funnel <em>traiciona</em> tu marca", "Con datos de Amazon, Ticketmaster y Edelman."),
   ("recursos", "Recursos", "Los libros detrás del método.", "Ventas, branding y estrategia."),
@@ -40,7 +40,7 @@ HTML = """<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>%(fontcss)s
 *{margin:0;padding:0;box-sizing:border-box}
-body{width:1200px;height:630px;background:#F1EDE3;color:#16213A;font-family:'Poppins',sans-serif;position:relative;overflow:hidden}
+body{width:1200px;height:630px;background:#FAF8F3;color:#16213A;font-family:'Poppins',sans-serif;position:relative;overflow:hidden}
 .bar{position:absolute;left:0;top:0;bottom:0;width:22px;background:#2E6F40}
 .mark{position:absolute;right:-120px;bottom:-170px;width:620px;height:620px;opacity:.09}
 .wrap{position:absolute;left:84px;right:84px;top:64px;bottom:64px;display:flex;flex-direction:column;justify-content:space-between}
@@ -57,7 +57,7 @@ h1 em{font-style:normal;color:#2E6F40}
 <div class="wrap">
   <div class="kicker">%(kicker)s</div>
   <div><h1>%(title)s</h1><p class="sub">%(sub)s</p></div>
-  <div class="foot"><svg viewBox="0 0 1080 1080"><path d="%(logo)s"/></svg>Fernando<span>Marca y negocio</span></div>
+  <div class="foot"><svg viewBox="0 0 1080 1080"><path d="%(logo)s"/></svg>Fernando<span>Estrategia de marca</span></div>
 </div></body></html>"""
 
 with sync_playwright() as p:
