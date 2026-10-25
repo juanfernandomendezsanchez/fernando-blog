@@ -8,6 +8,7 @@
   <script src="https://unpkg.com/htmx.org@1.9.12" defer></script>
 </head>
 <body>
+  {% set ruta = request.url.path %}
   <header class="barra-superior">
     <a href="/hoy" class="marca">CRM</a>
     <form action="/buscar" method="get" class="busqueda">
@@ -17,12 +18,12 @@
   </header>
 
   <nav class="navegacion">
-    <a href="/hoy" class="{{ 'activo' if request.url.path == '/hoy' else '' }}">Hoy</a>
-    <a href="/embudo" class="{{ 'activo' if request.url.path == '/embudo' else '' }}">Embudo</a>
-    <a href="/contactos" class="{{ 'activo' if request.url.path == '/contactos' else '' }}">Contactos</a>
-    <span class="pendiente" title="Todavia no esta construido (Fase 2)">Bandeja</span>
-    <span class="pendiente" title="Todavia no esta construido (Fase 2)">Cobros</span>
-    <span class="pendiente" title="Todavia no esta construido (Fase 2)">Cifras</span>
+    <a href="/hoy" class="{{ 'activo' if ruta == '/hoy' else '' }}">Hoy</a>
+    <a href="/embudo" class="{{ 'activo' if ruta.startswith('/embudo') or ruta.startswith('/oportunidades') else '' }}">Embudo</a>
+    <a href="/contactos" class="{{ 'activo' if ruta.startswith('/contactos') or ruta == '/buscar' else '' }}">Contactos</a>
+    <a href="/tareas" class="{{ 'activo' if ruta.startswith('/tareas') else '' }}">Tareas</a>
+    <a href="/biblioteca" class="{{ 'activo' if ruta.startswith('/biblioteca') else '' }}">Biblioteca</a>
+    <a href="/cifras" class="{{ 'activo' if ruta.startswith('/cifras') else '' }}">Cifras</a>
     <a href="/logout" class="salir">Salir</a>
   </nav>
 

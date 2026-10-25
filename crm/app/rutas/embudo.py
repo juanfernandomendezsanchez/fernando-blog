@@ -7,7 +7,7 @@ from sqlmodel import Session, select
 from app.base_datos import obtener_sesion
 from app.errores import ErrorDeNegocio
 from app.modelos import Contacto, Oportunidad, Servicio
-from app.plantillas_util import plantillas
+from app.plantillas_util import plantillas, ruta_de_regreso
 from app.reglas_embudo import color_semaforo, etapas_permitidas_desde, mover_etapa
 
 enrutador = APIRouter()
@@ -36,6 +36,7 @@ def ver_embudo(request: Request, linea: str = "", sesion: Session = Depends(obte
             {
                 "oportunidad": oportunidad,
                 "contacto": contacto,
+                "servicio": servicio,
                 "semaforo": color_semaforo(oportunidad),
                 "siguientes_etapas": etapas_permitidas_desde(oportunidad.etapa, servicio.linea),
             }
@@ -49,6 +50,10 @@ def ver_embudo(request: Request, linea: str = "", sesion: Session = Depends(obte
             "etapas": ETAPAS_DEL_TABLERO,
             "linea_seleccionada": linea,
             "lineas": LINEAS_DE_SERVICIO,
+            "totales": {
+                etapa: sum(t["oportunidad"].valor_estimado or 0 for t in tarjetas)
+                for etapa, tarjetas in columnas.items()
+            },
         },
     )
 
@@ -59,6 +64,7 @@ def mover_etapa_de_oportunidad(
     etapa_nueva: str = Form(...),
     motivo_perdida: str = Form(""),
     pago_recibido: bool = Form(False),
+    volver: str = Form(""),
     sesion: Session = Depends(obtener_sesion),
 ):
     oportunidad = sesion.get(Oportunidad, oportunidad_id)
@@ -72,4 +78,4 @@ def mover_etapa_de_oportunidad(
         motivo_perdida=motivo_perdida or None,
         pago_recibido=pago_recibido,
     )
-    return RedirectResponse("/embudo", status_code=303)
+    return RedirectResponse(ruta_de_regreso(volver, "/embudo"), status_code=303)

@@ -17,9 +17,15 @@ from app.autenticacion import enrutador as enrutador_autenticacion
 from app.base_datos import crear_tablas
 from app.configuracion import CLAVE_SECRETA
 from app.errores import ErrorDeNegocio
+from app.plantillas_util import plantillas
+from app.rutas.biblioteca import enrutador as enrutador_biblioteca
+from app.rutas.cifras import enrutador as enrutador_cifras
 from app.rutas.contactos import enrutador as enrutador_contactos
 from app.rutas.embudo import enrutador as enrutador_embudo
 from app.rutas.hoy import enrutador as enrutador_hoy
+from app.rutas.oportunidades import enrutador as enrutador_oportunidades
+from app.rutas.respaldo import enrutador as enrutador_respaldo
+from app.rutas.tareas import enrutador as enrutador_tareas
 
 CARPETA_APP = Path(__file__).resolve().parent
 
@@ -35,8 +41,12 @@ def redirigir_a_login(request: Request, excepcion: NoAutenticado):
 
 @app.exception_handler(ErrorDeNegocio)
 def mostrar_error_de_negocio(request: Request, excepcion: ErrorDeNegocio):
-    # Fase 1: un mensaje de texto simple en español, explicando que corregir.
-    # En una fase futura esto puede mostrarse como una notificacion en pantalla.
+    # En el navegador se muestra una pagina con el mensaje y un boton para
+    # volver; a cualquier otro cliente (pruebas, scripts) le llega texto simple.
+    if "text/html" in request.headers.get("accept", "") and request.session.get("autenticado"):
+        return plantillas.TemplateResponse(
+            "error.html", {"request": request, "mensaje": str(excepcion)}, status_code=400
+        )
     return PlainTextResponse(str(excepcion), status_code=400)
 
 
@@ -46,9 +56,17 @@ def al_iniciar() -> None:
 
 
 app.include_router(enrutador_autenticacion)
-app.include_router(enrutador_hoy, dependencies=[Depends(requerir_autenticacion)])
-app.include_router(enrutador_embudo, dependencies=[Depends(requerir_autenticacion)])
-app.include_router(enrutador_contactos, dependencies=[Depends(requerir_autenticacion)])
+for enrutador in (
+    enrutador_hoy,
+    enrutador_embudo,
+    enrutador_contactos,
+    enrutador_oportunidades,
+    enrutador_tareas,
+    enrutador_biblioteca,
+    enrutador_cifras,
+    enrutador_respaldo,
+):
+    app.include_router(enrutador, dependencies=[Depends(requerir_autenticacion)])
 
 
 @app.get("/")

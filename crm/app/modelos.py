@@ -173,6 +173,29 @@ class Borrador(ModeloBase, table=True):
     estado: str = "pendiente"
 
 
+class Documento(ModeloBase, table=True):
+    """Un documento de la Biblioteca: un archivo subido, un enlace externo, o
+    ambos. Puede quedar suelto (uso personal) o ligado a un contacto u
+    oportunidad para verlo tambien desde su ficha."""
+
+    titulo: str
+    # Categorias sugeridas: ver CATEGORIAS_SUGERIDAS en app/rutas/biblioteca.py.
+    # Es texto libre, asi puedes inventar las tuyas.
+    categoria: str = "general"
+    descripcion: Optional[str] = None
+    etiquetas: Optional[str] = None
+    # Nombre original del archivo, tal como lo subiste.
+    nombre_archivo: Optional[str] = None
+    # Nombre con el que se guardo en disco, dentro de CARPETA_BIBLIOTECA.
+    archivo_guardado: Optional[str] = None
+    tipo_contenido: Optional[str] = None
+    tamano_bytes: int = 0
+    enlace_externo: Optional[str] = None
+    favorito: bool = False
+    contacto_id: Optional[int] = Field(default=None, foreign_key="contacto.id")
+    oportunidad_id: Optional[int] = Field(default=None, foreign_key="oportunidad.id")
+
+
 class Evento(ModeloBase, table=True):
     # Formato modulo.hecho, por ejemplo "correo.nuevo" u "oportunidad.cambio_etapa".
     tipo: str

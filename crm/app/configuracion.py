@@ -4,6 +4,7 @@ fechas de UTC a la hora de Caracas (o la zona que elijas)."""
 import os
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 from zoneinfo import ZoneInfo
 
 from dotenv import load_dotenv
@@ -31,8 +32,26 @@ ID_HOJA_GOOGLE_SHEETS = obtener_variable("GOOGLE_SHEETS_ID", "")
 PESTANA_LEADS_GOOGLE_SHEETS = obtener_variable("GOOGLE_SHEETS_PESTANA_LEADS", "leads")
 
 
+# Biblioteca: carpeta donde se guardan los documentos que subes. Vive dentro
+# de datos/ para que nunca se suba al repositorio (ver .gitignore).
+CARPETA_BIBLIOTECA = Path(
+    obtener_variable("CRM_CARPETA_BIBLIOTECA") or str(CARPETA_CRM / "datos" / "biblioteca")
+)
+TAMANO_MAXIMO_DOCUMENTO_MB = int(obtener_variable("CRM_TAMANO_MAXIMO_DOCUMENTO_MB", "50") or "50")
+
+
 def convertir_a_hora_local(fecha_utc: datetime) -> datetime:
     """Convierte una fecha guardada en UTC a la zona horaria configurada, para mostrarla."""
     if fecha_utc.tzinfo is None:
         fecha_utc = fecha_utc.replace(tzinfo=ZoneInfo("UTC"))
     return fecha_utc.astimezone(ZoneInfo(ZONA_HORARIA))
+
+
+def convertir_fecha_local_a_utc(texto_fecha: str, hora: str = "12:00") -> Optional[datetime]:
+    """Convierte la fecha de un formulario ("2026-09-30", en hora local) a un
+    datetime en UTC sin zona, que es como se guarda en la base de datos.
+    Devuelve None si el texto viene vacio."""
+    if not texto_fecha:
+        return None
+    local = datetime.fromisoformat(f"{texto_fecha}T{hora}").replace(tzinfo=ZoneInfo(ZONA_HORARIA))
+    return local.astimezone(ZoneInfo("UTC")).replace(tzinfo=None)

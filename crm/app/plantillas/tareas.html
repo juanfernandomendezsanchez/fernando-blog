@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block titulo %}Tareas - CRM{% endblock %}
+{% block contenido %}
+{% set volver = "/tareas" %}
+<div class="encabezado-pagina">
+  <h1>Tareas <small class="texto-suave">({{ total_pendientes }} pendiente{{ "" if total_pendientes == 1 else "s" }})</small></h1>
+</div>
+
+<section class="tarjeta">
+  <form method="post" action="/tareas/nueva" class="fila-campos formulario-tarea-nueva">
+    <input type="hidden" name="volver" value="/tareas" />
+    <input type="text" name="descripcion" placeholder="¿Qué hay que hacer?" required class="campo-flexible" />
+    <input type="date" name="fecha_limite" />
+    <select name="prioridad">{% for p in prioridades %}<option {{ "selected" if p == "media" else "" }}>{{ p }}</option>{% endfor %}</select>
+    <select name="oportunidad_id">
+      <option value="">Tarea suelta</option>
+      {% for id, etiqueta in opciones_oportunidad %}<option value="{{ id }}">{{ etiqueta }}</option>{% endfor %}
+    </select>
+    <button type="submit" class="boton-principal">Agregar</button>
+  </form>
+</section>
+
+{% set titulos = {
+  "vencidas": "Vencidas",
+  "hoy": "Hoy",
+  "esta_semana": "Próximos 7 días",
+  "mas_adelante": "Más adelante",
+  "sin_fecha": "Sin fecha",
+} %}
+{% for clave, titulo in titulos.items() %}
+  {% if grupos[clave] %}
+  <section class="tarjeta grupo-tareas grupo-{{ clave }}">
+    <h2>{{ titulo }} ({{ grupos[clave]|length }})</h2>
+    <ul class="lista-tareas">
+      {% for tarea in grupos[clave] %}
+      <li class="prioridad-{{ tarea.prioridad }} {{ 'vencida' if clave == 'vencidas' else '' }}">
+        <form method="post" action="/tareas/{{ tarea.id }}/completar" class="en-linea">
+          <input type="hidden" name="volver" value="{{ volver }}" />
+          <button type="submit" class="casilla" title="Marcar como hecha" aria-label="Marcar como hecha"></button>
+        </form>
+        <div class="campo-flexible">
+          <span>{{ tarea.descripcion }}</span>
+          <span class="texto-suave">
+            {% if tarea.fecha_limite %}{{ tarea.fecha_limite|hora_local("%d/%m/%Y") }} · {% endif %}prioridad {{ tarea.prioridad }}
+            {% if tarea.oportunidad_id and nombres.get(tarea.oportunidad_id) %} · <a href="/oportunidades/{{ tarea.oportunidad_id }}">{{ nombres[tarea.oportunidad_id] }}</a>{% endif %}
+            {% if tarea.creada_por != "yo" %} · creada por {{ tarea.creada_por }}{% endif %}
+          </span>
+        </div>
+        <form method="post" action="/tareas/{{ tarea.id }}/cancelar" class="en-linea">
+          <input type="hidden" name="volver" value="{{ volver }}" />
+          <button type="submit" class="boton-pequeno boton-texto" title="Cancelar tarea">✕</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+{% endfor %}
+
+{% if not total_pendientes %}
+<p class="vacio">No tienes tareas pendientes. 🎉</p>
+{% endif %}
+
+{% if hechas_recientes %}
+<section class="tarjeta">
+  <details>
+    <summary><h2 class="en-linea">Hechas o canceladas esta semana ({{ hechas_recientes|length }})</h2></summary>
+    <ul class="lista-tareas">
+      {% for tarea in hechas_recientes %}
+      <li class="hecha">
+        <span class="campo-flexible"><s>{{ tarea.descripcion }}</s> <span class="texto-suave">{{ tarea.estado }}</span></span>
+        <form method="post" action="/tareas/{{ tarea.id }}/reabrir" class="en-linea">
+          <input type="hidden" name="volver" value="{{ volver }}" />
+          <button type="submit" class="boton-pequeno boton-texto">Reabrir</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+  </details>
+</section>
+{% endif %}
+{% endblock %}

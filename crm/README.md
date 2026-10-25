@@ -35,6 +35,44 @@ Este README documenta la **Fase 1**, que es lo que ya está construido.
   arrancas con `iniciar.py`, y también hay un botón "Sincronizar con Google
   Sheets ahora" en `/contactos`. Ver la sección de abajo para configurarla.
 
+## Qué se agregó después (fichas, tareas, biblioteca, cifras)
+
+- **Biblioteca** (`/biblioteca`, `app/rutas/biblioteca.py`): tu archivo
+  personal de documentos. Sube archivos (hasta 50 MB, ajustable con
+  `CRM_TAMANO_MAXIMO_DOCUMENTO_MB`) o guarda enlaces (Drive, Notion, Canva),
+  con categoría libre, etiquetas, descripción y favoritos (★). Búsqueda por
+  texto y filtros por categoría, etiqueta y favoritos. Un documento puede ser
+  solo tuyo o quedar ligado a un contacto u oportunidad (aparece también en su
+  ficha). Los PDF, imágenes y textos se abren en el navegador; todo lo demás
+  (incluido HTML y SVG) solo se descarga. Los archivos viven en
+  `crm/datos/biblioteca/` con nombre aleatorio y **nunca se suben al
+  repositorio** (está en `.gitignore`).
+- **Ficha de contacto** (`/contactos/{id}`): editar todos los datos (empresa,
+  referido por, etiquetas, notas, no contactar), botones directos a
+  WhatsApp/llamar/correo/Instagram, sus oportunidades, conversaciones, tareas,
+  documentos e historial de cambios. Avisa si el correo ya lo tiene otro
+  contacto.
+- **Ficha de oportunidad** (`/oportunidades/{id}`): valor, cierre esperado y
+  siguiente paso editables; mover de etapa; registrar conversaciones (cada
+  una reinicia el semáforo); propuestas con versiones, estado y documento
+  adjunto (así ya se puede llegar a Propuesta y a Ganado desde la interfaz);
+  tareas, documentos e historial.
+- **Tareas** (`/tareas`): agrupadas en vencidas, hoy, próximos 7 días, más
+  adelante y sin fecha; sueltas o ligadas a una oportunidad; completar,
+  cancelar y reabrir.
+- **Hoy** ahora muestra también tareas de hoy, conversaciones que te toca
+  responder, siguientes pasos del día y documentos favoritos. Las
+  oportunidades en riesgo se calculan en el momento con las reglas del
+  embudo.
+- **Cifras** (`/cifras`): embudo abierto y ponderado, tasa de cierre, ticket
+  promedio, días promedio para ganar, ganado por mes (últimos 6), embudo por
+  etapa, resultados por origen y por línea de servicio, y motivos de pérdida.
+- **Respaldo** (`/respaldo.zip`, botón en Cifras): un .zip con la base de
+  datos y todos los documentos de la biblioteca. **Exportar contactos a CSV**
+  (`/contactos/exportar.csv`).
+- El alta rápida acepta correo y teléfono, y no duplica si ya existen.
+- Los errores de negocio se muestran como una página con botón para volver.
+
 ## Qué falta (Fase 2, no está construido todavía)
 
 - El motor que lee cada Evento, busca en `reglas/automatizaciones.yaml` y
@@ -47,10 +85,9 @@ Este README documenta la **Fase 1**, que es lo que ya está construido.
   (hoy a propósito solo sincroniza Contactos: adivinar el servicio a partir
   del texto de "Necesidad" podría crear datos incorrectos sin que te des
   cuenta).
-- Rutas `/aprobacion` (bandeja de borradores), `/cobros` y `/cifras`.
-- Página de detalle `/oportunidades/{id}` con línea de tiempo, generar
-  propuesta y registrar pago.
-- Respaldo diario de la base de datos.
+- Rutas `/aprobacion` (bandeja de borradores) y `/cobros` (proyectos, hitos
+  y pagos: hoy "pago recibido" es solo una casilla al marcar Ganado).
+- Respaldo diario *automático* (el manual ya existe en `/respaldo.zip`).
 
 ## Configurar la sincronización con Google Sheets
 
@@ -156,13 +193,14 @@ crm/
 │   ├── reglas_embudo.py        ← mover_etapa(...), esta_en_riesgo(...)
 │   ├── reglas_puntuacion.py    ← calcular_puntuacion(...)
 │   ├── plantillas_util.py      ← instancia de Jinja2Templates + filtro de fecha
-│   ├── rutas/                  ← hoy.py, embudo.py, contactos.py
+│   ├── rutas/                  ← hoy, embudo, contactos, oportunidades, tareas,
+│   │                              biblioteca, cifras, respaldo
 │   ├── plantillas/             ← HTML (Jinja2)
 │   └── estaticos/              ← estilos.css
 ├── reglas/                     ← embudo.yaml, puntuacion.yaml, servicios.yaml,
 │                                  automatizaciones.yaml (catalogo, Fase 2)
 ├── pruebas/                    ← pytest
-├── datos/                      ← aqui vive crm.db (no se sube al repo)
+├── datos/                      ← aqui viven crm.db y biblioteca/ (no se suben al repo)
 ├── sembrar_datos.py
 ├── requirements.txt
 └── .env.example

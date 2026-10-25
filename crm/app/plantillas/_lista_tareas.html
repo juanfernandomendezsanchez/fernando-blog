@@ -1,0 +1,24 @@
+{# Lista de tareas con botones para completarlas. Espera las variables
+   "tareas_pendientes" y "volver"; "nombres" es opcional ({oportunidad_id: nombre}). #}
+<ul class="lista-tareas">
+  {% for tarea in tareas_pendientes %}
+  {% set vencida = tarea.fecha_limite and tarea.fecha_limite < ahora %}
+  <li class="prioridad-{{ tarea.prioridad }} {{ 'vencida' if vencida else '' }}">
+    <form method="post" action="/tareas/{{ tarea.id }}/completar" class="en-linea">
+      <input type="hidden" name="volver" value="{{ volver }}" />
+      <button type="submit" class="casilla" title="Marcar como hecha" aria-label="Marcar como hecha"></button>
+    </form>
+    <div>
+      <span>{{ tarea.descripcion }}</span>
+      <span class="texto-suave">
+        {% if tarea.fecha_limite %}{{ "venció" if vencida else "para" }} el {{ tarea.fecha_limite|hora_local("%d/%m") }}{% endif %}
+        {% if nombres is defined and tarea.oportunidad_id and nombres.get(tarea.oportunidad_id) %}
+          · <a href="/oportunidades/{{ tarea.oportunidad_id }}">{{ nombres[tarea.oportunidad_id] }}</a>
+        {% endif %}
+      </span>
+    </div>
+  </li>
+  {% else %}
+  <li class="vacio">Nada pendiente.</li>
+  {% endfor %}
+</ul>

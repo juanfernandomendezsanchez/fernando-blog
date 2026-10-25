@@ -1,0 +1,55 @@
+{# Piezas reutilizables para mostrar documentos de la Biblioteca.
+   Se usan en /biblioteca y en las fichas de contacto y oportunidad. #}
+
+{% macro tipo_documento(documento) -%}
+  {%- set nombre = (documento.nombre_archivo or "")|lower -%}
+  {%- set tipo = documento.tipo_contenido or "" -%}
+  {%- if not documento.archivo_guardado -%}ENLACE
+  {%- elif tipo == "application/pdf" -%}PDF
+  {%- elif tipo.startswith("image/") -%}IMG
+  {%- elif tipo.startswith("video/") -%}VIDEO
+  {%- elif tipo.startswith("audio/") -%}AUDIO
+  {%- elif nombre.endswith((".doc", ".docx", ".odt", ".rtf")) -%}DOC
+  {%- elif nombre.endswith((".xls", ".xlsx", ".ods", ".csv")) -%}HOJA
+  {%- elif nombre.endswith((".ppt", ".pptx", ".odp", ".key")) -%}PRES
+  {%- elif nombre.endswith((".zip", ".rar", ".7z")) -%}ZIP
+  {%- elif tipo.startswith("text/") -%}TXT
+  {%- else -%}ARCHIVO
+  {%- endif -%}
+{%- endmacro %}
+
+{% macro lista_compacta(documentos, volver) %}
+  {% if documentos %}
+  <ul class="lista-documentos-compacta">
+    {% for documento in documentos %}
+    <li>
+      <span class="insignia-tipo tipo-{{ tipo_documento(documento)|lower }}">{{ tipo_documento(documento) }}</span>
+      {% if documento.archivo_guardado %}
+      <a href="/biblioteca/{{ documento.id }}/archivo" target="_blank" rel="noopener">{{ documento.titulo }}</a>
+      {% else %}
+      <a href="{{ documento.enlace_externo }}" target="_blank" rel="noopener noreferrer">{{ documento.titulo }}</a>
+      {% endif %}
+      <span class="texto-suave">{{ documento.categoria }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="vacio">Sin documentos todavía.</p>
+  {% endif %}
+{% endmacro %}
+
+{% macro formulario_subida_rapida(volver, contacto_id="", oportunidad_id="") %}
+<details class="desplegable">
+  <summary>+ Adjuntar documento</summary>
+  <form method="post" action="/biblioteca/subir" enctype="multipart/form-data" class="formulario-apilado">
+    <input type="hidden" name="volver" value="{{ volver }}" />
+    <input type="hidden" name="contacto_id" value="{{ contacto_id }}" />
+    <input type="hidden" name="oportunidad_id" value="{{ oportunidad_id }}" />
+    <input type="file" name="archivo" />
+    <input type="url" name="enlace_externo" placeholder="…o pega un enlace (Drive, Notion, Canva)" />
+    <input type="text" name="titulo" placeholder="Título (si lo dejas vacío uso el nombre del archivo)" />
+    <input type="text" name="categoria" value="{{ 'propuestas' if oportunidad_id else 'general' }}" placeholder="Categoría" />
+    <button type="submit">Guardar en la biblioteca</button>
+  </form>
+</details>
+{% endmacro %}

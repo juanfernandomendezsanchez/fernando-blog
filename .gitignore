@@ -8,5 +8,9 @@ crm/venv/
 crm/.venv/
 crm/datos/*.db
 crm/datos/*.db-journal
+# Documentos personales de la Biblioteca: nunca se suben al repositorio.
+crm/datos/biblioteca/
 crm/credenciales_google.json
 .pytest_cache/
+# Documentos internos de marca (manual y guía): se quedan solo en la PC.
+marca/

@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% from "_documentos.html" import lista_compacta, formulario_subida_rapida %}
+{% block titulo %}Oportunidad #{{ oportunidad.id }} - CRM{% endblock %}
+{% block contenido %}
+{% set volver = "/oportunidades/" ~ oportunidad.id %}
+<p class="migas"><a href="/embudo">← Embudo</a>{% if contacto %} · <a href="/contactos/{{ contacto.id }}">{{ contacto.nombre }}</a>{% endif %}</p>
+
+<div class="encabezado-pagina">
+  <div>
+    <h1>{{ contacto.nombre if contacto else "Sin contacto" }} — {{ servicio.nombre if servicio else "Sin servicio" }}</h1>
+    <p class="texto-suave">
+      <span class="insignia etapa-{{ oportunidad.etapa|lower }}">{{ oportunidad.etapa }}</span>
+      · Probabilidad {{ oportunidad.probabilidad }}%
+      {% if semaforo %}· <span class="punto semaforo-{{ semaforo }}"></span> {{ dias_sin_movimiento }} día{{ "" if dias_sin_movimiento == 1 else "s" }} sin movimiento{% endif %}
+      {% if oportunidad.motivo_perdida %}· Motivo: {{ oportunidad.motivo_perdida }}{% endif %}
+    </p>
+  </div>
+  <div class="cifra-grande">
+    {% if oportunidad.valor_estimado %}{{ oportunidad.valor_estimado|dinero }} <small>{{ oportunidad.moneda }}</small>{% else %}<small>Sin valor estimado</small>{% endif %}
+  </div>
+</div>
+
+{% if siguientes_etapas %}
+<section class="tarjeta">
+  <h2>Mover de etapa</h2>
+  <form method="post" action="/oportunidades/{{ oportunidad.id }}/mover-etapa" class="fila-campos formulario-mover">
+    <input type="hidden" name="volver" value="{{ volver }}" />
+    <select name="etapa_nueva">
+      {% for e in siguientes_etapas %}<option value="{{ e }}">{{ e }}</option>{% endfor %}
+    </select>
+    {% if "Perdido" in siguientes_etapas %}
+    <select name="motivo_perdida">
+      <option value="">Motivo (solo si es Perdido)</option>
+      {% for m in motivos_perdida %}<option value="{{ m }}">{{ m|replace("_"," ") }}</option>{% endfor %}
+    </select>
+    {% endif %}
+    {% if "Ganado" in siguientes_etapas %}
+    <label class="opcion-en-linea"><input type="checkbox" name="pago_recibido" value="true" /> Pago recibido</label>
+    {% endif %}
+    <button type="submit" class="boton-principal">Mover</button>
+  </form>
+  {% if "Propuesta" in siguientes_etapas %}
+  <p class="texto-suave">Para pasar a Propuesta necesitas valor estimado, fecha de cierre esperada y una propuesta con alcance (abajo).</p>
+  {% endif %}
+</section>
+{% endif %}
+
+<div class="dos-columnas">
+  <div>
+    <section class="tarjeta">
+      <h2>Conversaciones ({{ interacciones|length }})</h2>
+      <form method="post" action="/oportunidades/{{ oportunidad.id }}/interacciones" class="formulario-apilado">
+        <div class="fila-campos">
+          <select name="canal">{% for c in canales %}<option>{{ c }}</option>{% endfor %}</select>
+          <select name="direccion"><option value="saliente">Yo escribí</option><option value="entrante">Me escribió</option></select>
+          <input type="date" name="fecha" title="Vacío = ahora" />
+        </div>
+        <textarea name="resumen" rows="2" placeholder="¿De qué hablaron? ¿Qué quedó pendiente?"></textarea>
+        <label class="opcion-en-linea"><input type="checkbox" name="requiere_respuesta" value="true" /> Me toca responder</label>
+        <button type="submit">Registrar conversación</button>
+      </form>
+      <ol class="linea-tiempo">
+        {% for i in interacciones %}
+        <li class="{{ 'requiere-respuesta' if i.requiere_respuesta else '' }}">
+          <span class="texto-suave">{{ i.fecha|hora_local }} · {{ i.canal }} · {{ "me escribió" if i.direccion == "entrante" else "yo escribí" }}</span>
+          <p>{{ i.resumen or "(sin resumen)" }}</p>
+          {% if i.requiere_respuesta %}
+          <form method="post" action="/interacciones/{{ i.id }}/respondida" class="en-linea">
+            <button type="submit" class="boton-pequeno">Ya respondí</button>
+          </form>
+          {% endif %}
+        </li>
+        {% else %}
+        <li class="vacio">Sin conversaciones registradas.</li>
+        {% endfor %}
+      </ol>
+    </section>
+
+    <section class="tarjeta" id="propuestas">
+      <h2>Propuestas ({{ propuestas|length }})</h2>
+      {% for p in propuestas %}
+      <div class="propuesta">
+        <div class="encabezado-seccion">
+          <strong>v{{ p.version }} · {{ p.monto|dinero }} {{ p.moneda }}</strong>
+          <span class="insignia estado-{{ p.estado }}">{{ p.estado }}</span>
+        </div>
+        {% if p.alcance %}<p class="alcance">{{ p.alcance }}</p>{% endif %}
+        <p class="texto-suave">
+          {% if p.fecha_envio %}Enviada {{ p.fecha_envio|hora_local("%d/%m/%Y") }} · {% endif %}
+          {% if p.vigencia_hasta %}Vigente hasta {{ p.vigencia_hasta|hora_local("%d/%m/%Y") }} · {% endif %}
+          {% if p.documento_adjunto_url %}<a href="{{ p.documento_adjunto_url }}" target="_blank" rel="noopener">Ver documento</a>{% else %}Sin documento{% endif %}
+        </p>
+        <form method="post" action="/propuestas/{{ p.id }}/estado" class="fila-campos">
+          <select name="estado">
+            {% for e in estados_propuesta %}<option value="{{ e }}" {{ "selected" if e == p.estado else "" }}>{{ e }}</option>{% endfor %}
+          </select>
+          {% if not p.documento_adjunto_url and documentos %}
+          <select name="documento_id">
+            <option value="">Adjuntar documento…</option>
+            {% for d in documentos %}<option value="{{ d.id }}">{{ d.titulo }}</option>{% endfor %}
+          </select>
+          {% endif %}
+          <button type="submit" class="boton-pequeno">Actualizar</button>
+        </form>
+      </div>
+      {% endfor %}
+      <details class="desplegable" {{ "open" if not propuestas and oportunidad.etapa in ["Diagnostico", "Propuesta"] else "" }}>
+        <summary>+ Nueva propuesta{% if propuestas %} (versión {{ propuestas[0].version + 1 }}){% endif %}</summary>
+        <form method="post" action="/oportunidades/{{ oportunidad.id }}/propuestas" class="formulario-apilado">
+          <div class="fila-campos">
+            <input type="text" inputmode="decimal" name="monto" placeholder="Monto" value="{{ oportunidad.valor_estimado or '' }}" />
+            <input type="text" name="moneda" value="{{ oportunidad.moneda }}" size="4" />
+            <label>Vigente hasta <input type="date" name="vigencia_hasta" /></label>
+          </div>
+          <textarea name="alcance" rows="4" placeholder="Alcance: qué incluye, entregables, tiempos…" required></textarea>
+          {% if documentos %}
+          <select name="documento_id">
+            <option value="">Documento de la biblioteca (opcional)</option>
+            {% for d in documentos %}<option value="{{ d.id }}">{{ d.titulo }}</option>{% endfor %}
+          </select>
+          {% endif %}
+          <input type="url" name="documento_adjunto_url" placeholder="…o enlace al documento (Drive, Canva)" />
+          <button type="submit">Guardar propuesta</button>
+        </form>
+      </details>
+    </section>
+  </div>
+
+  <div>
+    <section class="tarjeta">
+      <h2>Datos</h2>
+      <form method="post" action="/oportunidades/{{ oportunidad.id }}/editar" class="formulario-apilado">
+        <div class="fila-campos">
+          <label>Valor estimado <input type="text" inputmode="decimal" name="valor_estimado" value="{{ oportunidad.valor_estimado if oportunidad.valor_estimado is not none else '' }}" /></label>
+          <label>Moneda <input type="text" name="moneda" value="{{ oportunidad.moneda }}" size="4" /></label>
+        </div>
+        <label>Cierre esperado <input type="date" name="fecha_cierre_esperada" value="{{ oportunidad.fecha_cierre_esperada|hora_local('%Y-%m-%d') }}" /></label>
+        <label>Siguiente paso <input type="text" name="siguiente_paso" value="{{ oportunidad.siguiente_paso or '' }}" placeholder="Ej: llamar para revisar la propuesta" /></label>
+        <label>Fecha del siguiente paso <input type="date" name="fecha_siguiente_paso" value="{{ oportunidad.fecha_siguiente_paso|hora_local('%Y-%m-%d') }}" /></label>
+        <button type="submit" class="boton-principal">Guardar</button>
+      </form>
+      <p class="texto-suave">Origen: {{ oportunidad.origen }} · Creada {{ oportunidad.creado_en|hora_local("%d/%m/%Y") }}</p>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Tareas</h2>
+      {% set tareas_pendientes = tareas|selectattr("estado", "equalto", "pendiente")|list %}
+      {% include "_lista_tareas.html" %}
+      <form method="post" action="/tareas/nueva" class="formulario-apilado">
+        <input type="hidden" name="volver" value="{{ volver }}" />
+        <input type="hidden" name="oportunidad_id" value="{{ oportunidad.id }}" />
+        <input type="text" name="descripcion" placeholder="Nueva tarea…" required />
+        <div class="fila-campos">
+          <input type="date" name="fecha_limite" />
+          <select name="prioridad"><option>alta</option><option selected>media</option><option>baja</option></select>
+          <button type="submit">Agregar</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Documentos ({{ documentos|length }})</h2>
+      {{ lista_compacta(documentos, volver) }}
+      {{ formulario_subida_rapida(volver, contacto_id=oportunidad.contacto_id, oportunidad_id=oportunidad.id) }}
+    </section>
+
+    <section class="tarjeta">
+      <details>
+        <summary><h2 class="en-linea">Historial de cambios</h2></summary>
+        <ul class="historial">
+          {% for h in historial %}
+          <li><span class="texto-suave">{{ h.fecha|hora_local }}</span> · {{ h.campo }}:
+            {% if h.valor_anterior %}<s>{{ h.valor_anterior|truncate(40) }}</s> → {% endif %}{{ (h.valor_nuevo or "—")|truncate(60) }}
+            <span class="texto-suave">({{ h.origen }})</span></li>
+          {% else %}
+          <li class="vacio">Sin cambios registrados.</li>
+          {% endfor %}
+        </ul>
+      </details>
+    </section>
+  </div>
+</div>
+{% endblock %}
