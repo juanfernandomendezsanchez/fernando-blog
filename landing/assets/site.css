@@ -537,3 +537,15 @@ footer{background:var(--fondo-alt); border-top:1px solid var(--borde); padding:6
 @media (max-width:600px){ .card .thumb{aspect-ratio:16/10;} .card .thumb img{object-fit:contain;} }
 .article-header .back-link{display:flex; width:max-content;}
 .error-page h1 .haz{display:block;}
+
+/* Portada: la foto ocupa todo el alto, apoyada en el borde inferior (25 oct 2026) */
+.portada-grid{grid-template-columns:minmax(0, 1.05fr) minmax(0, .95fr); gap:clamp(32px, 4vw, 64px);}
+.portada-foto{align-self:end; justify-self:end; width:100%; max-width:600px; margin:clamp(40px, 6vh, 72px) 0 0;}
+.portada-foto img{width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; object-position:50% 20%;
+  max-height:calc(100svh - 72px - clamp(40px, 6vh, 72px)); display:block; margin-left:auto;}
+@media (max-width:900px){
+  .portada-foto{justify-self:stretch; max-width:none; margin:40px calc(-1 * var(--margen)) 0;}
+  .portada-foto img{max-height:none; aspect-ratio:4/5;}
+}
+@media (max-width:900px){ .portada-grid{grid-template-columns:1fr;} .portada-foto{margin-top:40px;} }
+@media (max-width:900px){ .portada-foto{width:auto; justify-self:stretch; max-width:none; margin-left:calc(-1 * var(--margen)); margin-right:calc(-1 * var(--margen));} }
