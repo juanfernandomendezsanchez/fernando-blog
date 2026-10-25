@@ -375,3 +375,43 @@ a[href^="mailto:"], a[href^="tel:"]{overflow-wrap:anywhere;}
 @media (min-width:901px){ .hero-full .hero-portrait img{height:min(86%, 42vw) !important;} }
 @media (max-width:900px){ .hero-full .hero-portrait{aspect-ratio:900/693 !important; width:calc(100% + 54px) !important; margin:0 -34px 0 -20px !important;} }
 :root[data-theme="dark"] .hero-full .btn-primary{background:var(--mint) !important; color:#16213A !important;}
+/* v4: titular de apoyo con otra letra, y retrato desvanecido hacia el fondo */
+.hero-full .hero-kicker{font-family:'Space Grotesk',sans-serif !important; font-weight:500; font-size:16px; letter-spacing:.01em; text-transform:none; color:var(--olive-deep); display:flex; align-items:center; gap:10px;}
+.hero-full .hero-kicker::before{content:""; width:28px; height:2px; background:var(--olive); display:inline-block;}
+.hero-full .hero-portrait img{
+  -webkit-mask-image:linear-gradient(0deg, transparent 0%, #000 26%), linear-gradient(90deg, transparent 0%, #000 14%) !important;
+  -webkit-mask-composite:source-in !important;
+  mask-image:linear-gradient(0deg, transparent 0%, #000 26%), linear-gradient(90deg, transparent 0%, #000 14%) !important;
+  mask-composite:intersect !important;
+}
+@media (max-width:900px){
+  .hero-full .hero-portrait img{-webkit-mask-image:linear-gradient(0deg, transparent 0%, #000 30%) !important; mask-image:linear-gradient(0deg, transparent 0%, #000 30%) !important;}
+}
+
+/* v5 (25 oct 2026): hero marino elegido. La camisa marino se funde con el fondo,
+   así el desvanecido no se nota. El menú toma el mismo color mientras se está en la portada. */
+.hero.hero-full{background:var(--navy-block) !important;}
+.hero-full h1{color:var(--on-navy) !important;}
+.hero-full .lede{color:rgba(250,248,243,.78) !important;}
+.hero-full .hero-kicker{color:var(--mint) !important;}
+.hero-full .hero-kicker::before{background:var(--mint) !important;}
+.hero-full .tachado{color:rgba(250,248,243,.6) !important;}
+.hero-full .tachado > span{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10' preserveAspectRatio='none'%3E%3Cpath d='M2 6 C 40 2, 70 9, 110 5 S 170 3, 198 6' fill='none' stroke='%239ADBB2' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") !important;}
+.hero-full .haz{color:var(--on-navy) !important;} .hero-full .haz b{color:var(--mint) !important;}
+.hero-full .btn-primary{background:var(--mint) !important; color:var(--navy-block) !important;}
+.hero-full .btn-primary:hover{background:var(--on-navy) !important;}
+.hero-full .btn-ghost{color:var(--on-navy) !important; border-bottom-color:rgba(250,248,243,.7) !important;}
+.hero-byline{color:rgba(250,248,243,.7) !important;} .hero-byline b{color:var(--on-navy) !important;}
+.hero-full + .marquee-strip{border-top:1px solid rgba(250,248,243,.12) !important;}
+
+.masthead{transition:background-color .25s ease, border-color .25s ease;}
+.masthead.masthead-dark{background:var(--navy-block) !important; border-bottom-color:transparent !important; backdrop-filter:none;}
+.masthead.masthead-dark .brandmark{color:var(--on-navy);}
+.masthead.masthead-dark .brand-logo{fill:var(--mint);}
+.masthead.masthead-dark nav a{color:rgba(250,248,243,.8);}
+.masthead.masthead-dark nav a:hover{color:var(--on-navy);}
+.masthead.masthead-dark .nav-cta{border-color:var(--on-navy) !important; color:var(--on-navy) !important;}
+.masthead.masthead-dark .nav-cta:hover{background:var(--mint) !important; border-color:var(--mint) !important; color:var(--navy-block) !important;}
+.masthead.masthead-dark .theme-toggle{color:var(--on-navy); border-color:rgba(250,248,243,.25);}
+.masthead.masthead-dark .mobile-toggle{border-color:rgba(250,248,243,.25);}
+.masthead.masthead-dark .mobile-toggle svg{stroke:var(--on-navy);}
