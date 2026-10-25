@@ -28,7 +28,7 @@
 <link rel="alternate" type="application/rss+xml" title="Fernando Méndez · Marca y negocio" href="feed.xml">
 <link rel="preload" href="assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/space-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/site.css?v=202610251426">
+<link rel="stylesheet" href="assets/site.css?v=202610251453">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <style>
   :root{
@@ -894,7 +894,7 @@
       <p class="hero-kicker">Marca y negocio · Venezuela</p>
       <h1>Negocios en los que la gente confía, que recuerda y que vuelve a elegir.</h1>
       <p class="lede">Te ayudo a construir esa cadena con un método de tres círculos: concepto, forma y percepción.</p>
-      <p class="tachado-linea" aria-label="En vez de competir solo por precio, haz esto: dale a tu cliente una razón para recordarte.">
+      <p class="tachado-linea" data-anim aria-label="En vez de competir solo por precio, haz esto: dale a tu cliente una razón para recordarte.">
         <span class="tachado"><span>Competir solo por precio</span></span>
         <span class="haz"><b>Haz:</b> dale a tu cliente una razón para recordarte.</span>
       </p>
@@ -911,15 +911,11 @@
   </div>
 </section>
 
-<div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-track marquee-static">
-    <span>Confianza</span>
-    <span>Memoria</span>
-    <span>Preferencia</span>
-    <span>Crecimiento</span>
-    <span>Casos venezolanos</span>
+<section class="cadena" data-cadena aria-label="Primero confían en ti. Después te recuerdan. Y al recordarte, te vuelven a elegir.">
+  <div class="wrap">
+    <p class="cadena-texto" aria-hidden="true"><span class="w">Primero</span> <span class="w clave">confían</span> <span class="w">en</span> <span class="w">ti.</span> <span class="w">Después</span> <span class="w">te</span> <span class="w clave">recuerdan.</span> <span class="w">Y</span> <span class="w">al</span> <span class="w">recordarte,</span> <span class="w">te</span> <span class="w">vuelven</span> <span class="w">a</span> <span class="w clave">elegir.</span></p>
   </div>
-</div>
+</section>
 
 <section class="about" id="sobre-mi">
   <div class="wrap">
@@ -942,25 +938,26 @@
   </div>
 </section>
 
+<div class="fundido" aria-hidden="true"></div>
 <section class="circles" id="metodo">
   <div class="wrap">
     <p class="eyebrow reveal">El método</p>
     <h2 class="reveal">Tres círculos para que te elijan una y otra vez</h2>
     <p class="circles-lede reveal">Concepto, forma y percepción. Cada decisión de una marca cae en uno de estos círculos; si una idea no cae en ninguno, no se hace. Cuando los tres se sostienen entre sí, la gente confía, te recuerda y vuelve.</p>
     <div class="circles-layout">
-      <svg class="venn reveal" viewBox="0 0 420 370" role="img" aria-label="Diagrama de tres círculos: Concepto, Forma y Percepción. Concepto y forma dan confianza; forma y percepción, memoria; concepto y percepción, preferencia. Los tres juntos, crecimiento.">
+      <svg class="venn reveal" data-anim viewBox="0 0 420 370" role="img" aria-label="Diagrama de tres círculos: Concepto, Forma y Percepción. Concepto y forma dan confianza; forma y percepción, memoria; concepto y percepción, preferencia. Los tres juntos, crecimiento.">
         <g class="venn-blend">
-          <circle cx="160" cy="150" r="115" fill="#2E6F40" fill-opacity=".30" stroke="#2E6F40" stroke-width="2"/>
-          <circle cx="260" cy="150" r="115" fill="#16213A" fill-opacity=".22" stroke="#16213A" stroke-width="2"/>
-          <circle cx="210" cy="238" r="115" fill="#9ADBB2" fill-opacity=".45" stroke="#3C7A52" stroke-width="2"/>
+          <circle data-c="1" cx="160" cy="150" r="115" fill="#2E6F40" fill-opacity=".30" stroke="#2E6F40" stroke-width="2"/>
+          <circle data-c="2" cx="260" cy="150" r="115" fill="#16213A" fill-opacity=".22" stroke="#16213A" stroke-width="2"/>
+          <circle data-c="3" cx="210" cy="238" r="115" fill="#9ADBB2" fill-opacity=".45" stroke="#3C7A52" stroke-width="2"/>
         </g>
-        <text x="104" y="112" text-anchor="middle" font-size="20">Concepto</text>
-        <text x="316" y="112" text-anchor="middle" font-size="20">Forma</text>
-        <text x="210" y="318" text-anchor="middle" font-size="20">Percepción</text>
-        <text x="210" y="92" text-anchor="middle" font-size="11" font-weight="500">Confianza</text>
-        <text x="146" y="222" text-anchor="middle" font-size="11" font-weight="500">Preferencia</text>
-        <text x="274" y="222" text-anchor="middle" font-size="11" font-weight="500">Memorable</text>
-        <text x="210" y="184" text-anchor="middle" font-size="12">Crece</text>
+        <text data-c="1" x="104" y="112" text-anchor="middle" font-size="20">Concepto</text>
+        <text data-c="2" x="316" y="112" text-anchor="middle" font-size="20">Forma</text>
+        <text data-c="3" x="210" y="318" text-anchor="middle" font-size="20">Percepción</text>
+        <text class="cruce" x="210" y="92" text-anchor="middle" font-size="11" font-weight="500">Confianza</text>
+        <text class="cruce" x="146" y="222" text-anchor="middle" font-size="11" font-weight="500">Preferencia</text>
+        <text class="cruce" x="274" y="222" text-anchor="middle" font-size="11" font-weight="500">Memorable</text>
+        <text x="210" y="184" text-anchor="middle" font-size="12" class="crece">Crece</text>
       </svg>
       <div class="circle-list">
         <div class="circle-item reveal" style="--c:var(--olive)">
@@ -1384,7 +1381,7 @@
   <svg viewBox="0 0 32 32"><path d="M16.001 3C9.107 3 3.5 8.607 3.5 15.5c0 2.42.686 4.68 1.874 6.598L3 29l7.086-2.34a12.44 12.44 0 0 0 5.915 1.505h.005c6.893 0 12.5-5.607 12.5-12.5S22.894 3 16.001 3zm7.34 17.86c-.309.869-1.53 1.64-2.514 1.855-.67.145-1.545.26-4.49-.964-3.77-1.562-6.194-5.37-6.383-5.618-.182-.248-1.53-2.033-1.53-3.878 0-1.845.968-2.752 1.31-3.13.34-.379.744-.474 1.001-.474.257 0 .513.003.737.014.236.012.554-.09.867.66.322.775 1.098 2.68 1.194 2.875.096.195.16.424.032.679-.128.256-.192.416-.383.638-.192.223-.404.498-.577.669-.192.19-.392.397-.169.78.223.383.99 1.632 2.126 2.643 1.462 1.304 2.694 1.708 3.077 1.9.383.192.607.16.831-.096.223-.256.958-1.117 1.213-1.5.256-.383.512-.319.863-.192.352.128 2.233 1.053 2.617 1.245.383.192.639.287.735.447.096.16.096.923-.213 1.792z"/></svg>
 </a>
 <noscript><style>.reveal{opacity:1 !important; transform:none !important;}</style></noscript>
-<script src="assets/site.js?v=202610251426" defer></script>
+<script src="assets/site.js?v=202610251453" defer></script>
 <script>
   // Menú del mismo color que la portada mientras se está en ella
   (function(){
@@ -1392,6 +1389,30 @@
     if(!m||!h) return;
     const upd=()=>m.classList.toggle('masthead-dark', window.scrollY < h.offsetHeight - m.offsetHeight);
     upd(); window.addEventListener('scroll',upd,{passive:true}); window.addEventListener('resize',upd);
+  })();
+</script>
+<script>
+  // Transiciones (25 oct 2026): pocas y en puntos clave
+  (function(){
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const anims = document.querySelectorAll('[data-anim]');
+    if(reduce || !('IntersectionObserver' in window)){ anims.forEach(el => el.classList.add('is-on')); }
+    else {
+      const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('is-on'); io.unobserve(e.target); } }), {threshold:.35});
+      anims.forEach(el => io.observe(el));
+    }
+    // La cadena se enciende palabra por palabra con el scroll
+    const sec = document.querySelector('[data-cadena]');
+    if(!sec) return;
+    const ws = sec.querySelectorAll('.w');
+    if(reduce){ ws.forEach(w => w.classList.add('on')); return; }
+    const paint = () => {
+      const r = sec.getBoundingClientRect(), vh = window.innerHeight;
+      const p = Math.min(1, Math.max(0, (vh * .9 - r.top) / (vh * .55)));
+      const n = Math.round(p * ws.length);
+      ws.forEach((w, i) => w.classList.toggle('on', i < n));
+    };
+    paint(); window.addEventListener('scroll', paint, {passive:true}); window.addEventListener('resize', paint);
   })();
 </script>
 </body>

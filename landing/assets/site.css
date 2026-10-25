@@ -415,3 +415,34 @@ a[href^="mailto:"], a[href^="tel:"]{overflow-wrap:anywhere;}
 .masthead.masthead-dark .theme-toggle{color:var(--on-navy); border-color:rgba(250,248,243,.25);}
 .masthead.masthead-dark .mobile-toggle{border-color:rgba(250,248,243,.25);}
 .masthead.masthead-dark .mobile-toggle svg{stroke:var(--on-navy);}
+
+/* ============================================================
+   Transiciones (25 oct 2026)
+   1. La cadena se enciende al bajar  2. El tachado se dibuja al verse
+   3. Los círculos se cruzan          4. Fundido marino -> crema
+   Todas se apagan con "reducir movimiento".
+   ============================================================ */
+.cadena{background:var(--navy-block); padding:96px 0 104px; border-top:1px solid rgba(250,248,243,.10);}
+.cadena-texto{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(28px, 4.2vw, 54px); line-height:1.18; max-width:22ch; letter-spacing:-.01em;}
+.cadena .w{color:rgba(250,248,243,.18); transition:color .35s ease;}
+.cadena .w.on{color:var(--on-navy);}
+.cadena .w.clave.on{color:var(--mint);}
+@media (max-width:900px){ .cadena{padding:64px 0 72px;} }
+
+.tachado-linea[data-anim] .tachado > span{animation-play-state:paused;}
+.tachado-linea[data-anim].is-on .tachado > span{animation-play-state:running;}
+
+.venn [data-c]{transition:transform 1.2s cubic-bezier(.2,.75,.2,1); transform-box:fill-box;}
+.venn:not(.is-on) [data-c="1"]{transform:translate(-48px,-28px);}
+.venn:not(.is-on) [data-c="2"]{transform:translate(48px,-28px);}
+.venn:not(.is-on) [data-c="3"]{transform:translate(0,56px);}
+.venn .cruce{opacity:0; transition:opacity .6s ease .8s;}
+.venn .crece{opacity:0; transition:opacity .6s ease 1.15s;}
+.venn.is-on .cruce, .venn.is-on .crece{opacity:1;}
+
+.about{border-bottom:0 !important;}
+.fundido{height:140px; background:linear-gradient(180deg, var(--navy-block) 0%, var(--paper) 100%);}
+@media (max-width:900px){ .fundido{height:96px;} }
+@media (prefers-reduced-motion: reduce){ .venn [data-c], .venn .cruce, .venn .crece, .cadena .w{transition:none !important;} }
+.fundido{height:180px !important; background:linear-gradient(180deg, var(--navy-block) 0%, #1B3A33 30%, #2E6F40 55%, #A9C9AE 80%, var(--paper) 100%) !important;}
+.venn{overflow:visible;}
