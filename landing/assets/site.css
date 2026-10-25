@@ -455,3 +455,12 @@ a[href^="mailto:"], a[href^="tel:"]{overflow-wrap:anywhere;}
 .venn .crece{transition:opacity .9s ease 1.8s !important;}
 .tachado-linea[data-anim] .tachado > span{animation-duration:1.4s !important; animation-delay:.5s !important;}
 .cadena .w{transition:color .6s ease !important;}
+
+/* Transición orgánica (25 oct 2026): reemplaza el fundido de colores.
+   Una ola a mano en marino sobre el crema, con una segunda ola verde detrás. */
+.fundido{display:none !important;}
+.ola{background:var(--paper-dim); line-height:0; margin-top:-1px;}
+.ola svg{display:block; width:100%; height:110px;}
+.ola .ola-marino{fill:var(--navy-block);}
+.ola .ola-verde{fill:var(--olive); opacity:.55;}
+@media (max-width:900px){ .ola svg{height:64px;} }
