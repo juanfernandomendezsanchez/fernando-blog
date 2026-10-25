@@ -278,50 +278,61 @@ a[href^="mailto:"], a[href^="tel:"]{overflow-wrap:anywhere;}
 
 
 /* ============================================================
-   Hero con retrato recortado (25 oct 2026)
-   Patrón de marca personal: titular a la izquierda, la persona a
-   la derecha apoyada en el borde inferior. Detrás, los tres
-   círculos del método en línea fina; la tarjeta pone nombre.
+   Hero de marca personal (25 oct 2026, v2)
+   Referencias revisadas en Chrome: Vilma Núñez, Marie Forleo,
+   Pat Flynn. Patrón común: la persona a pantalla completa, fondo
+   oscuro y el titular encima de la imagen, como un solo bloque.
+   Aquí: fondo marino, retrato en blanco y negro que ocupa todo el
+   alto a la derecha y se funde con el fondo; el titular se monta
+   sobre el borde del retrato.
    ============================================================ */
-.hero{padding-bottom:0 !important;}
-.hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:end;}
-.hero-copy{padding-bottom:120px;}
-.hero-portrait{position:relative; margin:0; align-self:end; justify-self:center; width:100%; max-width:520px;}
-.hero-portrait img{position:relative; z-index:1; display:block; width:100%; height:auto;}
-.hero-rings{position:absolute; z-index:0; left:-6%; top:-8%; width:112%; height:auto; fill:none; stroke-width:1.5;}
-.hero-rings circle:nth-child(1){stroke:var(--olive);}
-.hero-rings circle:nth-child(2){stroke:var(--ink); opacity:.55;}
-.hero-rings circle:nth-child(3){stroke:var(--olive-soft);}
-.hero-card{
-  position:absolute; z-index:2; left:-28px; bottom:96px; max-width:250px;
-  background:var(--white); border-left:3px solid var(--olive);
-  padding:14px 16px; box-shadow:0 10px 30px rgba(22,33,58,.12);
-  font-family:'Poppins',sans-serif; font-size:13px; line-height:1.45; color:var(--ink-soft);
+.hero.hero-full{
+  background:var(--navy-block) !important; clip-path:none !important;
+  padding:0 !important; min-height:max(560px, calc(100svh - 77px)); display:flex; align-items:center;
+  position:relative; overflow:hidden;
 }
-.hero-card b{display:block; font-family:'Space Grotesk',sans-serif; font-size:15px; color:var(--ink); margin-bottom:4px;}
+.hero-full .wrap.hero-grid{display:block; position:static; width:100%;}
+.hero-full .hero-copy{position:relative; z-index:3; max-width:min(680px, 58%); padding:56px 0;}
+.hero-full .hero-kicker{color:var(--mint);}
+.hero-full h1{color:var(--on-navy) !important; font-size:clamp(38px, min(4.8vw, 8.4vh), 70px) !important; line-height:1.02 !important; text-shadow:0 2px 24px rgba(22,33,58,.55);}
+.hero-full .lede{color:rgba(250,248,243,.78) !important; max-width:46ch; margin-top:20px !important;}
+.hero-full .tachado-linea{margin-top:20px;}
+.hero-full .btn-primary{background:var(--mint) !important; color:var(--navy-block) !important;}
+.hero-full .btn-primary:hover{background:var(--on-navy) !important;}
+.hero-full .btn-ghost{color:var(--on-navy) !important; border-bottom-color:rgba(250,248,243,.6) !important;}
+.hero-full .hero-actions{margin-top:26px !important;}
+.hero-full .hero-portrait{position:absolute; z-index:1; right:0; bottom:0; height:100%; width:min(62vw, 980px); margin:0;}
+.hero-full .hero-portrait img{position:absolute; right:-2%; bottom:0; height:96%; width:auto; max-width:none; object-fit:contain;}
+.hero-full .hero-portrait::after{ /* funde el retrato con el fondo por la izquierda y abajo */
+  content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:linear-gradient(90deg, var(--navy-block) 0%, rgba(22,33,58,.85) 18%, rgba(22,33,58,0) 52%),
+             linear-gradient(0deg, rgba(22,33,58,.9) 0%, rgba(22,33,58,0) 22%);
+}
+.hero-full .hero-name{position:absolute; z-index:3; right:40px; bottom:28px; text-align:right; font-family:'Poppins',sans-serif; color:rgba(250,248,243,.8); font-size:13px;}
+.hero-full .hero-name b{display:block; font-family:'Space Grotesk',sans-serif; font-size:16px; color:var(--on-navy);}
+.hero-full .hero-name span{color:var(--mint);}
 @media (max-width:900px){
-  .hero-grid{grid-template-columns:1fr !important; gap:28px !important;}
-  .hero-copy{padding-bottom:0;}
-  .hero-portrait{max-width:340px;}
-  .hero-card{left:auto; right:-8px; bottom:40px; max-width:200px; font-size:12px;}
+  .hero.hero-full{display:block; min-height:0;}
+  .hero-full .hero-portrait{position:relative; width:100%; height:auto; aspect-ratio:9/8;}
+  .hero-full .hero-portrait img{position:absolute; left:50%; right:auto; transform:translateX(-50%); height:100%;}
+  .hero-full .hero-portrait::after{background:linear-gradient(0deg, var(--navy-block) 0%, rgba(22,33,58,0) 45%);}
+  .hero-full .hero-name{right:16px; bottom:auto; top:16px;}
+  .hero-full .hero-copy{max-width:none; margin-top:-90px; padding:0 0 48px;}
 }
-
-/* Ajuste: foto y titular comparten la primera pantalla */
-@media (min-width:901px){
-  .hero{padding-top:56px !important;}
-  .hero-grid{min-height:min(calc(100vh - 77px), 820px); grid-template-columns:1fr 1fr; gap:32px; align-items:stretch;}
-  .hero-copy{align-self:center; padding-bottom:64px;}
-  .hero .hero-copy h1{font-size:clamp(40px, 4.4vw, 62px);}
-  .hero-portrait{align-self:end; max-width:600px;}
-  .hero-card{left:-36px; bottom:44px;}
+@media (max-width:900px){ .hero-full .wrap.hero-grid{display:flex !important; flex-direction:column-reverse;} .hero-full .hero-copy{position:relative;} }
+/* El retrato se desvanece por sus propios bordes (no depende del ancho de pantalla) */
+.hero-full .hero-portrait img{
+  -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 28%), linear-gradient(0deg, transparent 0%, #000 18%);
+  -webkit-mask-composite:source-in; mask-image:linear-gradient(90deg, transparent 0%, #000 28%), linear-gradient(0deg, transparent 0%, #000 18%); mask-composite:intersect;
 }
-@media (max-width:900px){ .hero-card{bottom:14px; right:-6px;} }
-@media (min-width:901px){
-  .hero-portrait{width:auto; max-width:none; justify-self:end;}
-  .hero-portrait img{height:min(calc(100vh - 150px), 720px); width:auto; max-width:46vw; object-fit:contain; object-position:bottom;}
+.hero-full .hero-name{bottom:112px;}
+@media (max-width:900px){
+  .hero-full .hero-portrait img{-webkit-mask-image:linear-gradient(0deg, transparent 0%, #000 40%); mask-image:linear-gradient(0deg, transparent 0%, #000 40%);}
+  .hero-full .hero-name{display:none;}
 }
-@media (min-width:901px){
-  .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;}
-  .hero-portrait{max-width:100%;}
-  .hero-portrait img{max-width:100%;}
+@media (min-width:901px) and (max-width:1200px){
+  .hero-full .hero-portrait img{right:-16%; height:86%;}
+  .hero-full .hero-copy{max-width:56%;}
 }
+.hero-full .hero-portrait::after{display:none !important;}
+.hero-full + .marquee-strip{border-top:1px solid rgba(250,248,243,.12);}
