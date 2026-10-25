@@ -336,3 +336,42 @@ a[href^="mailto:"], a[href^="tel:"]{overflow-wrap:anywhere;}
 }
 .hero-full .hero-portrait::after{display:none !important;}
 .hero-full + .marquee-strip{border-top:1px solid rgba(250,248,243,.12);}
+
+/* Hero claro (25 oct 2026, v3): el fondo es el mismo papel del sitio,
+   para que el encabezado, el titular y la foto se lean como un solo plano. */
+.hero.hero-full{background:var(--paper) !important;}
+.hero-full .hero-kicker{color:var(--olive-deep);}
+.hero-full h1{color:var(--ink) !important; text-shadow:none;}
+.hero-full .lede{color:var(--ink-soft) !important;}
+.hero-full .btn-primary{background:var(--navy-block) !important; color:var(--on-navy) !important;}
+.hero-full .btn-primary:hover{background:var(--olive) !important;}
+.hero-full .btn-ghost{color:var(--ink) !important; border-bottom-color:var(--ink) !important;}
+.hero-full .hero-name{color:var(--ink-soft);}
+.hero-full .hero-name b{color:var(--ink);}
+.hero-full .hero-name span{color:var(--olive-deep);}
+:root[data-theme="dark"] .hero-full .hero-name span{color:var(--mint);}
+.hero-full + .marquee-strip{border-top:0;}
+/* v3: sobre fondo claro la foto no se desvanece; se apoya limpia en el borde inferior */
+.hero-full .hero-portrait img{-webkit-mask-image:none !important; mask-image:none !important; bottom:-22%; height:118%;}
+.hero-full .hero-name{display:none !important;}
+.hero-byline{margin-top:22px; font-family:'Poppins',sans-serif; font-size:13px; color:var(--ink-soft);}
+.hero-byline b{font-family:'Space Grotesk',sans-serif; color:var(--ink); font-weight:600;}
+@media (min-width:901px) and (max-width:1200px){ .hero-full .hero-portrait img{bottom:-20%; height:104%; right:-14%;} }
+@media (max-width:900px){
+  .hero-full .hero-portrait{width:calc(100% + 40px); margin:0 -20px; aspect-ratio:1/1; overflow:hidden;}
+  .hero-full .hero-portrait img{bottom:-16% !important; height:116% !important; top:auto;}
+  .hero-full .hero-copy{margin-top:0 !important; padding-top:28px !important;}
+}
+@media (max-width:900px){ .hero-full .hero-portrait{width:calc(100% + 54px) !important; margin:0 -34px 0 -20px !important;} }
+/* v3b: retrato recortado en la línea de los hombros; base horizontal apoyada en el borde */
+.hero-full .hero-portrait img{bottom:0 !important; right:2% !important; height:86% !important; width:auto;}
+@media (min-width:901px) and (max-width:1200px){ .hero-full .hero-portrait img{height:66% !important; right:-2% !important;} }
+@media (max-width:900px){
+  .hero-full .hero-portrait{aspect-ratio:900/695 !important; width:100% !important; margin:0 !important; overflow:visible;}
+  .hero-full .hero-portrait img{position:absolute; left:0 !important; right:auto !important; transform:none !important; bottom:0 !important; width:100% !important; height:auto !important;}
+  .hero-full .hero-copy{padding-top:24px !important;}
+  .hero-full .wrap.hero-grid{padding-top:16px;}
+}
+@media (min-width:901px){ .hero-full .hero-portrait img{height:min(86%, 42vw) !important;} }
+@media (max-width:900px){ .hero-full .hero-portrait{aspect-ratio:900/693 !important; width:calc(100% + 54px) !important; margin:0 -34px 0 -20px !important;} }
+:root[data-theme="dark"] .hero-full .btn-primary{background:var(--mint) !important; color:#16213A !important;}
