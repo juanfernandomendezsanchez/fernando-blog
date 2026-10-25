@@ -53,7 +53,7 @@
           // Siguiente paso del embudo: quien se suscribe ya confía un poco; se le muestra cómo trabajo.
           var next = document.createElement("a");
           next.href = (location.pathname.indexOf("/articulos/") > -1 ? "../" : "") + "trabaja-conmigo.html";
-          next.textContent = "mira cómo trabajo →";
+          next.textContent = "mira cómo trabajo";
           if (status) status.appendChild(next);
         }
         else { setStatus(status, "No pude guardarlo. Escríbeme a juanfernandomendezsanchez@gmail.com y te agrego a mano.", "err"); }
@@ -108,4 +108,21 @@
       });
     });
   });
+})();
+
+/* ---------- La firma animada: el tachado se dibuja una sola vez al verse (manual, regla 7) ---------- */
+(function () {
+  var els = document.querySelectorAll("[data-anim]");
+  if (!els.length) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !("IntersectionObserver" in window)) {
+    els.forEach(function (el) { el.classList.add("is-on"); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add("is-on"); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  els.forEach(function (el) { el.classList.add("anim-lista"); io.observe(el); });
 })();

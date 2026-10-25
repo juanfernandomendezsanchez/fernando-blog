@@ -33,12 +33,14 @@ def card(a, prefix=""):
         <span class="chip chip-{circ}">{cfg["circles"][circ]}</span>
         <h3>{esc(a["title"])}</h3>
         <p>{esc(a["description"])}</p>
-        <div class="meta"><span>{fecha_es(a["date"])}</span><span>·</span><span>{a["read_min"]} min</span></div>
+        <p class="meta">{fecha_es(a["date"])}, {a["read_min"]} min de lectura</p>
       </a>'''
 
-GHOST = '''      <div class="card card-ghost">
-        <div class="thumb thumb-ghost"><span>Diagnóstico en Público</span></div>
-        <h3 class="ghost-title">Próximamente</h3>
+GHOST = '''      <div class="card card-proximo">
+        <div class="thumb"><span>Próximo caso en preparación</span></div>
+        <h3>Por qué la gente recuerda a ciertos negocios de Caracas</h3>
+        <p>Un análisis desde afuera, con el razonamiento a la vista. Te aviso cuando salga.</p>
+        <a href="#newsletter" class="enlace">Avísame</a>
       </div>'''
 
 def replace_block(path, start, end, content):

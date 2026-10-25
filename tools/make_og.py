@@ -21,7 +21,7 @@ PAGES = [
   ("blog", "Blog", "Marca y negocio, sin relleno.", "Casos reales de negocios venezolanos, con cada dato citado."),
   ("trabaja-conmigo", "Diagnóstico en Público", "Postula tu negocio. Lo reviso en público.", "Tu primer resultado en 24 a 48 horas."),
   ("territorio-de-marca-cashea", "Caso · Territorio de marca", "Territorio de marca: qué es realmente <em>(el caso Cashea)</em>", "Una batidora, un señor de 75 años y una app venezolana."),
-  ("cuando-tu-funnel-traiciona-tu-marca", "Ensayo · Funnel y marca", "Cuando tu funnel <em>traiciona</em> tu marca", "Con datos de Amazon, Ticketmaster y Edelman."),
+  ("cuando-tu-funnel-traiciona-tu-marca", "Ensayo · Embudo y marca", "Cuando tu embudo de ventas <em>traiciona</em> tu marca", "Con datos de Amazon, Ticketmaster y Edelman."),
   ("recursos", "Recursos", "Los libros detrás del método.", "Ventas, branding y estrategia."),
 ]
 
