@@ -446,3 +446,12 @@ a[href^="mailto:"], a[href^="tel:"]{overflow-wrap:anywhere;}
 @media (prefers-reduced-motion: reduce){ .venn [data-c], .venn .cruce, .venn .crece, .cadena .w{transition:none !important;} }
 .fundido{height:180px !important; background:linear-gradient(180deg, var(--navy-block) 0%, #1B3A33 30%, #2E6F40 55%, #A9C9AE 80%, var(--paper) 100%) !important;}
 .venn{overflow:visible;}
+/* Más duración para que las transiciones se noten */
+.venn [data-c]{transition-duration:1.8s !important;}
+.venn:not(.is-on) [data-c="1"]{transform:translate(-70px,-40px) !important;}
+.venn:not(.is-on) [data-c="2"]{transform:translate(70px,-40px) !important;}
+.venn:not(.is-on) [data-c="3"]{transform:translate(0,80px) !important;}
+.venn .cruce{transition:opacity .9s ease 1.3s !important;}
+.venn .crece{transition:opacity .9s ease 1.8s !important;}
+.tachado-linea[data-anim] .tachado > span{animation-duration:1.4s !important; animation-delay:.5s !important;}
+.cadena .w{transition:color .6s ease !important;}
