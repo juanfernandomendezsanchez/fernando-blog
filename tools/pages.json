@@ -1,10 +1,10 @@
 {
   "base": "https://juanfernandomendezsanchez.github.io/fernando-blog/",
-  "site_name": "Fernando · Estrategia de marca",
+  "site_name": "Fernando Méndez · Marca y negocio",
   "circles": {
-    "marca": "Marca",
-    "funcion": "Función",
-    "contenido": "Contenido"
+    "marca": "Concepto",
+    "funcion": "Percepción",
+    "contenido": "Forma"
   },
   "static": [
     {
