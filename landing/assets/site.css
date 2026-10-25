@@ -276,8 +276,52 @@ a[href^="mailto:"], a[href^="tel:"]{overflow-wrap:anywhere;}
 /* Enlaces de "Sobre mí" (fondo marino siempre): menta para que se lean */
 .about .about-links a{color:var(--mint, #9ADBB2) !important; border-bottom-color:rgba(154,219,178,.5) !important;}
 
-/* Foto en el hero: pequeña, para poner cara al titular sin competir con él */
-.hero-person{display:flex; align-items:center; gap:14px; margin-bottom:16px;}
-.hero-avatar{width:60px; height:60px; object-fit:cover; clip-path:polygon(16% 0,100% 0,100% 84%,84% 100%,0 100%,0 16%); flex-shrink:0;}
-.hero-person b{display:block; font-family:'Space Grotesk',sans-serif; font-size:15px; color:var(--ink); margin-bottom:6px;}
-.hero-person .stamp{margin-bottom:0;}
+
+/* ============================================================
+   Hero con retrato recortado (25 oct 2026)
+   Patrón de marca personal: titular a la izquierda, la persona a
+   la derecha apoyada en el borde inferior. Detrás, los tres
+   círculos del método en línea fina; la tarjeta pone nombre.
+   ============================================================ */
+.hero{padding-bottom:0 !important;}
+.hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:end;}
+.hero-copy{padding-bottom:120px;}
+.hero-portrait{position:relative; margin:0; align-self:end; justify-self:center; width:100%; max-width:520px;}
+.hero-portrait img{position:relative; z-index:1; display:block; width:100%; height:auto;}
+.hero-rings{position:absolute; z-index:0; left:-6%; top:-8%; width:112%; height:auto; fill:none; stroke-width:1.5;}
+.hero-rings circle:nth-child(1){stroke:var(--olive);}
+.hero-rings circle:nth-child(2){stroke:var(--ink); opacity:.55;}
+.hero-rings circle:nth-child(3){stroke:var(--olive-soft);}
+.hero-card{
+  position:absolute; z-index:2; left:-28px; bottom:96px; max-width:250px;
+  background:var(--white); border-left:3px solid var(--olive);
+  padding:14px 16px; box-shadow:0 10px 30px rgba(22,33,58,.12);
+  font-family:'Poppins',sans-serif; font-size:13px; line-height:1.45; color:var(--ink-soft);
+}
+.hero-card b{display:block; font-family:'Space Grotesk',sans-serif; font-size:15px; color:var(--ink); margin-bottom:4px;}
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr !important; gap:28px !important;}
+  .hero-copy{padding-bottom:0;}
+  .hero-portrait{max-width:340px;}
+  .hero-card{left:auto; right:-8px; bottom:40px; max-width:200px; font-size:12px;}
+}
+
+/* Ajuste: foto y titular comparten la primera pantalla */
+@media (min-width:901px){
+  .hero{padding-top:56px !important;}
+  .hero-grid{min-height:min(calc(100vh - 77px), 820px); grid-template-columns:1fr 1fr; gap:32px; align-items:stretch;}
+  .hero-copy{align-self:center; padding-bottom:64px;}
+  .hero .hero-copy h1{font-size:clamp(40px, 4.4vw, 62px);}
+  .hero-portrait{align-self:end; max-width:600px;}
+  .hero-card{left:-36px; bottom:44px;}
+}
+@media (max-width:900px){ .hero-card{bottom:14px; right:-6px;} }
+@media (min-width:901px){
+  .hero-portrait{width:auto; max-width:none; justify-self:end;}
+  .hero-portrait img{height:min(calc(100vh - 150px), 720px); width:auto; max-width:46vw; object-fit:contain; object-position:bottom;}
+}
+@media (min-width:901px){
+  .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;}
+  .hero-portrait{max-width:100%;}
+  .hero-portrait img{max-width:100%;}
+}
