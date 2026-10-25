@@ -272,3 +272,12 @@ a[href^="mailto:"], a[href^="tel:"]{overflow-wrap:anywhere;}
 .no-para-ti li{margin:6px 0;}
 
 @media (max-width:900px){ .hero .wrap{grid-template-columns:1fr !important; gap:32px !important;} .hero-side{border-left:0; padding-left:0; border-top:1px solid var(--line); padding-top:20px;} }
+
+/* Enlaces de "Sobre mí" (fondo marino siempre): menta para que se lean */
+.about .about-links a{color:var(--mint, #9ADBB2) !important; border-bottom-color:rgba(154,219,178,.5) !important;}
+
+/* Foto en el hero: pequeña, para poner cara al titular sin competir con él */
+.hero-person{display:flex; align-items:center; gap:14px; margin-bottom:16px;}
+.hero-avatar{width:60px; height:60px; object-fit:cover; clip-path:polygon(16% 0,100% 0,100% 84%,84% 100%,0 100%,0 16%); flex-shrink:0;}
+.hero-person b{display:block; font-family:'Space Grotesk',sans-serif; font-size:15px; color:var(--ink); margin-bottom:6px;}
+.hero-person .stamp{margin-bottom:0;}
