@@ -568,3 +568,16 @@ footer{background:var(--fondo-alt); border-top:1px solid var(--borde); padding:6
           mask-composite:intersect;
 }
 @media (max-width:900px){ .portada-foto{margin-top:-8px;} }
+
+/* Portada v3: retrato más grande, titular un poco más pequeño */
+.portada-grid{grid-template-columns:minmax(0, .95fr) minmax(0, 1.05fr);}
+.portada-foto{max-width:720px; margin:clamp(12px, 2vh, 24px) 0 0;}
+.portada-foto img{max-height:calc(100svh - 72px);}
+.portada h1 .tachado{font-size:clamp(22px, 2.4vw, 32px);}
+.portada h1 .haz{font-size:clamp(36px, 4.8vw, 64px);}
+@media (max-width:900px){
+  .portada-foto{margin-top:-24px;}
+  .portada-foto img{max-width:560px; max-height:none;}
+}
+/* Celular: siempre una columna (esta regla debe quedar después de cualquier ajuste de la portada) */
+@media (max-width:900px){ .portada-grid{grid-template-columns:1fr;} }
