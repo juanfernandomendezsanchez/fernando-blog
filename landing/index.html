@@ -28,7 +28,7 @@
 <link rel="alternate" type="application/rss+xml" title="Fernando Méndez · Marca y negocio" href="feed.xml">
 <link rel="preload" href="assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/space-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/site.css?v=202610260010">
+<link rel="stylesheet" href="assets/site.css?v=202610261200">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <script type="application/ld+json">
@@ -182,15 +182,14 @@
         <li><b>Hablo desde el mostrador</b><span>Sin tecnicismos: lo que hay que hacer y la mejora que sigue.</span></li>
       </ul>
 
-      <div class="limites">
-        <h3>Lo que te digo desde el inicio</h3>
-        <p>Prefiero que sepas qué esperar antes de escribirme.</p>
+      <details class="limites" data-abierto-escritorio open>
+        <summary><h3>Lo que te digo desde el inicio</h3><p>Prefiero que sepas qué esperar antes de escribirme.</p></summary>
         <dl>
           <div><dt>Soy uno</dt><dd>Hago pocos diagnósticos y los hago completos.</dd></div>
           <div><dt>Finanzas</dt><dd>De finanzas no te asesoro. De lo que tu precio le dice a tu cliente, sí.</dd></div>
           <div><dt>Logos</dt><dd>Si buscas solo un logo, hay gente mejor que yo para eso.</dd></div>
         </dl>
-      </div>
+      </details>
 
       <div class="acciones">
         <a href="trabaja-conmigo.html" class="enlace">Cómo trabajo</a>
@@ -240,12 +239,15 @@
         </div>
       </div>
     </div>
-    <div class="overlaps">
+    <details class="combinaciones" data-abierto-escritorio open>
+      <summary>Cómo se combinan los tres círculos</summary>
+      <div class="overlaps">
       <div class="overlap"><b>Concepto y forma: confianza</b>Lo que eres y cómo lo muestras coinciden.</div>
       <div class="overlap"><b>Forma y percepción: memoria</b>Te expresas de una manera que se queda en la cabeza.</div>
       <div class="overlap"><b>Concepto y percepción: preferencia</b>Te ven como lo que de verdad eres, y por eso te eligen.</div>
       <div class="overlap"><b>Los tres: crecimiento</b>Te eligen una y otra vez.</div>
     </div>
+    </details>
   </div>
 </section>
 
@@ -337,38 +339,38 @@
         <label for="f-telefono">WhatsApp</label>
         <input type="tel" id="f-telefono" name="telefono" placeholder="+58 412 000 0000" inputmode="tel" autocomplete="tel">
       </div>
-      <div class="field full">
-        <label for="f-descripcion">¿A qué se dedica tu negocio?</label>
-        <select id="f-descripcion" name="descripcion">
-          <option value="Comida y bebida (panadería, cafetería, restaurante)">Comida y bebida (panadería, cafetería, restaurante)</option>
-          <option value="Tienda de ropa, calzado o accesorios">Tienda de ropa, calzado o accesorios</option>
-          <option value="Repuestos, ferretería o tecnología">Repuestos, ferretería o tecnología</option>
-          <option value="Belleza y cuidado personal (barbería, peluquería)">Belleza y cuidado personal (barbería, peluquería)</option>
-          <option value="Servicios">Servicios</option>
-          <option value="Emprendimiento que vende por Instagram">Emprendimiento que vende por Instagram</option>
-          <option value="Otro">Otro</option>
-        </select>
-      </div>
-      <div class="field full">
-        <label for="f-mensaje">¿Cuál se parece más a tu caso?</label>
-        <select id="f-mensaje" name="mensaje">
-          <option value="Vendo, pero no sé bien por qué me compran (o por qué no)">Vendo, pero no sé bien por qué me compran (o por qué no)</option>
-          <option value="He bajado precios para competir">He bajado precios para competir</option>
-          <option value="Todo pasa por mí y no doy abasto">Todo pasa por mí y no doy abasto</option>
-          <option value="Atiendo por WhatsApp sin un orden claro">Atiendo por WhatsApp sin un orden claro</option>
-          <option value="Quiero subir mis precios sin perder clientes">Quiero subir mis precios sin perder clientes</option>
-          <option value="Solo quiero explorar opciones">Solo quiero explorar opciones</option>
-          <option value="Otro">Otro</option>
-        </select>
-      </div>
-      <div class="field full">
-        <label for="f-necesidad">¿Cómo quieres participar?</label>
-        <select id="f-necesidad" name="necesidad">
-          <option value="Diagnóstico en Público (puedo publicarlo con mi marca)">Pueden publicar el caso con el nombre de mi negocio</option>
-          <option value="Diagnóstico en Público (publicarlo sin mi marca)">Pueden publicarlo sin mencionar mi negocio</option>
-          <option value="Solo quiero conversar primero">Prefiero conversar primero</option>
-        </select>
-      </div>
+      <fieldset class="field full opciones opciones-cortas">
+        <legend>¿A qué se dedica tu negocio?</legend>
+        <div class="opciones-lista">
+          <label class="opcion"><input type="radio" name="descripcion" value="Comida y bebida (panadería, cafetería, restaurante)" checked><span>Comida y bebida (panadería, cafetería, restaurante)</span></label>
+          <label class="opcion"><input type="radio" name="descripcion" value="Tienda de ropa, calzado o accesorios"><span>Tienda de ropa, calzado o accesorios</span></label>
+          <label class="opcion"><input type="radio" name="descripcion" value="Repuestos, ferretería o tecnología"><span>Repuestos, ferretería o tecnología</span></label>
+          <label class="opcion"><input type="radio" name="descripcion" value="Belleza y cuidado personal (barbería, peluquería)"><span>Belleza y cuidado personal (barbería, peluquería)</span></label>
+          <label class="opcion"><input type="radio" name="descripcion" value="Servicios"><span>Servicios</span></label>
+          <label class="opcion"><input type="radio" name="descripcion" value="Emprendimiento que vende por Instagram"><span>Emprendimiento que vende por Instagram</span></label>
+          <label class="opcion"><input type="radio" name="descripcion" value="Otro"><span>Otro</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="field full opciones">
+        <legend>¿Cuál se parece más a tu caso?</legend>
+        <div class="opciones-lista">
+          <label class="opcion"><input type="radio" name="mensaje" value="Vendo, pero no sé bien por qué me compran (o por qué no)" checked><span>Vendo, pero no sé bien por qué me compran (o por qué no)</span></label>
+          <label class="opcion"><input type="radio" name="mensaje" value="He bajado precios para competir"><span>He bajado precios para competir</span></label>
+          <label class="opcion"><input type="radio" name="mensaje" value="Todo pasa por mí y no doy abasto"><span>Todo pasa por mí y no doy abasto</span></label>
+          <label class="opcion"><input type="radio" name="mensaje" value="Atiendo por WhatsApp sin un orden claro"><span>Atiendo por WhatsApp sin un orden claro</span></label>
+          <label class="opcion"><input type="radio" name="mensaje" value="Quiero subir mis precios sin perder clientes"><span>Quiero subir mis precios sin perder clientes</span></label>
+          <label class="opcion"><input type="radio" name="mensaje" value="Solo quiero explorar opciones"><span>Solo quiero explorar opciones</span></label>
+          <label class="opcion"><input type="radio" name="mensaje" value="Otro"><span>Otro</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="field full opciones">
+        <legend>¿Cómo quieres participar?</legend>
+        <div class="opciones-lista">
+          <label class="opcion"><input type="radio" name="necesidad" value="Diagnóstico en Público (puedo publicarlo con mi marca)" checked><span>Pueden publicar el caso con el nombre de mi negocio</span></label>
+          <label class="opcion"><input type="radio" name="necesidad" value="Diagnóstico en Público (publicarlo sin mi marca)"><span>Pueden publicarlo sin mencionar mi negocio</span></label>
+          <label class="opcion"><input type="radio" name="necesidad" value="Solo quiero conversar primero"><span>Prefiero conversar primero</span></label>
+        </div>
+      </fieldset>
       <div class="full acciones" style="margin-top:6px;">
         <button type="submit" class="btn diag-submit" id="diagSubmit">Postular mi negocio</button>
         <span class="diag-status" id="diagStatus" role="status" aria-live="polite"></span>
@@ -419,7 +421,7 @@
       <div class="fcol">
         <h5>Contacto</h5>
         <a href="https://wa.me/584125272140" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="mailto:juanfernandomendezsanchez@gmail.com">juanfernandomendezsanchez@gmail.com</a>
+        <a href="mailto:juanfernandomendezsanchez@gmail.com">Correo</a>
         <a href="tel:+584125272140">0412-527-2140</a>
         <a href="https://www.instagram.com/soyfrnando/" target="_blank" rel="noopener">Instagram</a>
       </div>
@@ -503,6 +505,7 @@
   // ─── Formulario de diagnóstico → Google Apps Script ───
   // Reemplaza esto por la URL de tu implementación (ver automatizaciones/SETUP.md).
   // No es una API key: es el endpoint público de tu propio backend.
+  const valorMarcado = (n) => { const el = document.querySelector('#diagForm input[name="' + n + '"]:checked'); return el ? el.value : ''; };
   const DIAGNOSTIC_ENDPOINT = "https://script.google.com/macros/s/AKfycbx5i8XMYxFKpF6WBA0KzsKM-nyVudr5Qgn9AxVWcgi_GqYcEQ2XSsv7sSO71ugtxLIL3A/exec";
 
   const diagForm = document.getElementById('diagForm');
@@ -516,11 +519,8 @@
   // preseleccionamos esa opción en el formulario automáticamente.
   const urlParams = new URLSearchParams(window.location.search);
   const necesidadParam = urlParams.get('necesidad');
-  const necesidadSelect = document.getElementById('f-necesidad');
-  if(necesidadParam && necesidadSelect){
-    const match = Array.from(necesidadSelect.options).find(opt => opt.value === necesidadParam);
-    if(match) necesidadSelect.value = necesidadParam;
-  }
+  const necesidadRadio = necesidadParam && Array.from(document.querySelectorAll('#diagForm input[name="necesidad"]')).find(r => r.value === necesidadParam);
+  if(necesidadRadio) necesidadRadio.checked = true;
 
   if(diagForm){
     diagForm.addEventListener('submit', async (e) => {
@@ -537,9 +537,9 @@
         empresa: document.getElementById('f-empresa').value.trim(),
         email: document.getElementById('f-email').value.trim(),
         telefono: document.getElementById('f-telefono').value.trim(),
-        necesidad: document.getElementById('f-necesidad').value,
-        descripcion: document.getElementById('f-descripcion').value.trim(),
-        mensaje: document.getElementById('f-mensaje').value.trim(),
+        necesidad: valorMarcado('necesidad'),
+        descripcion: valorMarcado('descripcion'),
+        mensaje: valorMarcado('mensaje'),
         sitio_web: document.getElementById('f-sitio-web').value.trim(),
         form_ts: document.getElementById('f-form-ts').value
       };
@@ -615,6 +615,6 @@
 <a class="wa-float" href="https://wa.me/584125272140?text=Hola%20Fernando%2C%20quiero%20postular%20mi%20marca%20al%20Diagn%C3%B3stico%20en%20P%C3%BAblico" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
   <svg viewBox="0 0 32 32"><path d="M16.001 3C9.107 3 3.5 8.607 3.5 15.5c0 2.42.686 4.68 1.874 6.598L3 29l7.086-2.34a12.44 12.44 0 0 0 5.915 1.505h.005c6.893 0 12.5-5.607 12.5-12.5S22.894 3 16.001 3zm7.34 17.86c-.309.869-1.53 1.64-2.514 1.855-.67.145-1.545.26-4.49-.964-3.77-1.562-6.194-5.37-6.383-5.618-.182-.248-1.53-2.033-1.53-3.878 0-1.845.968-2.752 1.31-3.13.34-.379.744-.474 1.001-.474.257 0 .513.003.737.014.236.012.554-.09.867.66.322.775 1.098 2.68 1.194 2.875.096.195.16.424.032.679-.128.256-.192.416-.383.638-.192.223-.404.498-.577.669-.192.19-.392.397-.169.78.223.383.99 1.632 2.126 2.643 1.462 1.304 2.694 1.708 3.077 1.9.383.192.607.16.831-.096.223-.256.958-1.117 1.213-1.5.256-.383.512-.319.863-.192.352.128 2.233 1.053 2.617 1.245.383.192.639.287.735.447.096.16.096.923-.213 1.792z"/></svg>
 </a>
-<script src="assets/site.js?v=202610252100" defer></script>
+<script src="assets/site.js?v=202610261200" defer></script>
 </body>
 </html>

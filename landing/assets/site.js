@@ -126,3 +126,37 @@
   }, { threshold: 0.4 });
   els.forEach(function (el) { el.classList.add("anim-lista"); io.observe(el); });
 })();
+
+/* ---------- Teléfono: desplegables cerrados y barra fija de acción ---------- */
+(function () {
+  var telefono = window.matchMedia && window.matchMedia("(max-width:760px)");
+  if (telefono && telefono.matches) {
+    document.querySelectorAll("details[data-abierto-escritorio]").forEach(function (d) { d.removeAttribute("open"); });
+  }
+
+  var cta = document.querySelector(".masthead .nav-cta");
+  if (!cta) return;
+  var wa = document.querySelector(".wa-float");
+  var bar = document.createElement("div");
+  bar.className = "barra-accion bloque-marino grano";
+  bar.setAttribute("role", "region");
+  bar.setAttribute("aria-label", "Acciones rápidas");
+  bar.innerHTML =
+    '<a class="btn" href="' + cta.getAttribute("href") + '">Postula al Diagnóstico</a>' +
+    '<a class="wa" href="' + (wa ? wa.getAttribute("href") : "https://wa.me/584125272140") + '" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">' +
+    '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.1 3 3.5 8.6 3.5 15.5c0 2.4.7 4.7 1.9 6.6L3 29l7.1-2.3a12.4 12.4 0 0 0 5.9 1.5c6.9 0 12.5-5.6 12.5-12.5S22.9 3 16 3zm7.3 17.9c-.3.9-1.5 1.6-2.5 1.8-.7.1-1.5.3-4.5-1-3.8-1.6-6.2-5.4-6.4-5.6-.2-.2-1.5-2-1.5-3.9 0-1.8 1-2.8 1.3-3.1.3-.4.7-.5 1-.5h.7c.2 0 .6-.1.9.7.3.8 1.1 2.7 1.2 2.9.1.2.2.4 0 .7-.1.3-.2.4-.4.6l-.6.7c-.2.2-.4.4-.2.8.2.4 1 1.6 2.1 2.6 1.5 1.3 2.7 1.7 3.1 1.9.4.2.6.2.8-.1.2-.3 1-1.1 1.2-1.5.3-.4.5-.3.9-.2.4.1 2.2 1.1 2.6 1.2.4.2.6.3.7.4.1.2.1 1-.2 1.8z"/></svg></a>';
+  document.body.appendChild(bar);
+
+  var portada = document.querySelector(".portada");
+  var formulario = document.getElementById("diagnostico");
+  var formularioVisible = false;
+  function actualizar() {
+    var paso = portada ? portada.getBoundingClientRect().bottom < 90 : window.scrollY > 260;
+    bar.classList.toggle("visible", paso && !formularioVisible);
+  }
+  if (formulario && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) { formularioVisible = es[0].isIntersecting; actualizar(); }, { threshold: 0.02 }).observe(formulario);
+  }
+  window.addEventListener("scroll", actualizar, { passive: true });
+  actualizar();
+})();

@@ -214,22 +214,52 @@ body.drawer-locked{overflow:hidden;}
 .seccion-cabeza{max-width:760px; margin-bottom:48px;}
 .seccion-cabeza p{color:var(--texto-suave); margin-top:16px; font-size:18px;}
 
-/* ---------- Portada (home) ---------- */
-.portada{overflow:hidden;}
-.portada-grid{display:grid; grid-template-columns:1.15fr .85fr; align-items:end; gap:40px; min-height:min(760px, calc(100svh - 72px));}
-.portada-copy{padding:clamp(64px, 9vh, 112px) 0 clamp(56px, 8vh, 96px); align-self:center;}
+/* ---------- Portada (home) ----------
+   Una sola definición, en tres tamaños: escritorio, tableta y teléfono.
+   El retrato es un recorte sin fondo (fernando-recorte.webp) que se funde con el marino. */
+.portada{position:relative; overflow:hidden;}
+.portada-grid{display:grid; grid-template-columns:minmax(0, .95fr) minmax(0, 1.05fr); align-items:center;
+  gap:clamp(32px, 4vw, 64px); min-height:min(760px, calc(100svh - 72px));}
+.portada-copy{padding:clamp(64px, 9vh, 112px) 0 clamp(56px, 8vh, 96px);}
 .portada h1{display:flex; flex-direction:column; gap:10px;}
-.portada h1 .tachado{font-family:'Space Grotesk', sans-serif; font-weight:500; font-size:clamp(24px, 2.8vw, 36px); line-height:1.2; color:rgba(241,237,227,.62);}
-.portada h1 .haz{font-size:clamp(40px, 5.6vw, 76px); line-height:1.02; letter-spacing:-.025em;}
+.portada h1 .tachado{font-family:'Space Grotesk', sans-serif; font-weight:500; font-size:clamp(22px, 2.4vw, 32px); line-height:1.2; color:rgba(241,237,227,.62);}
+.portada h1 .haz{font-size:clamp(36px, 4.8vw, 64px); line-height:1.02; letter-spacing:-.025em;}
 .portada .lede{font-size:clamp(17px, 1.5vw, 20px); color:var(--texto-suave); margin-top:28px; max-width:44ch;}
 .portada-firma{margin-top:28px; font-size:14px; color:var(--texto-suave);}
 .portada-firma b{font-family:'Space Grotesk', sans-serif; color:var(--texto); font-weight:600;}
-.portada-foto{align-self:end; justify-self:end; width:100%; max-width:520px;}
-.portada-foto img{width:100%; height:auto;}
+.portada-foto{justify-self:end; width:100%; max-width:720px; margin:clamp(12px, 2vh, 24px) 0 0;}
+.portada-foto img{display:block; width:100%; height:auto; max-height:calc(100svh - 72px); aspect-ratio:4/5;
+  object-fit:contain; object-position:50% 0; margin-left:auto;
+  /* se desvanece hacia abajo y por los lados, donde la foto original corta los hombros */
+  -webkit-mask-image:linear-gradient(to bottom, #000 58%, transparent 94%), linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
+  -webkit-mask-composite:source-in;
+          mask-image:linear-gradient(to bottom, #000 58%, transparent 94%), linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
+          mask-composite:intersect;}
+
+/* Tableta: una columna, el retrato debajo del texto */
 @media (max-width:900px){
   .portada-grid{grid-template-columns:1fr; min-height:0; gap:0;}
   .portada-copy{padding:48px 0 0;}
-  .portada-foto{justify-self:center; max-width:380px; margin-top:32px;}
+  .portada-foto{justify-self:stretch; max-width:none; margin:-24px 0 0;}
+  .portada-foto img{max-width:560px; max-height:none; margin:0 auto;}
+}
+
+/* Teléfono: el retrato de fondo arriba, oscurecido hacia abajo, y el texto encima */
+@media (max-width:760px){
+  .portada-grid{display:flex; flex-direction:column; justify-content:flex-end; min-height:calc(100svh - 72px);}
+  .portada-foto{position:absolute; top:0; right:0; bottom:0; left:0; z-index:0; width:auto; max-width:none; margin:0;
+    align-self:stretch; justify-self:stretch; pointer-events:none;}
+  .portada-foto img{position:absolute; top:0; left:50%; transform:translateX(-50%); width:108%; max-width:none; max-height:none;
+    object-fit:cover; -webkit-mask-image:none; mask-image:none;}
+  .portada-foto::after{content:""; position:absolute; inset:0;
+    background:linear-gradient(to bottom, rgba(22,33,58,0) 0%, rgba(22,33,58,.2) 36%, rgba(22,33,58,.9) 54%, #16213A 64%);}
+  .portada-copy{position:relative; z-index:1; padding:0 0 28px;}
+  .portada h1 .tachado{font-size:20px;}
+  .portada h1 .haz{font-size:clamp(32px, 9.4vw, 40px);}
+  .portada .lede{font-size:16px; margin-top:16px;}
+  .portada .acciones{margin-top:20px;}
+  .portada .acciones .btn{flex:1 1 100%;}
+  .portada-firma{display:none;}
 }
 
 /* ---------- La cadena (secuencia real: 1 a 5) ---------- */
@@ -538,46 +568,140 @@ footer{background:var(--fondo-alt); border-top:1px solid var(--borde); padding:6
 .article-header .back-link{display:flex; width:max-content;}
 .error-page h1 .haz{display:block;}
 
-/* Portada: la foto ocupa todo el alto, apoyada en el borde inferior (25 oct 2026) */
-.portada-grid{grid-template-columns:minmax(0, 1.05fr) minmax(0, .95fr); gap:clamp(32px, 4vw, 64px);}
-.portada-foto{align-self:end; justify-self:end; width:100%; max-width:600px; margin:clamp(40px, 6vh, 72px) 0 0;}
-.portada-foto img{width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; object-position:50% 20%;
-  max-height:calc(100svh - 72px - clamp(40px, 6vh, 72px)); display:block; margin-left:auto;}
-@media (max-width:900px){
-  .portada-foto{justify-self:stretch; max-width:none; margin:40px calc(-1 * var(--margen)) 0;}
-  .portada-foto img{max-height:none; aspect-ratio:4/5;}
-}
-@media (max-width:900px){ .portada-grid{grid-template-columns:1fr;} .portada-foto{margin-top:40px;} }
-@media (max-width:900px){ .portada-foto{width:auto; justify-self:stretch; max-width:none; margin-left:calc(-1 * var(--margen)); margin-right:calc(-1 * var(--margen));} }
 
-/* Portada v2: retrato sin fondo, más arriba y desvanecido hacia el marino */
-.portada-grid{align-items:center;}
-.portada-foto{align-self:center; margin:clamp(24px, 4vh, 48px) 0;}
-.portada-foto img{object-fit:contain; object-position:50% 0;
-  -webkit-mask-image:linear-gradient(to bottom, #000 62%, transparent 96%);
-          mask-image:linear-gradient(to bottom, #000 62%, transparent 96%);}
-@media (max-width:900px){
-  .portada-foto{margin-top:8px; margin-bottom:-24px;}
-  .portada-foto img{max-width:480px; margin:0 auto;}
-}
-/* Los hombros llegan al borde de la foto original: se desvanecen también por los lados */
-.portada-foto img{
-  -webkit-mask-image:linear-gradient(to bottom, #000 58%, transparent 94%), linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
-  -webkit-mask-composite:source-in;
-          mask-image:linear-gradient(to bottom, #000 58%, transparent 94%), linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
-          mask-composite:intersect;
-}
-@media (max-width:900px){ .portada-foto{margin-top:-8px;} }
+/* ============================================================
+   Correcciones generales (26 oct 2026)
+   ============================================================ */
+/* La foto de «Sobre mí» traía height="1000" en el HTML y se estiraba: la altura la decide la proporción */
+.sobre-foto img{height:auto;}
 
-/* Portada v3: retrato más grande, titular un poco más pequeño */
-.portada-grid{grid-template-columns:minmax(0, .95fr) minmax(0, 1.05fr);}
-.portada-foto{max-width:720px; margin:clamp(12px, 2vh, 24px) 0 0;}
-.portada-foto img{max-height:calc(100svh - 72px);}
-.portada h1 .tachado{font-size:clamp(22px, 2.4vw, 32px);}
-.portada h1 .haz{font-size:clamp(36px, 4.8vw, 64px);}
-@media (max-width:900px){
-  .portada-foto{margin-top:-24px;}
-  .portada-foto img{max-width:560px; max-height:none;}
+/* Desplegables de la home: abiertos en escritorio, cerrados en el teléfono (site.js) */
+details.limites > summary, details.combinaciones > summary{cursor:pointer; list-style:none;}
+details.limites > summary::-webkit-details-marker, details.combinaciones > summary::-webkit-details-marker{display:none;}
+details.limites > summary{display:grid; grid-template-columns:1fr auto; column-gap:16px;}
+details.limites > summary h3{grid-column:1;}
+details.limites > summary p{grid-column:1; color:var(--texto-suave); font-size:16px;}
+details.limites > summary::after, details.combinaciones > summary::after{
+  content:"+"; grid-column:2; grid-row:1; font-family:'Space Grotesk', sans-serif; font-size:26px; line-height:1; color:var(--acento);}
+details.limites[open] > summary::after, details.combinaciones[open] > summary::after{content:"\2212";}
+details.combinaciones{margin-top:56px;}
+details.combinaciones > summary{display:flex; justify-content:space-between; gap:16px; padding:16px 0; border-top:2px solid var(--texto);
+  font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:18px;}
+details.combinaciones .overlaps{margin-top:8px;}
+
+/* Formulario: opciones tocables en vez de listas desplegables */
+fieldset.opciones{border:0; padding:0; margin:0; min-width:0;}
+fieldset.opciones legend{font-size:14px; font-weight:500; margin-bottom:8px; padding:0;}
+.opciones-lista{display:flex; flex-direction:column; gap:8px;}
+.opciones-cortas .opciones-lista{flex-direction:row; flex-wrap:wrap;}
+.opcion{position:relative; display:block; cursor:pointer;}
+.opcion input{position:absolute; opacity:0; width:1px; height:1px;}
+.opcion span{display:flex; align-items:center; min-height:46px; padding:10px 14px; font-size:15px; line-height:1.35;
+  background:var(--crema-claro); border:1px solid #BDB29A; color:var(--marino); transition:border-color .12s ease, background-color .12s ease;}
+.opcion:hover span{border-color:var(--marino);}
+.opcion input:checked + span{border-color:var(--verde); box-shadow:inset 0 0 0 1px var(--verde); background:#E4EEE5; font-weight:500;}
+.opcion input:focus-visible + span{outline:3px solid var(--verde); outline-offset:2px;}
+
+/* Barra fija de acción (la crea site.js; solo se muestra en el teléfono) */
+.barra-accion{display:none;}
+
+/* ============================================================
+   Teléfono (hasta 760 px)
+   Investigación: zona del pulgar (Hoober), desplegables solo
+   para contenido secundario (NN/g), opciones visibles en vez
+   de listas (Baymard), carrusel con la tarjeta siguiente asomada.
+   ============================================================ */
+@media (max-width:760px){
+  body{font-size:16px; padding-bottom:76px;}
+  h2{font-size:clamp(26px, 7.4vw, 32px);}
+  .seccion{padding:56px 0;}
+  .seccion-cabeza{margin-bottom:28px;}
+  .seccion-cabeza p{font-size:16px;}
+  .antetitulo{font-size:12px; margin-bottom:12px;}
+  .wa-float{display:none;}
+
+
+  /* La cadena, más compacta */
+  .cadena{padding:52px 0;}
+  .cadena-lista{margin-top:24px;}
+  .cadena-lista li{padding:12px 0; font-size:20px;}
+  .cadena-lista li::before{font-size:28px;}
+  .cadena-pie{font-size:16px; margin-top:24px;}
+
+  /* Sobre mí: foto pequeña junto al título, no gigante */
+  .sobre-grid{grid-template-columns:88px minmax(0, 1fr); gap:0 16px; align-items:center;}
+  .sobre-texto{display:contents;}
+  .sobre-texto > *{grid-column:1 / -1;}
+  .sobre-texto > .antetitulo, .sobre-texto > h2{grid-column:2;}
+  .sobre-texto > .antetitulo{grid-row:1; align-self:end; margin-bottom:4px;}
+  .sobre-texto > h2{grid-row:2; align-self:start; font-size:24px;}
+  .sobre-foto{grid-column:1; grid-row:1 / span 2; position:static; max-width:none; margin:0;}
+  .sobre-foto img{aspect-ratio:1; border-radius:50%; object-position:50% 22%;}
+  .sobre-foto figcaption{display:none;}
+  .sobre-texto > p{font-size:16px; margin-top:14px;}
+  .sobre-texto > p:first-of-type{margin-top:22px;}
+  .habilidades{margin-top:24px;}
+  .habilidades li{padding:14px 0;}
+  .habilidades b{font-size:17px;}
+  .habilidades span{font-size:15px;}
+  .limites{margin-top:24px; border-bottom:1px solid var(--borde); padding-bottom:4px;}
+  .limites > summary{padding:6px 0 10px;}
+  .limites h3{font-size:17px;}
+  .limites > summary p{font-size:14px;}
+
+  /* Método: diagrama más chico y combinaciones plegadas */
+  .venn{max-width:270px;}
+  .circles-layout{gap:24px;}
+  .circle-list{gap:20px;}
+  .circle-item{padding-left:16px;}
+  .circle-item h3{font-size:20px;}
+  .circle-item p{font-size:15px;}
+  details.combinaciones{margin-top:32px;}
+  .overlaps{gap:14px;}
+
+  /* Artículos: fila deslizable, con la siguiente tarjeta asomada */
+  #casos .section-head{margin-bottom:24px;}
+  #casos .grid3{display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; overscroll-behavior-x:contain;
+    margin:0 calc(-1 * var(--margen)); padding:0 var(--margen) 12px; scroll-padding-left:var(--margen); scrollbar-width:none;}
+  #casos .grid3::-webkit-scrollbar{display:none;}
+  #casos .grid3 .card{flex:0 0 80%; scroll-snap-align:start;}
+  .card .thumb{aspect-ratio:4/3;}
+  .card h3{font-size:18px;}
+  .card p{font-size:14px;}
+  .grid3 + .temas{margin-top:36px;}
+  .temas{grid-template-columns:1fr 1fr; column-gap:16px;}
+  .tema{padding:14px 0;}
+  .tema h3{font-size:16px; margin:0;}
+  .tema p{display:none;}
+
+  /* Diagnóstico y formulario */
+  .diag-grid{gap:32px;}
+  .pasos{margin-top:24px;}
+  .pasos li{padding:12px 0; grid-template-columns:36px 1fr;}
+  .pasos li::before{font-size:24px;}
+  .pasos b{font-size:16px;}
+  .diag-intro .tachado-linea{display:none;}
+  .diag-form{margin:0 calc(-1 * var(--margen)); padding:28px var(--margen); gap:16px;}
+  .opciones-lista{gap:6px;}
+  .opcion span{min-height:42px; padding:8px 12px; font-size:14px;}
+  #diagnostico{padding-bottom:0;}
+
+  .newsletter{padding:48px 0;}
+  footer{padding:44px 0 24px;}
+
+  /* Trabaja conmigo: número al lado del título, no encima */
+  .proceso{gap:0;}
+  .proceso li{display:grid; grid-template-columns:40px 1fr; column-gap:12px; padding:16px 0; border-top-width:1px;}
+  .proceso li::before{grid-row:span 2; font-size:30px; margin:0;}
+  .proceso h3{font-size:18px; margin-bottom:4px;}
+
+  /* Barra fija abajo: lo más importante, donde llega el pulgar */
+  .barra-accion{display:flex; gap:10px; align-items:center; position:fixed; left:0; right:0; bottom:0; z-index:45;
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom)); border-top:1px solid rgba(241,237,227,.16);
+    transform:translateY(110%); visibility:hidden; transition:transform .25s ease, visibility 0s linear .25s;}
+  .barra-accion.visible{transform:none; visibility:visible; transition:transform .25s ease;}
+  .barra-accion .btn{flex:1; min-height:50px; font-size:15px;}
+  .barra-accion .wa{flex:none; width:50px; height:50px; display:flex; align-items:center; justify-content:center; border:2px solid rgba(241,237,227,.7);}
+  .barra-accion .wa svg{width:24px; height:24px; fill:var(--crema);}
 }
-/* Celular: siempre una columna (esta regla debe quedar después de cualquier ajuste de la portada) */
-@media (max-width:900px){ .portada-grid{grid-template-columns:1fr;} }
+@media (max-width:760px) and (prefers-reduced-motion: reduce){ .barra-accion, .barra-accion.visible{transition:none;} }
