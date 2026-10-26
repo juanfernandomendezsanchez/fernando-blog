@@ -549,3 +549,22 @@ footer{background:var(--fondo-alt); border-top:1px solid var(--borde); padding:6
 }
 @media (max-width:900px){ .portada-grid{grid-template-columns:1fr;} .portada-foto{margin-top:40px;} }
 @media (max-width:900px){ .portada-foto{width:auto; justify-self:stretch; max-width:none; margin-left:calc(-1 * var(--margen)); margin-right:calc(-1 * var(--margen));} }
+
+/* Portada v2: retrato sin fondo, más arriba y desvanecido hacia el marino */
+.portada-grid{align-items:center;}
+.portada-foto{align-self:center; margin:clamp(24px, 4vh, 48px) 0;}
+.portada-foto img{object-fit:contain; object-position:50% 0;
+  -webkit-mask-image:linear-gradient(to bottom, #000 62%, transparent 96%);
+          mask-image:linear-gradient(to bottom, #000 62%, transparent 96%);}
+@media (max-width:900px){
+  .portada-foto{margin-top:8px; margin-bottom:-24px;}
+  .portada-foto img{max-width:480px; margin:0 auto;}
+}
+/* Los hombros llegan al borde de la foto original: se desvanecen también por los lados */
+.portada-foto img{
+  -webkit-mask-image:linear-gradient(to bottom, #000 58%, transparent 94%), linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
+  -webkit-mask-composite:source-in;
+          mask-image:linear-gradient(to bottom, #000 58%, transparent 94%), linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
+          mask-composite:intersect;
+}
+@media (max-width:900px){ .portada-foto{margin-top:-8px;} }
