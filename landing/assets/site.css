@@ -244,20 +244,15 @@ body.drawer-locked{overflow:hidden;}
   .portada-foto img{max-width:560px; max-height:none; margin:0 auto;}
 }
 
-/* Teléfono: el retrato de fondo arriba, oscurecido hacia abajo, y el texto encima */
+/* Teléfono: solo texto; la foto vive en «Mi marca es el primer caso» */
 @media (max-width:760px){
-  .portada-grid{display:flex; flex-direction:column; justify-content:flex-end; min-height:calc(100svh - 72px);}
-  .portada-foto{position:absolute; top:0; right:0; bottom:0; left:0; z-index:0; width:auto; max-width:none; margin:0;
-    align-self:stretch; justify-self:stretch; pointer-events:none;}
-  .portada-foto img{position:absolute; top:0; left:50%; transform:translateX(-50%); width:108%; max-width:none; max-height:none;
-    object-fit:cover; -webkit-mask-image:none; mask-image:none;}
-  .portada-foto::after{content:""; position:absolute; inset:0;
-    background:linear-gradient(to bottom, rgba(22,33,58,0) 0%, rgba(22,33,58,.2) 36%, rgba(22,33,58,.9) 54%, #16213A 64%);}
-  .portada-copy{position:relative; z-index:1; padding:0 0 28px;}
+  .portada-grid{display:block; min-height:0;}
+  .portada-foto{display:none;}
+  .portada-copy{padding:44px 0 48px;}
   .portada h1 .tachado{font-size:20px;}
-  .portada h1 .haz{font-size:clamp(32px, 9.4vw, 40px);}
+  .portada h1 .haz{font-size:clamp(34px, 10vw, 42px);}
   .portada .lede{font-size:16px; margin-top:16px;}
-  .portada .acciones{margin-top:20px;}
+  .portada .acciones{margin-top:24px;}
   .portada .acciones .btn{flex:1 1 100%;}
   .portada-firma{display:none;}
 }
@@ -705,3 +700,25 @@ fieldset.opciones legend{font-size:14px; font-weight:500; margin-bottom:8px; pad
   .barra-accion .wa svg{width:24px; height:24px; fill:var(--crema);}
 }
 @media (max-width:760px) and (prefers-reduced-motion: reduce){ .barra-accion, .barra-accion.visible{transition:none;} }
+
+/* ---------- Teléfono y computadora: lo que cambia según la pantalla (26 oct 2026) ----------
+   Regla: la misma información en ambos; en el teléfono cambia el orden y lo secundario se pliega.
+   Solo lo visual que repite algo ya escrito (el diagrama) queda fuera del teléfono. */
+.solo-telefono{display:none;}
+.form-plegable > summary{display:none;}
+@media (max-width:760px){
+  .solo-telefono{display:block;}
+  .venn{display:none;}
+  .wa-postular{margin-top:28px;}
+  .wa-postular .btn{width:100%;}
+  .wa-postular p{font-size:14px; color:var(--texto-suave); margin-top:10px;}
+  .form-plegable > summary{display:flex; justify-content:space-between; align-items:center; cursor:pointer; list-style:none;
+    padding:16px 0; border-top:1px solid var(--borde); font-weight:600; font-size:16px;}
+  .form-plegable > summary::-webkit-details-marker{display:none;}
+  .form-plegable > summary::after{content:"+"; font-family:'Space Grotesk', sans-serif; font-size:26px; line-height:1; color:var(--acento);}
+  .form-plegable[open] > summary::after{content:"2";}
+  .form-plegable[open] > summary{margin-bottom:8px;}
+  .diag-grid{gap:20px;}
+  #diagnostico{padding-bottom:40px;}
+  .form-plegable[open] ~ *, #diagnostico:has(.form-plegable[open]){padding-bottom:0;}
+}
