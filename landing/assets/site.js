@@ -1,7 +1,7 @@
 /* Comportamiento compartido: formularios de newsletter + filtros del blog.
    Sin dependencias. El endpoint es el mismo Apps Script de los formularios. */
 (function () {
-  var ENDPOINT = "https://script.google.com/macros/s/AKfycbx5i8XMYxFKpF6WBA0KzsKM-nyVudr5Qgn9AxVWcgi_GqYcEQ2XSsv7sSO71ugtxLIL3A/exec";
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbyJ5d0PzpI51H2eqBj0-pX0GTz1YqfXP_1GVco5360z7uuIh3i333ZZ9rpJ1AvZHUlW/exec";
   var loadedAt = Date.now();
 
   function setStatus(el, msg, cls) {
