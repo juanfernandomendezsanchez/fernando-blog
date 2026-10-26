@@ -48,6 +48,7 @@
       var done = function (ok) {
         button.disabled = false; button.textContent = label;
         if (ok) {
+          document.dispatchEvent(new CustomEvent("newsletter:ok"));
           form.reset();
           setStatus(status, "Listo. Te escribo cuando publique el próximo artículo. Mientras tanto, ", "ok");
           // Siguiente paso del embudo: quien se suscribe ya confía un poco; se le muestra cómo trabajo.
@@ -159,4 +160,22 @@
   }
   window.addEventListener("scroll", actualizar, { passive: true });
   actualizar();
+})();
+
+/* ---------- Google Analytics 4: eventos propios ----------
+   clic_whatsapp (con la ubicación del botón), sign_up (newsletter).
+   generate_lead (formulario del Diagnóstico) se envía desde index.html. */
+(function () {
+  function evento(nombre, datos) { if (typeof window.gtag === "function") window.gtag("event", nombre, datos || {}); }
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="wa.me/"]');
+    if (!a) return;
+    var ubicacion = a.closest(".barra-accion") ? "barra_fija"
+      : a.closest(".wa-postular") ? "diagnostico"
+      : a.classList.contains("wa-float") ? "boton_flotante"
+      : a.closest("footer") ? "pie"
+      : "contenido";
+    evento("clic_whatsapp", { ubicacion: ubicacion, pagina: location.pathname });
+  });
+  document.addEventListener("newsletter:ok", function () { evento("sign_up", { method: "newsletter" }); });
 })();
