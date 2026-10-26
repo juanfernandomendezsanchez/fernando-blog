@@ -34,11 +34,13 @@
 
 // ─── CONFIGURACIÓN ───────────────────────────────────────────────
 const SHEET_ID = '1xiI72IZpZs4FZYhVOSt0_uo5QPdJbaZqMAVzrB7dgvw';
-const SHEET_NAME = 'leads';
+const SHEET_NAME = 'Leads';          // la pestaña se crea sola si no existe
 const RATING_SHEET_NAME = 'valoraciones';
 const NEWSLETTER_SHEET_NAME = 'newsletter';
 const NOTIFY_EMAIL = 'frnandosoy@gmail.com';
 const SEND_USER_CONFIRMATION = true;
+const SENDER_NAME = 'Fernando';
+const WHATSAPP = '+58 422-123-4881';
 // ──────────────────────────────────────────────────────────────────
 
 
@@ -102,12 +104,15 @@ function doPost(e) {
     };
 
     console.log('Abriendo sheet con SHEET_ID:', SHEET_ID);
-    const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(SHEET_NAME);
+    const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
+    // Acepta "Leads" o "leads"; si no existe ninguna, la crea.
+    let sheet = spreadsheet.getSheetByName(SHEET_NAME) || spreadsheet.getSheetByName(SHEET_NAME.toLowerCase());
     if (!sheet) {
-      console.log('ERROR: no se encontró una pestaña llamada "' + SHEET_NAME + '"');
-      return respond({ ok: false, error: 'sheet_no_encontrada' });
+      sheet = spreadsheet.insertSheet(SHEET_NAME);
+      console.log('Pestaña "' + SHEET_NAME + '" creada.');
     }
     ensureHeaders(sheet);
+    sheet.setFrozenRows(1);
 
     const estadoInicial = classifyLead(clean);
 
@@ -350,7 +355,7 @@ function sendOwnerNotification(data) {
     `Mensaje: ${data.mensaje || '—'}\n\n` +
     'Este lead ya quedó guardado en tu Google Sheet con estado "Nuevo".';
 
-  GmailApp.sendEmail(NOTIFY_EMAIL, subject, body);
+  GmailApp.sendEmail(NOTIFY_EMAIL, subject, body, { name: SENDER_NAME, replyTo: data.email });
 }
 
 function sendConfirmationToUser(data) {
@@ -359,11 +364,14 @@ function sendConfirmationToUser(data) {
   const body =
     `¡Hola ${primerNombre}!\n\n` +
     'Gracias por escribirme. Recibí tu postulación al Diagnóstico en Público. ' +
-    'La reviso personalmente y te respondo en las próximas 48 horas para ' +
-    'contarte si tu marca encaja en esta etapa y cómo sería el proceso.\n\n' +
+    'La reviso personalmente y en 24 a 48 horas te envío tu primer resultado: ' +
+    'las mejoras que tu marca necesita primero. Después agendamos una llamada corta ' +
+    'para conocer tu negocio y tu cliente.\n\n' +
+    'Si quieres adelantar algo, escríbeme por WhatsApp al ' + WHATSAPP + ' ' +
+    'o responde este correo.\n\n' +
     'Fernando';
 
-  GmailApp.sendEmail(data.email, subject, body);
+  GmailApp.sendEmail(data.email, subject, body, { name: SENDER_NAME, replyTo: NOTIFY_EMAIL });
 }
 
 function respond(obj) {

@@ -22,7 +22,7 @@ No hace falta que escribas los encabezados a mano — el script los crea solo la
    ```js
    const SHEET_ID = 'ESTE_ES_EL_ID';           // el que copiaste en el paso 1
    const SHEET_NAME = 'Leads';
-   const NOTIFY_EMAIL = 'tu-correo@gmail.com';  // donde quieres recibir cada lead
+   const NOTIFY_EMAIL = 'frnandosoy@gmail.com';  // donde recibes cada lead
    ```
 4. Guarda (ícono de disquete o `Ctrl+S`).
 
