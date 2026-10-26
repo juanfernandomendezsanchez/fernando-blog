@@ -37,7 +37,7 @@ const SHEET_ID = '1xiI72IZpZs4FZYhVOSt0_uo5QPdJbaZqMAVzrB7dgvw';
 const SHEET_NAME = 'leads';
 const RATING_SHEET_NAME = 'valoraciones';
 const NEWSLETTER_SHEET_NAME = 'newsletter';
-const NOTIFY_EMAIL = 'juanfernandomendezsanchez@gmail.com';
+const NOTIFY_EMAIL = 'frnandosoy@gmail.com';
 const SEND_USER_CONFIRMATION = true;
 // ──────────────────────────────────────────────────────────────────
 
