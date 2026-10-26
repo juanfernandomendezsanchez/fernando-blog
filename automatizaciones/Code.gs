@@ -1,5 +1,5 @@
 // Fernando · Backend de la web (Google Apps Script + Sheets + Gmail)
-const SHEET_ID = '1xiI72IZpZs4FZYhVOSt0_uo5QPdJbaZqMAVzrB7dgvw';
+const SHEET_ID = '1ECqTSxogn87wVtYl0ME0WYv7toOpPXVQT_V8T_iPL9o';
 const SHEET_NAME = 'Leads';
 const RATING_SHEET_NAME = 'valoraciones';
 const NEWSLETTER_SHEET_NAME = 'newsletter';
