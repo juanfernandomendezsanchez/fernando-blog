@@ -5,7 +5,7 @@ Este repo solo existe para que las direcciones viejas
 El sitio real vive en el repo privado `dimefernando-web`.
 
 Cada página tiene meta refresh de 0 segundos (Google lo trata como redirección permanente),
-`rel="canonical"` al destino, `noindex` y un enlace visible por si el navegador no redirige.
+`rel="canonical"` al destino (en la forma sin `.html` que sirve Cloudflare Pages), `noindex` y un enlace visible por si el navegador no redirige.
 `404.html` manda cualquier otra dirección a la portada.
 
 Se genera desde el repo del sitio con `python3 tools/make_redirects.py` (lee `landing/sitemap.xml`).
@@ -67,7 +67,7 @@ Cada URL vieja debe responder `200` y traer el refresh al destino correcto:
 while read u; do
   printf '%s\n  -> ' "$u"
   curl -s "$u" | grep -o 'url=[^"]*' || echo "SIN REDIRECCIÓN"
-done < urls.txt
+done < <(tr -d '\r' < urls.txt)
 ```
 
 Esperado (la última línea es una dirección inventada; GitHub responde 404 con `404.html`, que lleva a la portada):
@@ -76,7 +76,7 @@ Esperado (la última línea es una dirección inventada; GitHub responde 404 con
 https://juanfernandomendezsanchez.github.io/fernando-blog/index.html
   -> url=https://dimefernando.com/
 https://juanfernandomendezsanchez.github.io/fernando-blog/blog.html
-  -> url=https://dimefernando.com/blog.html
+  -> url=https://dimefernando.com/blog
 …
 https://juanfernandomendezsanchez.github.io/fernando-blog/no-existe.html
   -> url=https://dimefernando.com/
